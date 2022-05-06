@@ -1,0 +1,9 @@
+.card-body, .card-header, .card-footer {
+	overflow: auto;
+}
+.bg-yellow-pfj{
+	background-color: #fe9a18
+}
+.bg-yellow-pfj:hover{
+	background-color: #ffb900
+}
