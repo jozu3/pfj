@@ -12,7 +12,6 @@ use App\Http\Controllers\Admin\PfjController;
 use App\Http\Controllers\Admin\GrupoController;
 use App\Http\Controllers\Admin\NotaController;
 use App\Http\Controllers\Admin\ProgramaController;
-use App\Http\Controllers\Admin\ProfesoreController;
 use App\Http\Controllers\Admin\InscripcioneController;
 use App\Http\Controllers\Admin\ObligacioneController;
 use App\Http\Controllers\Admin\PagoController;
@@ -26,6 +25,7 @@ use App\Http\Controllers\Admin\AnuncioController;
 use App\Http\Controllers\Admin\ReporteController;
 
 Route::resource('', HomeController::class)->names('admin');
+Route::get('/users/sessions', [UserController::class, 'listSessions'])->name('admin.users.sessions');
 Route::resource('users', UserController::class)->names('admin.users');
 Route::resource('personales', PersonaleController::class)->names('admin.personales');
 Route::resource('roles', RoleController::class)->names('admin.roles');

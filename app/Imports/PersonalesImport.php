@@ -98,6 +98,7 @@ class PersonalesImport implements ToModel, WithValidation
     public function rules(): array
     {
         return [
+            '4' => 'required',
             '5' => 'required',
             '8' => function($attribute, $value, $onFailure) {
                 if (User::where('email', $value)->count()) {

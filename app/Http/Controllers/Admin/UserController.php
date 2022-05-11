@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-
 use Spatie\Permission\Models\Role;
 use App\Models\Personale;
+use Illuminate\Support\Facades\Session;
+
 
 use App\Actions\Fortify\PasswordValidationRules;
 
@@ -18,7 +19,8 @@ class UserController extends Controller
     use PasswordValidationRules;
 
     public function __construct(){
-        $this->middleware('can:admin.users.index')->only('index');
+        $this->middleware('can:admin.users.index');
+        //$this->middleware('can:admin.users.index')->only('index');
         // $this->middleware('can:admin.users.destroy')->only('destroy');
         
     }
@@ -154,5 +156,9 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->back()->with('info', 'El usuario se eliminó correctamente');
+    }
+
+    public function listSessions(){
+        return view('admin.users.sessions');
     }
 }
