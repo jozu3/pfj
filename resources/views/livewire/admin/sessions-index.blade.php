@@ -16,19 +16,20 @@
     				</tr>
     			</thead>
     			<tbody>
-						
     				@foreach($sessions as $session)
+						@php
+							$user = App\Models\User::find( $session->user_id);	
+						@endphp
 					<tr>
 						<td></td>
-						@if (App\Models\User::find( $session->user_id))
+						@if ($user)
 							
-                        <td>{{ App\Models\User::find( $session->user_id)->name }}</td>
+                        <td>{{ $user->name }}</td>
 						@else
 						<td></td>
 						@endif
 						<td>{{ $session->ip_address }}</td>
-                        <td>{{ date('d/m/Y h:m:s', strtotime($session->last_activity)) }}</td>
-						
+                        <td>{{ date('d/m/Y h:m:s', $session->last_activity) }}</td>
 						
 						@can('admin.sessions.destroy')
 						<td width="10px">
