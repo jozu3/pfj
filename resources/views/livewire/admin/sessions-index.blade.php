@@ -20,7 +20,12 @@
     				@foreach($sessions as $session)
 					<tr>
 						<td></td>
+						@if (App\Models\User::find( $session->user_id))
+							
                         <td>{{ App\Models\User::find( $session->user_id)->name }}</td>
+						@else
+						<td></td>
+						@endif
 						<td>{{ $session->ip_address }}</td>
                         <td>{{ date('d/m/Y h:m:s', strtotime($session->last_activity)) }}</td>
 						
