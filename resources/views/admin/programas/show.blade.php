@@ -9,13 +9,14 @@
         <a href="{{ route('admin.programas.edit', $programa) }}" class="btn btn-success btn-sm float-right">Editar programa</a>
     @endcan
     <a href="{{ route('admin.programas.asignar', $programa) }}" class="btn btn-success btn-sm float-right mr-3">
-		<i class="fas fa-sitemap"></i> Asignaciones</a>
-        {{-- <a href="{{ route('admin.excel.personalesGrupo', $programa) }}" class="btn btn-success btn-sm float-right mr-3"><i
+        <i class="fas fa-sitemap"></i> Asignaciones</a>
+    {{-- <a href="{{ route('admin.excel.personalesGrupo', $programa) }}" class="btn btn-success btn-sm float-right mr-3"><i
             class="far fa-file-excel"></i> Registro de personales</a> --}}
-            
-                <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#importExcelPersonal">
-                    <i class="far fa-file-excel"></i> Importar personal
-                </button>
+
+    <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal"
+        data-target="#importExcelPersonal">
+        <i class="far fa-file-excel"></i> Importar personal
+    </button>
 
     <h1>Sesión: {{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</h1>
 @stop
@@ -26,20 +27,21 @@
             {{ session('info') }}
         </div>
     @endif
-    @if(count($errors->getMessages()) > 0)
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        <strong>Validation Errors:</strong>
-        <ul>
-            @foreach($errors->getMessages() as $errorMessages)
-                @foreach($errorMessages as $errorMessage)
-                    <li>
-                        {{ $errorMessage }}
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    </li>
+    @if (count($errors->getMessages()) > 0)
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <strong>Validation Errors:</strong>
+            <ul>
+                @foreach ($errors->getMessages() as $errorMessages)
+                    @foreach ($errorMessages as $errorMessage)
+                        <li>
+                            {{ $errorMessage }}
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </li>
+                    @endforeach
                 @endforeach
-            @endforeach
-        </ul>
-    </div>@endif
+            </ul>
+        </div>
+    @endif
     @if (session('error'))
         <div class="alert alert-danger">
             {{ session('error') }}
@@ -50,37 +52,42 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-2" >
+                        <div class="col-md-2">
                             <canvas id="myChart" width="400" height="400"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-            <div class="col-md-12">
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-personal-tab" data-toggle="tab" href="#nav-personal"
-                            role="tab" aria-controls="nav-personal" aria-selected="true">Personal</a>
-                        <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                            aria-controls="nav-home" aria-selected="true">Asistencia</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                            aria-controls="nav-profile" aria-selected="false">Lecturas</a>
-                    </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-personal" role="tabpanel"
-                        aria-labelledby="nav-personal-tab">
-                        @livewire('admin.inscripcione-programa-index', ['programa_id' => $programa->id])
-                    </div>
-                    <div class="tab-pane fade show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        @include('admin.programas.partials.asistencia')
-                    </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        @include('admin.programas.partials.lectura')
-                    </div>
+        <div class="col-md-12">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-personal-tab" data-toggle="tab" href="#nav-personal"
+                        role="tab" aria-controls="nav-personal" aria-selected="true">Personal</a>
+                    <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                        aria-controls="nav-home" aria-selected="true">Asistencia</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">Lecturas</a>
+                    <a class="nav-item nav-link" id="nav-vacuna-tab" data-toggle="tab" href="#nav-vacuna" role="tab"
+                        aria-controls="nav-vacuna" aria-selected="false">Vacunas</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-personal" role="tabpanel" aria-labelledby="nav-personal-tab">
+                    @livewire('admin.inscripcione-programa-index', ['programa_id' => $programa->id])
+                </div>
+                <div class="tab-pane fade show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    @include('admin.programas.partials.asistencia')
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    @include('admin.programas.partials.lectura')
+                </div>
+                <div class="tab-pane fade" id="nav-vacuna" role="tabpanel" aria-labelledby="nav-vacuna-tab">
+                    {{-- @include('admin.programas.partials.vacuna') --}}
+                    @livewire('admin.create-personale-vacuna', ['programa' => $programa])
                 </div>
             </div>
+        </div>
     </div>
 
     <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -91,37 +98,40 @@
     </div>
 
     <!-- Button trigger modal -->
-    
-        
-        <!-- Modal -->
-        <div class="modal fade" id="importExcelPersonal" tabindex="-1" role="dialog" aria-labelledby="importExcelPersonalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="importExcelPersonal" tabindex="-1" role="dialog"
+        aria-labelledby="importExcelPersonalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form action="{{ route('admin.excel.importExcelPersonal', $programa) }}" method="post" enctype="multipart/form-data" >
+                <form action="{{ route('admin.excel.importExcelPersonal', $programa) }}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="importExcelPersonalLabel">Importar datos de usuario</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="importExcelPersonalLabel">Importar datos de usuario</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="file">Seleccione archivo .xlsx</label>
-                            <input type="file" class="form-control-file" name="file" id="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" >
-                          </div>
+                            <input type="file" class="form-control-file" name="file" id="file"
+                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-success">
                             <i class="far fa-file-excel"></i> Importar
                         </button>
-                            
+
                     </div>
                 </form>
             </div>
-            </div>
         </div>
+    </div>
     {{-- @livewire('admin.alert') --}}
 @stop
 
@@ -137,7 +147,8 @@
         .una-fila {
             flex-wrap: nowrap;
         }
-        .fijo{
+
+        .fijo {
             height: 74px;
             justify-content: center;
             display: flex;
@@ -180,9 +191,11 @@
         .input-nota {
             width: 80px !important;
         }
-		.tab-content{
-			overflow-y: auto
-		}
+
+        .tab-content {
+            overflow-y: auto
+        }
+
     </style>
     {{-- <link rel="stylesheet" href="{{ config('app.url') }}/css/app.css"> --}}
 
@@ -193,7 +206,7 @@
         $().ready(function() {
             $("#success-alert").hide();
         });
-        $(function () {
+        $(function() {
             $('[data-toggle="tooltip"]').tooltip()
         })
 
@@ -215,10 +228,10 @@
             ],
             datasets: [{
                 label: 'My First Dataset',
-                data: [ {{ $aprobacion['aprobados'] }}, {{ $aprobacion['no_aprobados'] }}],
+                data: [{{ $aprobacion['aprobados'] }}, {{ $aprobacion['no_aprobados'] }}],
                 backgroundColor: [
                     'rgb(255, 205, 86)',
-                    'rgb(255, 99, 132)',    
+                    'rgb(255, 99, 132)',
                 ],
                 hoverOffset: 4
             }]
@@ -234,25 +247,25 @@
 
         /*	$('input[type="radio"]').change(function () {
 
-        		var color = 'as';
-        		switch ($(this).val()){
-        			case 0:
-        				color = 'text-danger'
-        				break;
-        			case 1:
-        				color = 'text-success'
-        				break;
-        			case 2:
-        				color = 'text-warning'
-        				break;
-        		}
+            		var color = 'as';
+            		switch ($(this).val()){
+            			case 0:
+            				color = 'text-danger'
+            				break;
+            			case 1:
+            				color = 'text-success'
+            				break;
+            			case 2:
+            				color = 'text-warning'
+            				break;
+            		}
 
-    		  if($(this).is(":checked")){
-    		  	console.log($(this).val());
-    		    $(this).parent().addClass(color);
-    		  }
+        		  if($(this).is(":checked")){
+        		  	console.log($(this).val());
+        		    $(this).parent().addClass(color);
+        		  }
 
-    		});*/
+        		});*/
     </script>
     <script type="text/javascript" src="{{ config('app.url') }}/js/app.js"></script>
 @stop

@@ -10,6 +10,7 @@ use App\Models\Programa;
 use App\Models\Contacto;
 use App\Models\User;
 use App\Models\Inscripcione;
+use App\Models\PersonaleVacuna;
 
 class Personale extends Model
 {
@@ -27,6 +28,10 @@ class Personale extends Model
 
     public function inscripciones(){
         return $this->hasMany(Inscripcione::class);
+    }
+
+    public function vacunas(){
+        return $this->hasMany(PersonaleVacuna::class);
     }
 
     public function contacto(){

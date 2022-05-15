@@ -7,6 +7,7 @@ use App\Models\Inscripcione;
 use Illuminate\Http\Request;
 use App\Models\Pfj;
 use App\Models\Programa;
+use App\Models\Vacuna;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 
@@ -113,8 +114,9 @@ class ProgramaController extends Controller
             'no_aprobados' => $no_aprobados
         ];
 
+        $vacunas = Vacuna::all();
 
-        return view('admin.programas.show', compact('programa', 'inscripciones', 'aprobacion'));
+        return view('admin.programas.show', compact('programa', 'inscripciones', 'aprobacion', 'vacunas'));
     }
 
     /**
