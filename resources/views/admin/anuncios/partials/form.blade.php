@@ -1,4 +1,26 @@
 <div class="form-group">
+	{!! Form::label('image', 'Imagen de anuncio') !!}
+	@error('image')
+	<small class="text-danger">{{ $message }}</small>
+	@enderror
+	<div class="row p-2">
+		<div class="col">
+			<img id="img-show" class="img-fluid" src="@if ( isset($anuncio)) @if(isset($anuncio->image)) {{ Storage::url($anuncio->image->url) }} @endif @endif"  alt="">
+		</div>
+		<div class="col">
+			<div class="custom-file">
+				{{-- {!! Form::file('imgperfil', ['class' => 'custom-file-input', 'accept' => 'image/*']) !!} --}}
+				{!! Form::file('image', ['class' => 'custom-file-input', 'placeholder' => '-- Escoge una imagen de anuncio --', 'accept' => 'image/*']); !!}
+				<label class="custom-file-label" for="imgperfil">Escoge una foto</label>
+			</div>
+			<p>Solo se permite los formatos de imagen(jpg, png)</p>
+			@error('imgperfil')
+				<small class="text-danger">{{ $message }}</small>
+			@enderror
+		</div>
+	</div>
+</div> 
+<div class="form-group">
 	{!! Form::label('descripcion', 'Descripción') !!}
 	{!! Form::textArea('descripcion', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el anuncio']) !!}
 

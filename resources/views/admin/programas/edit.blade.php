@@ -46,7 +46,7 @@
                         <a class="nav-item nav-link active" id="nav-personal-tab" data-toggle="tab" href="#nav-personal"
                             role="tab" aria-controls="nav-personal" aria-selected="true">Capacitaciones</a>
                         <a class="nav-item nav-link" id="nav-comp-tab" data-toggle="tab" href="#nav-comp" role="tab"
-                            aria-controls="nav-comp" aria-selected="true">Grupos</a>
+                            aria-controls="nav-comp" aria-selected="true">Familias</a>
                         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                             aria-controls="nav-profile" aria-selected="false">Lecturas</a>
                     </div>

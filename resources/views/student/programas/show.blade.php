@@ -16,19 +16,31 @@
                                 <!-- inline-block --->
 
                                 <div class="container py-6">
-                                    <div class="text-xl text-center text-gray-900 border-b-2 font-bold">
-                                        <p class="">Matrimonio de sesión</p> <!-- border-b-4 -->
+                                    <div class="grid grid-cols-1 gap-4 place-content-center text-3xl text-center text-gray-900 border-b-2 mb-6 font-bold">
+                                        <p class="">Matrimonio Director</p> <!-- border-b-4 -->
                                     </div>
-                                    <div class="flex justify-center mt-4">
-                                        <img src="https://files.mormonsud.org/wp-content/uploads/2018/12/matrimonio1.jpg"
-                                            alt="" class="object-top" width="300px">
-                                    </div>
+
+                                    <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 place-content-center mt-4">
+                                        <div class="text-center">
+                                                @if ($inscripcione->programa->imageMatrimonioDirector)
+                                                    <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioDirector->url) }}"
+                                                    alt="" class="object-top rounded-full m-auto" width="300px">
+                                                @endif
+                                            </div>
+                                        <div class="md:text-left text-center">
+                                            @forelse ($inscripcione->programa->matrimonioDirectores() as $lider)
+                                                <p class="text-xl"><b>{{ $lider->personale->user->name }}</b></p>
+                                            @empty
+                                                <p>No asignados</p>
+                                            @endforelse
+                                            <br>
+                                            @if ($inscripcione->programa->resena_matrimonio)
+                                                <p>{{ $inscripcione->programa->resena_matrimonio }}</p>
+                                            @endif
+                                        </div>
+                                      </div>
                                     <div class="text-center">
-                                        @forelse ($inscripcione->programa->matrimonioDirectores() as $lider)
-                                            <p><b>{{ $lider->personale->user->name }}</b></p>
-                                        @empty
-                                            <p>No asignados</p>
-                                        @endforelse
+                                        
                                     </div>
 
                                 </div>

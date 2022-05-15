@@ -106,6 +106,12 @@ class CompanerismoController extends Controller
      */
     public function destroy(Companerismo $companerismo)
     {
-        //
+        foreach ($companerismo->inscripcioneCompanerismos as $inscripcioneCompanerismo){
+            $inscripcioneCompanerismo->delete();
+        }
+
+        $companerismo->delete();
+
+        return redirect()->route('admin.programas.edit', $companerismo->grupo->programa)->with('info', 'El compañerismo se eliminó con éxito'); 
     }
 }

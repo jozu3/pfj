@@ -314,8 +314,11 @@ return [
         ],
         [
             'header' => 'Mis sesiones',
-            'can'  =>   'admin.programas.misprogramas'
+            'can'  =>   'admin.programas.misprogramas',
+            'key' => 'programa',
+
         ],
+
         [
             'text' => 'Mi(s) sesión(es)',
             'route'  => 'admin.programas.misprogramas',

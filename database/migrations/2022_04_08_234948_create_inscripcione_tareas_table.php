@@ -15,8 +15,8 @@ class CreateInscripcioneTareasTable extends Migration
     {
         Schema::create('inscripcione_tareas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('inscripcione_id');
-            $table->foreignId('tarea_id');
+            $table->foreignId('inscripcione_id')->constrained();
+            $table->foreignId('tarea_id')->constrained();
             $table->tinyInteger('realizado');
             $table->timestamps();
         });

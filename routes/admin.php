@@ -25,6 +25,8 @@ use App\Http\Controllers\Admin\AnuncioController;
 use App\Http\Controllers\Admin\ReporteController;
 
 Route::resource('', HomeController::class)->names('admin');
+
+Route::get('/users/changesession/{programa}', [UserController::class, 'changeSession'])->name('admin.users.changesesion');
 Route::get('/users/sessions', [UserController::class, 'listSessions'])->name('admin.users.sessions');
 Route::resource('users', UserController::class)->names('admin.users');
 Route::resource('personales', PersonaleController::class)->names('admin.personales');

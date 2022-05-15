@@ -60,8 +60,11 @@
                         @endif
                     </td>
                     <td width="10px">
-                        <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}" class="btn btn-primary" >Editar</a>
+                        <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}" class="btn btn-primary" ><i class="fas fa-user-edit"></i></a>
                     </td>
+                    <td width="10px">
+                        <a href="{{ route('admin.inscripciones.show', $inscripcione) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                      </td>
                 </tr>
         @empty
         <tr>

@@ -17,7 +17,7 @@ class CreateTareasTable extends Migration
             $table->id();
             $table->string('descripcion');
             $table->date('fecha');
-            $table->foreignId('programa_id');
+            $table->foreignId('programa_id')->constrained();
             $table->timestamps();
         });
     }

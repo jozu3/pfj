@@ -56,6 +56,10 @@
 			@error('imgMatrimonioDirector')
 				<small class="text-danger">{{ $message }}</small>
 			@enderror
+			<div class="group-form-control">
+				<label for="resena_matrimonio">Reseña del Matrimonio Director</label>
+				{!! Form::textArea('resena_matrimonio', null, ['class' => 'form-control', 'placeholder' => 'Ingrese la reseña', 'id' => 'resena_matrimonio', 'rows' => '5']) !!}
+			</div>
 		</div>
 	</div>
 </div>

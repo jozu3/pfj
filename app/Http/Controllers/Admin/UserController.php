@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 
 
 use App\Actions\Fortify\PasswordValidationRules;
+use App\Models\Programa;
 
 class UserController extends Controller
 {
@@ -160,5 +161,9 @@ class UserController extends Controller
 
     public function listSessions(){
         return view('admin.users.sessions');
+    }
+    
+    public function changeSession(Programa $programa){
+        return redirect()->route('admin.index')->with('programa', $programa->id);
     }
 }

@@ -3,8 +3,8 @@
 @section('title', 'Detalle de Inscripcione')
 
 @section('content_header')
-	<a href="{{ route('admin.inscripciones.edit', $inscripcione) }}" class="btn btn-success btn-sm float-right">Editar matrícula</a>
-	<a href="{{ route('admin.print', 'recibo-inscripcione?idinscripcione='.$inscripcione->id) }}" class="btn btn-danger btn-sm float-right mr-2" target="_blank"><i class="fas fa-file-pdf"></i> Imprimir recibo</a>
+	<a href="{{ route('admin.inscripciones.edit', $inscripcione) }}" class="btn btn-success btn-sm float-right">Modificar inscripción</a>
+	{{-- <a href="{{ route('admin.print', 'recibo-inscripcione?idinscripcione='.$inscripcione->id) }}" class="btn btn-danger btn-sm float-right mr-2" target="_blank"><i class="fas fa-file-pdf"></i> Imprimir recibo</a> --}}
     <h1>Personale: {{ $inscripcione->personale->contacto->nombres.' '.$inscripcione->personale->contacto->apellidos }}</h1>
 @stop
 

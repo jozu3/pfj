@@ -24,5 +24,19 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script> 
+	 	document.getElementById('image').addEventListener('change', cambiarImagen);
+
+		function cambiarImagen(event){
+			var file = event.target.files[0];
+
+			var reader = new FileReader();
+			reader.onload = (event) => {
+				document.getElementById("img-show").setAttribute('src', event.target.result);
+			};
+
+			reader.readAsDataURL(file);
+		}
+	 </script>
+
 @stop

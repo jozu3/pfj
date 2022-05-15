@@ -13,8 +13,8 @@
     	<thead>
     		<tr>
 				<th></th>
-    			<th>Nombre de grupo</th>
-    			<th>Número de grupo</th>
+    			<th>Familia</th>
+    			<th>Número de familia</th>
     			<th></th>
     		</tr>
     	</thead>
@@ -52,7 +52,7 @@
 						<div class="collapse multi-collapse" id="list-companerismos{{ $grupo->id }}">
 							<div class="row">
 								<div class="col-3 px-4 py-2">
-									<b>Nombre</b>
+									<b>Compañerismo</b>
 								</div>
 								<div class="col-3 px-4 py-2">
 									<b>Número de compañia</b>
@@ -64,26 +64,40 @@
 								</div>
 							</div>
 							@foreach ($grupo->companerismos as $companerismo)
-							{!! Form::model($companerismo, ['route' => ['admin.companerismos.update', $companerismo], 'method' => 'put']) !!}
 							<div class="row">
-								<div class="col-3 mb-3">
-									{!!Form::hidden('grupo_id', null) !!}
-									{!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+								<div class="col-11">
+
+									{!! Form::model($companerismo, ['route' => ['admin.companerismos.update', $companerismo], 'method' => 'put']) !!}
+									<div class="row">
+									<div class="col-3 mb-3">
+										{!!Form::hidden('grupo_id', null) !!}
+										{!! Form::text('nombre', null, ['class' => 'form-control']) !!}
+									</div>
+									<div class="col-3 mb-3">
+										{!! Form::number('numero', null, ['class' => 'form-control']) !!}
+									</div>
+									<div class="col-3 mb-3">
+										{!! Form::select('role_id', $roles, null, ['class' => 'form-control ', 'placeholder' => 'Escoge un rol']); !!}
+										@error('role_id')
+										<small class="text-danger">{{ $message }}</small>
+										@enderror
+									</div>
+									<div class="col-3 mb-3">
+										{!! Form::submit('Actualizar',  ['class' => 'btn btn-sm btn-primary'])!!}
+									</div>
 								</div>
-								<div class="col-3 mb-3">
-									{!! Form::number('numero', null, ['class' => 'form-control']) !!}
+								{!! Form::close() !!}
 								</div>
-								<div class="col-3 mb-3">
-									{!! Form::select('role_id', $roles, null, ['class' => 'form-control ', 'placeholder' => 'Escoge un rol']); !!}
-									@error('role_id')
-									<small class="text-danger">{{ $message }}</small>
-									@enderror
-								</div>
-								<div class="col-3 mb-3">
-									{!! Form::submit('Actualizar',  ['class' => 'btn btn-sm btn-primary'])!!}
+								<div class="col-1">	
+								<form method="POST" action="{{ route('admin.companerismos.destroy', $companerismo) }}">
+									@csrf
+									@method('DELETE')
+									<button type="submit" class="btn btn-sm btn-danger">
+										<i class="fas fa-trash-alt"></i>
+									</button>
+								</form>
 								</div>
 							</div>
-							{!! Form::close() !!}
 							@endforeach
 							{!! Form::open( ['route' => 'admin.companerismos.store']) !!}
 							<div class="row">
@@ -112,7 +126,7 @@
 			<tr>
 				<form wire:submit.prevent="">
 					<td class="text-center">
-						<b>Nuevo grupo:</b>
+						<b>Nueva familia:</b>
 					</td>
 					<td>
 						<input type="text" name="nombre_grupo" wire:model="nombre_grupo" class="form-control">

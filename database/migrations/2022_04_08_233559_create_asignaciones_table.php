@@ -18,8 +18,8 @@ class CreateAsignacionesTable extends Migration
             $table->string('descripcion');
             $table->tinyInteger('tipo');
             $table->tinyInteger('estado');
-            $table->foreignId('inscripcione_id');
-            $table->foreignId('actividade_id');
+            $table->foreignId('inscripcione_id')->constrained();
+            $table->foreignId('actividade_id')->constrained();
             $table->timestamps();
         });
     }

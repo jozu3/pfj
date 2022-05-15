@@ -18,7 +18,7 @@ class CreateAnunciosTable extends Migration
             $table->longText('descripcion');
             $table->tinyInteger('tipo');
             $table->tinyInteger('estado');
-            $table->foreignId('programa_id');
+            $table->foreignId('programa_id')->constrained();
             $table->timestamps();
         });
     }

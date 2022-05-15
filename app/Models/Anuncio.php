@@ -15,5 +15,9 @@ class Anuncio extends Model
         return $this->belongsTo(Programa::class);
     }
 
+    public function image(){
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
 
 }

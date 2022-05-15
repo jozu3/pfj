@@ -3,8 +3,8 @@
 @section('title', 'Editar inscripcione')
 
 @section('content_header')
-    <a href="{{ route('admin.inscripciones.show', $inscripcione) }}" class="float-right">Ver recibo <i class="fas fa-chevron-right"></i></a>
-    <h1>Editar matrícula</h1>
+    <a href="{{ route('admin.inscripciones.show', $inscripcione) }}" class="float-right">Volver <i class="fas fa-chevron-right"></i></a>
+    <h1>Editar inscripción a {{ $inscripcione->programa->nombre }}</h1>
 @stop
 
 @section('content')
@@ -15,7 +15,7 @@
     @endif
     <div class="card">
         <div class="card-header">
-            <b>Detalle de la matrícula</b>
+            <b>Información de la inscripción</b>
             </div>
     	<div class="card-body">
     		{!! Form::model($inscripcione, ['route' => ['admin.inscripciones.update', $inscripcione], 'method' => 'put']) !!}

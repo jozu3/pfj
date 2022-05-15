@@ -20,6 +20,7 @@ class CreateProgramasTable extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->tinyInteger('estado');
+            $table->longText('resena_matrimonio')->default('');
             $table->timestamps();
         });
     }
