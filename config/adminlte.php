@@ -252,6 +252,12 @@ return [
             'can'  =>   'admin.personales.index'
         ],
         [
+            'text'        => 'Sesiones activas',
+            'route'         => 'admin.users.sessions',
+            'icon'        => 'fas fa-users',
+            'can'  =>   'admin.users.index'
+        ], 
+        [
             'text'        => 'Personales',
             'route'         => 'admin.personales.index',
             'icon'        => 'fas fa-users',
