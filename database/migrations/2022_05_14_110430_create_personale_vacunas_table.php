@@ -16,7 +16,7 @@ class CreatePersonaleVacunasTable extends Migration
         Schema::create('personale_vacunas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('personale_id')->constrained();
-            $table->foreignId('vacuna_id');
+            $table->foreignId('vacuna_id')->constrained();
             $table->tinyInteger('vacunado');
             $table->timestamps();
         });

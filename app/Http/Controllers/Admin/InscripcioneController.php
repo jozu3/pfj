@@ -213,8 +213,10 @@ class InscripcioneController extends Controller
         $personale = $inscripcione->personale; 
         $user = $personale->user;
         $inscripcione->delete();
-        $personale->delete();
-        $user->delete();
+        if(!count($personale->inscripciones)){
+            $personale->delete();
+            $user->delete();
+        }
 
         return redirect()->route('admin.inscripciones.index')->with('eliminar','Ok');
     }

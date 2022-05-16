@@ -85,29 +85,50 @@ class AppServiceProvider extends ServiceProvider
                     'submenu' => $missesiones
                 ];
                 
-                
-                
                 $event->menu->addAfter('programa', $menu_change_sesion);
-
-                //AGREGAR MENUS DE SESION
-                $menu_organigrama = [
-                    'text' => 'Organigrama',
-                    'url' => '/admin/programas/'.session('programa').'/asignar',
-                    // 'route'  => ['admin.programas.asignar', $programa_activo],
-                    'icon' => 'fas fa-sitemap',
-                    'can'  =>   'admin.contactos.index'
-                ];
                 
-                $event->menu->addAfter('programa', $menu_organigrama);
+                if(session('programa_activo')){
 
+                    //AGREGAR MENUS DE SESION
+                    $menu_organigrama = [
+                        'text' => 'Organigrama',
+                        'url' => '/admin/programas/'.session('programa_activo').'/asignar',
+                        // 'route'  => ['admin.programas.asignar', $programa_activo],
+                        'icon' => 'fas fa-sitemap',
+                        'can'  =>   'admin.programas.misprogramas'
+                    ];
+                    
+                    $event->menu->addAfter('programa', $menu_organigrama);
+                    
+                    $menu_personales = [
+                        'text' => 'Personal',
+                        'url' => '/admin/programas/'.session('programa_activo'),
+                        // 'route'  => ['admin.programas.asignar', $programa_activo],
+                        'icon' => 'fas fa-users',
+                        'can'  =>   'admin.programas.misprogramas'
+                    ];
+                    
+                    $event->menu->addAfter('programa', $menu_personales);
+                    
+                    $menu_anuncios = [
+                        'text'        => 'Anuncios',
+                        'route'         => 'admin.anuncios.index',
+                        'icon'        => 'fas fa-chalkboard-teacher',
+                        'can'  =>   'admin.anuncios.index'
+                    ];
+
+                    $event->menu->addAfter('programa', $menu_anuncios);
+                }   
+                
+                
             }
-
-
-
-
+            
+            
+            
+            
         });
-
-
+        
+        
         Personale::observe(PersonaleObserver::class);
         Inscripcione::observe(InscripcioneObserver::class);
         Seguimiento::observe(SeguimientoObserver::class);

@@ -6,6 +6,7 @@ module.exports = {
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './src/**/*.{html,js}', './node_modules/tw-elements/dist/js/**/*.js'
     ],
 
     theme: {
@@ -21,6 +22,7 @@ module.exports = {
             opacity: ['disabled'],
         },
     },
+    // content: ['./src/**/*.{html,js}', './node_modules/tw-elements/dist/js/**/*.js'],
 
-    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+    plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography'), require('tw-elements/dist/plugin')],
 };

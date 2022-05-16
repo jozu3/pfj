@@ -116,7 +116,7 @@ class ProgramaController extends Controller
 
         $vacunas = Vacuna::all();
 
-        return view('admin.programas.show', compact('programa', 'inscripciones', 'aprobacion', 'vacunas'));
+        return view('admin.programas.show', compact('programa', 'inscripciones', 'aprobacion', 'vacunas'))->with('programa_activo', session('programa_activo'));
     }
 
     /**
@@ -208,6 +208,6 @@ class ProgramaController extends Controller
 
 
     public function asignar(Programa $programa){
-        return view('admin.programas.asignar', compact('programa'));
+        return view('admin.programas.asignar', compact('programa'))->with('programa_activo', session('programa_activo'));
     }
 }

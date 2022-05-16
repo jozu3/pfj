@@ -20,8 +20,8 @@ class UserController extends Controller
     use PasswordValidationRules;
 
     public function __construct(){
-        $this->middleware('can:admin.users.index');
-        //$this->middleware('can:admin.users.index')->only('index');
+        $this->middleware('can:admin.users.index')->only('index','create', 'edit', 'destroy');
+        $this->middleware('can:admin.programas.misprogramas')->only('changeSession');
         // $this->middleware('can:admin.users.destroy')->only('destroy');
         
     }
@@ -164,6 +164,6 @@ class UserController extends Controller
     }
     
     public function changeSession(Programa $programa){
-        return redirect()->route('admin.index')->with('programa', $programa->id);
+        return redirect()->route('admin.index')->with('programa_activo', $programa->id);
     }
 }

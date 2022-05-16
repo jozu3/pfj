@@ -15,7 +15,7 @@ class CreateAnunciosTable extends Migration
     {
         Schema::create('anuncios', function (Blueprint $table) {
             $table->id();
-            $table->longText('descripcion');
+            $table->longText('descripcion')->nullable();
             $table->tinyInteger('tipo');
             $table->tinyInteger('estado');
             $table->foreignId('programa_id')->constrained();

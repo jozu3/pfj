@@ -7,6 +7,7 @@ use App\Models\Anuncio;
 use App\Models\Programa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AnuncioController extends Controller
 {
@@ -43,13 +44,19 @@ class AnuncioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'descripcion' => 'required',
+            // 'descripcion' => 'required',
             'tipo' => 'required',
             'estado' => 'required',
             'programa_id' => 'required',
         ]);
 
-        Anuncio::create($request->all());
+        $anuncio = Anuncio::create($request->all());
+        if ($request->file('imganuncio')) {
+            $url = Storage::put('anuncios', $request->file('imganuncio'));
+            $anuncio->image()->create([
+                'url' => $url
+            ]);
+        }
 
         return redirect()->route('admin.anuncios.index')->with('info', 'Anuncio creado.');
     }
@@ -90,13 +97,28 @@ class AnuncioController extends Controller
     public function update(Request $request, Anuncio $anuncio)
     {
         $request->validate([
-            'descripcion' => 'required',
+            // 'descripcion' => 'required',
             'tipo' => 'required',
             'estado' => 'required',
             'programa_id' => 'required',
         ]);
 
         $anuncio->update($request->all());
+
+        if ($request->file('imganuncio')) {
+            $url = Storage::put('anuncios', $request->file('imganuncio'));
+            //$contacto->image()->delete();
+            if($anuncio->image != null){
+                Storage::delete($anuncio->image->url);
+                $anuncio->image->update([
+                    'url' => $url
+                ]);
+            } else {
+                $anuncio->image()->create([
+                    'url' => $url
+                ]);
+            }
+        }
 
         return redirect()->route('admin.anuncios.index')->with('info', 'Anuncio editado correctamente.');
     }

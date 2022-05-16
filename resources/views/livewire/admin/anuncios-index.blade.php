@@ -18,8 +18,51 @@
     				@foreach($anuncios as $anuncio)
     				  <tr>
                         <td>{{ $anuncio->descripcion }}</td>
-                        <td>{{ $anuncio->tipo }}</td>
-                        <td>{{ $anuncio->estado }}</td>
+                        <td>
+							@switch($anuncio->tipo)
+							@case(1)
+									@php
+										$clases = 'bg-danger';
+										$tipo = 'Urgente';
+										@endphp
+									@break
+								@case(2)
+								@php
+										$clases = 'bg-info';
+										$tipo = 'Informatico';
+										@endphp
+									@break
+								@case(3)
+								@php
+									$clases = 'bg-warning';
+									$tipo = 'Advertencia';
+									@endphp	
+								@break
+								@default
+								
+							@endswitch
+							<span class="{{ $clases }} p-1 rounded-lg">
+								{{$tipo}}
+							</span>
+						</td>
+                        <td>
+							@switch($anuncio->estado)
+								@case(1)
+									{{'Activo'}}
+									@break
+								@case(2)
+									{{'Inactivo'}}
+									@break
+								@default
+									
+							@endswitch
+						
+						</td>
+						<td>
+							@if ($anuncio->image)
+								<img width="80px" src="{{ Storage::url($anuncio->image->url) }}" alt="">
+							@endif
+						</td>
     				  	<td width="10px">
     				  		<a href="{{ route('admin.anuncios.edit', $anuncio) }}" class="btn btn-primary" >Editar</a>
     				  	</td>
