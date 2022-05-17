@@ -295,7 +295,7 @@ return [
         ],
         [
             'header' => 'Inscripción', 
-            'key' => 'ventas',
+            'key' => 'inscripcion',
             'can'  => 'admin.contactos.index'
         ],
       /*  [

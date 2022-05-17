@@ -163,7 +163,5 @@ class UserController extends Controller
         return view('admin.users.sessions');
     }
     
-    public function changeSession(Programa $programa){
-        return redirect()->route('admin.index')->with('programa_activo', $programa->id);
-    }
+   
 }
