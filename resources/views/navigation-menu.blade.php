@@ -94,10 +94,10 @@
 
                         </x-jet-dropdown>
                     </div>
-
+{{-- 
                     <x-jet-nav-link href="{{ route('st.index') }}" :active="request()->routeIs('st.lectura.index')">
                         {{ __('Mis lecturas') }}
-                    </x-jet-nav-link>
+                    </x-jet-nav-link> --}}
 
                     @can('admin.home')
                         <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
