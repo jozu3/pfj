@@ -20,8 +20,8 @@ class UserController extends Controller
     use PasswordValidationRules;
 
     public function __construct(){
-        $this->middleware('can:admin.users.index');
-        //$this->middleware('can:admin.users.index')->only('index');
+        // $this->middleware('can:admin.users.index');
+        $this->middleware('can:admin.users.index')->only('index', 'create', 'edit','destroy');
         // $this->middleware('can:admin.users.destroy')->only('destroy');
         
     }
