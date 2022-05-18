@@ -293,11 +293,11 @@ return [
             'icon' => 'fas fa-address-card',
             'can'  =>   'admin.inscripciones.index'
         ],
-        [
-            'header' => 'Inscripción', 
-            'key' => 'inscripcion',
-            'can'  => 'admin.contactos.index'
-        ],
+        // [
+        //     'header' => 'Inscripción', 
+        //     'key' => 'inscripcion',
+        //     'can'  => 'admin.contactos.index'
+        // ],
       /*  [
             'text' => 'Lista de contactos',
             'key' => 'list_contacts',
@@ -306,12 +306,12 @@ return [
             'icon' => 'fas fa-fw fa-user',
             'can'  =>   'admin.contactos.index'
         ],*/
-        [
-            'text' => 'Comentarios',
-            'route'  => 'admin.seguimientos.index',
-            'icon' => 'fas fa-paper-plane',
-            'can'  =>   'admin.seguimientos.index'
-        ],
+        // [
+        //     'text' => 'Comentarios',
+        //     'route'  => 'admin.seguimientos.index',
+        //     'icon' => 'fas fa-paper-plane',
+        //     'can'  =>   'admin.seguimientos.index'
+        // ],
         [
             'header' => 'Mis sesiones',
             'can'  =>   'admin.programas.misprogramas',

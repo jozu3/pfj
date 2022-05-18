@@ -61,7 +61,7 @@ class AppServiceProvider extends ServiceProvider
             //     }
 
             // }   
-            $event->menu->addAfter('inscripcion', $menu_contactos);
+            // $event->menu->addAfter('inscripcion', $menu_contactos);
 
             if(auth()->user()->personale && auth()->user()->can(['admin.programas.misprogramas'])){
 

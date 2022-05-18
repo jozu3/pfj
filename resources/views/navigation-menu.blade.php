@@ -23,7 +23,7 @@
                             <x-slot name="trigger">
 
                                 <button
-                                    class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                                    class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out" >
                                     <div>Mi familia</div>
 
                                     <div class="ml-1">
@@ -246,42 +246,51 @@
                     {{ __('Inicio') }}
                 </x-jet-responsive-nav-link>
 
-                <div class="pt-4 pb-1 ">
-                    <div class="flex items-center px-4">
-                        {{-- @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                            <div class="flex-shrink-0 mr-3">
-                                <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
-                                    alt="{{ Auth::user()->name }}" />
-                            </div>
-                        @endif --}}
-
-                        <div>
-                            <div class="font-medium text-base text-gray-400">{{ __('Mi familia') }}</div>
-                            {{-- <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div> --}}
-                        </div>
-                    </div>
-
-                    <div class="mt-3 space-y-1">
                         <!-- Account Management -->
-                        {{-- <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                            {{ __('Mi familia') }}
-                        </x-jet-responsive-nav-link> --}}
-                        @foreach (Auth::user()->personale->inscripciones as $inscripcione)
-                        @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
-
-                            <x-jet-responsive-nav-link
-                                href="{{ route('st.grupos.show', $inscripcione->inscripcioneCompanerismo->companerismo->grupo) }}">
-                                {{ $inscripcione->programa->nombre }}
-                            </x-jet-responsive-nav-link>
-                            {{-- {{$inscripcione->inscripcioneCompanerismo}} --}}
-                            @endif
-                        @endforeach
-
-
-
-                    </div>
-                </div>
-
+                            <x-jet-dropdown>
+                                <x-slot name="trigger">
+    
+                                    <button
+                                        class="flex items-center block pl-3 pr-4 py-2 w-full  text-base text-sm font-medium focus:bg-indigo-100 focus:outline-none focus:text-indigo-800 focus:border-indigo-700 border-l-4 transition duration-150 ease-in-out " >
+                                        {{-- block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base  hover:text-gray-700 hover:border-grayborder-l-4 border-indigo-400  text-indigo-700 bg-indigo-50 active:border-indigo-400  active:text-indigo-700 active:bg-indigo-50 active:border-l-4 --}}
+                                        <div>Mi familia</div>
+    
+                                        <div class="ml-1">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </button>
+    
+                                </x-slot>
+    
+                                <x-slot name="content">
+                                    <!-- User Management -->
+                                    @foreach (Auth::user()->personale->inscripciones as $inscripcione)
+                                        @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
+    
+                                            <x-jet-dropdown-link
+                                                href="{{ route('st.grupos.show', $inscripcione->inscripcioneCompanerismo->companerismo->grupo) }}">
+                                                {{ $inscripcione->programa->nombre }}
+                                            </x-jet-dropdown-link>
+                                            {{-- {{$inscripcione->inscripcioneCompanerismo}} --}}
+                                        @endif
+                                        
+                                        @can('admin.programas.grupos') {{-- Si puede 'Ver los grupos de su sesión' --}}
+                                        <x-jet-dropdown-link
+                                            href="{{ route('st.index', $inscripcione->programa) }}">
+                                            {{ $inscripcione->programa->nombre }}
+                                        </x-jet-dropdown-link>
+                                        @endcan
+    
+                                    @endforeach
+                                </x-slot>
+    
+                            </x-jet-dropdown>
+        
 
 
                 {{-- <x-jet-responsive-nav-link href="{{ route('st.grupos.index') }}" :active="request()->routeIs('st.grupos.index')">
@@ -291,7 +300,7 @@
 
             @can('admin.home')
                 <x-jet-responsive-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
-                    {{ __('Admin') }}
+                    {{ __('Panel Administrativo') }}
                 </x-jet-responsive-nav-link>
             @endcan
         </div>
