@@ -45,14 +45,16 @@ class AsignarPersonal extends Component
             ]);
         }
 
+        
         $this->reset(['addFamilia', 'famNumero', 'famNombre', 'compCantidad']);
         $this->render();
+        $this->emit('pruebaAsignar');
     }
 
     public function render()
     {
         $grupos = Grupo::where('programa_id', $this->programa->id)->get();
-        // $famNumero = 
+        $this->famNumero = ($grupos)? ($grupos->sortByDesc('numero')->first()->numero) + 1 : 1;
         return view('livewire.admin.asignar-personal', compact('grupos'));
     }
 }

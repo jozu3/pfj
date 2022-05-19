@@ -57,7 +57,6 @@
             <div class="col-md-4"></div>
             {{-- @foreach ($programa->grupos as $grupo) --}}
             @foreach ($grupos as $grupo)
-
                 <div class="col-sm-6 col-md-4 col-lg-3">
                     <div class="card card-row card-primary">
                         <div class="card-header bg-yellow-pfj">
@@ -102,10 +101,10 @@
                 <div class="card card-row card-primary">
                     @if ($addFamilia)
                         <div class="card-body">
-                        {{-- <input type="hidden" wire:model='idTarea'> --}}
-                            <div>
+                            {{-- <input type="hidden" wire:model='idTarea'> --}}
+                            <div>                                
                                 <label for="">Número</label>
-                                <input type="number" wire:model.defer='famNumero' value="1" class="form-control">
+                                <input type="number" wire:model.defer='famNumero' class="form-control">
                             </div>
                             <div>
                                 <label for="">Nombre de la familia</label>
@@ -124,9 +123,11 @@
                     @else
                         <div class="card-body">
                             {{-- <a href="#" class="btn btn-link" wire:click="$toggle('addFamilia')"> --}}
-                                <h2 class="text-warning font-weight-bold text-center pe-auto" style="cursor: pointer;" wire:click="$toggle('addFamilia')">
-                                    <i class="fas fa-plus-circle"></i>
-                                    Agregar familia</h2>
+                            <h2 class="text-warning font-weight-bold text-center pe-auto" style="cursor: pointer;"
+                                wire:click="$toggle('addFamilia')">
+                                <i class="fas fa-plus-circle"></i>
+                                Agregar familia
+                            </h2>
                             {{-- </a> --}}
                         </div>
                     @endif
@@ -178,3 +179,11 @@
 </div>
 </div>
 </div>
+
+{{-- <script>
+    window.onload = function() {
+        Livewire.on('pruebaAsignar', () => {
+            alert("Esto tiene que salir")
+        });
+    }
+</script> --}}
