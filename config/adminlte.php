@@ -293,19 +293,19 @@ return [
             'icon' => 'fas fa-address-card',
             'can'  =>   'admin.inscripciones.index'
         ],
-        // [
-        //     'header' => 'Inscripción', 
-        //     'key' => 'inscripcion',
-        //     'can'  => 'admin.contactos.index'
-        // ],
-      /*  [
+        [
+            'header' => 'Inscripción', 
+            'key' => 'inscripcion',
+            'can'  => 'admin.inscripciones.index'
+        ],
+        [
             'text' => 'Lista de contactos',
             'key' => 'list_contacts',
             'label_color' => 'success',
             'route'  => 'admin.contactos.index',
             'icon' => 'fas fa-fw fa-user',
-            'can'  =>   'admin.contactos.index'
-        ],*/
+            'can'  =>   'admin.inscripciones.index'
+        ],
         // [
         //     'text' => 'Comentarios',
         //     'route'  => 'admin.seguimientos.index',

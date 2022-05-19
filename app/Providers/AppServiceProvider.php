@@ -97,6 +97,15 @@ class AppServiceProvider extends ServiceProvider
                 if(session('programa_activo')){
                     $text_menu_sesion = Programa::find(session('programa_activo'))->nombre;
                     //AGREGAR MENUS DE SESION
+                    $menu_configuracion = [
+                        'text' => 'Mi sesión',
+                        'url' => '/admin/programas/'.session('programa_activo').'/edit',
+                        'icon' => 'fas fa-cogs',
+                        'can'  =>   'admin.programas.edit'
+                    ];
+                    
+
+                    
                     $menu_organigrama = [
                         'text' => 'Organigrama',
                         'url' => '/admin/programas/'.session('programa_activo').'/asignar',
@@ -125,15 +134,28 @@ class AppServiceProvider extends ServiceProvider
                     $menu_asistencias = [
                         'text' => 'Asistencias',
                         'url' => 'admin/programas/'.session('programa_activo').'#nav-home',
-                        'icon' => 'fas fa-chalkboard-teacher',
+                        'icon' => 'fas fa-calendar-check',
                         'can' => 'admin.asistencias.index'
                     ];
 
                     $menu_actividades = [
-                        'text' => 'Asignaciones',
+                        'text' => 'Lecturas/Tareas',
                         'url' => 'admin/programas/'.session('programa_activo').'#nav-profile',
-                        'icon' => 'fas fa-chalkboard-teacher',
+                        'icon' => 'fas fa-tasks',
                         'can' => 'admin.actividades.index'
+                    ];
+                    
+                    $menu_dashboard = [
+                        'text' => 'Dashboard',
+                        'url' => 'admin',//programas/dashboard'.session('programa_activo').'',
+                        'icon' => 'fas fa-chart-line',
+                        'can' => 'admin.programas.edit'
+                    ];
+
+                    $header = [ 
+                        'header' => 'Dashboard',
+                        'can'  =>   'admin.programas.edit',
+                        'key' => 'dashboard'
                     ];
                     
                     
@@ -143,6 +165,9 @@ class AppServiceProvider extends ServiceProvider
                     $event->menu->addAfter('programa', $menu_anuncios);
                     $event->menu->addAfter('programa', $menu_organigrama);
                     $event->menu->addAfter('programa', $menu_personales);
+                    $event->menu->addAfter('programa', $menu_configuracion);
+                    $event->menu->addBefore('programa', $header);
+                    $event->menu->addAfter('dashboard', $menu_dashboard);
 
                 }   
 

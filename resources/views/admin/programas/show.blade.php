@@ -18,7 +18,7 @@
         <i class="far fa-file-excel"></i> Importar personal
     </button>
 
-    <h1>Sesión: {{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</h1>
+    <h1><b class="text-pfj">{{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</b></h1>
 @stop
 
 @section('content')
@@ -48,7 +48,7 @@
         </div>
     @endif
     <div class="row">
-        <div class="col-md-12">
+        {{-- <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-md-12">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">

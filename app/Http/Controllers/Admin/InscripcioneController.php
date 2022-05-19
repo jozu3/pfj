@@ -194,10 +194,11 @@ class InscripcioneController extends Controller
         ]);*/
 
 
-        $inscripcione->update([
-            'estado' => $request->estado,
-            'role_id' => $request->role_id
-        ]);
+        $inscripcione->update($request->all());
+        //     $inscripcione->update([
+        //     'estado' => $request->estado,
+        //     'role_id' => $request->role_id
+        // ]);
         
         return redirect()->route('admin.inscripciones.edit', compact('inscripcione'))->with('info','Se actualizaron los datos correctamente');
     }
