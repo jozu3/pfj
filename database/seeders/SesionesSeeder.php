@@ -65,7 +65,7 @@ class SesionesSeeder extends Seeder
         }
 
         //Manuel Mandujano
-        $nom_m1 = 'Felix Manuel';
+        $nom_m1 = 'Félix Manuel';
         $ape_m1 = 'Mandujano Urquiaga';
         $correo_m1 = 'manuelfmu@gmail.com';
         $tel_m1 = '936851538';
@@ -108,6 +108,16 @@ class SesionesSeeder extends Seeder
             'fecha' => date('Y-m-d')
         ]);
 
+        $this->createPersonal( [
+            'nom_m1' => 'Rosa Ysabel',
+            'ape_m1' => 'Lucero Rivera',
+            'correo_m1' => 'rosa@gmail.com',
+            'tel_m1' => '972358750',
+            'barrio' => 'Belaunde Ward',
+            'rol' => 'Matrimonio Director',
+            'genero' => 'Mujer',
+        ], $pln3);
+
 
         $this->createPersonal( [
             'nom_m1' => 'Helmut',
@@ -139,7 +149,7 @@ class SesionesSeeder extends Seeder
         */
     }
 
-    private function createPersonal($personale, $programa){
+    public function createPersonal($personale, $programa){
            //Manuel Mandujano
            $nom_m1 = $personale['nom_m1'];
            $ape_m1 = $personale['ape_m1'];
