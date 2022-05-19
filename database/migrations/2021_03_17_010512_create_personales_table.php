@@ -17,6 +17,8 @@ class CreatePersonalesTable extends Migration
             $table->id();
             $table->tinyInteger('permiso_obispo')->default(0);
             $table->tinyInteger('estado_rtemplo')->default(0);
+            $table->string('obs_rtemplo')->nullable();
+            $table->tinyInteger('preinscripcion')->nullable();
             $table->foreignId('barrio_id')->constrained();
             $table->foreignId('contacto_id')->constrained();
             $table->unsignedBigInteger('user_id')->nullable();

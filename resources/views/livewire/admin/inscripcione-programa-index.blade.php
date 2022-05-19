@@ -11,13 +11,20 @@
                 <th>Apellidos</th>
                 <th>Telefono</th>
                 <th>Correo electrónico</th>
+                <th>Pre-Inscripción</th>
+                <th>Recomendación para el templo</th>
                 <th>Permiso del obispo</th>
             </tr>
         </thead>
         <tbody>
         @forelse ($inscripciones as $inscripcione)
                 <tr>
-                    <td>{{ $inscripcione->role->name }}</td>
+                    <td>
+                        {{ $inscripcione->role->name }}
+                        @if ($inscripcione->funcion)
+                            {{ ' - '. $inscripcione->funcion}}
+                        @endif
+                    </td>
                     @if ($inscripcione->role->name == 'Matrimonio Director')
                         <td>{{ $inscripcione->role->name }}</td>
                     @else
@@ -55,10 +62,30 @@
                         @endif
                     </td>
                     <td>
+                        @switch($inscripcione->personale->preinscripcion)
+                            @case(1)
+                                {{ 'Sí' }}
+                                @break
+                            @case(0)
+                                {{ 'No' }}
+                                @break
+                            @default
+                        @endswitch
+                    </td>
+                    <td>
+                        @if ($inscripcione->personale->estado_rtemplo)
+                        {{ 'Sí' }}
+                        @endif
+                        @if ($inscripcione->personale->obs_rtemplo)
+                        {{ ' - '.$inscripcione->personale->obs_rtemplo }}
+                        @endif
+                    </td>
+                    <td>
                         @if ($inscripcione->personale->permiso_obispo)
                             {{ 'Sí' }}
                         @endif
                     </td>
+                    
                     <td width="10px">
                         <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}" class="btn btn-primary" ><i class="fas fa-user-edit"></i></a>
                     </td>

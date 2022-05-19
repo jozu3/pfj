@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
-            {{ $inscripcione->programa->nombre }}
+            Bienvenido(a) a tu sesión {{ $inscripcione->programa->nombre }}
         </h2>
     </x-slot>
 
@@ -44,64 +44,139 @@
                                     </div>
 
                                 </div>
-
-                                <div class="container py-6">
-                                    <div class="text-3xl text-center text-gray-900 border-b-2 font-bold">
+                              
+                                <div class="container py-6" style="height: 600px; max-height: 600px"> 
+                                    <div class="text-3xl text-center text-gray-900 border-b-2 mb-4 font-bold">
                                         <p class="">Anuncios</p> <!-- border-b-4 -->
                                     </div>
-                                    <div class="flex items-center justify-center">
-                                        <div class="grid max-w-2xl flex justify-center ">
-                                            <div class="grid col-span-6 relative">
-
-                                                <div
-                                                    class="group shadow-lg hover:shadow-2xl duration-200 delay-75 w-full border-2 border-yellow-300 rounded-sm my-4">
-                                                    <div class="bg-yellow-300 text-xl font-bold text-white text-center">
-                                                        <p class="px-6 py-4">Mensaje</p>
-                                                    </div>
-                                                    <div class="bg-white py-6 pr-6 pl-9">
-                                                        <!-- Description -->
-                                                        <p
-                                                            class="text-sm font-semibold text-gray-500 group-hover:text-gray-700 mt-2 leading-6  ">
-                                                            Lorem ipsum dolor sit, amet consectetur
-                                                            adipisicing elit. Quae officiis animi nisi
-                                                            in
-                                                            cupiditate eius, dolores natus atque,
-                                                            distinctio, ratione eveniet! Ea
-                                                            exercitationem
-                                                            enim non repellendus itaque iusto officia
-                                                            porro?
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                    <div id="carouselExampleIndicators" class="carousel slide relative" style="height: 500px" data-bs-ride="carousel">
+                                        <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
+                                          
+                                          @php
+                                                $i = 0;
+                                            @endphp
+                                            @foreach ($inscripcione->programa->anuncios->where('estado', '1') as $anuncio)
+                                            {{-- @if ($anuncio->image) --}}
+                                            <button
+                                                type="button"
+                                                data-bs-target="#carouselExampleIndicators"
+                                                data-bs-slide-to="{{ $i }}"
+                                                @if ($i == 0)
+                                                    {{ "class=active aria-current=true"  }}
+                                                @endif
+                                                aria-label="Slide {{ $i+1 }}"
+                                            ></button>
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                            {{-- @endif --}}
+                                            @endforeach
                                         </div>
-                                    </div>
-
+                                        <div class="carousel-inner relative w-full overflow-hidden" style="height: 500px; max-height: 500px">
+                                            @php
+                                                $i = 0;
+                                            @endphp
+                                            @foreach ($inscripcione->programa->anuncios->where('estado', '1') as $anuncio)
+                                            
+                                            @switch($anuncio->tipo)
+                                                @case(1)
+                                                    @php
+                                                        $color = 'bg-red-600';
+                                                        $texto = 'Urgente!';
+                                                        @endphp
+                                                    @break
+                                                @case(2)
+                                                    @php
+                                                        $color = 'bg-blue-600'	;
+                                                        $texto = 'Información';
+                                                    @endphp
+                                                    @break
+                                                @case(3)
+                                                    @php
+                                                        $color = 'bg-yellow-500'	;
+                                                        $texto = 'Advertencia';
+                                                    @endphp
+                                                    @break
+                                                @default
+                                                    
+                                            @endswitch
+                                            
+                                            <div class="carousel-item text-center @if($i == 0){{ "active"  }}@endif w-full overflow-hidden">
+                                               
+                                            <img
+                                                src=" @if ($anuncio->image){{ Storage::url($anuncio->image->url) }}@endif"
+                                                class="block m-auto"
+                                                width="500"
+                                                alt=""
+                                                />
+                                                @if (!$anuncio->image)
+                                                <div class="carousel-caption block absolute inset-0 text-center">
+                                                    <div class="flex justify-center">
+                                                        <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+                                                          <div class="py-3 px-6 rounded-lg  border-b border-gray-300 font-extrabold {{ $color }}">
+                                                            {{ $texto }}
+                                                          </div>
+                                                          <div class="p-6">
+                                                            <h5 class="text-gray-900 text-xl font-medium mb-2"> {{ $anuncio->descripcion }}</h5>
+                                                            {{-- <button type="button" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button> --}}
+                                                          </div>
+                                                          {{-- <div class="py-3 px-6 border-t border-gray-300 text-gray-600">
+                                                            2 days ago
+                                                          </div> --}}
+                                                        </div>
+                                                      </div>
+                                                </div>
+                                                @endif
+                                            </div>
+                                                        
+                                            @php
+                                                $i = $i+1;
+                                            @endphp
+                                            @endforeach
+                                          
+                                        </div>
+                                        <button
+                                          class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
+                                          type="button"
+                                          data-bs-target="#carouselExampleIndicators"
+                                          data-bs-slide="prev"
+                                        >
+                                          <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button
+                                          class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
+                                          type="button"
+                                          data-bs-target="#carouselExampleIndicators"
+                                          data-bs-slide="next"
+                                        >
+                                          <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Next</span>
+                                        </button>
+                                      </div>
                                 </div>
-
-                                <div class="container py-6">
-                                    <div class=" grid grid-cols-3 border-b-2 font-bold">
-                                        <p class="col-span-2 text-lef text-2xl text-gray-400">Metas de lectura</p>
-                                        <!-- border-b-4 -->
-                                        <p class="col-span-1 text-right"><a
-                                                href="{{ route('st.tareas.mislecturas', $inscripcione->programa) }}"><span class="border-l-2 pl-2">
-                                                    Mis lecturas</span></a></p>                                                    
-                                    </div>
-                                    <div class="overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200 text-center">
-                                            <tbody class="bg-white divide-y divide-gray-200">
-                                                @forelse ($inscripcione->programa->tareas->sortByDesc('fecha')->take(3) as $tarea)
-                                                    <tr>
-                                                        <td class="w-1/4 px-6 py-4 font-bold text-gray-400">{{$tarea->fecha}}</td>
-                                                        <td class="px-6 py-4 font-bold whitespace-normal">{{$tarea->descripcion}}
-                                                        </td>                                                        
-                                                    </tr>                                                
-                                                @empty
-                                                    <p>No asignados</p>
-                                                @endforelse
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="container py-6 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-6">
+                                    <table class="min-w-full divide-y divide-gray-200 mx-4">
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr>
+                                                <td>
+                                                    <p class="col-span-2 text-left text-md sm:text-2xl font-bold sm:ml-6">Tareas cumplidas:</p>
+                                                    <p>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="p-2 inline-flex text-xl leading-5 text-sm sm:text-xl font-semibold rounded-full bg-green-100 text-green-800">
+                                                        {{ '5/10' }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('st.tareas.mislecturas', $inscripcione->programa) }}" class="bg-yellow-pfj sm:p-2 sm:text-md rounded-lg text-white p-1 text-sm">
+                                                        <i class="fas fa-check-square"></i> Marcar
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
                                 </div>
 
@@ -147,45 +222,6 @@
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                {{-- <tr>
-                                <td class="px-6 py-4" colspan="100%">
-                                  <b>Comentario del docente:</b> 
-                                  @if ($personale_unidade->comentario == '')
-                                    <i class="text-gray-300">No hay comentario del docente.</i>
-                                  @else
-                                  {{ $personale_unidade->comentario }}
-                                  @endif
-                                </td>
-                              </tr>                                  
-                              <tr>
-                                <td class="px-6 whitespace-nowrap">
-                                      <div class="ml-12">
-                                        <div class="text-xl text-gray-900">
-                                          Notas
-                                      </div>
-                                </td>
-                                <td colspan="2" class="px-6 py-4 whitespace-nowrap">
-                                  @foreach ($personale_unidade->personaleNotasorden('asc') as $personale_nota)
-                                  <div class="">
-                                      <div class="flex my-2">
-                                        <div class="flex-1 flex items-center">
-                                          {{ $personale_nota->descripcionnota }}
-                                          @if ($personale_nota->tiponota == 1)
-                                            (Nota recuperatoria)
-                                          @endif
-                                        </div>
-                                        @if ($personale_nota->valorpersonale_nota != '')
-                                        <div class="flex-1 flex items-center justify-center ">
-                                          <div class="rounded-md bg-yellow-600 text-white font-semibold py-2 px-4">
-                                            {{ $personale_nota->valorpersonale_nota }}
-                                          </div>
-                                        </div>
-                                        @endif
-                                      </div>
-                                  </div>
-                                  @endforeach
-                                </td>
-                              </tr> --}}
                                             @empty
                                                 <tr>
                                                     <td class="px-6 py-4 text-gray-300" colspan="100%">
@@ -205,4 +241,17 @@
             </div>
         </div>
     </div>
+    <style>
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            background-color: #fe9321;
+            border-radius: 50%;
+        }
+        .carousel-control-prev-icon{
+            background-position-x: -2px!important
+        }
+        .carousel-control-next-icon{
+            background-position-x: 2px !important
+        }
+    </style>
+    <script src="{{ config('app.url') }}/tw-elements/dist/js/index.min.js"></script>
 </x-app-layout>

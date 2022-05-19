@@ -9,7 +9,7 @@
 @section('content')
 	<div class="card">
 		<div class="card-body">
-			{!! Form::open(['route' => 'admin.anuncios.store']) !!}
+			{!! Form::open(['route' => 'admin.anuncios.store', 'files' => true]) !!}
 				
 				@include('admin.anuncios.partials.form')
 
@@ -25,7 +25,7 @@
 
 @section('js')
     <script> 
-	 	document.getElementById('image').addEventListener('change', cambiarImagen);
+	 	document.getElementById('imganuncio').addEventListener('change', cambiarImagen);
 
 		function cambiarImagen(event){
 			var file = event.target.files[0];

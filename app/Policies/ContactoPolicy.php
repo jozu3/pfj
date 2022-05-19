@@ -14,11 +14,11 @@ class ContactoPolicy
      * Create a new policy instance.
      *
      * @return void
-     
+     */
     public function __construct()
     {
         //
-    }*/
+    }
 
     public function crear(User $user){
         return true;

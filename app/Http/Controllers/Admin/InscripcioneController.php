@@ -194,10 +194,11 @@ class InscripcioneController extends Controller
         ]);*/
 
 
-        $inscripcione->update([
-            'estado' => $request->estado,
-            'role_id' => $request->role_id
-        ]);
+        $inscripcione->update($request->all());
+        //     $inscripcione->update([
+        //     'estado' => $request->estado,
+        //     'role_id' => $request->role_id
+        // ]);
         
         return redirect()->route('admin.inscripciones.edit', compact('inscripcione'))->with('info','Se actualizaron los datos correctamente');
     }
@@ -213,8 +214,10 @@ class InscripcioneController extends Controller
         $personale = $inscripcione->personale; 
         $user = $personale->user;
         $inscripcione->delete();
-        $personale->delete();
-        $user->delete();
+        if(!count($personale->inscripciones)){
+            $personale->delete();
+            $user->delete();
+        }
 
         return redirect()->route('admin.inscripciones.index')->with('eliminar','Ok');
     }

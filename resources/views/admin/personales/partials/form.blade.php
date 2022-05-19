@@ -46,3 +46,10 @@
 @error('estado_rtemplo')
     <small class="text-danger">{{ $message }}</small>
 @enderror
+<div class="form-group">
+    {!! Form::label('obs_rtemplo', 'Observación de la recomendación para el templo') !!}
+    {!! Form::text('obs_rtemplo', null, ['class' => 'form-control']); !!}
+</div>
+@error('obs_rtemplo')
+    <small class="text-danger">{{ $message }}</small>
+@enderror

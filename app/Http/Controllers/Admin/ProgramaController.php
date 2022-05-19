@@ -210,4 +210,11 @@ class ProgramaController extends Controller
     public function asignar(Programa $programa){
         return view('admin.programas.asignar', compact('programa'));
     }
+
+    public function changeSession(Programa $programa){
+        $this->authorize('changeSession', $programa);
+        
+        session(['programa_activo' => $programa->id]);
+        return redirect()->route('admin.index');
+    }
 }

@@ -113,6 +113,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.anuncios.create', 'description' => 'Crear anuncios'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'admin.anuncios.edit', 'description' => 'Editar anuncios'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'admin.anuncios.destroy', 'description' => 'Eliminar anuncios'])->syncRoles([$role1, $role2, $role3, $role4]);
+        
+        //Permisos actividades
+        Permission::create(['name' => 'admin.actividades.index', 'description' => 'Ver listado de actividades'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.actividades.create', 'description' => 'Crear actividades'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.actividades.edit', 'description' => 'Editar actividades'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.actividades.destroy', 'description' => 'Eliminar actividades'])->syncRoles([$role1, $role2, $role3, $role4]);
   
 
              //Permisos admin.reportes.index

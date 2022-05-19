@@ -295,69 +295,68 @@ return [
         ],
         [
             'header' => 'Inscripción', 
-            'key' => 'ventas',
-            'can'  => 'admin.contactos.index'
+            'key' => 'inscripcion',
+            'can'  => 'admin.inscripciones.index'
         ],
-      /*  [
+        [
             'text' => 'Lista de contactos',
             'key' => 'list_contacts',
             'label_color' => 'success',
             'route'  => 'admin.contactos.index',
             'icon' => 'fas fa-fw fa-user',
-            'can'  =>   'admin.contactos.index'
-        ],*/
-        [
-            'text' => 'Comentarios',
-            'route'  => 'admin.seguimientos.index',
-            'icon' => 'fas fa-paper-plane',
-            'can'  =>   'admin.seguimientos.index'
+            'can'  =>   'admin.inscripciones.index'
         ],
+        // [
+        //     'text' => 'Comentarios',
+        //     'route'  => 'admin.seguimientos.index',
+        //     'icon' => 'fas fa-paper-plane',
+        //     'can'  =>   'admin.seguimientos.index'
+        // ],
         [
             'header' => 'Mis sesiones',
             'can'  =>   'admin.programas.misprogramas',
             'key' => 'programa',
-
         ],
 
-        [
-            'text' => 'Mi(s) sesión(es)',
-            'route'  => 'admin.programas.misprogramas',
-            'icon' => 'fab fa-leanpub',
-            'can'  =>   'admin.programas.misprogramas'
-        ],
-        [
-            'text' => 'Grupos',
-            'route'  => 'admin.programas.grupos',
-            'icon' => 'fab fa-leanpub',
-            'can'  =>   'admin.programas.grupos'
-        ],
-        [
-            'text' => 'Mi grupo',
-            'route'  => 'admin.grupos.migrupo',
-            'icon' => 'fab fa-leanpub',
-            'can'  =>   'admin.grupos.migrupo'
-        ],
+        // [
+        //     'text' => 'Mi(s) sesión(es)',
+        //     'route'  => 'admin.programas.misprogramas',
+        //     'icon' => 'fab fa-leanpub',
+        //     'can'  =>   'admin.programas.misprogramas'
+        // ],
+        // [
+        //     'text' => 'Grupos',
+        //     'route'  => 'admin.programas.grupos',
+        //     'icon' => 'fab fa-leanpub',
+        //     'can'  =>   'admin.programas.grupos'
+        // ],
+        // [
+        //     'text' => 'Mi grupo',
+        //     'route'  => 'admin.grupos.migrupo',
+        //     'icon' => 'fab fa-leanpub',
+        //     'can'  =>   'admin.grupos.migrupo'
+        // ],
  
-        [ 
-            'header' => 'Anuncios',
-            'can'  =>   'admin.anuncios.index'
-        ],
-        [
-            'text'        => 'Anuncios',
-            'route'         => 'admin.anuncios.index',
-            'icon'        => 'fas fa-chalkboard-teacher',
-            'can'  =>   'admin.anuncios.index'
-        ],
-        [ 
-            'header' => 'Reportes',
-            'can'  =>   'admin.reportes.index'
-        ],
-        [
-            'text'        => 'Reportes',
-            'route'         => 'admin.reportes.index',
-            'icon'        => 'fas fa-chalkboard-teacher',
-            'can'  =>   'admin.reportes.index'
-        ],
+        // [ 
+        //     'header' => 'Anuncios',
+        //     'can'  =>   'admin.anuncios.index'
+        // ],
+        // [
+        //     'text'        => 'Anuncios',
+        //     'route'         => 'admin.anuncios.index',
+        //     'icon'        => 'fas fa-chalkboard-teacher',
+        //     'can'  =>   'admin.anuncios.index'
+        // ],
+        // [ 
+        //     'header' => 'Reportes',
+        //     'can'  =>   'admin.reportes.index'
+        // ],
+        // [
+        //     'text'        => 'Reportes',
+        //     'route'         => 'admin.reportes.index',
+        //     'icon'        => 'fas fa-chalkboard-teacher',
+        //     'can'  =>   'admin.reportes.index'
+        // ],
      /*   [
             'header' => 'Finanzas',
             'can'  =>   'admin.pagos.index'
