@@ -35,7 +35,7 @@
                                             @endforelse
                                             <br>
                                             @if ($inscripcione->programa->resena_matrimonio)
-                                                <p>{{ $inscripcione->programa->resena_matrimonio }}</p>
+                                                <p>{!! $inscripcione->programa->resena_matrimonio !!}</p>
                                             @endif
                                         </div>
                                       </div>
