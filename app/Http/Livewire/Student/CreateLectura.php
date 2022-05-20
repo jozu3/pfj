@@ -18,6 +18,7 @@ class CreateLectura extends Component
         $inscripcioneTareas = InscripcioneTarea::where('inscripcione_id', $inscripcione->id)->get();
 
         $total_tareas = $programa->tareas->count();
+        $avance = 0;
 
         if($total_tareas){
             $avance = ($inscripcioneTareas->where('realizado', true)->count() / $total_tareas) * 100;

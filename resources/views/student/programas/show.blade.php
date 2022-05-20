@@ -224,14 +224,11 @@
                                         <tbody class="bg-white divide-y divide-gray-200">
                                             @forelse ($inscripcione->programa->capacitaciones as $capacitacione)
                                                 <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                    <td class="px-6 py-4 ">
                                                         <div class="flex items-center">
                                                             <div class="ml-4">
                                                                 <div class="text-2xl font-medium text-gray-900">
                                                                     <b>{{ $capacitacione->tema }}</b>
-                                                                </div>
-                                                                <div class="text-sm text-gray-500">
-                                                                    {{-- {{ date('d/m/Y', strtotime($personale_unidade->unidad->fechainicio)) }} --}}
                                                                 </div>
                                                             </div>
                                                         </div>
