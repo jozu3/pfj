@@ -76,7 +76,7 @@
                                             @php
                                                 $i = 0;
                                             @endphp
-                                            @foreach ($inscripcione->programa->anuncios->where('estado', '1') as $anuncio)
+                                            @forelse ($inscripcione->programa->anuncios->where('estado', '1') as $anuncio)
                                             
                                             @switch($anuncio->tipo)
                                                 @case(1)
@@ -110,7 +110,10 @@
                                                 alt=""
                                                 />
                                                 @if (!$anuncio->image)
-                                                <div class="carousel-caption block absolute inset-0 text-center">
+                                                <div class="carousel-caption block absolute inset-0 text-center" style="
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;"        >
                                                     <div class="flex justify-center">
                                                         <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center">
                                                           <div class="py-3 px-6 rounded-lg  border-b border-gray-300 font-extrabold {{ $color }}">
@@ -132,7 +135,31 @@
                                             @php
                                                 $i = $i+1;
                                             @endphp
-                                            @endforeach
+                                            @empty
+                                            @php
+                                                $color = 'bg-blue-600'	;
+                                                $texto = 'Información';
+                                            @endphp
+                                            <div class="carousel-caption block absolute inset-0 text-center" style="
+                                                                            display: flex;
+                                                                            align-items: center;
+                                                                            justify-content: center;"           >
+                                                <div class="flex justify-center">
+                                                    <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+                                                      <div class="py-3 px-6 rounded-lg  border-b border-gray-300 font-extrabold {{ $color }}">
+                                                        {{ $texto }}
+                                                      </div>
+                                                      <div class="p-6">
+                                                        <h5 class="text-gray-900 text-xl font-medium mb-2"> {{ 'No hay anuncios' }}</h5>
+                                                        {{-- <button type="button" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button> --}}
+                                                      </div>
+                                                      {{-- <div class="py-3 px-6 border-t border-gray-300 text-gray-600">
+                                                        2 days ago
+                                                      </div> --}}
+                                                    </div>
+                                                  </div>
+                                            </div>
+                                            @endforelse
                                           
                                         </div>
                                         <button
