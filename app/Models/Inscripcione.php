@@ -36,6 +36,9 @@ class Inscripcione extends Model
     public function inscripcioneCompanerismo(){
         return $this->hasOne(InscripcioneCompanerismo::class);
     }
+    public function inscripcioneTareas(){
+        return $this->hasMany(InscripcioneTarea::class);
+    }
 
     public function asignaciones(){
         return $this->hasMany(Asignacione::class);

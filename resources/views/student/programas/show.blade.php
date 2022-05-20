@@ -166,7 +166,7 @@
                                                 <td>
                                                     <span
                                                         class="p-2 inline-flex text-xl leading-5 text-sm sm:text-xl font-semibold rounded-full bg-green-100 text-green-800">
-                                                        {{ '5/10' }}
+                                                        {{ $inscripcione->inscripcioneTareas->where('realizado', true)->count().'/'.$inscripcione->programa->tareas->count() }}
                                                     </span>
                                                 </td>
                                                 <td>
@@ -185,19 +185,23 @@
                                         <thead class="bg-gray-50">
                                             <tr>
                                                 <th scope="col"
-                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Nombre
+                                                    class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                                    Próximas capacitaciones
                                                 </th>
+                                                <th>
+                                                    Fecha
+                                                </th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
-                                            @forelse ($inscripcione->programa->lideres() as $lider)
+                                            @forelse ($inscripcione->programa->capacitaciones as $capacitacione)
                                                 <tr>
                                                     <td class="px-6 py-4 whitespace-nowrap">
                                                         <div class="flex items-center">
                                                             <div class="ml-4">
                                                                 <div class="text-2xl font-medium text-gray-900">
-                                                                    <b>{{ $lider->personale->user->name }}</b>
+                                                                    <b>{{ $capacitacione->tema }}</b>
                                                                 </div>
                                                                 <div class="text-sm text-gray-500">
                                                                     {{-- {{ date('d/m/Y', strtotime($personale_unidade->unidad->fechainicio)) }} --}}
@@ -205,10 +209,10 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
+                                                    <td class="px-6 py-4 whitespace-nowrap text-center">
                                                         <span
-                                                            class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                            {{ $lider->role->name }}
+                                                            class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                            {{ date('d/m/Y', strtotime($capacitacione->fechacapacitacion)) }}
                                                         </span>
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -225,7 +229,7 @@
                                             @empty
                                                 <tr>
                                                     <td class="px-6 py-4 text-gray-300" colspan="100%">
-                                                        Aun no empiezan las clases
+                                                        No hay una próxima reunión
                                                     </td>
                                                 </tr>
                                             @endforelse

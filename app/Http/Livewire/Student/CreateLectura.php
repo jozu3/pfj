@@ -16,7 +16,15 @@ class CreateLectura extends Component
         $programa = $this->programa;
         $inscripcione = Inscripcione::where('personale_id', auth()->user()->personale->id)->where('programa_id', $this->programa->id)->first();
         $inscripcioneTareas = InscripcioneTarea::where('inscripcione_id', $inscripcione->id)->get();
-        return view('livewire.student.create-lectura', compact('programa', 'inscripcioneTareas'));
+
+        $total_tareas = $programa->tareas->count();
+
+        if($total_tareas){
+            $avance = ($inscripcioneTareas->where('realizado', true)->count() / $total_tareas) * 100;
+        }
+
+
+        return view('livewire.student.create-lectura', compact( 'inscripcioneTareas', 'avance'));
     }
 
     public function realizado($tarea)
