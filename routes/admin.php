@@ -42,6 +42,8 @@ Route::get('/programas/changesession/{programa}', [ProgramaController::class, 'c
 Route::get('/programas/misprogramas', [ProgramaController::class, 'misprogramas'])->name('admin.programas.misprogramas');
 Route::get('/programas/grupos', [ProgramaController::class, 'grupos'])->name('admin.programas.grupos');
 Route::get('/programas/{programa}/asignar', [ProgramaController::class, 'asignar'])->name('admin.programas.asignar');
+Route::get('/programas/{programa}/personal', [ProgramaController::class, 'personal'])->name('admin.programas.personal');
+Route::get('/programas/{programa}/dashboard', [ProgramaController::class, 'dashboard'])->name('admin.programas.dashboard');
 Route::resource('programas', ProgramaController::class)->names('admin.programas');
 Route::resource('capacitaciones', CapacitacioneController::class)->names('admin.capacitaciones');
 

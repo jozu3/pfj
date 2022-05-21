@@ -117,7 +117,7 @@ class AppServiceProvider extends ServiceProvider
                     
                     $menu_personales = [
                         'text' => 'Personal',
-                        'url' => '/admin/programas/'.session('programa_activo'),
+                        'url' => '/admin/programas/'.session('programa_activo').'/personal',
                         // 'route'  => ['admin.programas.asignar', $programa_activo],
                         'icon' => 'fas fa-users',
                         'can'  =>   'admin.programas.misprogramas'
@@ -132,22 +132,22 @@ class AppServiceProvider extends ServiceProvider
                     ];
                     
                     $menu_asistencias = [
-                        'text' => 'Asistencias',
-                        'url' => 'admin/programas/'.session('programa_activo').'#nav-home',
+                        'text' => 'Control',
+                        'url' => 'admin/programas/'.session('programa_activo'),
                         'icon' => 'fas fa-calendar-check',
                         'can' => 'admin.asistencias.index'
                     ];
 
-                    $menu_actividades = [
+                    $menu_tareas = [
                         'text' => 'Lecturas/Tareas',
-                        'url' => 'admin/programas/'.session('programa_activo').'#nav-profile',
+                        'url' => 'admin/programas/'.session('programa_activo').'',
                         'icon' => 'fas fa-tasks',
                         'can' => 'admin.actividades.index'
                     ];
                     
                     $menu_dashboard = [
                         'text' => 'Dashboard',
-                        'url' => 'admin',//programas/dashboard'.session('programa_activo').'',
+                        'url' => 'admin/programas/'.session('programa_activo').'/dashboard',
                         'icon' => 'fas fa-chart-line',
                         'can' => 'admin.programas.edit'
                     ];
@@ -160,7 +160,7 @@ class AppServiceProvider extends ServiceProvider
                     
                     
                     
-                    $event->menu->addAfter('programa', $menu_actividades);
+                    $event->menu->addAfter('programa', $menu_tareas);
                     $event->menu->addAfter('programa', $menu_asistencias);
                     $event->menu->addAfter('programa', $menu_anuncios);
                     $event->menu->addAfter('programa', $menu_organigrama);

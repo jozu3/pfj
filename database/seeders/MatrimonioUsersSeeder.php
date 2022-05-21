@@ -23,6 +23,7 @@ class MatrimonioUsersSeeder extends Seeder
     {
 
         $pln2 = Programa::where('nombre', 'PFJ Lima Norte Sesión 2')->first();
+        $pln1 = Programa::where('nombre', 'PFJ Lima Norte Sesión 1')->first();
         
         $this->createPersonal( [
             'nom_m1' => 'Ricardo Enmanuel',

@@ -12,8 +12,9 @@
                 <th>Telefono</th>
                 <th>Correo electrónico</th>
                 <th>Pre-Inscripción</th>
-                <th>Recomendación para el templo</th>
-                <th>Permiso del obispo</th>
+                <th></th>
+                {{-- <th>Recomendación para el templo</th>
+                <th>Permiso del obispo</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -72,19 +73,19 @@
                             @default
                         @endswitch
                     </td>
-                    <td>
+                    {{-- <td>
                         @if ($inscripcione->personale->estado_rtemplo)
                         {{ 'Sí' }}
                         @endif
                         @if ($inscripcione->personale->obs_rtemplo)
                         {{ ' - '.$inscripcione->personale->obs_rtemplo }}
                         @endif
-                    </td>
+                    </td>--}}
                     <td>
                         @if ($inscripcione->personale->permiso_obispo)
                             {{ 'Sí' }}
                         @endif
-                    </td>
+                    </td> 
                     
                     <td width="10px">
                         <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}" class="btn btn-primary" ><i class="fas fa-user-edit"></i></a>

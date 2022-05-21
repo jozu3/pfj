@@ -18,7 +18,8 @@ class TestSeeder extends Seeder
         $this->call(BarrioSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(VacunaSeeder::class);
-        $this->call(SesionesSeeder::class);
+        $this->call(SesionesSeeder::class);//Sesiones, usuario de Manuel y Rosa
+        $this->call(MatrimonioUsersSeeder::class); //Richard y Paola
 
        
     }

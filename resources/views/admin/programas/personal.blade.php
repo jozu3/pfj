@@ -2,15 +2,9 @@
 
 @section('title', 'Sesión')
 
-@section('content_header')
-    @can('admin.programas.edit')
-        <a href="{{ route('admin.programas.edit', $programa) }}" class="btn btn-success btn-sm float-right">Editar programa</a>
-    @endcan
-    <a href="{{ route('admin.programas.asignar', $programa) }}" class="btn btn-success btn-sm float-right mr-3">
-        <i class="fas fa-sitemap"></i> Asignaciones</a>
-    {{-- <a href="{{ route('admin.excel.personalesGrupo', $programa) }}" class="btn btn-success btn-sm float-right mr-3"><i
-            class="far fa-file-excel"></i> Registro de personales</a> --}}
+@section('plugins.Chartjs', true)
 
+@section('content_header')
     <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal"
         data-target="#importExcelPersonal">
         <i class="far fa-file-excel"></i> Importar personal
@@ -46,47 +40,11 @@
         </div>
     @endif
     <div class="row">
-        {{-- <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <canvas id="myChart" width="400" height="400"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+
         <div class="col-md-12">
-            <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                        aria-controls="nav-home" aria-selected="true">Asistencia</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                        aria-controls="nav-profile" aria-selected="false">Lecturas</a>
-                    <a class="nav-item nav-link" id="nav-vacuna-tab" data-toggle="tab" href="#nav-vacuna" role="tab"
-                        aria-controls="nav-vacuna" aria-selected="false">Vacunas</a>
-                    <a class="nav-item nav-link" id="nav-rtemplo-tab" data-toggle="tab" href="#nav-rtemplo" role="tab"
-                        aria-controls="nav-rtemplo" aria-selected="false">Recomendación para el templo</a>
-                </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-                
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    @include('admin.programas.partials.asistencia')
-                </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    @include('admin.programas.partials.lectura')
-                </div>
-                <div class="tab-pane fade" id="nav-vacuna" role="tabpanel" aria-labelledby="nav-vacuna-tab">
-                    {{-- @include('admin.programas.partials.vacuna') --}}
-                    @livewire('admin.create-personale-vacuna', ['programa' => $programa])
-                </div>
-                <div class="tab-pane fade" id="nav-rtemplo" role="tabpanel" aria-labelledby="nav-rtemplo-tab">
-                    @livewire('admin.create-personale-rtemplo', ['programa' => $programa])
-                </div>
-            </div>
+        
+            @livewire('admin.inscripcione-programa-index', ['programa_id' => $programa->id])
+            
         </div>
     </div>
 
@@ -97,7 +55,7 @@
         </button>
     </div>
 
-    <!-- Button trigger modal -->
+
 
 
     <!-- Modal -->
@@ -132,7 +90,6 @@
             </div>
         </div>
     </div>
-    {{-- @livewire('admin.alert') --}}
 @stop
 
 @section('css')
@@ -197,7 +154,6 @@
         }
 
     </style>
-    {{-- <link rel="stylesheet" href="{{ config('app.url') }}/css/app.css"> --}}
 
 @stop
 
@@ -221,29 +177,7 @@
 
         });
 
-        
-
-        /*	$('input[type="radio"]').change(function () {
-
-            		var color = 'as';
-            		switch ($(this).val()){
-            			case 0:
-            				color = 'text-danger'
-            				break;
-            			case 1:
-            				color = 'text-success'
-            				break;
-            			case 2:
-            				color = 'text-warning'
-            				break;
-            		}
-
-        		  if($(this).is(":checked")){
-        		  	console.log($(this).val());
-        		    $(this).parent().addClass(color);
-        		  }
-
-        		});*/
+       
     </script>
     <script type="text/javascript" src="{{ config('app.url') }}/js/app.js"></script>
 @stop

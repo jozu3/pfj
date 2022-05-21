@@ -96,27 +96,10 @@ class ProgramaController extends Controller
             ->with('personale.contacto')
             ->get()
             ->sortBy('personale.contacto.apellidos');
-
-
-            
-        $aprobados = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
-                $q->where('permiso_obispo', 1);
-            })->count();
-
-        $no_aprobados = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
-            $q->where('permiso_obispo', '<>', 1);
-        })->count();
         
-
-
-        $aprobacion = [
-            'aprobados' => $aprobados,
-            'no_aprobados' => $no_aprobados
-        ];
-
         $vacunas = Vacuna::all();
 
-        return view('admin.programas.show', compact('programa', 'inscripciones', 'aprobacion', 'vacunas'));
+        return view('admin.programas.show', compact('programa', 'inscripciones', 'vacunas'));
     }
 
     /**
@@ -209,6 +192,51 @@ class ProgramaController extends Controller
 
     public function asignar(Programa $programa){
         return view('admin.programas.asignar', compact('programa'));
+    }
+
+    public function personal(Programa $programa){
+        return view('admin.programas.personal', compact('programa'));
+    }
+
+    public function dashboard(Programa $programa){
+
+        $aprobados = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
+            $q->where('permiso_obispo', 1);
+        })->count();
+
+        $no_aprobados = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
+            $q->where('permiso_obispo', '<>', 1);
+        })->count();
+        
+
+
+        $aprobacion = [
+            'aprobados' => $aprobados,
+            'no_aprobados' => $no_aprobados
+        ];
+
+
+        $rtemplo_activa = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
+            $q->where('estado_rtemplo', 1);
+        })->count();
+
+        $rtemplo_activa_obs = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
+            $q->where('obs_rtemplo', '<>', '');
+        })->count();
+
+        $rtemplo_noactiva = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
+            $q->where('estado_rtemplo', '<>', 1);
+        })->count();
+        
+        $rtemplo = [
+            'activa' => ($rtemplo_activa - $rtemplo_activa_obs),
+            'activa_obs' => $rtemplo_activa_obs,
+            'noactiva' => $rtemplo_noactiva,
+        ];
+
+
+
+        return view('admin.programas.dashboard', compact('aprobacion','rtemplo','programa'));
     }
 
     public function changeSession(Programa $programa){
