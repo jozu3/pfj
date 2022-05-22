@@ -202,7 +202,7 @@ class PersonalesImport implements ToModel, WithValidation
             'programa_id' => $this->programa,
             'funcion' => $funcion,
             'role_id' => Role::where('name', $rol)->first()->id,//consejero
-            'estado' => 0,
+            'estado' => 1,//Activo-Habilitado
             'fecha' => date('Y-m-d')
         ]);
 

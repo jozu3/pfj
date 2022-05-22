@@ -20,10 +20,20 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-2">
-                            <canvas id="report-aprobados" width="400" height="400"></canvas>
+                            <div>
+                                <h3 class="text-center">Aprobación final</h3>
+                            </div>
+                            <div>
+                                <canvas id="report-aprobados" width="400" height="400"></canvas>
+                            </div>
                         </div>
                         <div class="col-md-2">
-                            <canvas id="report-rtemplo" width="400" height="400"></canvas>
+                            <div>
+                                <h3 class="text-center">Recomendación para el Templo</h3>
+                            </div>
+                            <div>
+                                <canvas id="report-rtemplo" width="400" height="400"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -23,9 +23,9 @@
                 <div class="form-group">
                     {!! Form::label('estado', 'Estado') !!}
                     {!! Form::select('estado', [
-                        '0' => 'Habilitado', 
-                        '1' => 'Retirado', 
-                        '2' => 'Suspendido',
+                        '0' => 'Desahabilitado', 
+                        '1' => 'Habilitado', 
+                        //'2' => 'Suspendido',
                     ], null, ['class' => 'form-control']) !!}
                 </div>
                 @include('admin.inscripciones.partials.formedit')

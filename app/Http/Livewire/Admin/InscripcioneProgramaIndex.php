@@ -16,6 +16,19 @@ class InscripcioneProgramaIndex extends Component
     public $programa_id;
     public $search;
 
+    protected $listeners = ['changeEstado' => 'changeEstado'];
+ 
+
+    public function changeEstado(Inscripcione $inscripcione){
+        $newestado = !$inscripcione->estado;
+        $update = $inscripcione->update([
+            'estado' => $newestado
+        ]);
+
+        $this->emit('alert', $update);
+
+    }
+
     public function render()
     {
         $that = $this;
