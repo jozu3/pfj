@@ -10,6 +10,7 @@ class CapacitacionesIndex extends Component
 	public $info_capacitacione;
 	public $programa;
     public $fechacapacitacion;
+    public $tipo = 1;
     public $tema;
 
 
@@ -26,6 +27,7 @@ class CapacitacionesIndex extends Component
 		$capacitacione = new Capacitacione([
             'programa_id' => $this->programa->id,
 			'fechacapacitacion' => $this->fechacapacitacion,
+			'tipo' => $this->tipo,
 			'tema' => $this->tema,
             'estado' => 1
 		]);

@@ -30,8 +30,8 @@ class CreateInscripcionesTable extends Migration
 
         2 -> Matrimonio Director
         3 -> Matrimonio logistica
-        4 -> Cordinador
-        5 -> Cordinador auxiliar
+        4 -> Coordinador
+        5 -> Coordinador auxiliar
         6 -> Consejero
     
     */

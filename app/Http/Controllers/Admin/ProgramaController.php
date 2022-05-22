@@ -92,10 +92,10 @@ class ProgramaController extends Controller
      */
     public function show(Programa $programa)
     {
-        $inscripciones = Inscripcione::where('programa_id', $programa->id)->whereIn('estado', [0,1,2])
+        $inscripciones = Inscripcione::where('programa_id', $programa->id)->whereIn('estado', [1])
             ->with('personale.contacto')
             ->get()
-            ->sortBy('personale.contacto.apellidos');
+            ->sortBy('personale.contacto.nombres');
         
         $vacunas = Vacuna::all();
 
@@ -193,6 +193,10 @@ class ProgramaController extends Controller
     public function asignar(Programa $programa){
         return view('admin.programas.asignar', compact('programa'));
     }
+    
+    public function tareas(Programa $programa){
+        return view('admin.programas.tareas', compact('programa'));
+    }
 
     public function personal(Programa $programa){
         return view('admin.programas.personal', compact('programa'));
@@ -201,18 +205,23 @@ class ProgramaController extends Controller
     public function dashboard(Programa $programa){
 
         $aprobados = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
-            $q->where('permiso_obispo', 1);
+            $q->where('permiso_obispo', '2');
         })->count();
 
-        $no_aprobados = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
-            $q->where('permiso_obispo', '<>', 1);
+        $pendientes = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
+            $q->where('permiso_obispo', '1');
+        })->count();
+
+        $cancelados = Inscripcione::where('programa_id', $programa->id)->whereHas('personale', function($q){
+            $q->where('permiso_obispo', '0');
         })->count();
         
 
 
         $aprobacion = [
             'aprobados' => $aprobados,
-            'no_aprobados' => $no_aprobados
+            'pendientes' => $pendientes,
+            'cancelados' => $cancelados
         ];
 
 

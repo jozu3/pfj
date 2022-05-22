@@ -25,7 +25,7 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {   
 
                 //return redirect(RouteServiceProvider::STUDENT);
-                // if (Auth::user()->hasRole(['Admin', 'Matrimonio Director', 'Matrimonio de logística', 'Cordinador', 'Cordinador auxiliar', 'Consejero'])) {
+                // if (Auth::user()->hasRole(['Admin', 'Matrimonio Director', 'Matrimonio de logística', 'Coordinador', 'Coordinador auxiliar', 'Consejero'])) {
                 // } else {
                 return redirect(RouteServiceProvider::HOME);
                 // }

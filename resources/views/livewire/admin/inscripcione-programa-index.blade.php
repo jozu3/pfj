@@ -31,7 +31,7 @@
                             @if ($inscripcione->role->name == 'Matrimonio Director')
                                 <td>{{ $inscripcione->role->name }}</td>
                             @else
-                            @if ($inscripcione->role->name == 'Cordinador')
+                            @if ($inscripcione->role->name == 'Coordinador')
                                 <td>{{ $inscripcione->role->name }}</td>
                             @else
                                 @if ($inscripcione->inscripcioneCompanerismo != null)

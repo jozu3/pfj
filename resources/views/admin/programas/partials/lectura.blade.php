@@ -2,13 +2,13 @@
     <div class="card">
         <div class="card-header">
             <b>Lecturas del personal</b>
-        </div>
-        <div class="card-body">
             <div>
                 {{-- <label for="">Buscar personal</label> --}}
-                <input wire:model="search" class="form-control form-control-sm"
-                    placeholder="Ingrese nombre o apellido de un personal">
+                {{-- <input wire:model="search" class="form-control form-control-sm"
+                    placeholder="Ingrese nombre o apellido de un personal"> --}}
             </div>
+        </div>
+        <div class="card-body">
             <div class="cont-table-div">
                 <table class="table table-striped">
                     <thead>
@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($programa->inscripcionesEstado([0, 1, 2]) as $inscripcione)
+                        @foreach ($programa->inscripcionesEstado([1]) as $inscripcione)
                             <tr>
                                 <td class="apellido-fijo">
                                     <b>{{ $inscripcione->personale->contacto->apellidos }}</b>

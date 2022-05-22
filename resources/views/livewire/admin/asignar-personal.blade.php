@@ -18,7 +18,7 @@
                 <div class="card card-row card-primary">
                     <div class="card-header bg-yellow-pfj text-center">
                         <h3 class="card-title">
-                            Cordinadores
+                            Coordinadores
                         </h3>
                     </div>
                     <div class="card-body ">
@@ -44,7 +44,7 @@
                                     {{-- <div class="col-12">
                                             <div class="card text-center">
                                                 <div class="card-body">
-                                                    No se ha asignado cordinadores
+                                                    No se ha asignado coordinadores
                                                 </div>
                                             </div>
                                         </div> --}}

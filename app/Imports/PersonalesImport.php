@@ -30,36 +30,39 @@ class PersonalesImport implements ToModel, WithValidation
     */
     public function model(array $row)
     {
-        if($row[0] == 'ID')
+        if($row[0] == 'NOMBRES')
         {
             return null;
         }
 
-        if($row[6] == 'No'){
+        if($row[5] == 'No'){
             $mretornado = 0;
         }
-        if($row[6] == 'Sí'){
+        if($row[5] == 'Sí'){
             $mretornado = 1;
         } else {
             $mretornado = 0;
         }
 
         //genero
-        if ($row[4] == 'V') {
+        if ($row[3] == 'V') {
             $genero = 'Hombre';
         }
-        if ($row[4] == 'M') {
+        if ($row[3] == 'M') {
             $genero = 'Mujer';
         }
 
+        $nombres = $row[0];
+        $apellidos = $row[1];
+
         $contacto = Contacto::create([
-            'nombres' => $row[1],
-            'apellidos' => $row[2],
-            'fecnac' => Date::excelToDateTimeObject($row[3]) ,
+            'nombres' => $nombres,
+            'apellidos' => $apellidos,
+            'fecnac' => Date::excelToDateTimeObject($row[2]) ,
             'genero' => $genero,
             'mretornado' => 0,
-            'telefono' => $row[5],
-            'email' => $row[6],
+            'telefono' => str_replace(' ','',$row[4]),
+            'email' => $row[5],
             'obispo' => '',
             'telobispo' => '',
             'fotodrive' => '',
@@ -73,12 +76,12 @@ class PersonalesImport implements ToModel, WithValidation
         ]);
 
         $user = User::create([
-            'name' => $row[2]. ' ' . $row[3],
+            'name' => $nombres. ' ' . $apellidos,
             'email' => $contacto->email,
             'password' => bcrypt('password'),
             'estado' => 1
         ]);
-        $rol = $row['9'];
+        $rol = $row[8];
         $role = Role::where('name', $rol)->first();
         $funcion = '';
         if ($role) {
@@ -86,10 +89,10 @@ class PersonalesImport implements ToModel, WithValidation
         } else {
             $user->assignRole('Consejero');
             $rol = 'Consejero';
-            $funcion = $row['9'];
+            $funcion = $rol;
         }
 
-        $barrio = Barrio::where('nombre', 'like','%'.$row[8].'%')->first();
+        $barrio = Barrio::where('nombre', 'like','%'.$rol.'%')->first();
 
         if($barrio != null){
             $barrio = $barrio->id;
@@ -98,13 +101,13 @@ class PersonalesImport implements ToModel, WithValidation
         }
 
         $rtemplo = 0;
-        $obs_rtemplo = $row[12];
+        $obs_rtemplo = $row[11];
 
-        switch ($row[11]) {
-            case 'Sí':
+        switch ($row[10]) {
+            case 'Sí' || 'Si' || 'si' || 'sí' || 'SI' || 'sI' || 'sÍ':
                 $rtemplo = 1;
                 break;
-            case 'No':
+            case 'No' || 'no' || 'NO':
                 $rtemplo = 0;
                 break;        
             default:
@@ -113,17 +116,20 @@ class PersonalesImport implements ToModel, WithValidation
         }
 
         $permiso_obispo = 0;
-        if ($row[16] == 'Sí') {
+        if ($row[12] == 'Aprobado') {
+            $permiso_obispo = 2;//aprobacion final
+        }
+        if ($row[12] == 'Aprobación pendiente') {
             $permiso_obispo = 1;//aprobacion final
         }
 
         $preinscripcion = 0;
         
-        switch ($row[10]) {
-            case 'Sí':
+        switch ($row[9]) {
+            case 'Sí' || 'Si' || 'si' || 'sí' || 'SI' || 'sI' || 'sÍ':
                 $preinscripcion = 1;
                 break;
-            case 'No':
+            case 'No' || 'no' || 'NO':
                 $preinscripcion = 0;
                 break;        
             default:
@@ -141,19 +147,7 @@ class PersonalesImport implements ToModel, WithValidation
             'user_id' => $user->id,
         ]);
 
-
-        switch ($row[13]) {
-            case 'Sí':
-                $d1 = 1;
-                break;
-            case 'No':
-                $d1 = 0;
-                break;        
-            default:
-                # code...
-                break;
-        }
-
+/*
         $d1 = 0;
         $d2 = 0;
         $d3 = 0;
@@ -196,7 +190,7 @@ class PersonalesImport implements ToModel, WithValidation
                 'vacunado' => $d1,
             ]);
         }
-
+*/
         $inscripcione = Inscripcione::create([
             'personale_id' => $personale->id,
             'programa_id' => $this->programa,

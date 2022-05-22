@@ -13,6 +13,7 @@
     	<thead>
     		<tr>
     			<th>Tema de la Capacitación</th>
+    			<th>Tipo</th>
     			<th>Fecha</th>
     			<th></th>
     		</tr>
@@ -21,9 +22,15 @@
     		@foreach ($capacitaciones as $capacitacione)
     			<tr>
     				{!! Form::model($capacitacione, ['route' => ['admin.capacitaciones.update', $capacitacione], 'method' => 'put']) !!}
-					{!!Form::hidden('programa_id', null) !!}
+					{!! Form::hidden('programa_id', null) !!}
     				<td>
     					{!! Form::text('tema', null, ['class' => 'form-control']) !!}
+					</td>
+					<td>
+						{!! Form::select('tipo', [
+							'1' => 'Capacitación',
+							'2' => 'Otro',
+						],null,['class'=> 'form-control']) !!}
 					</td>
 					<td>
 						{!! Form::date('fechacapacitacion', null, ['class' => 'form-control']) !!}
@@ -44,10 +51,16 @@
     		@endforeach
 
 			<tr>
-				<form wire:submit.prevent="submit">
+				<form wire:submit.prevent="">
 				<td>
 					<input type="text" name="tema" wire:model="tema" class="form-control">
 					@error('tema')<small class="text-danger">{{ $message }}</small> @enderror
+				</td>
+				<td>
+					<select name="tipo" id="tipo" wire:model="tipo" class="form-control">
+						<option value="1">Capacitación</option>
+						<option value="2">Otro</option>
+					</select>
 				</td>
 				<td>
 					<input type="date" name="fechacapacitacion" wire:model="fechacapacitacion" class="form-control">

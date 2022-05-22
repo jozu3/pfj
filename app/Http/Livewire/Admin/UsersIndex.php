@@ -16,7 +16,7 @@ class UsersIndex extends Component
   public $admin = true;
   public $mdirector = true;
   public $mlogística = true;
-  public $cordinador = true;
+  public $coordinador = true;
   public $cordauxiliar = true;	
   public $consejero = true;	
   public $otros = true;	
@@ -39,7 +39,7 @@ class UsersIndex extends Component
 		$this->admin == true ? array_push($roles_checked, "admin") : ''; 
     $this->mdirector == true ? array_push($roles_checked, "mdirector") : '';
     $this->mlogística == true ? array_push($roles_checked, "mlogística") : '';
-    $this->cordinador == true ? array_push($roles_checked, "cordinador") : '';
+    $this->coordinador == true ? array_push($roles_checked, "coordinador") : '';
     $this->cordauxiliar == true ? array_push($roles_checked, "cordauxiliar") : '';
     $this->consejero == true ? array_push($roles_checked, "consejero") : '';
     $this->otros == true ? array_push($roles_checked, "otros") : '';

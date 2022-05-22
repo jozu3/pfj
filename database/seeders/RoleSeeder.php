@@ -20,8 +20,8 @@ class RoleSeeder extends Seeder
         $role1 = Role::create(['name' => 'Admin', 'slug' => 'admin']);
         $role2 = Role::create(['name' => 'Matrimonio Director', 'slug' => 'mdirector']);
         $role3 = Role::create(['name' => 'Matrimonio de Logística', 'slug' => 'mlogística']);
-        $role4 = Role::create(['name' => 'Cordinador', 'slug' => 'cordinador']);
-        $role5 = Role::create(['name' => 'Cordinador auxiliar', 'slug' => 'cordauxiliar']);
+        $role4 = Role::create(['name' => 'Coordinador', 'slug' => 'coordinador']);
+        $role5 = Role::create(['name' => 'Coordinador auxiliar', 'slug' => 'cordauxiliar']);
         $role6 = Role::create(['name' => 'Consejero', 'slug' => 'consejero']);        
 
         Permission::create(['name' => 'admin.home', 'description' => 'Ver el panel administratico'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
@@ -77,7 +77,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.grupos.create', 'description' => 'Crear grupos'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create(['name' => 'admin.grupos.edit', 'description' => 'Editar grupos'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create(['name' => 'admin.grupos.destroy', 'description' => 'Eliminar grupos'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
-        Permission::create(['name' => 'admin.grupos.migrupo', 'description' => 'Ver el grupo del que es cordinador auxiliar'])->syncRoles([$role1, $role4, $role5]);
+        Permission::create(['name' => 'admin.grupos.migrupo', 'description' => 'Ver el grupo del que es coordinador auxiliar'])->syncRoles([$role1, $role4, $role5]);
 
 
         //Permisos inscripciones

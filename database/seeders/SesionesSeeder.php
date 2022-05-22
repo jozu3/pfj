@@ -171,8 +171,8 @@ class SesionesSeeder extends Seeder
         /*
         Matrimonio Director
         Matrimonio de Logística
-        Cordinador
-        Cordinador auxiliar
+        Coordinador
+        Coordinador auxiliar
         Consejero
         
         */

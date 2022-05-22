@@ -19,8 +19,8 @@ class PermissionPersonaleSeeder extends Seeder
         $role1 = Role::where('name','Admin')->first();
         $role2 = Role::where('name','Matrimonio Director')->first();
         $role3 = Role::where('name','Matrimonio de Logística')->first();
-        $role4 = Role::where('name','Cordinador')->first();
-        $role5 = Role::where('name','Cordinador auxiliar')->first();
+        $role4 = Role::where('name','Coordinador')->first();
+        $role5 = Role::where('name','Coordinador auxiliar')->first();
         $role6 = Role::where('name','Consejero')->first();
 
         //permisos 

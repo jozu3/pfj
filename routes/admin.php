@@ -44,6 +44,7 @@ Route::get('/programas/grupos', [ProgramaController::class, 'grupos'])->name('ad
 Route::get('/programas/{programa}/asignar', [ProgramaController::class, 'asignar'])->name('admin.programas.asignar');
 Route::get('/programas/{programa}/personal', [ProgramaController::class, 'personal'])->name('admin.programas.personal');
 Route::get('/programas/{programa}/dashboard', [ProgramaController::class, 'dashboard'])->name('admin.programas.dashboard');
+Route::get('/programas/{programa}/tareas', [ProgramaController::class, 'tareas'])->name('admin.programas.tareas');
 Route::resource('programas', ProgramaController::class)->names('admin.programas');
 Route::resource('capacitaciones', CapacitacioneController::class)->names('admin.capacitaciones');
 

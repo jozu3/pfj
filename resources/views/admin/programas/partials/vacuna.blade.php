@@ -19,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($programa->inscripcionesEstado([0, 1, 2]) as $inscripcione)
+                        @foreach ($inscripciones as $inscripcione)
                             <tr>
                                 <td><b>{{ $inscripcione->personale->contacto->apellidos }}</b></td>
                                 <td><b>{{ $inscripcione->personale->contacto->nombres }}</b></td>

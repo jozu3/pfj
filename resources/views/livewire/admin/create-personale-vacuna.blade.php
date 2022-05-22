@@ -9,18 +9,18 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th class="">Apellidos</th>
-                            <th class="">Nombres</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
                             @foreach ($vacunas as $vacuna)
                                 <th class="text-center">{{ $vacuna->descripcion }}</th>
                             @endforeach
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($programa->inscripcionesEstado([/*0,*/1]) as $inscripcione)
+                        @foreach ($inscripciones as $inscripcione)
                             <tr>
-                                <td><b>{{ $inscripcione->personale->contacto->apellidos }}</b></td>
                                 <td><b>{{ $inscripcione->personale->contacto->nombres }}</b></td>
+                                <td><b>{{ $inscripcione->personale->contacto->apellidos }}</b></td>
                                 @foreach ($vacunas as $vacuna)
                                     <td class="text-center">
                                         @php

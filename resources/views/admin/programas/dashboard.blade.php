@@ -57,12 +57,14 @@
         const data = {
             labels: [
                 'Aprobados',
-                'Falta Aprobación',
+                'Aprobación pendiente',
+                'Cancelado',
             ],
             datasets: [{
                 label: 'My First Dataset',
-                data: [{{ $aprobacion['aprobados'] }}, {{ $aprobacion['no_aprobados'] }}],
+                data: [{{ $aprobacion['aprobados'] }}, {{ $aprobacion['pendientes'] }},{{ $aprobacion['cancelados'] }}],
                 backgroundColor: [
+                    '#4bc0c0',
                     'rgb(255, 205, 86)',
                     'rgb(255, 99, 132)',
                 ],

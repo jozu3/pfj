@@ -63,12 +63,12 @@
                     
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                         aria-controls="nav-home" aria-selected="true">Asistencia</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                        aria-controls="nav-profile" aria-selected="false">Lecturas</a>
                     <a class="nav-item nav-link" id="nav-vacuna-tab" data-toggle="tab" href="#nav-vacuna" role="tab"
                         aria-controls="nav-vacuna" aria-selected="false">Vacunas</a>
                     <a class="nav-item nav-link" id="nav-rtemplo-tab" data-toggle="tab" href="#nav-rtemplo" role="tab"
                         aria-controls="nav-rtemplo" aria-selected="false">Recomendación para el templo</a>
+                    <a class="nav-item nav-link" id="nav-aprobacion-tab" data-toggle="tab" href="#nav-aprobacion" role="tab"
+                        aria-controls="nav-aprobacion" aria-selected="false">Aprobación final</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -76,15 +76,14 @@
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     @include('admin.programas.partials.asistencia')
                 </div>
-                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    @include('admin.programas.partials.lectura')
-                </div>
                 <div class="tab-pane fade" id="nav-vacuna" role="tabpanel" aria-labelledby="nav-vacuna-tab">
-                    {{-- @include('admin.programas.partials.vacuna') --}}
                     @livewire('admin.create-personale-vacuna', ['programa' => $programa])
                 </div>
                 <div class="tab-pane fade" id="nav-rtemplo" role="tabpanel" aria-labelledby="nav-rtemplo-tab">
                     @livewire('admin.create-personale-rtemplo', ['programa' => $programa])
+                </div>
+                <div class="tab-pane fade" id="nav-aprobacion" role="tabpanel" aria-labelledby="nav-aprobacion-tab">
+                    @livewire('admin.aprobacion-personale', ['programa' => $programa])
                 </div>
             </div>
         </div>
@@ -158,14 +157,14 @@
         .apellido-fijo {
             position: absolute;
             width: 11em;
-            left: 0;
+            left: 11em;
 
         }
 
         .nombre-fijo {
             position: absolute;
             width: 11em;
-            left: 11em;
+            left: 0em;
         }
 
         .card-body-2 {

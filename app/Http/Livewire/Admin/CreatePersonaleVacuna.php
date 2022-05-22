@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Inscripcione;
 use App\Models\PersonaleVacuna;
 use App\Models\Vacuna;
 use Livewire\Component;
@@ -63,6 +64,12 @@ class CreatePersonaleVacuna extends Component
     public function render()
     {
         $vacunas = Vacuna::all();
-        return view('livewire.admin.create-personale-vacuna', compact('vacunas'));
+
+        $inscripciones = Inscripcione::where('programa_id', $this->programa->id)->whereIn('estado', [1])
+                                    ->with('personale.contacto')
+                                    ->get()
+                                    ->sortBy('personale.contacto.nombres');
+        
+        return view('livewire.admin.create-personale-vacuna', compact('vacunas', 'inscripciones'));
     }
 }

@@ -14,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-        @forelse ($programa->inscripcionesEstado([0, 1, 2]) as $inscripcione)
+        @forelse ($inscripciones as $inscripcione)
                 <tr>
                     <td>
                         <img id="imgperfil" class="rounded-circle" width="50" height="50" src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">

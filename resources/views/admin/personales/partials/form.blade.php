@@ -27,6 +27,16 @@
     <small class="text-danger">{{ $message }}</small>
 @enderror
 <div class="form-group">
+    {!! Form::label('preinscripcion', 'Pre-Inscripcion') !!}
+    {!! Form::select('preinscripcion', [
+            '1' => 'Sí',
+            '0' => 'No',
+        ], null, ['class' => 'form-control', 'placeholder' => '-- Escoge --', 'style' => 'appearance: none; ']); !!}
+</div>
+@error('preinscripcion')
+    <small class="text-danger">{{ $message }}</small>
+@enderror
+<div class="form-group">
     {!! Form::label('permiso_obispo', 'Aprobación de su Obispo/Presidente de rama') !!}
     {!! Form::select('permiso_obispo', [
             '1' => 'Aprobado',
