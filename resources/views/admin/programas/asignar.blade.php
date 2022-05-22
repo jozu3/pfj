@@ -129,99 +129,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script>
         window.onload = function() {
+            renderSortable();
             Livewire.on('pruebaAsignar', () => {
-                // alert("Esto tiene que salir")
-                const grupos = document.getElementsByClassName('group');
-        const compas = document.getElementsByClassName('companerismo');
-
-        for (var i = 0; i < grupos.length; i++) {
-            new Sortable(grupos[i], {
-                group: 'grupo',
-                sort: false,
-                animation: 150,
-                fallbackOnBody: true,
-                swapThreshold: 0.65,
-                filter: ".ignore-elements",
-                onEnd: (sortable) => {
-                    console.log('se inserto un compañerismo')
-                    console.log(sortable.el)
-                },
-                store: {
-                    //guardamos el orden
-                    set: (sortable) => {
-                        const orden = sortable.toArray();
-                        localStorage.setItem(sortable.el.getAttribute('data-id'), orden.join('|'));
-                        //Livewire.emit('moverCompanerismo')
-                        if (localStorage.length > 0) {
-                            $('#guardar').removeAttr('disabled')
-                        } else {
-                            $('#guardar').attr('disabled', '')
-                        }
-
-                    },
-                    // Obtenemos el orden de la lista
-                    get: (sortable) => {
-                        const orden = localStorage.getItem(sortable.el.getAttribute('data-id'));
-                        return orden ? orden.split('|') : [];
-                    }
-                }
-
-            });
-        }
-
-
-        for (var i = 0; i < compas.length; i++) {
-            new Sortable(compas[i], {
-                group: 'companerismo',
-                sort: false,
-                animation: 150,
-                fallbackOnBody: true,
-                swapThreshold: 0.65,
-                ghostClass: "col-md-6",
-                onEnd: (sortable) => {
-                    //console.log(sortable.to)
-                    var data_id = sortable.to.getAttribute('data-id');
-                    if (data_id.includes('com') || data_id.includes('cordis')) {
-                        //sortable.item.removeAttr('class')
-                        sortable.item.setAttribute('class', 'col-6')
-                        console.log('se movio un personal a un compañerismo')
-                    } else if (sortable.to.getAttribute('data-id').includes('sinAsignar')) {
-                        sortable.item.setAttribute('class', 'col-sm-2 col-md-1')
-                        console.log('se movio un personal a sin asignar')
-
-                    }
-
-                    console.log('se inserto un personal')
-                },
-                store: {
-                    //guardamos el orden
-                    set: (sortable) => {
-                        const orden = sortable.toArray();
-                        console.log(orden)
-                        var iddata = sortable.el.getAttribute('data-id')
-                        // if (iddata == 'sinAsignar') {
-                        //     localStorage.setItem('quitarInsComp', orden.join('|'));
-                        // } else {
-                        localStorage.setItem(iddata, orden.join('|'));
-                        // }
-
-
-                        //console.log(sortable)
-                        if (localStorage.length > 0) {
-                            $('#guardar').removeAttr('disabled')
-                        } else {
-                            $('#guardar').attr('disabled', '')
-                        }
-                    },
-                    // Obtenemos el orden de la lista
-                    get: (sortable) => {
-                        const orden = localStorage.getItem(sortable.el.getAttribute('data-id'));
-                        return orden ? orden.split('|') : [];
-                    }
-                }
-
-            });
-        }
+                    renderSortable();
             });
         }
 
@@ -231,98 +141,100 @@
             $('#guardar').attr('disabled', '')
         });
 
-        const grupos = document.getElementsByClassName('group');
-        const compas = document.getElementsByClassName('companerismo');
+        function renderSortable(){
+            const grupos = document.getElementsByClassName('group');
+            const compas = document.getElementsByClassName('companerismo');
 
-        for (var i = 0; i < grupos.length; i++) {
-            new Sortable(grupos[i], {
-                group: 'grupo',
-                sort: false,
-                animation: 150,
-                fallbackOnBody: true,
-                swapThreshold: 0.65,
-                filter: ".ignore-elements",
-                onEnd: (sortable) => {
-                    console.log('se inserto un compañerismo')
-                    console.log(sortable.el)
-                },
-                store: {
-                    //guardamos el orden
-                    set: (sortable) => {
-                        const orden = sortable.toArray();
-                        localStorage.setItem(sortable.el.getAttribute('data-id'), orden.join('|'));
-                        //Livewire.emit('moverCompanerismo')
-                        if (localStorage.length > 0) {
-                            $('#guardar').removeAttr('disabled')
-                        } else {
-                            $('#guardar').attr('disabled', '')
+            for (var i = 0; i < grupos.length; i++) {
+                new Sortable(grupos[i], {
+                    group: 'grupo',
+                    sort: false,
+                    animation: 150,
+                    fallbackOnBody: true,
+                    swapThreshold: 0.65,
+                    filter: ".ignore-elements",
+                    onEnd: (sortable) => {
+                        console.log('se inserto un compañerismo')
+                        console.log(sortable.el)
+                    },
+                    store: {
+                        //guardamos el orden
+                        set: (sortable) => {
+                            const orden = sortable.toArray();
+                            localStorage.setItem(sortable.el.getAttribute('data-id'), orden.join('|'));
+                            //Livewire.emit('moverCompanerismo')
+                            if (localStorage.length > 0) {
+                                $('#guardar').removeAttr('disabled')
+                            } else {
+                                $('#guardar').attr('disabled', '')
+                            }
+
+                        },
+                        // Obtenemos el orden de la lista
+                        get: (sortable) => {
+                            const orden = localStorage.getItem(sortable.el.getAttribute('data-id'));
+                            return orden ? orden.split('|') : [];
+                        }
+                    }
+
+                });
+            }
+
+
+            for (var i = 0; i < compas.length; i++) {
+                new Sortable(compas[i], {
+                    group: 'companerismo',
+                    sort: false,
+                    animation: 150,
+                    fallbackOnBody: true,
+                    swapThreshold: 0.65,
+                    ghostClass: "col-md-6",
+                    onEnd: (sortable) => {
+                        //console.log(sortable.to)
+                        var data_id = sortable.to.getAttribute('data-id');
+                        if (data_id.includes('com') || data_id.includes('cordis')) {
+                            //sortable.item.removeAttr('class')
+                            sortable.item.setAttribute('class', 'col-6')
+                            console.log('se movio un personal a un compañerismo')
+                        } else if (sortable.to.getAttribute('data-id').includes('sinAsignar')) {
+                            sortable.item.setAttribute('class', 'col-sm-2 col-md-1')
+                            console.log('se movio un personal a sin asignar')
+
                         }
 
+                        console.log('se inserto un personal')
                     },
-                    // Obtenemos el orden de la lista
-                    get: (sortable) => {
-                        const orden = localStorage.getItem(sortable.el.getAttribute('data-id'));
-                        return orden ? orden.split('|') : [];
-                    }
-                }
-
-            });
-        }
-
-
-        for (var i = 0; i < compas.length; i++) {
-            new Sortable(compas[i], {
-                group: 'companerismo',
-                sort: false,
-                animation: 150,
-                fallbackOnBody: true,
-                swapThreshold: 0.65,
-                ghostClass: "col-md-6",
-                onEnd: (sortable) => {
-                    //console.log(sortable.to)
-                    var data_id = sortable.to.getAttribute('data-id');
-                    if (data_id.includes('com') || data_id.includes('cordis')) {
-                        //sortable.item.removeAttr('class')
-                        sortable.item.setAttribute('class', 'col-6')
-                        console.log('se movio un personal a un compañerismo')
-                    } else if (sortable.to.getAttribute('data-id').includes('sinAsignar')) {
-                        sortable.item.setAttribute('class', 'col-sm-2 col-md-1')
-                        console.log('se movio un personal a sin asignar')
-
-                    }
-
-                    console.log('se inserto un personal')
-                },
-                store: {
-                    //guardamos el orden
-                    set: (sortable) => {
-                        const orden = sortable.toArray();
-                        console.log(orden)
-                        var iddata = sortable.el.getAttribute('data-id')
-                        // if (iddata == 'sinAsignar') {
-                        //     localStorage.setItem('quitarInsComp', orden.join('|'));
-                        // } else {
-                        localStorage.setItem(iddata, orden.join('|'));
-                        // }
+                    store: {
+                        //guardamos el orden
+                        set: (sortable) => {
+                            const orden = sortable.toArray();
+                            console.log(orden)
+                            var iddata = sortable.el.getAttribute('data-id')
+                            // if (iddata == 'sinAsignar') {
+                            //     localStorage.setItem('quitarInsComp', orden.join('|'));
+                            // } else {
+                            localStorage.setItem(iddata, orden.join('|'));
+                            // }
 
 
-                        //console.log(sortable)
-                        if (localStorage.length > 0) {
-                            $('#guardar').removeAttr('disabled')
-                        } else {
-                            $('#guardar').attr('disabled', '')
+                            //console.log(sortable)
+                            if (localStorage.length > 0) {
+                                $('#guardar').removeAttr('disabled')
+                            } else {
+                                $('#guardar').attr('disabled', '')
+                            }
+                        },
+                        // Obtenemos el orden de la lista
+                        get: (sortable) => {
+                            const orden = localStorage.getItem(sortable.el.getAttribute('data-id'));
+                            return orden ? orden.split('|') : [];
                         }
-                    },
-                    // Obtenemos el orden de la lista
-                    get: (sortable) => {
-                        const orden = localStorage.getItem(sortable.el.getAttribute('data-id'));
-                        return orden ? orden.split('|') : [];
                     }
-                }
 
-            });
+                });
+            }
+
         }
-
 
 
 
