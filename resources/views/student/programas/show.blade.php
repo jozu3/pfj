@@ -206,7 +206,7 @@
                                     </table>
 
                                 </div>
-
+{{-- 
                                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                     <table class="min-w-full divide-y divide-gray-200">
                                         <thead class="bg-gray-50">
@@ -244,7 +244,6 @@
                                                             <div class="flex items-center justify-center">
                                                                 <div
                                                                     class="rounded-md bg-yellow-400 text-white font-semibold py-2 px-4">
-                                                                    {{-- {{ $personale_unidade->nota }} --}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -259,7 +258,7 @@
                                             @endforelse
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
