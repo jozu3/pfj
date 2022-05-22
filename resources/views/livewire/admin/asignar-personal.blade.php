@@ -63,6 +63,11 @@
                             <h3 class="card-title">
                                 {{ $grupo->nombre . ' ' . $grupo->numero }}
                             </h3>
+                            <div class="float-right">
+                                <i class="fas fa-edit" wire:click='editFamilia({{ $grupo }}, {{ $grupo->companerismos->where('role_id', 6)->count() }})' style="cursor: pointer;"></i>
+                                &nbsp;
+                                <i class="fas fa-trash" wire:click='removeFamilia({{ $grupo->id }})' style="cursor: pointer;"></i>
+                            </div>
                         </div>
                         <div class="card-body group" data-id="{{ 'grupo-' . $grupo->id }}">
                             @foreach ($grupo->companerismos as $companerismo)
@@ -101,10 +106,10 @@
                 <div class="card card-row card-primary">
                     @if ($addFamilia)
                         <div class="card-body">
-                            {{-- <input type="hidden" wire:model='idTarea'> --}}
+                            <input type="hidden" wire:model='idFamilia'>
                             <div>                                
                                 <label for="">Número</label>
-                                <input type="number" wire:model.defer='famNumero' class="form-control">
+                                <input type="number" wire:model.defer='famNumero' class="form-control" min="1">
                             </div>
                             <div>
                                 <label for="">Nombre de la familia</label>
@@ -112,7 +117,7 @@
                             </div>
                             <div>
                                 <label for="">Cantidad de compañías</label>
-                                <input type="number" wire:model.defer='compCantidad' class="form-control">
+                                <input type="number" wire:model.defer='compCantidad' class="form-control" min="1">
                             </div>
                             <div class="text-right">
                                 <button class="btn btn-sm btn-warning" wire:click='createFamilia'>
@@ -134,10 +139,10 @@
 
                 </div>
             </div>
-        </div>
+        </div>        
 
         <div style="height: 300px"></div>
-
+{{ $del }}
     </div>
 
     @if (count($programa->inscripcionesSinAsignar()))
