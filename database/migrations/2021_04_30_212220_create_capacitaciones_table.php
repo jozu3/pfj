@@ -17,6 +17,7 @@ class CreateCapacitacionesTable extends Migration
             $table->id();
             $table->string('tema');
             $table->date('fechacapacitacion');
+            $table->tinyInteger('tipo')->nullable();
             $table->tinyInteger('estado');
             $table->foreignId('programa_id')->constrained();
             $table->timestamps();
