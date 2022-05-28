@@ -1,7 +1,33 @@
 <div>
+    <div class="card">
     <div class="card-header">
-        {{-- <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un personal"> --}}
+        <div class="form-row">
+            <div class="col">
+                <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un personal">
+            </div>
+            <div class="col">
+                <select name="" id="" class="form-control" wire:model="familia">
+                    <option value="">-- Familias --</option>
+                    @foreach ($familias as $familia)
+                        <option value="{{ $familia->id }}">{{ $familia->nombre.' '.$familia->numero }}</option>  
+                    @endforeach
+                </select>
+
+            </div>
+            <div class="col">
+                <select name="" id="" class="form-control" wire:model="rtemplo">
+                    <option value="">-- Estado de Aprobación --</option>
+                    <option value="0">Vencida</option>
+                    <option value="1">Activa</option>
+                    <option value="2">Activa con observación</option>
+                </select>
+                {{$rtemplo}}
+
+            </div>
+        </div>
     </div>
+    <div class="card-body">
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -22,20 +48,30 @@
                     <td>
                         {{ $inscripcione->personale->contacto->nombres }}
                     </td>
-                    <td>{{ $inscripcione->personale->contacto->apellidos }}</td>
                     <td>
-                        @if ($inscripcione->inscripcione_companerismo)
-                            {{ $inscripcione->inscripcione_companerismo->companerismo->grupo->numero }}
-                        @endif
+                        {{ $inscripcione->personale->contacto->apellidos }}
                     </td>
                     <td>
+                        @if ($inscripcione->inscripcioneCompanerismo)
+                            {{ $inscripcione->inscripcioneCompanerismo->companerismo->grupo->numero }}
+                        @endif
+                    </td>
+                    <td class="font-weight-bold">
                         @if ($inscripcione->personale->estado_rtemplo == 1)
-                        {{ 'Sí' }}
+                        <span class="bg-success p-1 rounded-lg">
+                            {{ 'Sí' }}
+                        </span>
                         @else
-                        {{ 'No' }}
+                        @if ($inscripcione->personale->estado_rtemplo == 0)
+                        <span class="bg-danger p-1 rounded-lg">                            
+                            {{ 'No' }}
+                        </span>
+                        @endif
                         @endif
                         @if ($inscripcione->personale->obs_rtemplo)
-                        {{ ' - '}} <span class="text-danger"> {{$inscripcione->personale->obs_rtemplo }}</span>
+                        <span class="bg-warning p-1 rounded-lg">                            
+                             {{$inscripcione->personale->obs_rtemplo }}
+                        </span>
                         @endif
                     </td>
                     <td width="10px">
@@ -56,4 +92,10 @@
         @endforelse
         </tbody>
     </table>
+</div>
+
+    <div class="card-footer">
+        {{ $inscripciones->links() }}
+    </div>
+</div>
 </div>

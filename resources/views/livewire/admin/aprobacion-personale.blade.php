@@ -1,7 +1,29 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un personal">
+            <div class="form-row">
+                <div class="col">
+                    <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un personal">
+                </div>
+                <div class="col">
+                    <select name="" id="" class="form-control" wire:model="familia">
+                        <option value="">-- Familias --</option>
+                        @foreach ($familias as $familia)
+                            <option value="{{ $familia->id }}">{{ $familia->nombre.' '.$familia->numero }}</option>  
+                        @endforeach
+                    </select>
+
+                </div>
+                <div class="col">
+                    <select name="" id="" class="form-control" wire:model="aprobacion">
+                        <option value="">-- Estado de Aprobación --</option>
+                        <option value="0">Cancelado</option>
+                        <option value="1">Aprobación pendiente</option>
+                        <option value="2">Aprobado</option>
+                    </select>
+
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -10,6 +32,7 @@
                         <th></th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
+                        <th>Familia</th>
                         <th>Aprobación final</th>
                     </tr>
                 </thead>
@@ -23,6 +46,11 @@
                                 {{ $inscripcione->personale->contacto->nombres }}
                             </td>
                             <td>{{ $inscripcione->personale->contacto->apellidos }}</td>
+                            <td>
+                                @if ($inscripcione->inscripcioneCompanerismo)
+                                    {{ $inscripcione->inscripcioneCompanerismo->companerismo->grupo->numero }}
+                                @endif
+                            </td>
                             <td>
                                 @switch($inscripcione->personale->permiso_obispo)
                                     @case(0)

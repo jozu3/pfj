@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Grupo;
 use App\Models\Inscripcione;
 use App\Models\Personale;
 use App\Models\Programa;
@@ -11,6 +12,9 @@ use Livewire\WithPagination;
 class AprobacionPersonale extends Component
 {
     public $programa;
+    public $search;
+    public $familia;
+    public $aprobacion;
 
     protected $listeners = ['changeAprob'];
 
@@ -30,17 +34,42 @@ class AprobacionPersonale extends Component
 
     public function render()
     {
-        $inscripciones = Inscripcione::where('programa_id',$this->programa->id)
-                            ->where('inscripciones.estado', '1')
-                            ->join('personales', 'inscripciones.personale_id', '=', 'personales.id')     
-                            ->join('contactos', 'contactos.id', '=', 'personales.contacto_id')
-                            ->select('*')   
-                            // ->with('personale.contacto')
-                            ->orderBy('nombres', 'asc')
-                            // ->get()
-                            // ->sortByDesc('personale.contacto.nombres')
-                            ->paginate();
+        $fam = $this->familia;
+        $search = $this->search;
+        $aprobacion = $this->aprobacion;
 
-        return view('livewire.admin.aprobacion-personale', compact('inscripciones'));
+        $inscripciones = Inscripcione::where('programa_id',$this->programa->id)
+                            ->where('estado', '1')
+                            // ->join('personales', 'inscripciones.personale_id', '=', 'personales.id')     
+                            // ->join('contactos', 'contactos.id', '=', 'personales.contacto_id')
+                            // ->select('*')   
+                            ->whereHas('personale', function ($q) use($search){
+                                $q->whereHas('contacto', function ($q) use ( $search){
+                                    $q->where('nombres','like', '%'.$search.'%')
+                                      ->orderBy('nombres', 'asc')  ;
+                                });
+                            });
+
+
+                            if ($fam != '') {
+                                $inscripciones = $inscripciones->whereHas('inscripcioneCompanerismo', function ($q) use ($fam){
+                                                    $q->whereHas('companerismo', function ($q) use ($fam){
+                                                        $q->where('grupo_id', $fam);
+                                                    });
+                                                });
+                            }
+                            if ($aprobacion != '') {
+                                $inscripciones = $inscripciones->whereHas('personale', function ($q) use ($aprobacion){
+                                                    $q->where('permiso_obispo', $aprobacion);
+                                                });
+                            }
+
+        // $inscripciones = $inscripciones->orderBy('nombres', 'asc')
+        $inscripciones = $inscripciones->paginate();
+        $this->page = 1;
+
+        $familias = Grupo::where('programa_id', session('programa_activo'))->get();
+
+        return view('livewire.admin.aprobacion-personale', compact('inscripciones', 'familias'));
     }
 }

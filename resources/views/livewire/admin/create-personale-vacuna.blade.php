@@ -11,6 +11,7 @@
                         <tr>
                             <th>Nombres</th>
                             <th>Apellidos</th>
+                            <th>Familia</th>
                             @foreach ($vacunas as $vacuna)
                                 <th class="text-center">{{ $vacuna->descripcion }}</th>
                             @endforeach
@@ -21,6 +22,11 @@
                             <tr>
                                 <td><b>{{ $inscripcione->personale->contacto->nombres }}</b></td>
                                 <td><b>{{ $inscripcione->personale->contacto->apellidos }}</b></td>
+                                <td>
+                                    @if ($inscripcione->inscripcioneCompanerismo)
+                                        {{ $inscripcione->inscripcioneCompanerismo->companerismo->grupo->numero }}
+                                    @endif
+                                </td>
                                 @foreach ($vacunas as $vacuna)
                                     <td class="text-center">
                                         @php

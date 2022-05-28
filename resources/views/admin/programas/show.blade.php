@@ -1,16 +1,8 @@
 @extends('adminlte::page')
 
-@section('title', 'Sesión')
+@section('title', 'Control de Consejeros')
 
 @section('content_header')
-    @can('admin.programas.edit')
-        <a href="{{ route('admin.programas.edit', $programa) }}" class="btn btn-success btn-sm float-right">Editar programa</a>
-    @endcan
-    <a href="{{ route('admin.programas.asignar', $programa) }}" class="btn btn-success btn-sm float-right mr-3">
-        <i class="fas fa-sitemap"></i> Asignaciones</a>
-    {{-- <a href="{{ route('admin.excel.personalesGrupo', $programa) }}" class="btn btn-success btn-sm float-right mr-3"><i
-            class="far fa-file-excel"></i> Registro de personales</a> --}}
-
     <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal"
         data-target="#importExcelPersonal">
         <i class="far fa-file-excel"></i> Importar personal
@@ -46,17 +38,6 @@
         </div>
     @endif
     <div class="row">
-        {{-- <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <canvas id="myChart" width="400" height="400"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
         <div class="col-md-12">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -219,30 +200,6 @@
             }
 
         });
-
-        
-
-        /*	$('input[type="radio"]').change(function () {
-
-            		var color = 'as';
-            		switch ($(this).val()){
-            			case 0:
-            				color = 'text-danger'
-            				break;
-            			case 1:
-            				color = 'text-success'
-            				break;
-            			case 2:
-            				color = 'text-warning'
-            				break;
-            		}
-
-        		  if($(this).is(":checked")){
-        		  	console.log($(this).val());
-        		    $(this).parent().addClass(color);
-        		  }
-
-        		});*/
     </script>
     <script type="text/javascript" src="{{ config('app.url') }}/js/app.js"></script>
 @stop
