@@ -52,7 +52,7 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					<h5 class="card-title">Información de personal</h5>
+					<h3 class="">Información de personal</h3>
 				</div>
 				@php
 					$personale = $contacto->personale;
@@ -68,7 +68,35 @@
 				</div>
 			</div>
 		</div>
+		@forelse ($contacto->personale->inscripciones as $inscripcione)
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+					<h3>Información de la inscripción a: {{ $inscripcione->programa->nombre }}</h3>
+					</div>
+				<div class="card-body">
+					{!! Form::model($inscripcione, ['route' => ['admin.inscripciones.update', $inscripcione], 'method' => 'put']) !!}
+					{{--@livewire('admin.grupo-info', ['pfj_id' => $inscripcione->grupo->pfj->id, 'grupo_id' => $inscripcione->grupo->id])--}}
+					<div class="form-group">
+						{!! Form::label('estado', 'Estado') !!}
+						{!! Form::select('estado', [
+							'0' => 'Desahabilitado', 
+							'1' => 'Habilitado', 
+							//'2' => 'Suspendido',
+						], null, ['class' => 'form-control']) !!}
+						</div>
+						@include('admin.inscripciones.partials.formedit')
+						{!! Form::submit('Guardar', ['class' => 'btn btn-yellow-pfj']) !!}
+						{!! Form::close() !!}
+					</div>  
+				</div>
+			</div>
+			
+		@empty
+			
+		@endforelse
 	@endif
+
 	{{-- <div class="col-md-12">
 		@livewire('admin.contacto-seguimientos', ['contacto' => $contacto])
 	</div> --}}

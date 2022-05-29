@@ -149,6 +149,14 @@ class AppServiceProvider extends ServiceProvider
                         'can' => 'admin.programas.edit'
                     ];
 
+                    /* * */
+                    $menu_funciones = [
+                        'text' => 'Funciones',
+                        'url' => 'admin/programas/'.session('programa_activo').'/dashboard',
+                        'icon' => 'fas fa-chart-line',
+                        'can' => 'admin.programas.edit'
+                    ];
+
                     $header = [ 
                         'header' => 'Dashboard',
                         'can'  =>   'admin.programas.edit',

@@ -67,4 +67,5 @@ class Personale extends Model
         return $inscripcione;
     }
 
+    
 }

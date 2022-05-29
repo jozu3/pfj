@@ -14,6 +14,7 @@ use App\Models\Barrio;
 use DB;
 
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class ContactoController extends Controller
 {
@@ -99,7 +100,10 @@ class ContactoController extends Controller
         //     $contacto['vendedor_id'] = $contacto->personal_id;
         // }
 
-        return view('admin.contactos.show', compact('contacto','seguimientos', 'pfjs', 'barrios'));
+        $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
+
+
+        return view('admin.contactos.show', compact('contacto','seguimientos', 'pfjs', 'barrios', 'roles'));
     }
 
     /**

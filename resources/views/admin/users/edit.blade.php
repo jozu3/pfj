@@ -15,7 +15,7 @@
     @endif
 
     <div class="card">
-    	<dic class="card-body">
+    	<div class="card-body">
             {!! Form::model($user, ['route' => ['admin.users.update', $user], 'method' => 'put']) !!}
                 <p class="h5">Correo electrónico:</p>
                 {!! Form::text('email',null, ['class' => 'form-control']) !!}
@@ -39,7 +39,7 @@
 
                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary mt-2']) !!}
     		{!! Form::close() !!}
-    	</dic>
+    	</div>
     </div>
 @stop
 

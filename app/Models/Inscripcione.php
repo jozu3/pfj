@@ -57,7 +57,10 @@ class Inscripcione extends Model
                 ->where('asistencia', '0');
         })->get();
     }
-
+    
+    public function funciones() {
+        return $this->belongsToMany(Funcione::class);
+    }
 }
 /*
     Estados = [

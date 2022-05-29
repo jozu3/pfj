@@ -18,7 +18,6 @@ class CreateInscripcionesTable extends Migration
             $table->foreignId('personale_id')->constrained();
             $table->foreignId('programa_id')->constrained();
             $table->foreignId('role_id')->constrained();
-            $table->string('funcion')->nullable();
             $table->tinyInteger('estado');
             $table->date('fecha');
             $table->timestamps();

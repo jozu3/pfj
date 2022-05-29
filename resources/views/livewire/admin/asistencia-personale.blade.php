@@ -60,7 +60,11 @@
                             </td>
                            
                             <td class="text-center">
+                                @if ($capacitaciones->count())
                                 {{ 100*$inscripcione_->asistencias->where('asistencia', '0')->count()/$capacitaciones->count() .'%' }}
+                                @else
+                                <span class="text-secondary">{{ 'No ha creado reuniones/capacitaciones.' }}</span>
+                                @endif
                                 
                             </td>
                             @forelse($capacitaciones as $capacitacione)

@@ -173,18 +173,6 @@ class InscripcioneController extends Controller
     public function update(Request $request, Inscripcione $inscripcione)
     {   
 
-        // if ($request->tipoinscripcione != $inscripcione->tipoinscripcione) {
-            
-        //     $haypagos = Pago::whereHas('obligacione', function($query) use ($inscripcione){
-        //         $query->where('inscripcione_id', $inscripcione->id);
-        //     })->count();
-        //     //dd($haypagos);
-        //     if ($haypagos > 0 ){
-        //         return redirect()->back()->with('haypagos', 'No puede cambiar el tipo de inscripcione porque algunas obligaciones ya fueron pagadas.');
-        //     }
-            
-        // }
-
        /* $request->validate([
             'estado' => 'in:0,1,2,3',
             'tipoinscripcione' => 'in:0,1',
@@ -195,6 +183,12 @@ class InscripcioneController extends Controller
 
 
         $inscripcione->update($request->all());
+        $inscripcione->funciones()->sync($request->funciones);
+        foreach($request->funciones as $funcione){
+            
+        }
+        
+        // dd($request->funciones);
         //     $inscripcione->update([
         //     'estado' => $request->estado,
         //     'role_id' => $request->role_id

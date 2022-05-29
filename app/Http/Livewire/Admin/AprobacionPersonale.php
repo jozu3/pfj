@@ -75,7 +75,7 @@ class AprobacionPersonale extends Component
         $inscripciones = $inscripciones->orderBy('nombres')->paginate();
         $this->page = 1;
 
-        $familias = Grupo::where('programa_id', session('programa_activo'))->get();
+        $familias = Grupo::where('programa_id', $this->programa->id)->get();
 
         return view('livewire.admin.aprobacion-personale', compact('inscripciones', 'familias'));
     }

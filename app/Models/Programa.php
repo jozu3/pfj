@@ -77,6 +77,10 @@ class Programa extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
+    public function funciones(){
+        return $this->hasMany(Funcione::class);
+    }
+
     // public function imageMatrimonioLogistica(){
     //     return $this->morphOne(Image::class, 'imageable');
     // }

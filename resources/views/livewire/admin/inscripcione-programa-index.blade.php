@@ -7,10 +7,10 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Asignación</th>
-                        <th>Grupo - Compañerismo</th>
                         <th colspan="2">Nombres</th>
                         <th>Apellidos</th>
+                        <th>Asignación</th>
+                        {{-- <th>Grupo - Compañerismo</th> --}}
                         <th>Telefono</th>
                         <th>Correo electrónico</th>
                         <th>Pre-Inscripción</th>
@@ -23,34 +23,34 @@
                 @forelse ($inscripciones as $inscripcione)
                         <tr>
                             <td>
-                                {{ $inscripcione->role->name }}
-                                @if ($inscripcione->funcion)
-                                    {{ ' - '. $inscripcione->funcion}}
-                                @endif
-                            </td>
-                            @if ($inscripcione->role->name == 'Matrimonio Director')
-                                <td>{{ $inscripcione->role->name }}</td>
-                            @else
-                            @if ($inscripcione->role->name == 'Coordinador')
-                                <td>{{ $inscripcione->role->name }}</td>
-                            @else
-                                @if ($inscripcione->inscripcioneCompanerismo != null)
-                                    
-                                <td>
-                                    {{  $inscripcione->inscripcioneCompanerismo->companerismo->grupo->numero . ' - ' . $inscripcione->inscripcioneCompanerismo->companerismo->numero }}
-                                </td>
-                                @else
-                                <td> No tiene compañero(a)</td>
-                                @endif
-                            @endif
-                            @endif
-                            <td>
                                 <img id="imgperfil" class="rounded-circle" width="50" height="50" src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
                             </td>
                             <td>
                                 {{ $inscripcione->personale->contacto->nombres }}
                             </td>
                             <td>{{ $inscripcione->personale->contacto->apellidos }}</td>
+                            <td>
+                                {{ $inscripcione->role->name }}
+                                @forelse ($inscripcione->funciones as $funcione)
+                                    
+                                {{ ' - '. $funcione->descripcion}}
+                                @empty
+                                    
+                                @endforelse
+                                
+                            </td>
+                            {{-- @if ($inscripcione->role->name == 'Matrimonio Director' || $inscripcione->role->name == 'Coordinador')
+                                <td>{{ $inscripcione->role->name }}</td>
+                            @else
+                                @if ($inscripcione->inscripcioneCompanerismo != null)   
+                                <td>
+                                    {{  $inscripcione->inscripcioneCompanerismo->companerismo->grupo->numero . ' - ' . $inscripcione->inscripcioneCompanerismo->companerismo->numero }}
+                                </td>
+                                @else
+                                <td> No tiene compañero(a)</td>
+                                @endif
+                            @endif --}}
+                            
                             <td>
                                 <span>
                                     <a href="tel:{{ $inscripcione->personale->contacto->telefono }}" alt="Llamar por teléfono" data-toggle="tooltip" data-placement="top" title="Llamar por teléfono">{{ $inscripcione->personale->contacto->telefono }}</a>
