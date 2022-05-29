@@ -39,10 +39,17 @@ class AprobacionPersonale extends Component
         $aprobacion = $this->aprobacion;
 
         $inscripciones = Inscripcione::where('programa_id',$this->programa->id)
-                            ->where('estado', '1')
-                            // ->join('personales', 'inscripciones.personale_id', '=', 'personales.id')     
-                            // ->join('contactos', 'contactos.id', '=', 'personales.contacto_id')
-                            // ->select('*')   
+                            ->where('inscripciones.estado', '1')
+                            ->join('personales', 'inscripciones.personale_id', '=', 'personales.id')     
+                            ->join('contactos', 'contactos.id', '=', 'personales.contacto_id')
+                            ->select(
+                                'inscripciones.id as inscripciones_id',
+                                'contactos.id as contactos_id',
+                                'contactos.nombres as contactos_nombres',
+                                'contactos.apellidos as contactos_apellidos',
+                                'personales.id as personales_id',
+                                'personales.permiso_obispo as permiso_obispo'
+                            )   
                             ->whereHas('personale', function ($q) use($search){
                                 $q->whereHas('contacto', function ($q) use ( $search){
                                     $q->where('nombres','like', '%'.$search.'%')
@@ -65,7 +72,7 @@ class AprobacionPersonale extends Component
                             }
 
         // $inscripciones = $inscripciones->orderBy('nombres', 'asc')
-        $inscripciones = $inscripciones->paginate();
+        $inscripciones = $inscripciones->orderBy('nombres')->paginate();
         $this->page = 1;
 
         $familias = Grupo::where('programa_id', session('programa_activo'))->get();

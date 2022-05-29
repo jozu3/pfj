@@ -92,14 +92,7 @@ class ProgramaController extends Controller
      */
     public function show(Programa $programa)
     {
-        $inscripciones = Inscripcione::where('programa_id', $programa->id)->whereIn('estado', [1])
-            ->with('personale.contacto')
-            ->get()
-            ->sortBy('personale.contacto.nombres');
-        
-        $vacunas = Vacuna::all();
-
-        return view('admin.programas.show', compact('programa', 'inscripciones', 'vacunas'));
+        return view('admin.programas.show', compact('programa'));
     }
 
     /**

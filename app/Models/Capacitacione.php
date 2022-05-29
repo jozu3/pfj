@@ -14,4 +14,8 @@ class Capacitacione extends Model
     public function programa(){
     	return $this->belongsTo(Programa::class);
     }
+
+    public function asistencias(){
+        return $this->hasMany(Asistencia::class);
+    }
 }

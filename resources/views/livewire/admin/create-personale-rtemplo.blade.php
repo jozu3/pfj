@@ -21,8 +21,6 @@
                     <option value="1">Activa</option>
                     <option value="2">Activa con observación</option>
                 </select>
-                {{$rtemplo}}
-
             </div>
         </div>
     </div>
@@ -43,39 +41,42 @@
         @forelse ($inscripciones as $inscripcione)
                 <tr>
                     <td>
-                        <img id="imgperfil" class="rounded-circle" width="50" height="50" src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
+                        <img id="imgperfil" class="rounded-circle" width="50" height="50" src=" {{ \App\Models\Inscripcione::find($inscripcione->inscripcione_id)->personale->user->adminlte_image() }}" alt="">
                     </td>
                     <td>
-                        {{ $inscripcione->personale->contacto->nombres }}
+                        {{ $inscripcione->contacto_nombres }}
                     </td>
                     <td>
-                        {{ $inscripcione->personale->contacto->apellidos }}
+                        {{ $inscripcione->contacto_apellidos }}
                     </td>
                     <td>
-                        @if ($inscripcione->inscripcioneCompanerismo)
-                            {{ $inscripcione->inscripcioneCompanerismo->companerismo->grupo->numero }}
-                        @endif
+                        @php
+                            $ic = \App\Models\InscripcioneCompanerismo::where('inscripcione_id',$inscripcione->inscripcione_id)->first();
+                            if($ic){
+                                echo $ic->companerismo->grupo->numero ;
+                            }
+                        @endphp
                     </td>
                     <td class="font-weight-bold">
-                        @if ($inscripcione->personale->estado_rtemplo == 1)
+                        @if ($inscripcione->personale_estado_rtemplo == 1)
                         <span class="bg-success p-1 rounded-lg">
                             {{ 'Sí' }}
                         </span>
                         @else
-                        @if ($inscripcione->personale->estado_rtemplo == 0)
+                        @if ($inscripcione->personale_estado_rtemplo == 0)
                         <span class="bg-danger p-1 rounded-lg">                            
                             {{ 'No' }}
                         </span>
                         @endif
                         @endif
-                        @if ($inscripcione->personale->obs_rtemplo)
+                        @if ($inscripcione->personale_obs_rtemplo)
                         <span class="bg-warning p-1 rounded-lg">                            
-                             {{$inscripcione->personale->obs_rtemplo }}
+                             {{$inscripcione->personale_obs_rtemplo }}
                         </span>
                         @endif
                     </td>
                     <td width="10px">
-                        <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}" class="btn btn-primary" ><i class="fas fa-user-edit"></i></a>
+                        <a href="{{ route('admin.contactos.show', $inscripcione->contacto_id) }}" class="btn btn-primary" ><i class="fas fa-user-edit"></i></a>
                     </td>
                 </tr>
         @empty

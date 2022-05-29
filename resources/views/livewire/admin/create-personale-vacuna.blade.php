@@ -1,7 +1,20 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <b>Dosis de vacunas contra el COVID-19</b>
+            <h3>Dosis de vacunas contra el COVID-19</h3>
+            <div class="form-row">
+                <div class="col">
+                    <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un personal">
+                </div>
+                <div class="col">
+                    <select name="" id="" class="form-control" wire:model="familia">
+                        <option value="">-- Familias --</option>
+                        @foreach ($familias as $familia)
+                            <option value="{{ $familia->id }}">{{ $familia->nombre.' '.$familia->numero }}</option>  
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div></div>
@@ -9,6 +22,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Nombres</th>
                             <th>Apellidos</th>
                             <th>Familia</th>
@@ -20,21 +34,34 @@
                     <tbody>
                         @foreach ($inscripciones as $inscripcione)
                             <tr>
-                                <td><b>{{ $inscripcione->personale->contacto->nombres }}</b></td>
-                                <td><b>{{ $inscripcione->personale->contacto->apellidos }}</b></td>
                                 <td>
-                                    @if ($inscripcione->inscripcioneCompanerismo)
-                                        {{ $inscripcione->inscripcioneCompanerismo->companerismo->grupo->numero }}
-                                    @endif
+                                    @php
+                                        $ins = \App\Models\Inscripcione::find($inscripcione->inscripcione_id);
+                                    @endphp
+                                    <img id="imgperfil" class="rounded-circle" width="50" height="50" src=" {{ $ins->personale->user->adminlte_image() }}" alt="">
+                                </td>
+                                <td>
+                                    {{ $inscripcione->contacto_nombres }}
+                                </td>
+                                <td>
+                                    {{ $inscripcione->contacto_apellidos }}
+                                </td>
+                                <td>
+                                    @php
+                                        $ic = \App\Models\InscripcioneCompanerismo::where('inscripcione_id',$inscripcione->inscripcione_id)->first();
+                                        if($ic){
+                                            echo $ic->companerismo->grupo->numero ;
+                                        }
+                                    @endphp
                                 </td>
                                 @foreach ($vacunas as $vacuna)
                                     <td class="text-center">
                                         @php
-                                            $checkedVacuna = $inscripcione->personale->vacunas->isNotEmpty() 
-                                                            && $inscripcione->personale->vacunas->where(('vacuna_id'), $vacuna->id)->firstWhere('vacunado', true) ? 'checked' : '';
+                                            $checkedVacuna = $ins->personale->vacunas->isNotEmpty() 
+                                            && $ins->personale->vacunas->where(('vacuna_id'), $vacuna->id)->firstWhere('vacunado', true) ? 'checked' : '';
                                         @endphp
 
-                                        <input type="checkbox" {{ $checkedVacuna }} wire:click="vacunado({{ $inscripcione->personale->id }}, {{ $vacuna->id }})">
+                                        <input type="checkbox" {{ $checkedVacuna }} wire:click="vacunado({{ $ins->personale->id }}, {{ $vacuna->id }})">
                                         {{-- @livewire('admin.create-inscripcione-vacuna', 
                                         ['vacuna_id' => $vacuna->id, 'personale_id' => $inscripcione->personale->id]) --}}
                                     </td>
@@ -44,6 +71,9 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="card-footer">
+            {{ $inscripciones->links() }}
         </div>
     </div>
 </div>

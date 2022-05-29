@@ -1,4 +1,4 @@
-<div>
+<div >
 	@if (!$is_report)
    <div class="form-check">
 	{!! Form::radio('asistencia', 0, null, ['class' => 'form-check-input disabled:opacity-25', 'id' =>'cl_a'.$capacitacione_id.$inscripcione_id, 'wire:click' => 'saveAsistencia', 'wire:model' => 'asistencia', 'wire:loading.attr' => 'disabled']) !!} 

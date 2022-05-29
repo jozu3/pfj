@@ -55,7 +55,8 @@
             <div class="tab-content" id="nav-tabContent">
                 
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    @include('admin.programas.partials.asistencia')
+                    {{-- @include('admin.programas.partials.asistencia') --}}
+                    @livewire('admin.asistencia-personale', ['programa' => $programa])
                 </div>
                 <div class="tab-pane fade" id="nav-vacuna" role="tabpanel" aria-labelledby="nav-vacuna-tab">
                     @livewire('admin.create-personale-vacuna', ['programa' => $programa])
@@ -129,7 +130,7 @@
         }
 
         .fijo {
-            height: 74px;
+            height: 97px;
             justify-content: center;
             display: flex;
             align-items: center;
@@ -137,8 +138,9 @@
 
         .apellido-fijo {
             position: absolute;
-            width: 11em;
+            width: 5em;
             left: 11em;
+            text-align: center;
 
         }
 
@@ -154,7 +156,7 @@
 
         .cont-table-div {
             overflow-x: scroll;
-            margin-left: 22em;
+            margin-left: 16em;
         }
 
         .alturatd-dis {
@@ -174,6 +176,27 @@
 
         .tab-content {
             overflow-y: auto
+        }
+
+        @media (max-width: 767px) {
+            .apellido-fijo {
+                width: 4em;
+                left: 6em;
+                font-size: 14px;
+            }
+
+            .nombre-fijo {
+                width: 7em;
+                left: 0em;
+                font-size: 14px;
+            }
+            .cont-table-div {
+                overflow-x: scroll;
+                margin-left: 9em;
+            }
+            .fijo {
+                height: 98px;
+            }
         }
 
     </style>

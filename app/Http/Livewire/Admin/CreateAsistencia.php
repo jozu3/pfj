@@ -40,12 +40,13 @@ class CreateAsistencia extends Component
 		}
 	}
 
-	public function loadPosts(){
-		$this->readyToLoad = true;	
+	public function loadAsistencia(){
+		$this->readyToLoad = true;
 	}
 
     public function render()
     {
+		
     	//if ($this->readyToLoad) {
 	    	$asis = Asistencia::where('capacitacione_id', $this->capacitacione_id)->where('inscripcione_id', $this->inscripcione_id)->first();
 	    	if(isset($asis)){
