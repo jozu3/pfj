@@ -1,4 +1,4 @@
-<div>
+<div style="width: 6rem">
     @php
         $checkedTarea = $inscripcioneTarea->isNotEmpty() && $inscripcioneTarea->where('tarea_id', $tarea_id)->firstWhere('realizado', true) ? 'checked' : '';
     @endphp    

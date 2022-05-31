@@ -15,8 +15,10 @@
                         <tr>
                             <th class="apellido-fijo">Apellidos</th>
                             <th class="nombre-fijo">Nombres</th>
-                            @forelse ($programa->tareas->sortBy('fecha') as $tarea)
-                                <th class="text-center">{{ $tarea->descripcion }}</th>
+                            @forelse ($programa->tareas->sortBy('fecha_inicio') as $tarea)
+                                <th class="text-center" style="50px">
+                                     {{ $tarea->fecha_inicio }} <br>al <br> {{ $tarea->fecha_final }}
+                                </th>
                             @empty
                                 <th>No hay lecturas</th>
                             @endforelse
@@ -31,10 +33,9 @@
                                 <td class="nombre-fijo">
                                     <b>{{ $inscripcione->personale->contacto->nombres }}</b>
                                 </td>
-                                @forelse ($programa->tareas->sortBy('fecha') as $tarea)                                    
+                                @forelse ($programa->tareas->sortBy('fecha') as $tarea)
                                     <td class="text-center">
-                                        @livewire('admin.create-inscripcione-tarea',
-                                        ['tarea_id' => $tarea->id, 'inscripcione_id' => $inscripcione->id])
+                                        @livewire('admin.create-inscripcione-tarea', ['tarea_id' => $tarea->id, 'inscripcione_id' => $inscripcione->id])
                                     </td>
                                 @empty
                                     <td>No hay lecturas</td>

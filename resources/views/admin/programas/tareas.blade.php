@@ -19,7 +19,7 @@
     @endif
     <div class="row">
         <div class="col-md-12">
-            @include('admin.programas.partials.lectura')            
+            @include('admin.programas.partials.lectura')
         </div>
     </div>
     <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
