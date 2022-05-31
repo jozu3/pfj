@@ -294,6 +294,12 @@ return [
             'can'  =>   'admin.inscripciones.index'
         ],
         [
+            'text' => 'Materiales',
+            'route'  => 'admin.materiales.index',
+            'icon' => 'fas fa-cogs',
+            // 'can'  =>   'admin.configuraciones.materiales'
+        ],      
+        [
             'header' => 'Inscripción', 
             'key' => 'inscripcion',
             'can'  => 'admin.inscripciones.index'
@@ -318,45 +324,45 @@ return [
             'key' => 'programa',
         ],
 
-        // [
-        //     'text' => 'Mi(s) sesión(es)',
-        //     'route'  => 'admin.programas.misprogramas',
-        //     'icon' => 'fab fa-leanpub',
-        //     'can'  =>   'admin.programas.misprogramas'
-        // ],
-        // [
-        //     'text' => 'Grupos',
-        //     'route'  => 'admin.programas.grupos',
-        //     'icon' => 'fab fa-leanpub',
-        //     'can'  =>   'admin.programas.grupos'
-        // ],
-        // [
-        //     'text' => 'Mi grupo',
-        //     'route'  => 'admin.grupos.migrupo',
-        //     'icon' => 'fab fa-leanpub',
-        //     'can'  =>   'admin.grupos.migrupo'
-        // ],
+        [
+            'text' => 'Mi(s) sesión(es)',
+            'route'  => 'admin.programas.misprogramas',
+            'icon' => 'fab fa-leanpub',
+            'can'  =>   'admin.programas.misprogramas'
+        ],
+        [
+            'text' => 'Grupos',
+            'route'  => 'admin.programas.grupos',
+            'icon' => 'fab fa-leanpub',
+            'can'  =>   'admin.programas.grupos'
+        ],
+        [
+            'text' => 'Mi grupo',
+            'route'  => 'admin.grupos.migrupo',
+            'icon' => 'fab fa-leanpub',
+            'can'  =>   'admin.grupos.migrupo'
+        ],
  
-        // [ 
-        //     'header' => 'Anuncios',
-        //     'can'  =>   'admin.anuncios.index'
-        // ],
-        // [
-        //     'text'        => 'Anuncios',
-        //     'route'         => 'admin.anuncios.index',
-        //     'icon'        => 'fas fa-chalkboard-teacher',
-        //     'can'  =>   'admin.anuncios.index'
-        // ],
-        // [ 
-        //     'header' => 'Reportes',
-        //     'can'  =>   'admin.reportes.index'
-        // ],
-        // [
-        //     'text'        => 'Reportes',
-        //     'route'         => 'admin.reportes.index',
-        //     'icon'        => 'fas fa-chalkboard-teacher',
-        //     'can'  =>   'admin.reportes.index'
-        // ],
+        [ 
+            'header' => 'Anuncios',
+            'can'  =>   'admin.anuncios.index'
+        ],
+        [
+            'text'        => 'Anuncios',
+            'route'         => 'admin.anuncios.index',
+            'icon'        => 'fas fa-chalkboard-teacher',
+            'can'  =>   'admin.anuncios.index'
+        ],
+        [ 
+            'header' => 'Reportes',
+            'can'  =>   'admin.reportes.index'
+        ],
+        [
+            'text'        => 'Reportes',
+            'route'         => 'admin.reportes.index',
+            'icon'        => 'fas fa-chalkboard-teacher',
+            'can'  =>   'admin.reportes.index'
+        ],
      /*   [
             'header' => 'Finanzas',
             'can'  =>   'admin.pagos.index'

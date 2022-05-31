@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tarea extends Model
+class Materiale extends Model
 {
     use HasFactory;
 
@@ -14,12 +14,4 @@ class Tarea extends Model
     public function tareaMateriales(){
         return $this->hasMany(TareaMateriale::class);
     }
-
-    public function programa(){
-        return $this->belongsTo(Programa::class);
-    }
-
-    public function inscripcioneTareas(){
-    	return $this->hasMany(InscripcioneTarea::class);
-    }    
 }

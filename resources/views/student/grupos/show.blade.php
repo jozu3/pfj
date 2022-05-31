@@ -10,11 +10,6 @@
                     <div class="text-3xl text-gray-900 border-b-2 font-bold mb-8">
                         <p class="text-yellow-500 uppercase">FAMILIA: {{ $grupo->nombre }}</p>
                     </div>
-                    {{-- @if ($grupo->companerismos->where('role_id', 5))
-                        {{$inscripcioneCompanerismo = $grupo->companerismos->firstWhere('role_id', 5)->inscripcioneCompanerismos}}
-                    @else
-                        
-                    @endif --}}
 
                     <div class="grid grid-cols-4 gap-4">
                         @foreach ($grupo->companerismos->sortBy('role_id ') as $companerismo)

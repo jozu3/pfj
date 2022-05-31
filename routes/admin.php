@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\InscripcioneCompanerismoController;
 use App\Http\Controllers\Admin\ExcelController;
 use App\Http\Controllers\Admin\CompanerismoController;
 use App\Http\Controllers\Admin\AnuncioController;
+use App\Http\Controllers\Admin\MaterialeController;
 use App\Http\Controllers\Admin\ReporteController;
 
 Route::resource('', HomeController::class)->names('admin');
@@ -75,4 +76,6 @@ Route::get('grupos/create/{id}', [GrupoController::class, 'create'])->name('admi
 
 Route::get('/report-personales-grupo/{grupo}', [ExcelController::class, 'personalesGrupo'])->name('admin.excel.personalesGrupo');
 Route::post('/import-excel-personal/{programa}', [ExcelController::class, 'importExcelPersonal'])->name('admin.excel.importExcelPersonal');
+
+Route::resource('materiales', MaterialeController::class)->names('admin.materiales');
 	
