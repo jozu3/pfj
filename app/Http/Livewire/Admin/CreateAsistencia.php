@@ -37,6 +37,7 @@ class CreateAsistencia extends Component
 
     	if ($this->result) {
 				$this->emit('alert', $this->result);				
+				$this->emit('update_totales');//actualiza el total de Asistencia al final de la hoja
 		}
 	}
 

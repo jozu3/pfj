@@ -20,13 +20,13 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th class="apellido-fijo fijo">
+                        <th class="apellido-fijo fijo border-0">
                             Familia
                         </th>
-                        <th class="nombre-fijo fijo">
+                        <th class="nombre-fijo fijo border-0">
                             Nombres y Apellidos
                         </th>
-                        <th>
+                        <th class="text-center">
                             %
                         </th>
                         @forelse($capacitaciones as $capacitacione)
@@ -110,13 +110,13 @@
                         @forelse($capacitaciones as $capacitacione)
                             <td colspan="1" class="text-center border-left">
                                 <div class="bg-success p-1 rounded-lg font-weight-bold mx-auto mb-1" style="width: 100px">
-                                    A: {{ $capacitacione->asistencias->where('asistencia','0')->count() }}
+                                    A: {{ $capacitacione->asistencias->where('asistencia','0')->whereIn('inscripcione_id', $inscripciones_all_ids)->count() }}
                                 </div>
                                 <div class="bg-danger p-1 rounded-lg font-weight-bold mx-auto mb-1" style="width: 100px">
-                                    F: {{ $capacitacione->asistencias->where('asistencia','1')->count() }}
+                                    F: {{ $capacitacione->asistencias->where('asistencia','1')->whereIn('inscripcione_id', $inscripciones_all_ids)->count() }}
                                 </div>
                                 <div class="bg-warning p-1 rounded-lg font-weight-bold mx-auto" style="width: 100px">
-                                    FJ: {{ $capacitacione->asistencias->where('asistencia','2')->count() }}
+                                    FJ: {{ $capacitacione->asistencias->where('asistencia','2')->whereIn('inscripcione_id', $inscripciones_all_ids)->count() }}
                                 </div>
                             </td>
                         @empty

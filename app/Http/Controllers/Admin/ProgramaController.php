@@ -67,16 +67,19 @@ class ProgramaController extends Controller
         if ($request->file('imgMatrimonioDirector')) {
             $url = Storage::put('programas', $request->file('imgMatrimonioDirector'));
             $programa->imageMatrimonioDirector()->create([
-                'url' => $url
+                'url' => $url,
+                'tipo' => 'md'
             ]);
+
         }
 
-        // if ($request->file('imgMatrimonioLogistica')) {
-        //     $url = Storage::put('programas', $request->file('imgMatrimonioLogistica'));
-        //     $programa->imageMatrimonioLogistica()->create([
-        //         'url' => $url
-        //     ]);
-        // }
+        if ($request->file('imgMatrimonioLogistica')) {
+            $url = Storage::put('programas', $request->file('imgMatrimonioLogistica'));
+            $programa->imageMatrimonioLogistica()->create([
+                'url' => $url,
+                'tipo' => 'ml'
+            ]);
+        }
 
         $pfj = Pfj::find($request->pfj_id);
         //echo $request->id;  
@@ -130,30 +133,35 @@ class ProgramaController extends Controller
             if($programa->imageMatrimonioDirector != null){
                 Storage::delete($programa->imageMatrimonioDirector->url);
                 $programa->imageMatrimonioDirector->update([
-                    'url' => $urlMD
+                    'url' => $urlMD,
+                    'tipo' => 'md'
                 ]);
             } else {
                 $programa->imageMatrimonioDirector()->create([
-                    'url' => $urlMD
+                    'url' => $urlMD,
+                    'tipo' => 'md'
                 ]);
             }
         }
+
         
-        // if ($request->file('imgMatrimonioLogistica')) {
-        //     $urlML = Storage::put('programas', $request->file('imgMatrimonioLogistica'));
-        //     //$programa->image()->delete();
-        //     if($programa->imageMatrimonioLogistica != null){
-        //         Storage::delete($programa->imageMatrimonioLogistica->url);
-        //         $programa->imageMatrimonioLogistica->update([
-        //             'url' => $urlML
-        //         ]);
-        //         // dd($request->file('imgMatrimonioLogistica'));
-        //     } else {
-        //         $programa->imageMatrimonioLogistica()->create([
-        //             'url' => $urlML
-        //         ]);
-        //     }
-        // }
+        if ($request->file('imgMatrimonioLogistica')) {
+            $urlML = Storage::put('programas', $request->file('imgMatrimonioLogistica'));
+            //$programa->image()->delete();
+            if($programa->imageMatrimonioLogistica != null){
+                Storage::delete($programa->imageMatrimonioLogistica->url);
+                $programa->imageMatrimonioLogistica->update([
+                    'url' => $urlML,
+                    'tipo' => 'ml'
+                ]);
+                // dd($request->file('imgMatrimonioLogistica'));
+            } else {
+                $programa->imageMatrimonioLogistica()->create([
+                    'url' => $urlML,
+                    'tipo' => 'ml'
+                ]);
+            }
+        }
 
 
         return redirect()->route('admin.programas.edit', compact('programa'))->with('info', 'Se actualizaron los datos');

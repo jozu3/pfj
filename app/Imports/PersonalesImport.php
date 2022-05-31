@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Barrio;
 use App\Models\Contacto;
+use App\Models\Funcione;
 use App\Models\Inscripcione;
 use App\Models\Personale;
 use App\Models\PersonaleVacuna;
@@ -81,18 +82,22 @@ class PersonalesImport implements ToModel, WithValidation
             'password' => bcrypt('password'),
             'estado' => 1
         ]);
-        $rol = $row[8];
-        $role = Role::where('name', $rol)->first();
+        $funcion = $row[8];
+        $role = Role::where('name', $funcion)->first();
         $funcion = '';
         if ($role) {
-            $user->assignRole($rol);
+            $user->assignRole($funcion);
         } else {
             $user->assignRole('Consejero');
-            $rol = 'Consejero';
-            $funcion = $rol;
+            
+            /*Funcione::create([
+                'descripcion' => $funcion,
+                'programa_id' => $this->programa
+            ]);*/
+            
         }
 
-        $barrio = Barrio::where('nombre', 'like','%'.$rol.'%')->first();
+        $barrio = Barrio::where('nombre', 'like','%'.$row[7].'%')->first();
 
         if($barrio != null){
             $barrio = $barrio->id;
@@ -115,7 +120,7 @@ class PersonalesImport implements ToModel, WithValidation
                 break;
         }
 
-        $permiso_obispo = 0;
+        $permiso_obispo = 0; //aprobacion final
         if ($row[12] == 'Aprobado') {
             $permiso_obispo = 2;//aprobacion final
         }
@@ -194,7 +199,7 @@ class PersonalesImport implements ToModel, WithValidation
         $inscripcione = Inscripcione::create([
             'personale_id' => $personale->id,
             'programa_id' => $this->programa,
-            'funcion' => $funcion,
+            //'funcion' => $funcion,
             'role_id' => Role::where('name', $rol)->first()->id,//consejero
             'estado' => 1,//Activo-Habilitado
             'fecha' => date('Y-m-d')

@@ -21,6 +21,7 @@ class CreateProgramasTable extends Migration
             $table->date('fecha_fin');
             $table->tinyInteger('estado');
             $table->longText('resena_matrimonio')->nullable();
+            $table->longText('resena_matrimonio_logistica')->nullable();
             $table->timestamps();
         });
     }

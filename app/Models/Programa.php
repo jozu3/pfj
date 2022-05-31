@@ -74,16 +74,16 @@ class Programa extends Model
     }
 
     public function imageMatrimonioDirector(){
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable')->where('tipo', 'md');
     }
 
     public function funciones(){
         return $this->hasMany(Funcione::class);
     }
 
-    // public function imageMatrimonioLogistica(){
-    //     return $this->morphOne(Image::class, 'imageable');
-    // }
+    public function imageMatrimonioLogistica(){
+        return $this->morphOne(Image::class, 'imageable')->where('tipo', 'ml');
+    }
 
 
 }

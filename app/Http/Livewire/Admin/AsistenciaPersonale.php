@@ -18,6 +18,8 @@ class AsistenciaPersonale extends Component
 
 	protected $paginationTheme = 'bootstrap';
 
+    protected $listeners = ['update_totales' => 'render'];
+
     public function render()
     {   
         $fam = $this->familia;
@@ -51,12 +53,15 @@ class AsistenciaPersonale extends Component
                                                         });
                                     }
                                    
-        $inscripciones = $inscripciones->orderBy('contactos.nombres')->paginate();
+        $inscripciones = $inscripciones->orderBy('contactos.nombres');
+        
+        $inscripciones_all_ids = $inscripciones->pluck('inscripciones.inscripcione_id'); 
+        $inscripciones = $inscripciones->paginate();
         $this->page = 1;
 
         $familias = Grupo::where('programa_id', session('programa_activo'))->get();
         $capacitaciones = $this->programa->capacitaciones->where('tipo', '1');
 
-        return view('livewire.admin.asistencia-personale', compact('inscripciones', 'familias', 'capacitaciones'));
+        return view('livewire.admin.asistencia-personale', compact('inscripciones', 'familias', 'capacitaciones', 'inscripciones_all_ids'));
     }
 }

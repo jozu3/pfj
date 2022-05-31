@@ -172,29 +172,12 @@ class InscripcioneController extends Controller
      */
     public function update(Request $request, Inscripcione $inscripcione)
     {   
-
-       /* $request->validate([
-            'estado' => 'in:0,1,2,3',
-            'tipoinscripcione' => 'in:0,1',
-           // 'haypagos' => 'in:0'
-        ], [
-            'haypagos.in' => 'No puede cambiar el tipo de inscripcione porque algunas obligaciones ya fueron pagadas.'
-        ]);*/
-
-
         $inscripcione->update($request->all());
         $inscripcione->funciones()->sync($request->funciones);
-        foreach($request->funciones as $funcione){
-            
-        }
-        
-        // dd($request->funciones);
-        //     $inscripcione->update([
-        //     'estado' => $request->estado,
-        //     'role_id' => $request->role_id
-        // ]);
-        
-        return redirect()->route('admin.inscripciones.edit', compact('inscripcione'))->with('info','Se actualizaron los datos correctamente');
+
+
+                
+        return redirect()->route('admin.programas.personal', $inscripcione->programa)->with('info','Se actualizaron los datos correctamente');
     }
 
     /**

@@ -58,9 +58,12 @@ class ProgramaController extends Controller
 
         $inscripcione = Inscripcione::where('programa_id', $programa->id)->where('personale_id', $personale->id)->first();
         // $inscripcioneCompanerismos = InscripcioneCompanerismo::where('inscripcione_id', $inscripcione->id)->get();
-
+        
+        if(auth()->user()->can(['admin.programas.viewList'])){
+            
+        }
         // return view('student.programas.show', compact('inscripcioneCompanerismos', 'inscripcione'));
-        return view('student.programas.show', compact('inscripcione'));
+        return view('student.programas.show', compact('inscripcione', 'programa'));
 
     }
 

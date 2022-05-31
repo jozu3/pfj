@@ -1,10 +1,14 @@
 <x-app-layout>
+    @can('admin.programas.viewList')
+        @php
+            $inscripcione = \App\Models\Inscripcione::where('programa_id', $programa->id)->first();
+        @endphp
+    @endcan
     <x-slot name="header">
         <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
             Bienvenido(a) a tu sesión {{ $inscripcione->programa->nombre }}
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -36,6 +40,35 @@
                                             <br>
                                             @if ($inscripcione->programa->resena_matrimonio)
                                                 <p>{!! $inscripcione->programa->resena_matrimonio !!}</p>
+                                            @endif
+                                        </div>
+                                      </div>
+                                    <div class="text-center">
+                                        
+                                    </div>
+
+                                </div>
+                                <div class="container py-6">
+                                    <div class="grid grid-cols-1 gap-4 place-content-center text-3xl text-center text-gray-900 border-b-2 mb-6 font-bold">
+                                        <p class="">Matrimonio de Logística</p> <!-- border-b-4 -->
+                                    </div>
+
+                                    <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 place-content-center mt-4">
+                                        <div class="text-center">
+                                                @if ($inscripcione->programa->imageMatrimonioLogistica)
+                                                    <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioLogistica->url) }}"
+                                                    alt="" class="object-top rounded-full m-auto" width="300px">
+                                                @endif
+                                            </div>
+                                        <div class="md:text-left text-center">
+                                            @forelse ($inscripcione->programa->matrimonioLogisticas() as $lider)
+                                                <p class="text-xl"><b>{{ $lider->personale->user->name }}</b></p>
+                                            @empty
+                                                <p>No asignados</p>
+                                            @endforelse
+                                            <br>
+                                            @if ($inscripcione->programa->resena_matrimonio_logistica)
+                                                <p>{!! $inscripcione->programa->resena_matrimonio_logistica !!}</p>
                                             @endif
                                         </div>
                                       </div>

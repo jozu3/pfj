@@ -1,7 +1,34 @@
 <div>
     <div class="card">
         <div class="card-header">
-            <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un personal">
+            <div class="form-row">
+                <div class="col">
+                    <input wire:model="search" class="form-control" placeholder="Ingrese nombre para buscar">
+                </div>
+                <div class="col">
+                    <select name="" id="" class="form-control" wire:model="rol">
+                        <option value="">-- Asignación --</option>
+                        @foreach ($roles as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>  
+                        @endforeach
+                    </select>
+                    
+                    @if ($rol >4 )
+                    <div class="form-row">
+                        @forelse ($funciones as $funcione)
+
+                            <div class="col">
+                                <input type="checkbox" value="{{$funcione->id}}" wire:model="functions_selecteds.ca{{$funcione->id}}" id="{{$funcione->descripcion. $funcione->id}}">
+                                <label for="{{$funcione->descripcion. $funcione->id}}">{{$funcione->descripcion}}</label>
+                            </div>
+                        @empty
+                        
+                        @endforelse
+                    </div>
+                    @else
+                    @endif
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -131,6 +158,16 @@
                 @endforelse
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer">
+            <div class="form-row">
+                <div class="col">
+                    {{ $inscripciones->links() }}
+                </div>
+                <div class="col">
+                    Viendo <b> {{ count($inscripciones)  }}</b> de un total de <b> {{ $inscripciones->total() }}</b>
+                </div>
+            </div>
         </div>
     </div>
 
