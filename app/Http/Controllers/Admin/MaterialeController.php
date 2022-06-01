@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class MaterialeController extends Controller
 {
+    public function __construct(){
+        $this->middleware('can:admin.materiales.index');
+    }
     /**
      * Display a listing of the resource.
      *

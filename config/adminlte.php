@@ -292,13 +292,7 @@ return [
             'route'  => 'admin.inscripciones.index',
             'icon' => 'fas fa-address-card',
             'can'  =>   'admin.inscripciones.index'
-        ],
-        [
-            'text' => 'Materiales',
-            'route'  => 'admin.materiales.index',
-            'icon' => 'fas fa-cogs',
-            // 'can'  =>   'admin.configuraciones.materiales'
-        ],      
+        ],   
         [
             'header' => 'Inscripción', 
             'key' => 'inscripcion',
@@ -323,7 +317,12 @@ return [
             'can'  =>   'admin.programas.misprogramas',
             'key' => 'programa',
         ],
-
+        [
+            'text' => 'Materiales',
+            'route'  => 'admin.materiales.index',
+            'icon' => 'fas fa-cogs',
+            'can'  =>   'admin.materiales.index'
+        ],   
         // [
         //     'text' => 'Mi(s) sesión(es)',
         //     'route'  => 'admin.programas.misprogramas',

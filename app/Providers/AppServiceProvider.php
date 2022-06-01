@@ -150,11 +150,11 @@ class AppServiceProvider extends ServiceProvider
                     ];
 
                     /* * */
-                    $menu_funciones = [
-                        'text' => 'Funciones',
-                        'url' => 'admin/programas/'.session('programa_activo').'/dashboard',
+                    $menu_planificador = [
+                        'text' => 'Planificador',
+                        'url' => 'admin/programas/'.session('programa_activo').'/planificador',
                         'icon' => 'fas fa-chart-line',
-                        'can' => 'admin.programas.edit'
+                        'can' => 'admin.programas.planning'
                     ];
 
                     $header = [ 

@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
 
         $role1 = Role::create(['name' => 'Admin', 'slug' => 'admin']);
         $role2 = Role::create(['name' => 'Matrimonio Director', 'slug' => 'mdirector']);
-        $role3 = Role::create(['name' => 'Matrimonio de Logística', 'slug' => 'mlogística']);
+        $role3 = Role::create(['name' => 'Matrimonio de Logística', 'slug' => 'mlogistica']);
         $role4 = Role::create(['name' => 'Coordinador', 'slug' => 'coordinador']);
         $role5 = Role::create(['name' => 'Coordinador auxiliar', 'slug' => 'cordauxiliar']);
         $role6 = Role::create(['name' => 'Consejero', 'slug' => 'consejero']);        
@@ -71,6 +71,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.programas.viewList', 'description' => 'Ver lista de personales de todos los programas'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.programas.misprogramas', 'description' => 'Ver mis sesiones'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         Permission::create(['name' => 'admin.programas.grupos', 'description' => 'Ver los grupos de su sesión'])->syncRoles([$role1, $role2, $role3, $role4, ]);
+        Permission::create(['name' => 'admin.programas.planning', 'description' => 'Ver el menu planificador'])->syncRoles([$role1, $role2, $role3, $role4, ]);
         
         //Permisos grupo
         Permission::create(['name' => 'admin.grupos.index', 'description' => 'Ver listado de grupos'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
@@ -121,10 +122,20 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.actividades.destroy', 'description' => 'Eliminar actividades'])->syncRoles([$role1, $role2, $role3, $role4]);
   
 
-             //Permisos admin.reportes.index
+        //Permisos admin.reportes.index
         Permission::create(['name' => 'admin.reportes.index', 'description' => 'Ver listado de reportes'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
 
+        //Permisos materiales
+        Permission::create(['name' => 'admin.materiales.index', 'description' => 'Ver listado de materiales'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.materiales.create', 'description' => 'Crear materiales'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.materiales.edit', 'description' => 'Editar materiales'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.materiales.destroy', 'description' => 'Eliminar materiales'])->syncRoles([$role1, $role2, $role3, $role4]);
 
-
+         //funciones
+         Permission::create(['name' => 'admin.funciones.index', 'description' => 'Ver listado de funciones'])->syncRoles([$role1, $role2, $role3, $role4]);
+         Permission::create(['name' => 'admin.funciones.create', 'description' => 'Crear funciones'])->syncRoles([$role1, $role2, $role3, $role4]);
+         Permission::create(['name' => 'admin.funciones.edit', 'description' => 'Editar funciones'])->syncRoles([$role1, $role2, $role3, $role4]);
+         Permission::create(['name' => 'admin.funciones.destroy', 'description' => 'Eliminar funciones'])->syncRoles([$role1, $role2, $role3, $role4]);
+ 
     }
 }
