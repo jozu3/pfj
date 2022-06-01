@@ -75,13 +75,16 @@
                                         $color_c = 'danger';
                                     }
                                 @endphp
-                                <span class="bg-{{$color_p}} rounded-lg p-1">
-                                    {{ $porcentaje .'%' }}
-                                </span>
+                                <div style="width:130px; margin:auto">
+
+                                    <span class="bg-{{$color_p}} rounded-lg p-1">
+                                        {{ $porcentaje .'%' }}
+                                    </span>
                                     <span class="bg-{{$color_c}} rounded-lg p-1 ml-2">
                                         
-                                    {{ $inscripcione_->asistencias->where('asistencia', '0')->count().'/'.$capacitaciones->count()  }}
-                                </span>
+                                        {{ $inscripcione_->asistencias->where('asistencia', '0')->count().'/'.$capacitaciones->count()  }}
+                                    </span>
+                                </div>
                                     @else
                                 <span class="text-secondary">{{ 'No ha creado reuniones/capacitaciones.' }}</span>
                                 @endif
