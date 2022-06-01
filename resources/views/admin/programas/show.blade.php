@@ -178,6 +178,13 @@
         .tab-content {
             overflow-y: auto
         }
+        .porcentaje{
+            width:130px; 
+            margin:auto;
+        }
+        .pdiv-porcentaje{
+            margin-right: 0.5rem!important;
+        }
 
         @media (max-width: 767px) {
             .apellido-fijo {
@@ -198,6 +205,14 @@
             .fijo {
                 height: 98px;
             }
+            .porcentaje{
+                width:auto; 
+            }
+            .pdiv-porcentaje{
+                margin-right: 0rem!important;
+                margin-bottom: 0.5rem!important;
+            }
+
         }
 
     </style>

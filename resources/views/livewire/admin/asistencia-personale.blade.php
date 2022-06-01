@@ -75,13 +75,11 @@
                                         $color_c = 'danger';
                                     }
                                 @endphp
-                                <div style="width:130px; margin:auto">
-
-                                    <span class="bg-{{$color_p}} rounded-lg p-1">
+                                <div class="porcentaje">
+                                    <span class="bg-{{$color_p}} rounded-lg p-1 pdiv-porcentaje">
                                         {{ $porcentaje .'%' }}
                                     </span>
-                                    <span class="bg-{{$color_c}} rounded-lg p-1 ml-2">
-                                        
+                                    <span class="bg-{{$color_c}} rounded-lg p-1 ">
                                         {{ $inscripcione_->asistencias->where('asistencia', '0')->count().'/'.$capacitaciones->count()  }}
                                     </span>
                                 </div>
