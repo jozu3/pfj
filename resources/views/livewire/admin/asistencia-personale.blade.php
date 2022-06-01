@@ -59,10 +59,30 @@
                                 {{ ' '.$inscripcione->contacto_apellidos }}
                             </td>
                            
-                            <td class="text-center">
+                            <td class="text-center text-info font-weight-bold align-middle">
+                                
                                 @if ($capacitaciones->count())
-                                {{ 100*$inscripcione_->asistencias->where('asistencia', '0')->count()/$capacitaciones->count() .'%' }}
-                                @else
+                                @php
+                                    $porcentaje = round(100*$inscripcione_->asistencias->where('asistencia', '0')->count()/$capacitaciones->count(), 2);
+                                    $color_p = 'warning';
+                                    $color_c = 'warning';
+                                    if ($porcentaje == 100) {
+                                        $color_p = 'info';
+                                        $color_c = 'success';
+                                    }
+                                    if ($porcentaje == 0) {
+                                        $color_p = 'danger';
+                                        $color_c = 'danger';
+                                    }
+                                @endphp
+                                <span class="bg-{{$color_p}} rounded-lg p-1">
+                                    {{ $porcentaje .'%' }}
+                                </span>
+                                    <span class="bg-{{$color_c}} rounded-lg p-1 ml-2">
+                                        
+                                    {{ $inscripcione_->asistencias->where('asistencia', '0')->count().'/'.$capacitaciones->count()  }}
+                                </span>
+                                    @else
                                 <span class="text-secondary">{{ 'No ha creado reuniones/capacitaciones.' }}</span>
                                 @endif
                                 
