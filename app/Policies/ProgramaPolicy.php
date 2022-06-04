@@ -31,7 +31,8 @@ class ProgramaPolicy
      */
     public function view(User $user, Programa $programa)
     {
-        //
+        // if($user)
+        return true;
     }
 
     /**

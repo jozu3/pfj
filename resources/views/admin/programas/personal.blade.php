@@ -2,7 +2,7 @@
 
 @section('title', 'Sesión')
 
-@section('plugins.Chartjs', true)
+@section('plugins.Sweetalert2', true)
 
 @section('content_header')
     @can('admin.programas.edit')
@@ -371,6 +371,45 @@
 @section('js')
     <script>
         $().ready(function() {
+			@if (session('inactivar') == 'Ok')
+				Swal.fire(
+					      "Ok",
+					      'Personal inactivado.',
+					      'success'
+					    )
+			@endif
+	    	Livewire.on('readytoload', event => {
+		    	$('.prevent-inactive').change( function (e) {
+                    e.preventDefault();
+                    var msg = '';
+                    var confirmButtonText = '';
+                    if(this.checked){
+                        msg = 'Al activar este personal, le dará acceso al sistema y podrá ver sus reportes de lectura, asistencia y otros.'
+                        confirmButtonText = 'Sí, activar y dar acceso'
+                    }else {
+                        msg = 'Todas las asignaciones de compañerirsmo de este personal se borrarán, y ya no podrá ver sus reportes de asistencia, lecturas y otros.';
+                        confirmButtonText = 'Sí, inactivar y borrar sus asignaciones'
+                    }
+			    	Swal.fire({
+					  title: 'Se necesita confirmación',
+					  text: msg,
+					  icon: 'warning',
+					  showCancelButton: true,
+					  cancelButtonColor: '#d33',
+					  cancelButtonText: 'Cancelar'
+					  confirmButtonColor: '#3085d6',
+					  confirmButtonText: confirmButtonText,
+					}).then((result) => {
+					  if (result.value) {
+					    var ins = $(this).attr( 'data-inscripcione' );
+                        Livewire.emit('changeEstado', ins);
+					  } else {
+                        this.checked = !this.checked
+                      }
+					})	    		
+		    	});
+	    	});
+
             $("#success-alert").hide();
         });
         $(function() {
@@ -383,13 +422,9 @@
                 $("#success-alert").fadeTo(1000, 500).slideUp(500, function() {
                     $("#success-alert").slideUp(500);
                 });
-                togg();
             }
         });
     </script>
-    {{-- <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script> --}}
     <script type="text/javascript" src="{{ config('app.url') }}/js/toggle-bootstrap.js"></script>
-    <script>
-        togg();
-    </script>
+
 @stop

@@ -5,8 +5,7 @@
 |*| https://gitbrent.github.io/bootstrap4-toggle/
 |*| ========================================================================
 */
-function togg(){
-  }
+
 !function (a) { "use strict"; 
 function l(t, e) { 
     this.$element = a(t), 

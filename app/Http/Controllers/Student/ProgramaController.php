@@ -53,7 +53,7 @@ class ProgramaController extends Controller
      */
     public function show(Programa $programa)
     {
-        // $this->authorize('view', $programa);
+        $this->authorize('view', $programa);
 
         $personale = auth()->user()->personale;
 
