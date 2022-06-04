@@ -11,6 +11,7 @@ use App\Models\Pfj;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreContactoRequest;
 use App\Models\Barrio;
+use App\Models\Estaca;
 use DB;
 
 use Illuminate\Support\Facades\Storage;
@@ -93,7 +94,9 @@ class ContactoController extends Controller
         $seguimientos = Seguimiento::where('contacto_id', $contacto->id)->get();
         $pfjs = Pfj::pluck('nombre', 'id');
 
-        $barrios = Barrio::all()->pluck('nombre', 'id');
+        $barrios = Barrio::orderBy('nombre', 'asc')->get()->pluck('nombre', 'id');
+        
+        $estacas = Estaca::orderBy('nombre', 'asc')->get();
         // if (auth()->user()->hasRole(['Admin', 'Asistente'])) {
         //     $vendedores = Personale::select(DB::raw('concat(nombres, " ", apellidos) as nombre'), 'id')->pluck('nombre', 'id');
 
@@ -103,7 +106,7 @@ class ContactoController extends Controller
         $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
 
 
-        return view('admin.contactos.show', compact('contacto','seguimientos', 'pfjs', 'barrios', 'roles'));
+        return view('admin.contactos.show', compact('contacto','seguimientos', 'pfjs', 'barrios', 'estacas', 'roles'));
     }
 
     /**
