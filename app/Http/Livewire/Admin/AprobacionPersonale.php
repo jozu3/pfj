@@ -37,6 +37,7 @@ class AprobacionPersonale extends Component
         $fam = $this->familia;
         $search = $this->search;
         $aprobacion = $this->aprobacion;
+        $familias = Grupo::where('programa_id', $this->programa->id)->get();
 
         $inscripciones = Inscripcione::where('programa_id',$this->programa->id)
                             ->where('inscripciones.estado', '1')
@@ -56,8 +57,15 @@ class AprobacionPersonale extends Component
                                       ->orderBy('nombres', 'asc')  ;
                                 });
                             });
-
-
+                            if(auth()->user()->can('admin.asistencias.migrupo' )){
+                                $auth_inscripcione = auth()->user()->personale->inscripciones->where('programa_id', $this->programa->id)->first();
+                                if($auth_inscripcione && $auth_inscripcione->inscripcioneCompanerismo){
+                                    $fam = $auth_inscripcione->inscripcioneCompanerismo->companerismo->grupo_id;
+                                    $this->familia = $fam; 
+                                    
+                                    $familias = Grupo::where('id', $fam)->get();
+                                }
+                            }
                             if ($fam != '') {
                                 $inscripciones = $inscripciones->whereHas('inscripcioneCompanerismo', function ($q) use ($fam){
                                                     $q->whereHas('companerismo', function ($q) use ($fam){
@@ -75,7 +83,6 @@ class AprobacionPersonale extends Component
         $inscripciones = $inscripciones->orderBy('nombres')->paginate();
         $this->page = 1;
 
-        $familias = Grupo::where('programa_id', $this->programa->id)->get();
 
         return view('livewire.admin.aprobacion-personale', compact('inscripciones', 'familias'));
     }

@@ -212,6 +212,7 @@
                                             </button>
                                         </div>
                                     </div>
+
                                     <div
                                         class="container py-6 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-6">
                                         <table class="min-w-full divide-y divide-gray-200 mx-4">
@@ -240,58 +241,66 @@
                                         </table>
 
                                     </div>
-                                    {{-- <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                    <table class="min-w-full divide-y divide-gray-200">
-                                        <thead class="bg-gray-50">
-                                            <tr>
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
-                                                    Próximas capacitaciones
-                                                </th>
-                                                <th>
-                                                    Fecha
-                                                </th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200">
-                                            @forelse ($inscripcione->programa->capacitaciones as $capacitacione)
+                                    @foreach ($tarea_actuales as $tarea)
+                                    <div
+                                        class="grid grid-cols-1 gap-4 place-content-center text-3xl text-center text-gray-900 border-b-2 mb-6 mt-10 font-bold">
+                                        <p class="">Tareas de la semana {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} al {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}</p> <!-- border-b-4 -->
+                                        
+                                    </div>
+                                    
+                                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-2">
+
+                                        <table class="min-w-full divide-y divide-gray-200">
+                                            <thead class="bg-gray-50">
                                                 <tr>
-                                                    <td class="px-6 py-4 ">
-                                                        <div class="flex items-center">
-                                                            <div class="ml-4">
-                                                                <div class="text-2xl font-medium text-gray-900">
-                                                                    <b>{{ $capacitacione->tema }}</b>
+                                                    <th scope="col"
+                                                        class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                                        Materiales
+                                                    </th>
+                                                    <th>
+                                                        Tema
+                                                    </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white divide-y divide-gray-200">
+                                                @forelse ($tarea->tareaMateriales as $tareaMateriale)
+                                                    <tr>
+                                                        <td class="px-6 py-4 ">
+                                                            <div class="flex items-center">
+                                                                <div class="ml-4">
+                                                                    <div class="text-2xl font-medium text-gray-900">
+                                                                        <b>{{ $tareaMateriale->materiale->descripcion }}</b>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                        <span
-                                                            class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                                            {{ date('d/m/Y', strtotime($capacitacione->fechacapacitacion)) }}
-                                                        </span>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <div class="text-sm">
-                                                            <div class="flex items-center justify-center">
-                                                                <div
-                                                                    class="rounded-md bg-yellow-400 text-white font-semibold py-2 px-4">
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                            <span
+                                                                class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                                {{ $tareaMateriale->tema }}
+                                                            </span>
+                                                        </td>
+                                                        {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                                            <div class="text-sm">
+                                                                <div class="flex items-center justify-center">
+                                                                    <div class="rounded-md bg-yellow-400 text-white font-semibold py-2 px-4">
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                                <tr>
-                                                    <td class="px-6 py-4 text-gray-300" colspan="100%">
-                                                        No hay una próxima reunión
-                                                    </td>
-                                                </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div> --}}
+                                                        </td> --}}
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td class="px-6 py-4 text-gray-300" colspan="100%">
+                                                            No hay una próxima reunión
+                                                        </td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

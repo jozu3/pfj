@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Programa;
 use App\Models\Inscripcione;
 use App\Models\InscripcioneCompanerismo;
+use App\Models\Tarea;
 use Illuminate\Http\Request;
 
 class ProgramaController extends Controller
@@ -63,7 +64,10 @@ class ProgramaController extends Controller
             
         }
         // return view('student.programas.show', compact('inscripcioneCompanerismos', 'inscripcione'));
-        return view('student.programas.show', compact('inscripcione', 'programa'));
+
+        $tarea_actuales = $programa->tareas->where('fecha_inicio','<=', date('Y-m-d'))->where('fecha_final','>=',date('Y-m-d'));
+
+        return view('student.programas.show', compact('inscripcione', 'programa', 'tarea_actuales'));
 
     }
 

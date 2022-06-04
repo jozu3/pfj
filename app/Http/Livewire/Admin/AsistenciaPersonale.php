@@ -24,6 +24,8 @@ class AsistenciaPersonale extends Component
     {   
         $fam = $this->familia;
         $search = $this->search;
+        $familias = Grupo::where('programa_id', session('programa_activo'))->get();
+
 
         $inscripciones = Inscripcione::where('inscripciones.programa_id', $this->programa->id)->whereIn('inscripciones.estado', [1])
                                     // ->join('inscripcione_companerismos', 'inscripciones.id', '=', 'inscripcione_companerismos.inscripcione_id')
@@ -45,6 +47,16 @@ class AsistenciaPersonale extends Component
                                             $q->orWhere('apellidos','like', '%'.$search.'%');
                                         });
                                     });
+
+                                    if(auth()->user()->can('admin.asistencias.migrupo' )){
+                                        $auth_inscripcione = auth()->user()->personale->inscripciones->where('programa_id', $this->programa->id)->first();
+                                        if($auth_inscripcione && $auth_inscripcione->inscripcioneCompanerismo){
+                                            $fam = $auth_inscripcione->inscripcioneCompanerismo->companerismo->grupo_id;
+                                            $this->familia = $fam; 
+                                            
+                                            $familias = Grupo::where('id', $fam)->get();
+                                        }
+                                    }
                                     if ($fam != '') {
                                         $inscripciones = $inscripciones->whereHas('inscripcioneCompanerismo', function ($q) use ($fam){
                                                             $q->whereHas('companerismo', function ($q) use ($fam){
@@ -59,7 +71,6 @@ class AsistenciaPersonale extends Component
         $inscripciones = $inscripciones->paginate();
         $this->page = 1;
 
-        $familias = Grupo::where('programa_id', session('programa_activo'))->get();
         $capacitaciones = $this->programa->capacitaciones->where('tipo', '1');
 
         return view('livewire.admin.asistencia-personale', compact('inscripciones', 'familias', 'capacitaciones', 'inscripciones_all_ids'));

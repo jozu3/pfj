@@ -19,7 +19,8 @@
     @endif
     <div class="row">
         <div class="col-md-12">
-            @include('admin.programas.partials.lectura')
+            {{-- @include('admin.programas.partials.lectura') --}}
+            @livewire('admin.tareas-personale', ['programa' => $programa])
         </div>
     </div>
     <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -47,9 +48,8 @@
         .una-fila {
             flex-wrap: nowrap;
         }
-
         .fijo {
-            height: 74px;
+            height: 97px;
             justify-content: center;
             display: flex;
             align-items: center;
@@ -57,15 +57,16 @@
 
         .apellido-fijo {
             position: absolute;
-            width: 11em;
-            left: 0;
+            width: 5em;
+            left: 17em;
+            text-align: center;
 
         }
 
         .nombre-fijo {
             position: absolute;
-            width: 11em;
-            left: 11em;
+            width: 17em;
+            left: 0em;
         }
 
         .card-body-2 {
@@ -74,7 +75,7 @@
 
         .cont-table-div {
             overflow-x: scroll;
-            margin-left: 22em;
+            margin-left: 21em;
         }
 
         .alturatd-dis {
@@ -98,6 +99,48 @@
         .btn-warning{
             color: #624a00
         }
+        .porcentaje{
+            width:130px; 
+            height: 51px;
+            margin:auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .pdiv-porcentaje{
+            margin-right: 0.5rem!important;
+        }
+
+        
+        @media (max-width: 767px) {
+            .apellido-fijo {
+                width: 4em;
+                left: 6em;
+                font-size: 14px;
+            }
+
+            .nombre-fijo {
+                width: 7em;
+                left: 0em;
+                font-size: 14px;
+            }
+            .cont-table-div {
+                overflow-x: scroll;
+                margin-left: 8em;
+            }
+            .fijo {
+                height: 98px;
+            }
+            .porcentaje{
+                width:auto; 
+                height: 100px;
+            }
+            /* .pdiv-porcentaje{
+                margin-right: 0rem!important;
+                margin-bottom: 0.5rem!important;
+            } */
+
+        }
 
     </style>
 @stop
@@ -118,7 +161,6 @@
                 $("#success-alert").fadeTo(1000, 500).slideUp(500, function() {
                     $("#success-alert").slideUp(500);
                 });
-                togg();
             }
         });
 

@@ -25,7 +25,11 @@ class CreateInscripcioneTarea extends Component
                 'realizado' => true,
             ]);
         }
-        $inscripcioneTarea->save();
+
+        if ($inscripcioneTarea->save()) {
+                $this->emit('alert', true);				
+                $this->emit('update_totales');//actualiza el total de lecturas al final de la hoja
+        }
     }
 
     public function render()

@@ -8,7 +8,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-14 py-12">
                     <div class="text-3xl text-gray-900 border-b-2 font-bold mb-8">
-                        <p class="text-yellow-500 uppercase">FAMILIA: {{ $grupo->nombre }}</p>
+                        <p class="text-yellow-500 uppercase">FAMILIA: {{ $grupo->nombre . ' '. $grupo->numero}}</p>
                     </div>
 
                     <div class="grid grid-cols-4 gap-4">

@@ -4,76 +4,29 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Grupo;
 use App\Models\Inscripcione;
-use App\Models\PersonaleVacuna;
-use App\Models\Vacuna;
+use App\Models\Tarea;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class CreatePersonaleVacuna extends Component
+class TareasPersonale extends Component
 {
-    public $personale_id, $vacuna_id;
     public $programa;
     public $search;
     public $familia;
-    
+    public $aprobacion;
+
     use WithPagination;
 
 	protected $paginationTheme = 'bootstrap';
 
-    public function vacunado($personale_id, $vacuna_id)
-    {
-        $personaleVacuna = PersonaleVacuna::where('personale_id', $personale_id)->where('vacuna_id', $vacuna_id)->first();
-        $vacunas = Vacuna::all();
-
-        foreach ($vacunas as $vacuna) {
-            if ($personaleVacuna) {
-
-                $personaleVacuna = PersonaleVacuna::where('personale_id', $personale_id)
-                    ->where('vacuna_id', $vacuna->id)->first();
-
-                if ($personaleVacuna) {
-                    if ($vacuna->id > $vacuna_id) { //&& $personaleVacuna->vacunado
-                        $personaleVacuna->vacunado = false;
-                    } else
-                    if ($vacuna->id < $vacuna_id) { //&& !$personaleVacuna->vacunado
-                        $personaleVacuna->vacunado = true;
-                    } else {
-                        $personaleVacuna->vacunado = !$personaleVacuna->vacunado;
-                    }
-                    $personaleVacuna->save();
-                }
-            } else {
-
-                $personaleVacuna = PersonaleVacuna::where('personale_id', $personale_id)
-                    ->where('vacuna_id', $vacuna->id)->first();
-
-                if ($vacuna->id <= $vacuna_id) {
-                    if (!$personaleVacuna) {
-                        PersonaleVacuna::create([
-                            'personale_id' => $personale_id,
-                            'vacuna_id' => $vacuna->id,
-                            'vacunado' => true,
-                        ]);
-                    } else {
-                        $personaleVacuna->vacunado = true;
-                        $personaleVacuna->save();
-                    }
-                    // $personaleVacuna = new PersonaleVacuna([
-                    //     'personale_id' => $personale_id,
-                    //     'vacuna_id' => $vacuna_id,
-                    //     'vacunado' => true
-                    // ]);
-                }
-            }
-        }
-
-    }
-
+    protected $listeners = ['update_totales' => 'render'];
+    
     public function render()
     {
         $fam = $this->familia;
         $search = $this->search;
         $familias = Grupo::where('programa_id', session('programa_activo'))->get();
+
 
         $inscripciones = Inscripcione::where('inscripciones.programa_id', $this->programa->id)->whereIn('inscripciones.estado', [1])
                                     // ->join('inscripcione_companerismos', 'inscripciones.id', '=', 'inscripcione_companerismos.inscripcione_id')
@@ -95,6 +48,7 @@ class CreatePersonaleVacuna extends Component
                                             $q->orWhere('apellidos','like', '%'.$search.'%');
                                         });
                                     });
+
                                     if(auth()->user()->can('admin.asistencias.migrupo' )){
                                         $auth_inscripcione = auth()->user()->personale->inscripciones->where('programa_id', $this->programa->id)->first();
                                         if($auth_inscripcione && $auth_inscripcione->inscripcioneCompanerismo){
@@ -112,12 +66,13 @@ class CreatePersonaleVacuna extends Component
                                                         });
                                     }
                                    
-                // $inscripciones = $inscripciones->orderBy('nombres', 'asc')
-                $inscripciones = $inscripciones->orderBy('contactos.nombres')->paginate();
-                $this->page = 1;
-
-        $vacunas = Vacuna::all();
+        $inscripciones = $inscripciones->orderBy('contactos.nombres');
         
-        return view('livewire.admin.create-personale-vacuna', compact('vacunas', 'inscripciones', 'familias'));
+        $inscripciones_all_ids = $inscripciones->pluck('inscripciones.inscripcione_id'); 
+        $inscripciones = $inscripciones->paginate();
+        $this->page = 1;
+        $tareas = $this->programa->tareas;
+
+        return view('livewire.admin.tareas-personale', compact('inscripciones', 'tareas', 'familias', 'inscripciones_all_ids'));
     }
 }

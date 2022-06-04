@@ -96,7 +96,7 @@
 </div>
 
     <div class="card-footer">
-        {{ $inscripciones->links() }}
+        @include('admin.programas.partials.card-footer-personal')
     </div>
 </div>
 </div>

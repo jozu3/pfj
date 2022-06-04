@@ -109,7 +109,7 @@ class AppServiceProvider extends ServiceProvider
                         'url' => '/admin/programas/'.session('programa_activo').'/asignar',
                         // 'route'  => ['admin.programas.asignar', $programa_activo],
                         'icon' => 'fas fa-sitemap',
-                        'can'  =>   'admin.programas.misprogramas'
+                        'can'  =>   'admin.inscripcioneCompanerismos.edit'
                     ];
                     
                     $menu_personales = [
@@ -117,7 +117,7 @@ class AppServiceProvider extends ServiceProvider
                         'url' => '/admin/programas/'.session('programa_activo').'/personal',
                         // 'route'  => ['admin.programas.asignar', $programa_activo],
                         'icon' => 'fas fa-users',
-                        'can'  =>   'admin.programas.misprogramas'
+                        'can'  =>   'admin.programas.edit'
                     ];
                     
                     
@@ -170,6 +170,7 @@ class AppServiceProvider extends ServiceProvider
                     $event->menu->addAfter('programa', $menu_anuncios);
                     $event->menu->addAfter('programa', $menu_organigrama);
                     $event->menu->addAfter('programa', $menu_personales);
+                    $event->menu->addAfter('programa', $menu_planificador);
                     $event->menu->addAfter('programa', $menu_configuracion);
                     $event->menu->addBefore('programa', $header);
                     $event->menu->addAfter('dashboard', $menu_dashboard);
