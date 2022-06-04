@@ -5,8 +5,17 @@
         @endphp
     @endcan
     <x-slot name="header">
-        <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
-            Bienvenido(a) a tu sesión {{ $inscripcione->programa->nombre }}
+        <h2 class="font-semibold text-3xl leading-tight text-white">
+            @if (auth()->user()->personale->contacto->genero == 'Hombre')
+            @php
+                $bienvenido = 'Bienvenido';
+            @endphp    
+            @else 
+            @php
+                $bienvenido = 'Bienvenida';
+            @endphp
+            @endif
+            {{ $bienvenido }} al {{ $inscripcione->programa->nombre }}
         </h2>
     </x-slot>
     <div class="py-12">
