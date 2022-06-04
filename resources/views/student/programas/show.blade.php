@@ -6,6 +6,9 @@
     @endcan
     <x-slot name="header">
         <h2 class="font-semibold text-3xl leading-tight text-white">
+            @php
+                $bienvenido = 'Bienvenido';
+            @endphp
             @if (auth()->user()->personale->contacto->genero == 'Hombre')
             @php
                 $bienvenido = 'Bienvenido';

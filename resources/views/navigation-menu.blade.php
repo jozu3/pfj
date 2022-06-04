@@ -40,24 +40,21 @@
                             <x-slot name="content">
                                 <!-- User Management -->
                                 @foreach (Auth::user()->personale->inscripciones as $inscripcione)
-                                        <div class="p-2">  {{ $inscripcione->programa->nombre }}</div>
+                                    <div class="p-2"> {{ $inscripcione->programa->nombre }}</div>
                                     @can('admin.programas.grupos')
                                         {{-- Si puede 'Ver los grupos de su sesión' --}}
                                         @foreach ($inscripcione->programa->grupos as $grupo)
-                                            <x-jet-dropdown-link
-                                                href="{{ route('st.grupos.show', $grupo) }}">
-                                                {{ $grupo->nombre. ' '. $grupo->numero }}
+                                            <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                                {{ $grupo->nombre . ' ' . $grupo->numero }}
                                             </x-jet-dropdown-link>
                                         @endforeach
-                        
                                     @else
                                         @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
                                             @php
                                                 $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
                                             @endphp
-                                            <x-jet-dropdown-link
-                                                href="{{ route('st.grupos.show', $grupo) }}">
-                                                {{ $grupo->nombre. ' '. $grupo->numero }}
+                                            <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                                {{ $grupo->nombre . ' ' . $grupo->numero }}
                                             </x-jet-dropdown-link>
                                         @endif
                                     @endcan
@@ -234,7 +231,10 @@
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
                                 {{ __('Administrar cuenta') }}
+                                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                             </div>
+                            <div class="border-t border-gray-100"></div>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Perfil') }}
@@ -307,21 +307,24 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <!-- User Management -->
                         @foreach (Auth::user()->personale->inscripciones as $inscripcione)
-                            @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
-                                <x-jet-dropdown-link
-                                    href="{{ route('st.grupos.show', $inscripcione->inscripcioneCompanerismo->companerismo->grupo) }}">
-                                    {{ $inscripcione->programa->nombre }}
-                                </x-jet-dropdown-link>
-                                {{-- {{$inscripcione->inscripcioneCompanerismo}} --}}
-                            @endif
-
+                            <div class="p-2"> {{ $inscripcione->programa->nombre }}</div>
                             @can('admin.programas.grupos')
                                 {{-- Si puede 'Ver los grupos de su sesión' --}}
-                                <x-jet-dropdown-link href="{{ route('st.index', $inscripcione->programa) }}">
-                                    {{ $inscripcione->programa->nombre }}
-                                </x-jet-dropdown-link>
+                                @foreach ($inscripcione->programa->grupos as $grupo)
+                                    <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                        {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                    </x-jet-dropdown-link>
+                                @endforeach
+                            @else
+                                @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
+                                    @php
+                                        $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
+                                    @endphp
+                                    <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                        {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                    </x-jet-dropdown-link>
+                                @endif
                             @endcan
                         @endforeach
                     </x-slot>

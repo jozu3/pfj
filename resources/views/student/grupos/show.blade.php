@@ -1,6 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-3xl leading-tight text-white">
+            @php
+                $bienvenido = 'Bienvenido';
+            @endphp
             @if (auth()->user()->personale->contacto->genero == 'Hombre')
                 @php
                     $bienvenido = 'Bienvenido';
@@ -19,7 +22,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-14 py-12">
                     <div class="text-3xl text-gray-900 border-b-2 font-bold mb-8">
-                        <p class="text-yellow-500">Familia: {{ $grupo->nombre . ' ' . $grupo->numero }}</p>
+                        <p class="text-yellow-500">Familia {{$grupo->numero}}: {{ $grupo->nombre }}</p>
                     </div>
 
                     <div class="grid grid-cols-4 gap-4">
