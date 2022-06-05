@@ -52,7 +52,10 @@
 
                                         </div>
                                         <h1 class="text-yellow-600 font-semibold px-1">
-                                            {{ $inscripcioneCompanerismo->inscripcione->personale->user->name }}
+                                            @php
+                                                $contacto = $inscripcioneCompanerismo->inscripcione->personale->contacto;
+                                            @endphp
+                                            {{ $contacto->nombres. ' '. $contacto->apellidos }}
                                         </h1>
                                         <h2 class="text-gray-500 text-xs"><i class="fas fa-birthday-cake"></i>
                                             {{ date('d/m/Y', strtotime($inscripcioneCompanerismo->inscripcione->personale->contacto->fecnac)) }}
