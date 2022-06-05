@@ -120,9 +120,17 @@
                             <span class="col-2 text">
                                 <i class="fas fa-bookmark text-warning"></i>&nbsp; Semana
                             </span>
-                            <span class="col-2 text">{{ $tarea->fecha_inicio }}</span>
+                            <span class="col-2 text">
+                                <div class="bg-info rounded-pill text-center">
+                                    {{ date( 'd/m/Y', strtotime($tarea->fecha_inicio)) }}
+                                </div>
+                            </span>
                             <span class="col-1 text">al</span>
-                            <span class="col-2 text" style="width: 200px">{{ $tarea->fecha_final }}</span>
+                            <span class="col-2 text" style="width: 200px">
+                                <div class="bg-info rounded-pill text-center">
+                                    {{ date( 'd/m/Y', strtotime($tarea->fecha_final)) }}
+                                </div>
+                            </span>
                             {{-- <span class="text">{{ $tarea->descripcion }}</span> --}}
                             <div class="row"> {{-- col-4 col-md-3--}}
                                 <a class="col btn btn-link collapsed" data-toggle="collapse" href="#collapse{{ $tarea->id }}"
