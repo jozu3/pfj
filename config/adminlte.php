@@ -317,6 +317,12 @@ return [
             'can'  =>   'admin.programas.misprogramas',
             'key' => 'programa',
         ],
+        // [
+        //     'text' => 'Funciones',
+        //     'route'  => 'admin.funciones.index',
+        //     'icon' => 'fas fa-cogs',
+        //     'can'  =>   'admin.funciones.index'
+        // ],
         [
             'text' => 'Materiales',
             'route'  => 'admin.materiales.index',

@@ -6,6 +6,10 @@
     <button id="guardar" class="btn btn-success btn-sm">Guardar cambios</button>
     <h2 class="txt-yellow-pfj font-weight-bold">{{ $programa->nombre }}</h2>
     <h1>Organizar Personal y Grupos</h1>
+    <div>
+        <a href="{{ route('admin.programa.directorio', $programa->id) }}" class="btn btn-info">Dirección</a>
+        <button class="btn btn-warning">Coordinadores</button>
+    </div>
     <div class="result"></div>
     <div id="cont-progress" class="progress" style="height: 20px;">
         <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"

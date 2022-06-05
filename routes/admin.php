@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\InscripcioneCompanerismoController;
 use App\Http\Controllers\Admin\ExcelController;
 use App\Http\Controllers\Admin\CompanerismoController;
 use App\Http\Controllers\Admin\AnuncioController;
+use App\Http\Controllers\Admin\FuncioneController;
 use App\Http\Controllers\Admin\MaterialeController;
 use App\Http\Controllers\Admin\ReporteController;
 
@@ -44,9 +45,11 @@ Route::get('/programas/misprogramas', [ProgramaController::class, 'misprogramas'
 Route::get('/programas/grupos', [ProgramaController::class, 'grupos'])->name('admin.programas.grupos');
 Route::get('/programas/{programa}/planificador', [ProgramaController::class, 'planificador'])->name('admin.programas.planificador');
 Route::get('/programas/{programa}/asignar', [ProgramaController::class, 'asignar'])->name('admin.programas.asignar');
+Route::get('/programas/{programa}/directorio', [ProgramaController::class, 'directorio'])->name('admin.programa.directorio');
 Route::get('/programas/{programa}/personal', [ProgramaController::class, 'personal'])->name('admin.programas.personal');
 Route::get('/programas/{programa}/dashboard', [ProgramaController::class, 'dashboard'])->name('admin.programas.dashboard');
 Route::get('/programas/{programa}/tareas', [ProgramaController::class, 'tareas'])->name('admin.programas.tareas');
+Route::get('/programas/{programa}/funciones', [ProgramaController::class, 'funciones'])->name('admin.programas.funciones');
 Route::resource('programas', ProgramaController::class)->names('admin.programas');
 Route::resource('capacitaciones', CapacitacioneController::class)->names('admin.capacitaciones');
 

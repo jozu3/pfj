@@ -198,9 +198,17 @@ class ProgramaController extends Controller
     public function asignar(Programa $programa){
         return view('admin.programas.asignar', compact('programa'));
     }
+
+    public function directorio(Programa $programa){
+        return view('admin.programas.directorio', compact('programa'));
+    }
     
     public function tareas(Programa $programa){
         return view('admin.programas.tareas', compact('programa'));
+    }
+
+    public function funciones(Programa $programa){
+        return view('admin.programas.funciones', compact('programa'));
     }
 
     public function personal(Programa $programa){

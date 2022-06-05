@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\InscripcioneTarea;
 use App\Models\Materiale;
 use App\Models\Programa;
 use App\Models\Tarea;
@@ -18,18 +19,16 @@ class TareaLista extends Component
     public $noMaterial = 1;
     public $idTarea;
     public $programa;
-    // public $tareas;
     public $addTarea = false;
 
     public $fecha_inicio, $fecha_final;
     public $tareaMateriales;
-    public $deleteTareaMaterial = [], $rrr;
+    public $deleteTareaMaterial = [], $rrr;    
 
-    // protected $listeners = ['render' => 'render'];
+    protected $listeners = ['refresh' => 'render'];
     protected $rules = [
         'fecha_inicio' => 'required',
-        'fecha_final' => 'required',
-        // 'tareaMateriales.*.id' => 'required',
+        'fecha_final' => 'required',        
         'tareaMateriales.*.materiale_id' => 'required',
         'tareaMateriales.*.tema' => 'required',
     ];
@@ -41,10 +40,8 @@ class TareaLista extends Component
 
     public function quitarTareaMaterial($index = null)
     {
-        if (!is_null($index)){
+        if (!is_null($index)) {
             array_push($this->deleteTareaMaterial, $this->tareaMateriales[$index]['id']);
-            // $this->deleteTareaMaterial = $this->tareaMateriales[$index]['id'];
-            // $this->deleteTareaMaterial += ['id' => $this->tareaMateriales[$index]['id']];
             array_splice($this->tareaMateriales, $index, 1);
         }
         $this->noMaterial = $this->noMaterial - 1;
@@ -59,10 +56,10 @@ class TareaLista extends Component
             $tarea->fecha_final = $this->fecha_final;
             $tarea->save();
 
-            foreach ($this->tareaMateriales as $tareaMaterial) {                
-                if (array_key_exists("id",$tareaMaterial)) {
+            foreach ($this->tareaMateriales as $tareaMaterial) {
+                if (array_key_exists("id", $tareaMaterial)) {
                     $tareaMateriale = TareaMateriale::where('tarea_id', $this->idTarea)
-                    ->where('id', $tareaMaterial['id'])->first();
+                        ->where('id', $tareaMaterial['id'])->first();
 
                     $tareaMateriale->materiale_id = $tareaMaterial['materiale_id'];
                     $tareaMateriale->tema = $tareaMaterial['tema'];
@@ -74,13 +71,11 @@ class TareaLista extends Component
                         'materiale_id' => $tareaMaterial['materiale_id'],
                         'tema' => $tareaMaterial['tema'],
                     ]);
-                    
                 }
-                
-            }        
+            }
 
-            foreach ($this->deleteTareaMaterial as $delete){
-                TareaMateriale::where('id',$delete)->delete();
+            foreach ($this->deleteTareaMaterial as $delete) {
+                TareaMateriale::where('id', $delete)->delete();
             }
         } else {
             $tarea = Tarea::create([
@@ -103,11 +98,6 @@ class TareaLista extends Component
 
     }
 
-    // public function saveTareaMaterial($idTarea)
-    // {
-
-    // }
-
     public function editTarea(Tarea $tarea)
     {
         // $tarea = Tarea::find($id);
@@ -128,10 +118,18 @@ class TareaLista extends Component
         // $this->tareaMateriales = $tarea->tareaMateriales;
     }
 
-    public function removeTarea($idTarea)
+    public function removeTarea($idTarea, $confirmed = null)
     {
-        $deleted = TareaMateriale::where('tarea_id', $idTarea)->delete();
-        $deleted = Tarea::where('id', $idTarea)->delete();
+        if ($confirmed) {
+            $deleted = InscripcioneTarea::where('tarea_id', $idTarea)->delete();
+            $deleted = TareaMateriale::where('tarea_id', $idTarea)->delete();
+            $deleted = Tarea::where('id', $idTarea)->delete();        
+            if($deleted){                
+                $this->render();
+            }
+        } else {
+            $this->dispatchBrowserEvent('questionremove', ['idTarea' => $idTarea, 'msj' => 'Se eliminarán todas las dependencias.']);
+        }
     }
 
     public function render()

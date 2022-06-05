@@ -73,7 +73,8 @@
                             </div>
                             @for ($i = 0; $i < $noMaterial; $i++)
                                 <div class="row" wire:key="post-field-{{ $i }}">
-                                    <input type="hidden" wire:model='tareaMateriales.{{ $i }}.id' wire:target='saveTarea'>
+                                    <input type="hidden" wire:model='tareaMateriales.{{ $i }}.id'
+                                        wire:target='saveTarea'>
                                     <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
                                     <span class="text text-center" style="width: 300px">
                                         <select class="form-control form-control-sm"
@@ -96,7 +97,8 @@
                                             for="tareaMateriales.{{ $i }}.tema" />
                                     </span>
                                     <div class="col-2">
-                                        <button class="btn btn-link" wire:click='quitarTareaMaterial({{$i}})'>
+                                        <button class="btn btn-link"
+                                            wire:click='quitarTareaMaterial({{ $i }})'>
                                             <i class="fas fa-times-circle"></i> Quitar</button>
                                     </div>
                                 </div>
@@ -106,88 +108,53 @@
                                     <button class="btn btn-link" wire:click='añadirTareaMaterial'>
                                         <i class="fas fa-plus-circle"></i>
                                         Añadir tarea</button>
-                                        {{$rrr}}
+                                    {{ $rrr }}
                                 </div>
                             </div>
                         </form>
                     </li>
                 @endif
                 @foreach ($tareas as $tarea)
-                    <li id="accordion">
+                    <li id="accordion{{$tarea->id}}">
                         <div class="row">
                             <span class="col-2 text">
-                                <i class="far fa-bookmark"></i>&nbsp; Semana
+                                <i class="fas fa-bookmark text-warning"></i>&nbsp; Semana
                             </span>
                             <span class="col-2 text">{{ $tarea->fecha_inicio }}</span>
                             <span class="col-1 text">al</span>
                             <span class="col-2 text" style="width: 200px">{{ $tarea->fecha_final }}</span>
                             {{-- <span class="text">{{ $tarea->descripcion }}</span> --}}
-                            <div class="row tools col-2">
-                                <a class="col collapsed" data-toggle="collapse" href="#collapse{{ $tarea->id }}"
+                            <div class="row"> {{-- col-4 col-md-3--}}
+                                <a class="col btn btn-link collapsed" data-toggle="collapse" href="#collapse{{ $tarea->id }}"
                                     aria-expanded="false"><i class="fas fa-eye"></i></a>
-                                <button class="btn btn-link"><i class="fas fa-edit"
+                                <button class="col btn btn-link btn-sm"><i class="fas fa-edit"
                                         wire:click='editTarea({{ $tarea }})'></i></button>
-                                <button class="btn btn-link"><i class="fas fa-trash-alt"
+                                <button class="col btn btn-link btn-sm"><i class="fas fa-trash-alt"
                                         wire:click='removeTarea({{ $tarea->id }})'></i></button>
                             </div>
                         </div>
                         <div>
-                            <div class="collapse" id="collapse{{ $tarea->id }}" data-parent="#accordion">
-                                @foreach ($tarea->tareaMateriales as $item)                                                                    
-                                <div class="row">
+                            <div class="collapse" id="collapse{{ $tarea->id }}" data-parent="#accordion{{$tarea->id}}">
+                                <div class="row text-warning">
                                     <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
-                                    <span class="text text-center" style="width: 300px">
-                                        Material
-                                            <p>{{$item->materiale->descripcion}}</p>   
-                                        {{-- <select class="form-control form-control-sm" wire:model.defer="materialeId"
-                                            id="exampleFormControlSelect1">
-                                            <option selected>[-- Seleccione un material --]</option>
-                                            @foreach ($materiales as $materiale)
-                                                <option>{{ $materiale->descripcion }}</option>
-                                            @endforeach
-                                        </select>
-                                        <x-jet-input-error class="text-danger" for="descripcion" /> --}}
-                                    </span>
-                                    <span class="text text-center" style="width: 300px">Temas
-                                        <p style="font-weight: normal;">{{$item->tema}}</p> 
-                                        {{-- <input type="text" class="form-control form-control-sm disabled:opacity-5"
-                                        wire:model.defer="descripcion" wire:loading.attr='disabled'
-                                        wire:target='saveTarea'>
-                                    <x-jet-input-error class="text-danger" for="descripcion" /> --}}
-                                    </span>
-                                    {{-- <div class="col-1">
-                                        <br>
-                                        <a href="#" wire:click='saveTareaMaterial({{ $tarea->id }})'><i
-                                                class="fas fa-check-circle fa-fw"></i> Añadir</a>
-                                    </div> --}}
+                                    <span class="text text-center" style="width: 300px">Material</span>
+                                    <span class="text text-center" style="width: 300px">Temas</span>
                                 </div>
+                                @foreach ($tarea->tareaMateriales as $item)
+                                    <div class="row">
+                                        <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
+                                        <span class="text text-center" style="width: 300px">                                            
+                                            <p>{{ $item->materiale->descripcion }}</p>
+                                        </span>
+                                        <span class="text text-center" style="width: 300px">
+                                            <p style="font-weight: normal;">{{ $item->tema }}</p>
+                                        </span>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
                     </li>
                 @endforeach
-                {{-- <li>
-                    <div class="row">
-                        <div class="col-12" id="accordion">
-                            <div class="card card-primary card-outline">
-                                <a class="d-block w-100 collapsed" data-toggle="collapse" href="#collapseOne"
-                                    aria-expanded="false">
-                                    <div class="card-header">
-                                        <h4 class="card-title w-100">
-                                            1. Lorem ipsum dolor sit amet
-                                        </h4>
-                                    </div>
-                                </a>
-                                <div id="collapseOne" class="collapse" data-parent="#accordion" style="">
-                                    <div class="card-body">
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula
-                                        eget dolor.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li> --}}
             </ul>
         </div>
         <!-- /.card-body -->
@@ -198,4 +165,22 @@
             {{-- @livewire('admin.create-tarea') --}}
         </div>
     </div>
+    <script>
+        window.addEventListener('questionremove', event => {
+            Swal.fire({
+                title: 'Advertencia',
+                text: "¿Está seguro que desea eliminar esta tarea?" + event.detail.msj,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Continuar',
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.value) {
+                    @this.call('removeTarea', event.detail.idTarea, true)
+                }
+            })
+        })
+    </script>
 </div>
