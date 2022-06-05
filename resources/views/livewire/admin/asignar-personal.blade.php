@@ -32,7 +32,7 @@
                                                     @if ($inscripcione->personale->user)
                                                         {{ 'src='. $inscripcione->personale->user->adminlte_image().' alt=""' }}
                                                         @else
-                                                        {{ 'src="https://picsum.photos/300/300"' }}
+                                                        {{ 'src=https://picsum.photos/300/300' }}
                                                     @endif
                                                 >
                                                 <div class="card-text"><small
@@ -92,7 +92,7 @@
                                                             @if ($inscripcioneCompanerismo->inscripcione->personale->user)
                                                                 {{ 'src='. $inscripcioneCompanerismo->inscripcione->personale->user->adminlte_image().' alt=""' }}
                                                                 @else
-                                                                {{ 'src="https://picsum.photos/300/300"' }}
+                                                                {{ 'src=https://picsum.photos/300/300' }}
                                                             @endif
                                                         >
                                                         <div class="card-text"><small
@@ -175,7 +175,7 @@
                                                 @if ($inscripcione->personale->user)
                                                     {{ 'src='. $inscripcione->personale->user->adminlte_image().' alt=""' }}
                                                     @else
-                                                    {{ 'src="https://picsum.photos/300/300"' }}
+                                                    {{ 'src=https://picsum.photos/300/300' }}
                                                 @endif
                                             >
                                             <div class="card-text"><small
