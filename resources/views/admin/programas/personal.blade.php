@@ -57,6 +57,12 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+    <div id="danger-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <b>Ocurrió un error al guardar!</b>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
 
 
@@ -106,6 +112,12 @@
             right: 5px;
         }
 
+        #danger-alert {
+            position: fixed;
+            top: 250px;
+            right: 5px;
+        }
+
         .cont-pestaña {
             box-shadow: none;
             border: 1px solid transparent;
@@ -149,12 +161,6 @@
         .alturatd-dis {
             height: 4em;
             color: #00000050;
-        }
-
-        #success-alert {
-            position: fixed;
-            top: 150px;
-            right: 5px;
         }
 
         .input-nota {
@@ -403,7 +409,8 @@
 					  if (result.value) {
 					    var ins = $(this).attr( 'data-inscripcione' );
                         Livewire.emit('changeEstado', ins);
-					  } else {
+                    } else {
+                          Livewire.emit('alert', false);
                         this.checked = !this.checked
                       }
 					})	    		
@@ -411,6 +418,8 @@
 	    	});
 
             $("#success-alert").hide();
+            $("#danger-alert").hide();
+            
         });
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
@@ -421,6 +430,11 @@
                 $("#success-alert").show();
                 $("#success-alert").fadeTo(1000, 500).slideUp(500, function() {
                     $("#success-alert").slideUp(500);
+                });
+            } else {
+                $("#danger-alert").show();
+                $("#danger-alert").fadeTo(1000, 500).slideUp(500, function() {
+                    $("#danger-alert").slideUp(500);
                 });
             }
         });
