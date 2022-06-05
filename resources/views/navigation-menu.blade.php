@@ -17,102 +17,63 @@
                             {{ __('Inicio') }}
                         </x-jet-nav-link>
                     @endcan
+                    @if ((
+                        auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count()) ||
+                        auth()->user()->can('admin.programas.viewList'))
 
-                    <div class="inline-flex items-center px-1 pt-1">
-                        <x-jet-dropdown>
-                            <x-slot name="trigger">
-                                <button
-                                    class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                    <div>Mi familia</div>
+                        <div class="inline-flex items-center px-1 pt-1">
+                            <x-jet-dropdown>
+                                <x-slot name="trigger">
+                                    <button
+                                        class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                                        <div>Mi familia</div>
 
-                                    <div class="ml-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </button>
+                                        <div class="ml-1">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </button>
 
-                            </x-slot>
+                                </x-slot>
 
-                            <x-slot name="content">
-                                <!-- User Management -->
-                                @foreach (Auth::user()->personale->inscripciones as $inscripcione)
-                                    <div class="p-2"> {{ $inscripcione->programa->nombre }}</div>
-                                    @can('admin.programas.grupos')
-                                        {{-- Si puede 'Ver los grupos de su sesión' --}}
-                                        @foreach ($inscripcione->programa->grupos as $grupo)
-                                            <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                                {{ $grupo->nombre . ' ' . $grupo->numero }}
-                                            </x-jet-dropdown-link>
-                                        @endforeach
-                                    @else
-                                        @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
-                                            @php
-                                                $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
-                                            @endphp
-                                            <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                                {{ $grupo->nombre . ' ' . $grupo->numero }}
-                                            </x-jet-dropdown-link>
-                                        @endif
-                                    @endcan
-                                @endforeach
-                            </x-slot>
+                                <x-slot name="content">
+                                    <!-- User Management -->
+                                    @foreach (Auth::user()->personale->inscripciones as $inscripcione)
+                                        <div class="p-2"> {{ $inscripcione->programa->nombre }}</div>
+                                        @can('admin.programas.grupos')
+                                            {{-- Si puede 'Ver los grupos de su sesión' --}}
+                                            @foreach ($inscripcione->programa->grupos as $grupo)
+                                                <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                                    {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                                </x-jet-dropdown-link>
+                                            @endforeach
+                                        @else
+                                            @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
+                                                @php
+                                                    $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
+                                                @endphp
+                                                <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                                    {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                                </x-jet-dropdown-link>
+                                            @endif
+                                        @endcan
+                                    @endforeach
+                                </x-slot>
 
-                        </x-jet-dropdown>
-                    </div>
+                            </x-jet-dropdown>
+                        </div>
 
-                    <div class="inline-flex items-center px-1 pt-1">
-                        <x-jet-dropdown>
-                            <x-slot name="trigger">
-
-                                <button
-                                    class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                    <div>Manual PFJ</div>
-
-                                    <div class="ml-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </button>
-                            </x-slot>
-                            <x-slot name="content">
-                                <x-jet-dropdown-link href="{{ config('app.url') . '/img/PFJManualStaff2022.pdf' }}"
-                                    target="_blank">
-                                    {{ __('Manual para el personal') }}
-                                </x-jet-dropdown-link>
-                                <x-jet-dropdown-link
-                                    href="{{ config('app.url') . '/img/PFJManualParticipante2022.pdf' }}"
-                                    target="_blank">
-                                    {{ __('Manual para el participante') }}
-                                </x-jet-dropdown-link>
-                            </x-slot>
-
-                        </x-jet-dropdown>
-                    </div>
-                    {{-- <x-jet-nav-link href="{{ route('st.index') }}" :active="request()->routeIs('st.lectura.index')">
-                        {{ __('Mis lecturas') }}
-                    </x-jet-nav-link> --}}
-
-                    @can('admin.home')
-                        <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
-                            {{ __('Panel administrativo') }}
-                        </x-jet-nav-link>
-                    @endcan
-                    @can('admin.programas.viewList')
                         <div class="inline-flex items-center px-1 pt-1">
                             <x-jet-dropdown>
                                 <x-slot name="trigger">
 
                                     <button
                                         class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                        <div>Ver como:</div>
+                                        <div>Manual PFJ</div>
 
                                         <div class="ml-1">
                                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -125,21 +86,66 @@
                                     </button>
                                 </x-slot>
                                 <x-slot name="content">
-                                    @forelse (\App\Models\Inscripcione::where('programa_id', session('programa_activo'))->get() as $inscripcione)
-                                        @php
-                                            //$inscripcione = \App\Models\Inscripcione::where('programa_id', $programa->id)->first();
-                                        @endphp
-                                        <x-jet-dropdown-link href="{{ '#' }}" target="_blank">
-                                            {{ $inscripcione->personale->user->name }}
-                                        </x-jet-dropdown-link>
-                                    @empty
-                                    @endforelse
-
+                                    <x-jet-dropdown-link
+                                        href="{{ config('app.url') . '/img/PFJManualStaff2022.pdf' }}"
+                                        target="_blank">
+                                        {{ __('Manual para el personal') }}
+                                    </x-jet-dropdown-link>
+                                    <x-jet-dropdown-link
+                                        href="{{ config('app.url') . '/img/PFJManualParticipante2022.pdf' }}"
+                                        target="_blank">
+                                        {{ __('Manual para el participante') }}
+                                    </x-jet-dropdown-link>
                                 </x-slot>
 
                             </x-jet-dropdown>
                         </div>
-                    @endcan
+                        {{-- <x-jet-nav-link href="{{ route('st.index') }}" :active="request()->routeIs('st.lectura.index')">
+                            {{ __('Mis lecturas') }}
+                        </x-jet-nav-link> --}}
+
+                        @can('admin.home')
+                            <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
+                                {{ __('Panel administrativo') }}
+                            </x-jet-nav-link>
+                        @endcan
+                        @can('admin.programas.viewList')
+                            <div class="inline-flex items-center px-1 pt-1">
+                                <x-jet-dropdown>
+                                    <x-slot name="trigger">
+
+                                        <button
+                                            class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                                            <div>Ver como:</div>
+
+                                            <div class="ml-1">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </x-slot>
+                                    <x-slot name="content">
+                                        @forelse (\App\Models\Inscripcione::where('programa_id', session('programa_activo'))->get() as $inscripcione)
+                                            @php
+                                                //$inscripcione = \App\Models\Inscripcione::where('programa_id', $programa->id)->first();
+                                            @endphp
+                                            <x-jet-dropdown-link href="{{ '#' }}" target="_blank">
+                                                {{ $inscripcione->personale->user->name }}
+                                            </x-jet-dropdown-link>
+                                        @empty
+                                        @endforelse
+
+                                    </x-slot>
+
+                                </x-jet-dropdown>
+                            </div>
+                        @endcan
+                    @endif
+
                 </div>
             </div>
 
@@ -285,7 +291,10 @@
                 <x-jet-responsive-nav-link href="{{ route('st.index') }}" :active="request()->routeIs('st.index')">
                     {{ __('Inicio') }}
                 </x-jet-responsive-nav-link>
-
+            @endcan
+            @if ((
+                auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count()) ||
+                auth()->user()->can('admin.programas.viewList') )
                 <!-- Account Management -->
                 <x-jet-dropdown>
                     <x-slot name="trigger">
@@ -296,7 +305,8 @@
                             <div>Mi familia</div>
 
                             <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                         clip-rule="evenodd" />
@@ -337,7 +347,8 @@
                             {{-- block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base  hover:text-gray-700 hover:border-grayborder-l-4 border-indigo-400  text-indigo-700 bg-indigo-50 active:border-indigo-400  active:text-indigo-700 active:bg-indigo-50 active:border-l-4 --}}
                             <div>Manual PFJ </div>
                             <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                         clip-rule="evenodd" />
@@ -356,12 +367,13 @@
                         </x-jet-dropdown-link>
                     </x-slot>
                 </x-jet-dropdown>
-            @endcan
-            @can('admin.home')
-                <x-jet-responsive-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
-                    {{ __('Panel Administrativo') }}
-                </x-jet-responsive-nav-link>
-            @endcan
+
+                @can('admin.home')
+                    <x-jet-responsive-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
+                        {{ __('Panel Administrativo') }}
+                    </x-jet-responsive-nav-link>
+                @endcan
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

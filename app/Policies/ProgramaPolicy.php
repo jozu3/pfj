@@ -31,8 +31,10 @@ class ProgramaPolicy
      */
     public function view(User $user, Programa $programa)
     {
-        // if($user)
-        return true;
+        if($user->personale->inscripciones->where('estado', '1')->whereIn('programa_id', $programa->id)->count() || $user->can('admin.programas.viewList')){
+            return true;
+        }
+        return false;
     }
 
     /**
