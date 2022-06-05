@@ -68,7 +68,7 @@
             </div>
             <div class="row justify-content-center">
                 @foreach ($programa->funciones->where('id', 2)->all() as $funcione)                    
-                    @foreach ($funcione->funcioneInscripciones as $funcioneInscripcione)
+                    @foreach ($funcione->inscripciones as $nscripcione)
                         <div class="col-md-2">
                             <div class="card card-row card-primary h-100">
                                 <div class="card-header bg-primary text-center">
@@ -78,10 +78,10 @@
                                     <div class="card text-center">
                                         <div class="card-header">
                                             <img class="img-fluid rounded-circle img-personal"
-                                                src="{{ $funcioneInscripcione->inscripcione->personale->user->adminlte_image() }}" alt="">
+                                                src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
                                         </div>
                                         <div class="card-body p-0">
-                                            {{ $funcioneInscripcione->inscripcione->personale->user->name }}
+                                            {{ $inscripcione->personale->user->name }}
                                         </div>
                                     </div>
                                 
@@ -93,7 +93,7 @@
             </div>
             <div class="row justify-content-center">
                 @foreach ($programa->funciones->where('id', 1)->all() as $funcione)                    
-                    @foreach ($funcione->funcioneInscripciones as $funcioneInscripcione)
+                    @foreach ($funcione->inscripciones as $nscripcione)
                         <div class="col-md-2">
                             <div class="card card-row card-primary h-100">
                                 <div class="card-header bg-danger text-center">
@@ -103,10 +103,10 @@
                                     <div class="card text-center">
                                         <div class="card-header">
                                             <img class="img-fluid rounded-circle img-personal"
-                                                src="{{ $funcioneInscripcione->inscripcione->personale->user->adminlte_image() }}" alt="">
+                                                src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
                                         </div>
                                         <div class="card-body p-0">
-                                            {{ $funcioneInscripcione->inscripcione->personale->user->name }}
+                                            {{ $inscripcione->personale->user->name }}
                                         </div>
                                     </div>
                                 
