@@ -55,11 +55,15 @@ class PersonalesImport implements ToModel, WithValidation
 
         $nombres = $row[0];
         $apellidos = $row[1];
+        $fec_nac = '';
+        if($row[2] != ''){
+            $fec_nac = Date::excelToDateTimeObject($row[2]);
+        }
 
         $contacto = Contacto::create([
             'nombres' => $nombres,
             'apellidos' => $apellidos,
-            'fecnac' => Date::excelToDateTimeObject($row[2]) ,
+            'fecnac' => $fec_nac ,
             'genero' => $genero,
             'mretornado' => 0,
             'telefono' => str_replace(' ','',$row[4]),
@@ -121,7 +125,7 @@ class PersonalesImport implements ToModel, WithValidation
                 break;
         }
 
-        $permiso_obispo = 0; //aprobacion final
+        $permiso_obispo = 0; //cancelado - aprobacion final
         if ($row[12] == 'Aprobado') {
             $permiso_obispo = 2;//aprobacion final
         }
