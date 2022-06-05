@@ -14,51 +14,67 @@ class Inscripcione extends Model
     use HasFactory;
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function personale(){
-    	return $this->belongsTo(Personale::class);
+    public function personale()
+    {
+        return $this->belongsTo(Personale::class);
     }
 
-	public function programa(){
-    	return $this->belongsTo(Programa::class);
+    public function programa()
+    {
+        return $this->belongsTo(Programa::class);
     }
-    public function role(){
-    	return $this->belongsTo(Role::class);
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 
-    public function obligaciones(){
+    public function obligaciones()
+    {
         return $this->hasMany(Obligacione::class);
     }
 
-    public function asistencias(){
+    public function asistencias()
+    {
         return $this->hasMany(Asistencia::class);
     }
 
-    public function inscripcioneCompanerismo(){
+    public function inscripcioneCompanerismo()
+    {
         return $this->hasOne(InscripcioneCompanerismo::class);
     }
-    public function inscripcioneTareas(){
+    public function inscripcioneTareas()
+    {
         return $this->hasMany(InscripcioneTarea::class);
     }
 
-    public function asignaciones(){
+    public function inscripcioneFunciones()
+    {
+        return $this->hasMany(FuncioneInscripcione::class);
+    }
+
+    public function asignaciones()
+    {
         return $this->hasMany(Asignacione::class);
     }
 
-    public function asistenciaCapacitacione(Capacitacione $capacitacione){
+    public function asistenciaCapacitacione(Capacitacione $capacitacione)
+    {
         return Asistencia::where('capacitacione_id', $capacitacione->id)->where('inscripcione_id', $this->id)->first();
     }
 
-    public function asistenciasGrupo(Grupo $grupo){
+    public function asistenciasGrupo(Grupo $grupo)
+    {
         return Asistencia::where('inscripcione_id', $this->id)
-                ->whereHas('clase', function($q) use ($grupo){ 
-                    $q->whereHas('grupo', function($qu) use ($grupo){ 
-                        $qu->where('id', $grupo->id); 
-                    })
-                ->where('asistencia', '0');
-        })->get();
+            ->whereHas('clase', function ($q) use ($grupo) {
+                $q->whereHas('grupo', function ($qu) use ($grupo) {
+                    $qu->where('id', $grupo->id);
+                })
+                    ->where('asistencia', '0');
+            })->get();
     }
-    
-    public function funciones() {
+
+    public function funciones()
+    {
         return $this->belongsToMany(Funcione::class);
     }
 }

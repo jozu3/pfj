@@ -83,12 +83,13 @@ class PersonalesImport implements ToModel, WithValidation
             'estado' => 1
         ]);
         $funcion = $row[8];
-        $role = Role::where('name', $funcion)->first();
-        $funcion = '';
+        $role = Role::where('name', $funcion)->first();        
+        $rol = $funcion;
         if ($role) {
             $user->assignRole($funcion);
         } else {
             $user->assignRole('Consejero');
+            $rol = "Consejero";
             
             /*Funcione::create([
                 'descripcion' => $funcion,

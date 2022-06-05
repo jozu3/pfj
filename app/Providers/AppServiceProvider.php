@@ -141,6 +141,13 @@ class AppServiceProvider extends ServiceProvider
                         'icon' => 'fas fa-tasks',
                         'can' => 'admin.actividades.index'
                     ];
+
+                    $menu_funciones = [
+                        'text' => 'Funciones',
+                        'url' => 'admin/programas/'.session('programa_activo').'/funciones',
+                        'icon' => 'fas fa-tasks',
+                        'can' => 'admin.funciones.index'
+                    ];
                     
                     $menu_dashboard = [
                         'text' => 'Dashboard',
@@ -164,7 +171,7 @@ class AppServiceProvider extends ServiceProvider
                     ];
                     
                     
-                    
+                    $event->menu->addAfter('programa', $menu_funciones);
                     $event->menu->addAfter('programa', $menu_tareas);
                     $event->menu->addAfter('programa', $menu_asistencias);
                     $event->menu->addAfter('programa', $menu_anuncios);
