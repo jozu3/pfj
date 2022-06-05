@@ -48,7 +48,7 @@
                                             {{-- Si puede 'Ver los grupos de su sesión' --}}
                                             @foreach ($inscripcione->programa->grupos as $grupo)
                                                 <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                                    {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                                    {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
                                                 </x-jet-dropdown-link>
                                             @endforeach
                                         @else
@@ -57,7 +57,7 @@
                                                     $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
                                                 @endphp
                                                 <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                                    {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                                    {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
                                                 </x-jet-dropdown-link>
                                             @endif
                                         @endcan
@@ -325,7 +325,7 @@
                                 {{-- Si puede 'Ver los grupos de su sesión' --}}
                                 @foreach ($inscripcione->programa->grupos as $grupo)
                                     <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                        {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                        {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
                                     </x-jet-dropdown-link>
                                 @endforeach
                             @else
@@ -334,7 +334,7 @@
                                         $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
                                     @endphp
                                     <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                        {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                        {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
                                     </x-jet-dropdown-link>
                                 @endif
                             @endcan
