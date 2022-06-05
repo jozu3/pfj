@@ -65,7 +65,7 @@ class Programa extends Model
     }
 
     public function inscripcionesSinAsignar(){
-        $inscripciones = Inscripcione::where('programa_id', $this->id)->whereIn('role_id', [4,5,6])->whereDoesntHave('inscripcioneCompanerismo', function ($query) {
+        $inscripciones = Inscripcione::where('programa_id', $this->id)->whereIn('role_id', [5,6])->whereDoesntHave('inscripcioneCompanerismo', function ($query) {
             $query->where('id','!=', '');
         })->get();
 

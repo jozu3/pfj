@@ -43,6 +43,7 @@ Route::resource('notas', NotaController::class)->names('admin.notas');
 Route::get('/programas/changesession/{programa}', [ProgramaController::class, 'changeSession'])->name('admin.programas.changesesion');
 Route::get('/programas/misprogramas', [ProgramaController::class, 'misprogramas'])->name('admin.programas.misprogramas');
 Route::get('/programas/grupos', [ProgramaController::class, 'grupos'])->name('admin.programas.grupos');
+Route::get('/programas/{programa}/planificador', [ProgramaController::class, 'planificador'])->name('admin.programas.planificador');
 Route::get('/programas/{programa}/asignar', [ProgramaController::class, 'asignar'])->name('admin.programas.asignar');
 Route::get('/programas/{programa}/directorio', [ProgramaController::class, 'directorio'])->name('admin.programa.directorio');
 Route::get('/programas/{programa}/personal', [ProgramaController::class, 'personal'])->name('admin.programas.personal');

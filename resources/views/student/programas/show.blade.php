@@ -1,12 +1,25 @@
 <x-app-layout>
     @can('admin.programas.viewList')
+        {{-- esto es cuando ungresa un administrador --}}
         @php
             $inscripcione = \App\Models\Inscripcione::where('programa_id', $programa->id)->first();
         @endphp
     @endcan
     <x-slot name="header">
-        <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
-            Bienvenido(a) a tu sesión {{ $inscripcione->programa->nombre }}
+        <h2 class="font-semibold text-3xl leading-tight text-white">
+            @php
+                $bienvenido = 'Bienvenido';
+            @endphp
+            @if (auth()->user()->personale->contacto->genero == 'Hombre')
+                @php
+                    $bienvenido = 'Bienvenido';
+                @endphp
+            @else
+                @php
+                    $bienvenido = 'Bienvenida';
+                @endphp
+            @endif
+            {{ $bienvenido }} al {{ $inscripcione->programa->nombre }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -47,20 +60,22 @@
                                     </div>
                                 </div>
                                 <div class="container py-6">
-                                    <div class="grid grid-cols-1 gap-4 place-content-center text-3xl text-center text-gray-900 border-b-2 mb-6 font-bold">
+                                    <div
+                                        class="grid grid-cols-1 gap-4 place-content-center text-3xl text-center text-gray-900 border-b-2 mb-6 font-bold">
                                         <p class="">Matrimonio de Logística</p> <!-- border-b-4 -->
                                     </div>
 
                                     <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 place-content-center mt-4">
                                         <div class="text-center">
-                                                @if ($inscripcione->programa->imageMatrimonioLogistica)
-                                                    <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioLogistica->url) }}"
+                                            @if ($inscripcione->programa->imageMatrimonioLogistica)
+                                                <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioLogistica->url) }}"
                                                     alt="" class="object-top rounded-full m-auto" width="300px">
-                                                @endif
-                                            </div>
+                                            @endif
+                                        </div>
                                         <div class="md:text-left text-center">
                                             @forelse ($inscripcione->programa->matrimonioLogisticas() as $lider)
-                                                <p class="text-xl"><b>{{ $lider->personale->user->name }}</b></p>
+                                                <p class="text-xl"><b>{{ $lider->personale->user->name }}</b>
+                                                </p>
                                             @empty
                                                 <p>No asignados</p>
                                             @endforelse
@@ -72,8 +87,8 @@
                                     </div>
 
                                 </div>
-                              
-                                <div class="container py-6" style="height: 600px; max-height: 600px"> 
+
+                                <div class="container py-6" style="height: 600px; max-height: 600px">
                                     <div class="text-3xl text-center text-gray-900 border-b-2 mb-4 font-bold">
                                         <p class="">Anuncios</p> <!-- border-b-4 -->
                                     </div>
@@ -170,9 +185,9 @@
                                                         $texto = 'Información';
                                                     @endphp
                                                     <div class="carousel-caption block absolute inset-0 text-center" style="
-                                                                                            display: flex;
-                                                                                            align-items: center;
-                                                                                            justify-content: center;">
+                                                                                                display: flex;
+                                                                                                align-items: center;
+                                                                                                justify-content: center;">
                                                         <div class="flex justify-center">
                                                             <div
                                                                 class="block rounded-lg shadow-lg bg-white max-w-sm text-center">
@@ -212,6 +227,7 @@
                                             </button>
                                         </div>
                                     </div>
+
                                     <div
                                         class="container py-6 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-6">
                                         <table class="min-w-full divide-y divide-gray-200 mx-4">
@@ -240,58 +256,69 @@
                                         </table>
 
                                     </div>
-                                    {{-- <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                    <table class="min-w-full divide-y divide-gray-200">
-                                        <thead class="bg-gray-50">
-                                            <tr>
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
-                                                    Próximas capacitaciones
-                                                </th>
-                                                <th>
-                                                    Fecha
-                                                </th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200">
-                                            @forelse ($inscripcione->programa->capacitaciones as $capacitacione)
-                                                <tr>
-                                                    <td class="px-6 py-4 ">
-                                                        <div class="flex items-center">
-                                                            <div class="ml-4">
-                                                                <div class="text-2xl font-medium text-gray-900">
-                                                                    <b>{{ $capacitacione->tema }}</b>
+                                    @foreach ($tarea_actuales as $tarea)
+                                        <div
+                                            class="grid grid-cols-1 gap-4 place-content-center text-3xl text-center text-gray-900 border-b-2 mb-6 mt-10 font-bold">
+                                            <p class="">Tareas de la semana
+                                                {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} al
+                                                {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}</p>
+                                            <!-- border-b-4 -->
+
+                                        </div>
+
+                                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-2">
+
+                                            <table class="min-w-full divide-y divide-gray-200">
+                                                <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                                            Materiales
+                                                        </th>
+                                                        <th>
+                                                            Tema
+                                                        </th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="bg-white divide-y divide-gray-200">
+                                                    @forelse ($tarea->tareaMateriales as $tareaMateriale)
+                                                        <tr>
+                                                            <td class="px-6 py-4 ">
+                                                                <div class="flex items-center">
+                                                                    <div class="ml-4">
+                                                                        <div class="text-2xl font-medium text-gray-900">
+                                                                            <b>{{ $tareaMateriale->materiale->descripcion }}</b>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                                <span
+                                                                    class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                                    {{ $tareaMateriale->tema }}
+                                                                </span>
+                                                            </td>
+                                                            {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                                            <div class="text-sm">
+                                                                <div class="flex items-center justify-center">
+                                                                    <div class="rounded-md bg-yellow-400 text-white font-semibold py-2 px-4">
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                        <span
-                                                            class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                                            {{ date('d/m/Y', strtotime($capacitacione->fechacapacitacion)) }}
-                                                        </span>
-                                                    </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                        <div class="text-sm">
-                                                            <div class="flex items-center justify-center">
-                                                                <div
-                                                                    class="rounded-md bg-yellow-400 text-white font-semibold py-2 px-4">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @empty
-                                                <tr>
-                                                    <td class="px-6 py-4 text-gray-300" colspan="100%">
-                                                        No hay una próxima reunión
-                                                    </td>
-                                                </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div> --}}
+                                                        </td> --}}
+                                                        </tr>
+                                                    @empty
+                                                        <tr>
+                                                            <td class="px-6 py-4 text-gray-300" colspan="100%">
+                                                                No hay una próxima reunión
+                                                            </td>
+                                                        </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

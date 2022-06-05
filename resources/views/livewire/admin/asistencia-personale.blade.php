@@ -26,8 +26,8 @@
                         <th class="nombre-fijo fijo border-0">
                             Nombres y Apellidos
                         </th>
-                        <th class="text-center">
-                            %
+                        <th class="text-center align-middle border-left">
+                            Asistencia (%/#)
                         </th>
                         @forelse($capacitaciones as $capacitacione)
                             <th colspan="1" class="text-center border-left">
@@ -92,9 +92,6 @@
                                 <td class="border-left">
                                     <div class="form-row align-items-center una-fila">
                                         <div class="col-auto my-1 mx-2">
-                                            @if (!isset($is_report))
-                                                {{ $is_report = false }}
-                                            @endif
                                             @if($inscripcione_->asistenciaCapacitacione($capacitacione))
                                             {!! Form::model($inscripcione_->asistenciaCapacitacione($capacitacione)) !!}
                                             @else
@@ -103,7 +100,6 @@
                                             @livewire('admin.create-asistencia', [
                                                 'capacitacione_id' => $capacitacione->id,
                                                 'inscripcione_id' => $inscripcione_->id,
-                                                'is_report' => $is_report
                                                 ], key($inscripcione_->id.'-'.$capacitacione->id))
                                             {!! Form::close() !!}
                                         </div>
@@ -129,7 +125,7 @@
                         <td class="text-center">
                         </td>
                         @forelse($capacitaciones as $capacitacione)
-                            <td colspan="1" class="text-center border-left">
+                            <td colspan="1" class="text-center text-lg border-left">
                                 <div class="bg-success p-1 rounded-lg font-weight-bold mx-auto mb-1" style="width: 100px">
                                     A: {{ $capacitacione->asistencias->where('asistencia','0')->whereIn('inscripcione_id', $inscripciones_all_ids)->count() }}
                                 </div>
@@ -148,7 +144,7 @@
             </table>
         </div>
         <div class="card-footer">
-            {{ $inscripciones->links() }}
+            @include('admin.programas.partials.card-footer-personal')
         </div>
     </div>
 </div>

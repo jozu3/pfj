@@ -3,11 +3,6 @@
 @section('title', 'Control de Consejeros')
 
 @section('content_header')
-    <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal"
-        data-target="#importExcelPersonal">
-        <i class="far fa-file-excel"></i> Importar personal
-    </button>
-
     <h1><b class="text-pfj">{{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</b></h1>
 @stop
 
@@ -78,42 +73,6 @@
         </button>
     </div>
 
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="importExcelPersonal" tabindex="-1" role="dialog"
-        aria-labelledby="importExcelPersonalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="{{ route('admin.excel.importExcelPersonal', $programa) }}" method="post"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="importExcelPersonalLabel">Importar datos de usuario</h5>
-                        <a href="{{ config('app.url').'/files/PERSONAL-PLANTILLA.xlsx' }}" class="btn btn-yellow-pfj ml-5" download><i class="far fa-file-excel"></i> Descargar plantilla</a>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="file">Seleccione archivo .xlsx</label>
-                            <input type="file" class="form-control-file" name="file" id="file"
-                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">
-                            <i class="far fa-file-excel"></i> Importar
-                        </button>
-
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     {{-- @livewire('admin.alert') --}}
 @stop
 
