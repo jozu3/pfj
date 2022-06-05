@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout programa_id="{{ $programa->id}}">
     @can('admin.programas.viewList')
         {{-- esto es cuando ungresa un administrador --}}
         @php

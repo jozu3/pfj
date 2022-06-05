@@ -21,25 +21,24 @@ class PersonalesImport implements ToModel, WithValidation
 
     public function  __construct(Programa $programa)
     {
-        $this->programa= $programa->id;
+        $this->programa = $programa->id;
     }
 
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
-        if($row[0] == 'NOMBRES')
-        {
+        if ($row[0] == 'NOMBRES') {
             return null;
         }
 
-        if($row[5] == 'No'){
+        if ($row[5] == 'No') {
             $mretornado = 0;
         }
-        if($row[5] == 'Sí'){
+        if ($row[5] == 'Sí') {
             $mretornado = 1;
         } else {
             $mretornado = 0;
@@ -55,56 +54,71 @@ class PersonalesImport implements ToModel, WithValidation
 
         $nombres = $row[0];
         $apellidos = $row[1];
-        $fec_nac = '';
-        if($row[2] != ''){
+        $fec_nac = null;
+        if ($row[2] != '') {
             $fec_nac = Date::excelToDateTimeObject($row[2]);
         }
 
-        $contacto = Contacto::create([
-            'nombres' => $nombres,
-            'apellidos' => $apellidos,
-            'fecnac' => $fec_nac ,
-            'genero' => $genero,
-            'mretornado' => 0,
-            'telefono' => str_replace(' ','',$row[4]),
-            'email' => $row[5],
-            'obispo' => '',
-            'telobispo' => '',
-            'fotodrive' => '',
-            'anterior' => '',
-            'pasatiempos' => '',
-            'paciencia' => 0,
-            'liderazgo' => 0,
-            'ensenanza' => 0,
-            'experiencia' => 0,
-            'estado' => 5,
-        ]);
+        $email = $row[5];
+        $user = null;
 
-        $user = User::create([
-            'name' => $nombres. ' ' . $apellidos,
-            'email' => $contacto->email,
-            'password' => bcrypt('password'),
-            'estado' => 1
-        ]);
+        if (!User::where('email', $email)->count()) {
+
+            $contacto = Contacto::create([
+                'nombres' => $nombres,
+                'apellidos' => $apellidos,
+                'fecnac' => $fec_nac,
+                'genero' => $genero,
+                'mretornado' => 0,
+                'telefono' => str_replace(' ', '', $row[4]),
+                'email' => $email,
+                'obispo' => '',
+                'telobispo' => '',
+                'fotodrive' => '',
+                'anterior' => '',
+                'pasatiempos' => '',
+                'paciencia' => 0,
+                'liderazgo' => 0,
+                'ensenanza' => 0,
+                'experiencia' => 0,
+                'estado' => 5,
+            ]);
+            if($email != ''){
+                $user = User::create([
+                    'name' => $nombres . ' ' . $apellidos,
+                    'email' => $contacto->email,
+                    'password' => bcrypt('password'),
+                    'estado' => 1
+                ]);
+            }
+
+        } else {
+            $user = User::where('email', $email)->first();
+            $contacto = $user->personale->contacto;
+        }
         $funcion = $row[8];
-        $role = Role::where('name', $funcion)->first();        
+        $role = Role::where('name', $funcion)->first();
         $rol = $funcion;
         if ($role) {
-            $user->assignRole($funcion);
+            if($user){
+                $user->assignRole($funcion);
+            }
         } else {
-            $user->assignRole('Consejero');
+            if($user){
+                $user->assignRole('Consejero');
+            }
             $rol = "Consejero";
-            
-            /*Funcione::create([
+
+            $funcione = Funcione::create([
                 'descripcion' => $funcion,
                 'programa_id' => $this->programa
-            ]);*/
-            
+            ]);
+
         }
 
-        $barrio = Barrio::where('nombre', 'like','%'.$row[7].'%')->first();
+        $barrio = Barrio::where('nombre', 'like', '%' . $row[7] . '%')->first();
 
-        if($barrio != null){
+        if ($barrio != null) {
             $barrio = $barrio->id;
         } else {
             $barrio = 1;
@@ -119,7 +133,7 @@ class PersonalesImport implements ToModel, WithValidation
                 break;
             case 'No' || 'no' || 'NO':
                 $rtemplo = 0;
-                break;        
+                break;
             default:
                 # code...
                 break;
@@ -127,24 +141,30 @@ class PersonalesImport implements ToModel, WithValidation
 
         $permiso_obispo = 0; //cancelado - aprobacion final
         if ($row[12] == 'Aprobado') {
-            $permiso_obispo = 2;//aprobacion final
+            $permiso_obispo = 2; //aprobacion final
         }
         if ($row[12] == 'Aprobación pendiente') {
-            $permiso_obispo = 1;//aprobacion final
+            $permiso_obispo = 1; //aprobacion final
         }
 
         $preinscripcion = 0;
-        
+
         switch ($row[9]) {
             case 'Sí' || 'Si' || 'si' || 'sí' || 'SI' || 'sI' || 'sÍ':
                 $preinscripcion = 1;
                 break;
             case 'No' || 'no' || 'NO':
                 $preinscripcion = 0;
-                break;        
+                break;
             default:
                 # code...
                 break;
+        }
+
+        if($user){
+            $us =$user->id;
+        } else {
+            $us = null;
         }
 
         $personale = Personale::create([
@@ -154,10 +174,10 @@ class PersonalesImport implements ToModel, WithValidation
             'preinscripcion' => $preinscripcion,
             'barrio_id' => $barrio,
             'contacto_id' => $contacto->id,
-            'user_id' => $user->id,
+            'user_id' => $us,
         ]);
 
-/*
+        /*
         $d1 = 0;
         $d2 = 0;
         $d3 = 0;
@@ -205,12 +225,14 @@ class PersonalesImport implements ToModel, WithValidation
             'personale_id' => $personale->id,
             'programa_id' => $this->programa,
             //'funcion' => $funcion,
-            'role_id' => Role::where('name', $rol)->first()->id,//consejero
-            'estado' => 1,//Activo-Habilitado
+            'role_id' => Role::where('name', $rol)->first()->id, //consejero
+            'estado' => 1, //Activo-Habilitado
             'fecha' => date('Y-m-d')
         ]);
 
-
+        if(isset($funcione)){
+            $inscripcione->funciones()->sync($funcione->id);
+        }
 
         return null;
     }
@@ -220,18 +242,19 @@ class PersonalesImport implements ToModel, WithValidation
         return [
             '3' => 'required',
             '4' => 'required',
-            '6' => function($attribute, $value, $onFailure) {
+           /* '5' => function ($attribute, $value, $onFailure) {
                 if (User::where('email', $value)->count()) {
-                     $onFailure('El correo '. $value . ' ya está en uso.');
+                    $onFailure('El correo ' . $value . ' ya está en uso.');
                 }
-            }
+            }*/
         ];
     }
 
     public function customValidationMessages()
-        {
-            return [
-                '5.required' => 'El campo género es requerido.',
-            ];
-        }
+    {
+        return [
+            '3.required' => 'El campo género es requerido.',
+            '4.required' => 'El campo teléfono es requerido.',
+        ];
+    }
 }

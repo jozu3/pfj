@@ -129,15 +129,17 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
-                                        @forelse (\App\Models\Inscripcione::where('programa_id', session('programa_activo'))->get() as $inscripcione)
+                                        {{-- @forelse (\App\Models\Inscripcione::where('programa_id', session('programa_activo'))->get() as $inscripcione)
                                             @php
                                                 //$inscripcione = \App\Models\Inscripcione::where('programa_id', $programa->id)->first();
                                             @endphp
                                             <x-jet-dropdown-link href="{{ '#' }}" target="_blank">
+                                                @if ($inscripcione->personale->user)
                                                 {{ $inscripcione->personale->user->name }}
+                                                @endif
                                             </x-jet-dropdown-link>
                                         @empty
-                                        @endforelse
+                                        @endforelse --}}
 
                                     </x-slot>
 
