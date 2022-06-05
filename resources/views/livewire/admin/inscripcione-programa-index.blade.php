@@ -55,6 +55,7 @@
                                 <img id="imgperfil" class="rounded-circle" width="50" height="50"
                                     src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
                                 @else
+                                <img id="imgperfil" class="rounded-circle" width="50" height="50" src="https://picsum.photos/300/300" alt="">
                                 @endif
                             </td>
                             <td>

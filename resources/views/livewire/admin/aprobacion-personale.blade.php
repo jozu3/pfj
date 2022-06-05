@@ -40,7 +40,9 @@
                 @forelse ($inscripciones as $inscripcione)
                         <tr>
                             <td>
-                                <img id="imgperfil" class="rounded-circle" width="50" height="50" src=" {{ \App\Models\Inscripcione::find($inscripcione->inscripciones_id)->personale->user->adminlte_image() }}" alt="">
+                                @if (\App\Models\Inscripcione::find($inscripcione->inscripciones_id)->personale->user)
+                                    <img id="imgperfil" class="rounded-circle" width="50" height="50" src=" {{ \App\Models\Inscripcione::find($inscripcione->inscripciones_id)->personale->user->adminlte_image() }}" alt="">
+                                @endif
                             </td>
                             <td>
                                 {{ $inscripcione->contactos_nombres }}

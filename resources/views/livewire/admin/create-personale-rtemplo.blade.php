@@ -41,7 +41,11 @@
         @forelse ($inscripciones as $inscripcione)
                 <tr>
                     <td>
-                        <img id="imgperfil" class="rounded-circle" width="50" height="50" src=" {{ \App\Models\Inscripcione::find($inscripcione->inscripcione_id)->personale->user->adminlte_image() }}" alt="">
+                        @if (\App\Models\Inscripcione::find($inscripcione->inscripcione_id)->personale->user)
+                            <img id="imgperfil" class="rounded-circle" width="50" height="50" src=" {{ \App\Models\Inscripcione::find($inscripcione->inscripcione_id)->personale->user->adminlte_image() }}" alt="">
+                        @else
+                            <img id="imgperfil" class="rounded-circle" width="50" height="50" src="https://picsum.photos/300/300" alt="">
+                        @endif
                     </td>
                     <td>
                         {{ $inscripcione->contacto_nombres }}

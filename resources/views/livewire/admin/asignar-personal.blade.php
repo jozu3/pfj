@@ -29,14 +29,22 @@
                                         <div class="card text-center">
                                             <div class="card-header">
                                                 <img class="img-fluid rounded-circle img-personal"
-                                                    src="{{ $inscripcione->personale->user->adminlte_image() }}"
-                                                    alt="">
+                                                    @if ($inscripcione->personale->user)
+                                                        {{ 'src='. $inscripcione->personale->user->adminlte_image().' alt=""' }}
+                                                        @else
+                                                        {{ 'src="https://picsum.photos/300/300"' }}
+                                                    @endif
+                                                >
                                                 <div class="card-text"><small
                                                         class="text-muted">{{ $inscripcione->role->name }}</small>
                                                 </div>
                                             </div>
                                             <div class="card-body p-0">
-                                                {{ $inscripcione->personale->user->name }}
+                                                @if ($inscripcione->personale->user)
+                                                    {{ $inscripcione->personale->user->name }}
+                                                    @else
+                                                    
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -81,15 +89,19 @@
                                                 <div class="card text-center">
                                                     <div class="card-header inscripcione">
                                                         <img class="img-fluid rounded-circle img-personal"
-                                                            src="{{ $inscripcioneCompanerismo->inscripcione->personale->user->adminlte_image() }}"
-                                                            alt="">
+                                                            @if ($inscripcioneCompanerismo->inscripcione->personale->user)
+                                                                {{ 'src='. $inscripcioneCompanerismo->inscripcione->personale->user->adminlte_image().' alt=""' }}
+                                                                @else
+                                                                {{ 'src="https://picsum.photos/300/300"' }}
+                                                            @endif
+                                                        >
                                                         <div class="card-text"><small
                                                                 class="text-muted">{{ $inscripcioneCompanerismo->inscripcione->role->name }}</small>
                                                         </div>
                                                     </div>
                                                     <div class="card-body p-0">
                                                         <div class="card-text">
-                                                            {{ $inscripcioneCompanerismo->inscripcione->personale->user->name }}
+                                                            {{ $inscripcioneCompanerismo->inscripcione->personale->contacto->nombres . ' ' .$inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,13 +172,19 @@
                                     <div class="card text-center">
                                         <div class="card-header inscripcione">
                                             <img class="img-fluid rounded-circle img-personal"
-                                                src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
+                                                @if ($inscripcione->personale->user)
+                                                    {{ 'src='. $inscripcione->personale->user->adminlte_image().' alt=""' }}
+                                                    @else
+                                                    {{ 'src="https://picsum.photos/300/300"' }}
+                                                @endif
+                                            >
                                             <div class="card-text"><small
                                                     class="text-muted">{{ $inscripcione->role->name }}</small>
                                             </div>
                                         </div>
                                         <div class="card-body p-0">
-                                            <div class="card-text">{{ $inscripcione->personale->user->name }}
+                                            <div class="card-text">
+                                                {{ $inscripcione->personale->contacto->nombres . ' ' .$inscripcione->personale->contacto->apellidos }}
                                             </div>
                                         </div>
                                     </div>
