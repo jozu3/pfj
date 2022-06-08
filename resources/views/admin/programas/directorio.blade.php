@@ -66,12 +66,39 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                @foreach ($programa->funciones->where('id', 2)->all() as $funcione)                    
-                    @foreach ($funcione->inscripciones as $nscripcione)
+            @foreach ($programa->funciones as $funcione)
+                @switch($loop->index)
+                    @case(0)
+                        @php
+                            $color = 'bg-primary';
+                        @endphp
+                        @break
+                    @case(1)
+                        @php
+                            $color = 'bg-danger';
+                        @endphp
+                        @break
+                    @case(2)
+                        @php
+                            $color = 'bg-warning';
+                        @endphp    
+                        @break
+                    @case(3)
+                        @php
+                            $color = 'bg-success';
+                        @endphp    
+                        @break
+                    @default
+                        @php
+                            $color = 'bg-primary';
+                        @endphp
+                        @break
+                @endswitch
+                <div class="row justify-content-center">
+                    @foreach ($funcione->inscripciones as $inscripcione)
                         <div class="col-md-2">
                             <div class="card card-row card-primary h-100">
-                                <div class="card-header bg-primary text-center">
+                                <div class="card-header {{$color}} text-center" style="background-color: ;">
                                     <h3 class="card-title">{{ $funcione->descripcion }}</h3>
                                 </div>
                                 <div class="card-body row">
@@ -84,38 +111,13 @@
                                             {{ $inscripcione->personale->user->name }}
                                         </div>
                                     </div>
-                                
+
                                 </div>
                             </div>
                         </div>
                     @endforeach
-                @endforeach
-            </div>
-            <div class="row justify-content-center">
-                @foreach ($programa->funciones->where('id', 1)->all() as $funcione)                    
-                    @foreach ($funcione->inscripciones as $nscripcione)
-                        <div class="col-md-2">
-                            <div class="card card-row card-primary h-100">
-                                <div class="card-header bg-danger text-center">
-                                    <h3 class="card-title">{{ $funcione->descripcion }}</h3>
-                                </div>
-                                <div class="card-body row">
-                                    <div class="card text-center">
-                                        <div class="card-header">
-                                            <img class="img-fluid rounded-circle img-personal"
-                                                src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
-                                        </div>
-                                        <div class="card-body p-0">
-                                            {{ $inscripcione->personale->user->name }}
-                                        </div>
-                                    </div>
-                                
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </section>
 @stop
