@@ -21,7 +21,7 @@
                                 <div class="card-header row"> --}}
                             @foreach ($programa->matrimonioDirectores() as $inscripcione)
                                 <div class="col-6">
-                                    <div class="card text-center">
+                                    <div class="card text-center w-100">
                                         <div class="card-header">
                                             <img class="img-fluid rounded-circle img-personal"
                                                 src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
@@ -49,7 +49,7 @@
                                 <div class="card-header row"> --}}
                             @foreach ($programa->matrimonioLogisticas() as $inscripcione)
                                 <div class="col-6">
-                                    <div class="card text-center">
+                                    <div class="card text-center w-100">
                                         <div class="card-header">
                                             <img class="img-fluid rounded-circle img-personal"
                                                 src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
@@ -102,7 +102,7 @@
                                     <h3 class="card-title">{{ $funcione->descripcion }}</h3>
                                 </div>
                                 <div class="card-body row">
-                                    <div class="card text-center">
+                                    <div class="card text-center w-100">
                                         <div class="card-header">
                                             <img class="img-fluid rounded-circle img-personal"
                                                 src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
@@ -120,4 +120,17 @@
             @endforeach
         </div>
     </section>
+@stop
+
+
+@section('css')
+<style>
+     .img-personal {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+</style>
+@stop
+@section('js')
 @stop
