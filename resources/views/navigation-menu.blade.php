@@ -48,7 +48,7 @@
                                             {{-- Si puede 'Ver los grupos de su sesión' --}}
                                             @foreach ($inscripcione->programa->grupos as $grupo)
                                                 <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                                    {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                                    {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
                                                 </x-jet-dropdown-link>
                                             @endforeach
                                         @else
@@ -57,7 +57,7 @@
                                                     $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
                                                 @endphp
                                                 <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                                    {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                                    {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
                                                 </x-jet-dropdown-link>
                                             @endif
                                         @endcan
@@ -129,15 +129,17 @@
                                         </button>
                                     </x-slot>
                                     <x-slot name="content">
-                                        @forelse (\App\Models\Inscripcione::where('programa_id', session('programa_activo'))->get() as $inscripcione)
+                                        {{-- @forelse (\App\Models\Inscripcione::where('programa_id', session('programa_activo'))->get() as $inscripcione)
                                             @php
                                                 //$inscripcione = \App\Models\Inscripcione::where('programa_id', $programa->id)->first();
                                             @endphp
                                             <x-jet-dropdown-link href="{{ '#' }}" target="_blank">
+                                                @if ($inscripcione->personale->user)
                                                 {{ $inscripcione->personale->user->name }}
+                                                @endif
                                             </x-jet-dropdown-link>
                                         @empty
-                                        @endforelse
+                                        @endforelse --}}
 
                                     </x-slot>
 
@@ -323,7 +325,7 @@
                                 {{-- Si puede 'Ver los grupos de su sesión' --}}
                                 @foreach ($inscripcione->programa->grupos as $grupo)
                                     <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                        {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                        {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
                                     </x-jet-dropdown-link>
                                 @endforeach
                             @else
@@ -332,7 +334,7 @@
                                         $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
                                     @endphp
                                     <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                        {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                        {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
                                     </x-jet-dropdown-link>
                                 @endif
                             @endcan

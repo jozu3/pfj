@@ -47,11 +47,6 @@ class Inscripcione extends Model
         return $this->hasMany(InscripcioneTarea::class);
     }
 
-    public function inscripcioneFunciones()
-    {
-        return $this->hasMany(FuncioneInscripcione::class);
-    }
-
     public function asignaciones()
     {
         return $this->hasMany(Asignacione::class);

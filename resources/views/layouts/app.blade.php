@@ -28,6 +28,11 @@
         <x-jet-banner />
 
         <div class="min-h-screen bg-gray-100">
+            @php
+            if (isset($attributes['programa_id'])) {
+                session(['programa_activo' => $attributes['programa_id']]);
+            }
+            @endphp
             @livewire('navigation-menu')
 
             <!-- Page Heading -->

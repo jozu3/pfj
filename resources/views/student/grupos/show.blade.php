@@ -13,7 +13,7 @@
                     $bienvenido = 'Bienvenida';
                 @endphp
             @endif
-            {{ $bienvenido }} a tu familia PFJ! 
+            {{ $bienvenido }} a tu familia PFJ!
         </h2>
     </x-slot>
 
@@ -22,7 +22,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-14 py-12">
                     <div class="text-3xl text-gray-900 border-b-2 font-bold mb-8">
-                        <p class="text-yellow-500">Familia {{$grupo->numero}}: {{ $grupo->nombre }}</p>
+                        <p class="text-yellow-500">Familia {{ $grupo->numero }}: {{ $grupo->nombre }}</p>
                     </div>
 
                     <div class="grid grid-cols-4 gap-4">
@@ -40,12 +40,22 @@
                                     <div class="flex flex-col w-1/2 rounded-lg space-y-4">
                                         <p class="text-gray-500 text-sm">{{ $companerismo->role->name }}</p>
                                         <div class="flex justify-center">
-                                            <img class="rounded-full border-gray-100 shadow-sm w-24 h-24"
-                                                src="{{ $inscripcioneCompanerismo->inscripcione->personale->user->adminlte_image() }}"
-                                                alt="user image">
+                                            @if ($inscripcioneCompanerismo->inscripcione->personale->user)
+                                                <img class="rounded-full border-gray-100 shadow-sm w-24 h-24"
+                                                    src="{{ $inscripcioneCompanerismo->inscripcione->personale->user->adminlte_image() }}"
+                                                    alt="user image">
+                                            @else
+                                                <img id="imgperfil" class="rounded-circle" width="50" height="50"
+                                                    src="https://picsum.photos/300/300" alt="">
+                                            @endif
+
+
                                         </div>
                                         <h1 class="text-yellow-600 font-semibold px-1">
-                                            {{ $inscripcioneCompanerismo->inscripcione->personale->user->name }}
+                                            @php
+                                                $contacto = $inscripcioneCompanerismo->inscripcione->personale->contacto;
+                                            @endphp
+                                            {{ $contacto->nombres. ' '. $contacto->apellidos }}
                                         </h1>
                                         <h2 class="text-gray-500 text-xs"><i class="fas fa-birthday-cake"></i>
                                             {{ date('d/m/Y', strtotime($inscripcioneCompanerismo->inscripcione->personale->contacto->fecnac)) }}

@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function create()
     {   
-        $personal = $_GET['personal'];
+        $personal = $_GET['personale'];
         
         return view('admin.users.create', compact('personal'));
     }

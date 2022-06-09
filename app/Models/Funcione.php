@@ -17,7 +17,7 @@ class Funcione extends Model
         return $this->belongsTo(Programa::class);
     }
 
-    public function funcioneInscripciones() {
-        return $this->hasMany(FuncioneInscripcione::class);
+    public function inscripciones() {
+        return $this->belongsToMany(Inscripcione::class);
     }    
 }
