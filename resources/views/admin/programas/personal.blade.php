@@ -11,6 +11,9 @@
             <i class="far fa-file-excel"></i> Importar personal
         </button>
     @endcan
+    <a href="{{ route('admin.contactos.create') }}" class="btn btn-success btn-sm float-right mr-3">
+        <i class="fas fa-user-plus"></i> Nuevo personal
+        </a>
 
     <h1><b class="text-pfj">{{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</b>
     </h1>
