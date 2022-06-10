@@ -6,7 +6,7 @@
         @foreach ($estacas as $estaca)
             <option value="" class="bg-light font-weight-bold">{{ 'Estaca '. $estaca->nombre }}</option>
             @foreach ($estaca->barrios as $barrio)
-                <option value="{{$barrio->id}}" class="mp-2" @if ($contacto->personale->barrio_id == $barrio->id){{'selected'}}@endif >{{ $barrio->nombre }}</option>
+                <option value="{{$barrio->id}}" class="mp-2" @if ( isset($contacto->personale) && $contacto->personale->barrio_id == $barrio->id){{'selected'}}@endif >{{ $barrio->nombre }}</option>
             @endforeach
         @endforeach
     </select>

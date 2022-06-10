@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Personale;
 use App\Models\Contacto;
+use App\Models\Estaca;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
 use App\Models\Inscripcione;
-use App\Models\Pago;
-use App\Models\Obligacione;
 use DB;
 use App\Notifications\InscripcioneNotification;
 
@@ -46,19 +45,14 @@ class InscripcioneController extends Controller
         $contacto = Contacto::find($_GET['idcontacto']);
         $personale_existe = null;
         if (isset($contacto->personale)) {
-            $personale_existe = 'Ya es personale, se sugiere tipo de matrícula para personale antiguo.';
+            $personale_existe = 'Ya es personal, se sugiere tipo de matrícula para personale antiguo.';
         }
 
         $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
         $barrios = Barrio::orderBy('nombre')->pluck('nombre', 'id');
+        $estacas = Estaca::all();
 
-        // $vendedores = [];
-        // if (auth()->user()->can(['Admin'])) {
-        //     $vendedores = Personale::select(DB::raw('concat(nombres, " ", apellidos) as nombre'), 'id')->pluck('nombre', 'id');
-        //     //$contacto['vendedor_id'] = $contacto->personal_id;
-        // }
-
-        return view('admin.inscripciones.create', compact('contacto', 'personale_existe', 'roles', 'barrios'));
+        return view('admin.inscripciones.create', compact('contacto', 'personale_existe', 'roles', 'barrios', 'estacas'));
     }
 
     /**
@@ -104,7 +98,7 @@ class InscripcioneController extends Controller
             ])->assignRole(Role::find($request->role_id)->name);
 
             $request['user_id'] = $user->id;
-            $request['permiso_obispo'] = 0;
+            // $request['permiso_obispo'] = 0;
 
             //obtener el ultimo codigo de personale y asignar el nuevo
             //PersonaleObserver / creating
@@ -126,7 +120,7 @@ class InscripcioneController extends Controller
         $request['personale_id'] = $personale->id;
 
         //estado de la inscripcione
-        $request['estado'] = '0';
+        $request['estado'] = '1';
 
         //registrar la matrícula
         $inscripcione = Inscripcione::create($request->all());

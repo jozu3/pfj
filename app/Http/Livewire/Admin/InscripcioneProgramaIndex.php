@@ -99,7 +99,7 @@ class InscripcioneProgramaIndex extends Component
 
                 $inscripciones = $inscripciones;
             }
-
+            $this->emit('readytoload');
             $inscripciones = $inscripciones->orderBy('role_id')->paginate();
             $this->page = 1;
         }

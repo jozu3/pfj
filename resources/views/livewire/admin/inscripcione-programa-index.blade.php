@@ -116,30 +116,7 @@
                                     @default
                                 @endswitch
                             </td>
-                            {{-- <td>
-                                @if ($inscripcione->personale->estado_rtemplo)
-                                {{ 'Sí' }}
-                                @endif
-                                @if ($inscripcione->personale->obs_rtemplo)
-                                {{ ' - '.$inscripcione->personale->obs_rtemplo }}
-                                @endif
-                            </td> --}}
                             <td>
-                                {{-- <style>
-                                    .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20rem; }
-                                    .toggle.ios .toggle-handle { border-radius: 20rem; }
-                                </style>
-                                <input type="checkbox" 
-                                        @if ($inscripcione->estado)
-                                            checked 
-                                        @endif
-                                        data-toggle="toggle" 
-                                        data-style="ios" 
-                                        data-onstyle="warning" 
-                                        data-offstyle="danger"
-                                        
-                                        > --}}
-
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" @if ($inscripcione->estado) checked @endif
                                         data-inscripcione="{{ $inscripcione->id }}"
@@ -149,9 +126,6 @@
                                         for="customSwitch{{ $inscripcione->id }}"></label>
                                 </div>
                             </td>
-                            {{-- <td>
-                                {{ $inscripcione->estado }}
-                            </td> --}}
                             <td width="10px">
                                 <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}"
                                     class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
