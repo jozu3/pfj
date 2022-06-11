@@ -28,8 +28,8 @@
 					</td>
 					<td>
 						{!! Form::select('tipo', [
-							'1' => 'Capacitación',
-							'2' => 'Otro',
+							'1' => 'Controlable',
+							'2' => 'No controlable',
 						],null,['class'=> 'form-control']) !!}
 					</td>
 					<td>
@@ -58,8 +58,8 @@
 				</td>
 				<td>
 					<select name="tipo" id="tipo" wire:model="tipo" class="form-control">
-						<option value="1">Capacitación</option>
-						<option value="2">Otro</option>
+						<option value="1">Controlable</option>
+						<option value="2">No controlable</option>
 					</select>
 				</td>
 				<td>
