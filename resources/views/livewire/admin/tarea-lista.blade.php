@@ -70,6 +70,7 @@
                                 <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
                                 <span class="text text-center" style="width: 300px">Material</span>
                                 <span class="text text-center" style="width: 300px">Temas</span>
+                                <span class="text text-center" style="width: 300px">Enlace</span>
                             </div>
                             @for ($i = 0; $i < $noMaterial; $i++)
                                 <div class="row" wire:key="post-field-{{ $i }}">
@@ -92,6 +93,13 @@
                                     <span class="text text-center" style="width: 300px">
                                         <input type="text" class="form-control form-control-sm disabled:opacity-5"
                                             wire:model.defer="tareaMateriales.{{ $i }}.tema"
+                                            wire:loading.attr='disabled' wire:target='saveTarea'>
+                                        <x-jet-input-error class="text-danger"
+                                            for="tareaMateriales.{{ $i }}.tema" />
+                                    </span>
+                                    <span class="text text-center" style="width: 300px">
+                                        <input type="text" class="form-control form-control-sm disabled:opacity-5"
+                                            wire:model.defer="tareaMateriales.{{ $i }}.link"
                                             wire:loading.attr='disabled' wire:target='saveTarea'>
                                         <x-jet-input-error class="text-danger"
                                             for="tareaMateriales.{{ $i }}.tema" />
@@ -147,6 +155,7 @@
                                     <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
                                     <span class="text text-center" style="width: 300px">Material</span>
                                     <span class="text text-center" style="width: 300px">Temas</span>
+                                    <span class="text text-center" style="width: 300px">Enlace</span>
                                 </div>
                                 @foreach ($tarea->tareaMateriales as $item)
                                     <div class="row">
@@ -156,6 +165,9 @@
                                         </span>
                                         <span class="text text-center" style="width: 300px">
                                             <p style="font-weight: normal;">{{ $item->tema }}</p>
+                                        </span>
+                                        <span class="text text-center" style="width: 300px">
+                                            <p style="font-weight: normal;">{{ $item->link }}</p>
                                         </span>
                                     </div>
                                 @endforeach

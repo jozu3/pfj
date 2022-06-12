@@ -1,4 +1,4 @@
-<x-app-layout programa_id="{{ $programa->id}}">
+<x-app-layout programa_id="{{ $programa->id }}">
     @can('admin.programas.viewList')
         {{-- esto es cuando ungresa un administrador --}}
         @php
@@ -184,10 +184,11 @@
                                                         $color = 'bg-blue-600';
                                                         $texto = 'Información';
                                                     @endphp
-                                                    <div class="carousel-caption block absolute inset-0 text-center" style="
-                                                                                                display: flex;
-                                                                                                align-items: center;
-                                                                                                justify-content: center;">
+                                                    <div class="carousel-caption block absolute inset-0 text-center"
+                                                        style="
+                                                                                                            display: flex;
+                                                                                                            align-items: center;
+                                                                                                            justify-content: center;">
                                                         <div class="flex justify-center">
                                                             <div
                                                                 class="block rounded-lg shadow-lg bg-white max-w-sm text-center">
@@ -296,7 +297,13 @@
                                                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                                                 <span
                                                                     class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                                                    {{ $tareaMateriale->tema }}
+                                                                    @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
+                                                                        <a href="{{ $tareaMateriale->link }}">
+                                                                            {{ $tareaMateriale->tema }}
+                                                                        </a>
+                                                                    @else
+                                                                        {{ $tareaMateriale->tema }}
+                                                                    @endif
                                                                 </span>
                                                             </td>
                                                             {{-- <td class="px-6 py-4 whitespace-nowrap">
@@ -342,7 +349,6 @@
             .carousel-control-next-icon {
                 background-position-x: 2px !important
             }
-
         </style>
         <script src="{{ config('app.url') }}/tw-elements/dist/js/index.min.js"></script>
     </x-app-layout>

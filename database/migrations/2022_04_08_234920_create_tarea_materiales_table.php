@@ -18,6 +18,7 @@ class CreateTareaMaterialesTable extends Migration
             $table->foreignId('tarea_id')->constrained();
             $table->foreignId('materiale_id')->constrained();
             $table->string('tema');
+            $table->longText('link')->nullable();
             $table->timestamps();
         });
     }

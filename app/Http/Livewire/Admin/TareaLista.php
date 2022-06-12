@@ -63,6 +63,7 @@ class TareaLista extends Component
 
                     $tareaMateriale->materiale_id = $tareaMaterial['materiale_id'];
                     $tareaMateriale->tema = $tareaMaterial['tema'];
+                    $tareaMateriale->link = isset($tareaMaterial['link'])  ? $tareaMaterial['link']: '';
                     $tareaMateriale->save();
                     // unset($array[array_search($tareaMaterial['id'], $tareaMateriale)]);
                 } else {
@@ -70,6 +71,7 @@ class TareaLista extends Component
                         'tarea_id' => $this->idTarea,
                         'materiale_id' => $tareaMaterial['materiale_id'],
                         'tema' => $tareaMaterial['tema'],
+                        'link' => isset($tareaMaterial['link'])  ? $tareaMaterial['link']: '',
                     ]);
                 }
             }
@@ -89,6 +91,7 @@ class TareaLista extends Component
                     'tarea_id' => $tarea->id,
                     'materiale_id' => $tareaMaterial['materiale_id'],
                     'tema' => $tareaMaterial['tema'],
+                    'link' => isset($tareaMaterial['link'])  ? $tareaMaterial['link']: '',
                 ]);
             }
         }
@@ -112,6 +115,7 @@ class TareaLista extends Component
                 'id' => $tareaMaterial->id,
                 'materiale_id' => $tareaMaterial->materiale_id,
                 'tema' => $tareaMaterial->tema,
+                'link' => $tareaMaterial->link,
             ];
             $i++;
         }
