@@ -39,6 +39,8 @@
                     
                     <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                         aria-controls="nav-home" aria-selected="true">Asistencia</a>
+                    <a class="nav-item nav-link" id="nav-tareas-tab" data-toggle="tab" href="#nav-tareas" role="tab"
+                        aria-controls="nav-tareas" aria-selected="false">Lecturas/Tareas</a>
                     <a class="nav-item nav-link" id="nav-vacuna-tab" data-toggle="tab" href="#nav-vacuna" role="tab"
                         aria-controls="nav-vacuna" aria-selected="false">Vacunas</a>
                     <a class="nav-item nav-link" id="nav-rtemplo-tab" data-toggle="tab" href="#nav-rtemplo" role="tab"
@@ -50,8 +52,10 @@
             <div class="tab-content" id="nav-tabContent">
                 
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    {{-- @include('admin.programas.partials.asistencia') --}}
                     @livewire('admin.asistencia-personale', ['programa' => $programa])
+                </div>
+                <div class="tab-pane fade" id="nav-tareas" role="tabpanel" aria-labelledby="nav-tareas-tab">
+                    @livewire('admin.tareas-personale', ['programa' => $programa])
                 </div>
                 <div class="tab-pane fade" id="nav-vacuna" role="tabpanel" aria-labelledby="nav-vacuna-tab">
                     @livewire('admin.create-personale-vacuna', ['programa' => $programa])
@@ -104,11 +108,25 @@
 
         }
 
+        .apellido-fijo-lecturas {
+            position: absolute;
+            width: 5em;
+            left: 17em;
+            text-align: center;
+
+        }
+
         .nombre-fijo {
             position: absolute;
             width: 11em;
             left: 0em;
         }
+        .nombre-fijo-lecturas {
+            position: absolute;
+            width: 17em;
+            left: 0em;
+        }
+
 
         .card-body-2 {
             padding-left: 0
@@ -117,6 +135,11 @@
         .cont-table-div {
             overflow-x: scroll;
             margin-left: 16em;
+        }
+
+        .cont-table-div-lecturas {
+            overflow-x: scroll;
+            margin-left: 21em;
         }
 
         .alturatd-dis {
@@ -141,18 +164,26 @@
             width:130px; 
             margin:auto;
         }
+        .porcentaje-lecturas, .porcentaje{
+            width:130px; 
+            height: 51px;
+            margin:auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .pdiv-porcentaje{
             margin-right: 0.5rem!important;
         }
 
         @media (max-width: 767px) {
-            .apellido-fijo {
+            .apellido-fijo, .apellido-fijo-lecturas {
                 width: 4em;
                 left: 6em;
                 font-size: 14px;
             }
 
-            .nombre-fijo {
+            .nombre-fijo, .nombre-fijo-lecturas {
                 width: 7em;
                 left: 0em;
                 font-size: 14px;
@@ -161,16 +192,20 @@
                 overflow-x: scroll;
                 margin-left: 9em;
             }
+            .cont-table-div-lecturas {
+                overflow-x: scroll;
+                margin-left: 8em;
+            }
             .fijo {
                 height: 98px;
             }
             .porcentaje{
                 width:auto; 
             }
-            .pdiv-porcentaje{
+            /* .pdiv-porcentaje{
                 margin-right: 0rem!important;
                 margin-bottom: 0.5rem!important;
-            }
+            } */
 
         }
 

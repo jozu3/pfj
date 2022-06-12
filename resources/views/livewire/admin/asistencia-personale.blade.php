@@ -29,7 +29,7 @@
                         <th class="text-center align-middle border-left">
                             Asistencia (%/#)
                         </th>
-                        @forelse($capacitaciones as $capacitacione)
+                        @forelse($capacitaciones->sortBy('fechacapacitacion') as $capacitacione)
                             <th colspan="1" class="text-center border-left">
                                 <b>{{ $capacitacione->tema }}</b> <br>
                                 <b>{{ date('d/m/Y', strtotime($capacitacione->fechacapacitacion)) }}</b>
@@ -88,7 +88,7 @@
                                 @endif
                                 
                             </td>
-                            @forelse($capacitaciones as $capacitacione)
+                            @forelse($capacitaciones->sortBy('fechacapacitacion') as $capacitacione)
                                 <td class="border-left">
                                     <div class="form-row align-items-center una-fila">
                                         <div class="col-auto my-1 mx-2">
@@ -124,7 +124,7 @@
                         </td>
                         <td class="text-center">
                         </td>
-                        @forelse($capacitaciones as $capacitacione)
+                        @forelse($capacitaciones->sortBy('fechacapacitacion') as $capacitacione)
                             <td colspan="1" class="text-center text-lg border-left">
                                 <div class="bg-success p-1 rounded-lg font-weight-bold mx-auto mb-1" style="width: 100px">
                                     A: {{ $capacitacione->asistencias->where('asistencia','0')->whereIn('inscripcione_id', $inscripciones_all_ids)->count() }}

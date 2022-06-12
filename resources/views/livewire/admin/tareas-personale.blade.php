@@ -18,18 +18,18 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="cont-table-div">
+            <div class="cont-table-div-lecturas">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th class="apellido-fijo fijo border-0">
+                            <th class="apellido-fijo-lecturas fijo border-0">
                                 Familia
                             </th>
-                            <th class="nombre-fijo fijo border-0">
+                            <th class="nombre-fijo-lecturas fijo border-0">
                                 Nombres y Apellidos
                             </th>
                             <th class="text-center align-middle border-left">
-                                Asistencia (%/#)
+                                Completado (%/#)
                             </th>
                             @forelse ($programa->tareas->sortBy('fecha_inicio') as $tarea)
                                 <th class="text-center border-left" style="50px">
@@ -47,14 +47,14 @@
                                 @php
                                     $inscripcione_ = \App\Models\Inscripcione::find($inscripcione->inscripcione_id);
                                 @endphp
-                                <td class="apellido-fijo text-center">
+                                <td class="apellido-fijo-lecturas text-center">
                                     @php
                                         if ($inscripcione_->inscripcioneCompanerismo) {
                                             echo $inscripcione_->inscripcioneCompanerismo->companerismo->grupo->numero;
                                         }
                                     @endphp
                                 </td>
-                                <td class="nombre-fijo">
+                                <td class="nombre-fijo-lecturas">
                                     <b>
                                         {{ $inscripcione->contacto_nombres }}
                                     </b>
@@ -76,7 +76,7 @@
                                                 $color_c = 'danger';
                                             }
                                         @endphp
-                                        <div class="porcentaje">
+                                        <div class="porcentaje-lecturas">
                                             <span class="bg-{{ $color_p }} rounded-lg p-1 pdiv-porcentaje">
                                                 {{ $porcentaje . '%' }}
                                             </span>
@@ -101,9 +101,9 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td class="apellido-fijo text-center">
+                            <td class="apellido-fijo-lecturas text-center">
                             </td>
-                            <td class="nombre-fijo">
+                            <td class="nombre-fijo-lecturas">
                             </td>
                             <td class="text-center">
                             </td>

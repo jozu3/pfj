@@ -13,7 +13,10 @@
     @endcan
     <a href="{{ route('admin.contactos.create') }}" class="btn btn-success btn-sm float-right mr-3">
         <i class="fas fa-user-plus"></i> Nuevo personal
-        </a>
+    </a>
+    <a href="{{ route('admin.programas.funciones', $programa) }}" class="btn btn-success btn-sm float-right mr-3">
+        <i class="fas fa-address-card"></i> Funciones
+    </a>
 
     <h1><b class="text-pfj">{{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</b>
     </h1>
@@ -80,8 +83,9 @@
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="importExcelPersonalLabel">Importar datos de usuario</h5>
-                        <a href="{{ config('app.url') . '/files/PERSONAL-PLANTILLA.xlsx' }}" class="btn btn-yellow-pfj ml-5"
-                            download><i class="far fa-file-excel"></i> Descargar plantilla</a>
+                        <a href="{{ config('app.url') . '/files/PERSONAL-PLANTILLA.xlsx' }}"
+                            class="btn btn-yellow-pfj ml-5" download><i class="far fa-file-excel"></i> Descargar
+                            plantilla</a>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -177,19 +181,18 @@
         .btn-warning {
             color: #624a00
         }
-
     </style>
     {{-- <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet"> --}}
     <style>
         /*\
-    |*| ========================================================================
-    |*| Bootstrap Toggle: bootstrap4-toggle.css v3.6.1
-    |*| https://gitbrent.github.io/bootstrap4-toggle/
-    |*| ========================================================================
-    |*| Copyright 2018-2019 Brent Ely
-    |*| Licensed under MIT
-    |*| ========================================================================
-    \*/
+        |*| ========================================================================
+        |*| Bootstrap Toggle: bootstrap4-toggle.css v3.6.1
+        |*| https://gitbrent.github.io/bootstrap4-toggle/
+        |*| ========================================================================
+        |*| Copyright 2018-2019 Brent Ely
+        |*| Licensed under MIT
+        |*| ========================================================================
+        \*/
         .btn-group-xs>.btn,
         .btn-xs {
             padding: .35rem .4rem .25rem .4rem;
@@ -373,56 +376,57 @@
         .toggle-off.btn-xs {
             padding-left: .8rem
         }
-
     </style>
 @stop
 
 @section('js')
     <script>
         $().ready(function() {
-			@if (session('inactivar') == 'Ok')
-				Swal.fire(
-					      "Ok",
-					      'Personal inactivado.',
-					      'success'
-					    )
-			@endif
-	    	Livewire.on('readytoload', event => {
-		    	$('.prevent-inactive').change( function (e) {
+            @if (session('inactivar') == 'Ok')
+                Swal.fire(
+                    "Ok",
+                    'Personal inactivado.',
+                    'success'
+                )
+            @endif
+            Livewire.on('readytoload', event => {
+                $('.prevent-inactive').change(function(e) {
                     e.preventDefault();
                     var msg = '';
                     var confirmButtonText = '';
-                    if(this.checked){
-                        msg = 'Al activar este personal, le dará acceso al sistema y podrá ver sus reportes de lectura, asistencia y otros.'
+                    if (this.checked) {
+                        msg =
+                            'Al activar este personal, le dará acceso al sistema y podrá ver sus reportes de lectura, asistencia y otros.'
                         confirmButtonText = 'Sí, activar y dar acceso'
-                    }else {
-                        msg = 'Todas las asignaciones de compañerirsmo de este personal se borrarán, y ya no podrá ver sus reportes de asistencia, lecturas y otros.';
+                    } else {
+                        msg =
+                            'Todas las asignaciones de compañerirsmo de este personal se borrarán, y ya no podrá ver sus reportes de asistencia, lecturas y otros.';
                         confirmButtonText = 'Sí, inactivar y borrar sus asignaciones'
                     }
-			    	Swal.fire({
-					  title: 'Se necesita confirmación',
-					  text: msg,
-					  icon: 'warning',
-					  showCancelButton: true,
-					  cancelButtonColor: '#d33',
-					  cancelButtonText: 'Cancelar',
-					  confirmButtonColor: '#3085d6',
-					  confirmButtonText: confirmButtonText,
-					}).then((result) => {
-					  if (result.value) {
-					    var ins = $(this).attr( 'data-inscripcione' );
-                        Livewire.emit('changeEstado', ins);
-                    } else {
-                          Livewire.emit('alert', false);
-                        this.checked = !this.checked
-                      }
-					})	    		
-		    	});
-	    	});
+                    Swal.fire({
+                        title: 'Se necesita confirmación',
+                        text: msg,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        cancelButtonColor: '#d33',
+                        cancelButtonText: 'Cancelar',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: confirmButtonText,
+                    }).then((result) => {
+                        if (result.value) {
+                            var ins = $(this).attr('data-inscripcione');
+                            Livewire.emit('changeEstado', ins);
+                        } else {
+                            Livewire.emit('alert', false);
+                            this.checked = !this.checked
+                        }
+                    })
+                });
+            });
 
             $("#success-alert").hide();
             $("#danger-alert").hide();
-            
+
         });
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()

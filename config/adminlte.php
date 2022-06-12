@@ -323,12 +323,12 @@ return [
         //     'icon' => 'fas fa-cogs',
         //     'can'  =>   'admin.funciones.index'
         // ],
-        [
-            'text' => 'Materiales',
-            'route'  => 'admin.materiales.index',
-            'icon' => 'fas fa-cogs',
-            'can'  =>   'admin.materiales.index'
-        ],   
+        // [
+        //     'text' => 'Materiales',
+        //     'route'  => 'admin.materiales.index',
+        //     'icon' => 'fas fa-cogs',
+        //     'can'  =>   'admin.materiales.index'
+        // ],   
         // [
         //     'text' => 'Mi(s) sesión(es)',
         //     'route'  => 'admin.programas.misprogramas',

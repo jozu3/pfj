@@ -32,8 +32,10 @@
                             role="tab" aria-controls="nav-personal" aria-selected="true">Capacitaciones</a>
                         {{-- <a class="nav-item nav-link" id="nav-comp-tab" data-toggle="tab" href="#nav-comp" role="tab"
                             aria-controls="nav-comp" aria-selected="true">Familias</a> --}}
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                             aria-controls="nav-profile" aria-selected="false">Lecturas</a>
+                            <a class="nav-item nav-link" id="nav-materiales-tab" data-toggle="tab" href="#nav-materiales" role="tab"
+                            aria-controls="nav-materiales" aria-selected="false">Materiales</a>
                     </div>
                 </nav>
                 <div class="tab-content overflow-auto" id="nav-tabContent">
@@ -46,6 +48,9 @@
                     </div> --}}
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 						@livewire('admin.tarea-lista', ['programa' => $programa])
+                    </div>
+                    <div class="tab-pane fade" id="nav-materiales" role="tabpanel" aria-labelledby="nav-materiales-tab">
+                        @livewire('admin.materiales-index')
                     </div>
                 </div>
             </div>

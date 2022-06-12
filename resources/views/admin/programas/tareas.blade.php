@@ -55,7 +55,7 @@
             align-items: center;
         }
 
-        .apellido-fijo {
+        .apellido-fijo-lecturas {
             position: absolute;
             width: 5em;
             left: 17em;
@@ -63,7 +63,7 @@
 
         }
 
-        .nombre-fijo {
+        .nombre-fijo-lecturas {
             position: absolute;
             width: 17em;
             left: 0em;
@@ -73,7 +73,7 @@
             padding-left: 0
         }
 
-        .cont-table-div {
+        .cont-table-div-lecturas {
             overflow-x: scroll;
             margin-left: 21em;
         }
@@ -99,7 +99,7 @@
         .btn-warning{
             color: #624a00
         }
-        .porcentaje{
+        .porcentaje-lecturas{
             width:130px; 
             height: 51px;
             margin:auto;
@@ -113,25 +113,25 @@
 
         
         @media (max-width: 767px) {
-            .apellido-fijo {
+            .apellido-fijo-lecturas {
                 width: 4em;
                 left: 6em;
                 font-size: 14px;
             }
 
-            .nombre-fijo {
+            .nombre-fijo-lecturas {
                 width: 7em;
                 left: 0em;
                 font-size: 14px;
             }
-            .cont-table-div {
+            .cont-table-div-lecturas {
                 overflow-x: scroll;
                 margin-left: 8em;
             }
             .fijo {
                 height: 98px;
             }
-            .porcentaje{
+            .porcentaje-lecturas{
                 width:auto; 
                 height: 100px;
             }
