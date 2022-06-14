@@ -298,7 +298,7 @@
                                                                 <span
                                                                     class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                                                                     @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
-                                                                        <a href="{{ $tareaMateriale->link }}">
+                                                                        <a href="{{ $tareaMateriale->link }}" target="_blank">
                                                                             {{ $tareaMateriale->tema }}
                                                                         </a>
                                                                     @else
