@@ -29,21 +29,19 @@
                                         <div class="card text-center">
                                             <div class="card-header">
                                                 <img class="img-fluid rounded-circle img-personal"
-                                                    @if ($inscripcione->personale->user)
-                                                        {{ 'src='. $inscripcione->personale->user->adminlte_image().' alt=""' }}
+                                                    @if ($inscripcione->personale->user) {{ 'src=' . $inscripcione->personale->user->adminlte_image() . ' alt=""' }}
                                                     @else
-                                                        {{ 'src=https://picsum.photos/300/300' }}
-                                                    @endif
-                                                >
+                                                        {{ 'src=' . config('app.url') . '/img/' }} @endif>
                                                 <div class="card-text"><small
                                                         class="text-muted">{{ $inscripcione->role->name }}</small>
                                                 </div>
                                             </div>
                                             <div class="card-body p-0">
                                                 @if ($inscripcione->personale->user)
-                                                    {{ $inscripcione->personale->user->name }}
-                                                    @else
-                                                    
+                                                    <a href="{{ route('admin.contactos.show',  $inscripcione->personale->contacto) }}" class="txt-yellow-pfj">
+                                                        {{ $inscripcione->personale->user->name }}
+                                                    </a>
+                                                @else
                                                 @endif
                                             </div>
                                         </div>
@@ -72,9 +70,12 @@
                                 {{ 'Familia ' . $grupo->numero }}
                             </h3>
                             <div class="float-right">
-                                <i class="fas fa-edit" wire:click='editFamilia({{ $grupo }}, {{ $grupo->companerismos->where('role_id', 6)->count() }})' style="cursor: pointer;"></i>
+                                <i class="fas fa-edit"
+                                    wire:click='editFamilia({{ $grupo }}, {{ $grupo->companerismos->where('role_id', 6)->count() }})'
+                                    style="cursor: pointer;"></i>
                                 &nbsp;
-                                <i class="fas fa-trash" wire:click='removeFamilia({{ $grupo->id }})' style="cursor: pointer;"></i>
+                                <i class="fas fa-trash" wire:click='removeFamilia({{ $grupo->id }})'
+                                    style="cursor: pointer;"></i>
                             </div>
                         </div>
                         <div class="card-body group" data-id="{{ 'grupo-' . $grupo->id }}">
@@ -89,20 +90,17 @@
                                                 <div class="card text-center">
                                                     <div class="card-header inscripcione">
                                                         <img class="img-fluid rounded-circle img-personal"
-                                                            @if ($inscripcioneCompanerismo->inscripcione->personale->user)
-                                                                {{ 'src='. $inscripcioneCompanerismo->inscripcione->personale->user->adminlte_image().' alt=""' }}
+                                                            @if ($inscripcioneCompanerismo->inscripcione->personale->user) {{ 'src=' . $inscripcioneCompanerismo->inscripcione->personale->user->adminlte_image() . ' alt=""' }}
                                                                 @else
-                                                                {{ 'src=https://picsum.photos/300/300' }}
-                                                            @endif
-                                                        >
+                                                                {{ 'src=' . config('app.url') . '/img/pfj-lima-norte.png' }} @endif>
                                                         <div class="card-text"><small
                                                                 class="text-muted">{{ $inscripcioneCompanerismo->inscripcione->role->name }}</small>
                                                         </div>
                                                     </div>
                                                     <div class="card-body p-0">
                                                         <div class="card-text">
-                                                            <a href="">
-                                                                {{ $inscripcioneCompanerismo->inscripcione->personale->contacto->nombres . ' ' .$inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos }}
+                                                            <a href="{{ route('admin.contactos.show', $inscripcioneCompanerismo->inscripcione->personale->contacto) }}" class="txt-yellow-pfj">
+                                                                {{ $inscripcioneCompanerismo->inscripcione->personale->contacto->nombres . ' ' . $inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos }}
                                                             </a>
                                                         </div>
                                                     </div>
@@ -121,7 +119,7 @@
                     @if ($addFamilia)
                         <div class="card-body">
                             <input type="hidden" wire:model='idFamilia'>
-                            <div>                                
+                            <div>
                                 <label for="">Número</label>
                                 <input type="number" wire:model.defer='famNumero' class="form-control" min="1">
                             </div>
@@ -131,7 +129,8 @@
                             </div>
                             <div>
                                 <label for="">Cantidad de compañías</label>
-                                <input type="number" wire:model.defer='compCantidad' class="form-control" min="1">
+                                <input type="number" wire:model.defer='compCantidad' class="form-control"
+                                    min="1">
                             </div>
                             <div class="text-right">
                                 <button class="btn btn-sm btn-warning" wire:click='createFamilia'>
@@ -153,7 +152,7 @@
 
                 </div>
             </div>
-        </div>        
+        </div>
 
         <div style="height: 300px"></div>
     </div>
@@ -174,20 +173,17 @@
                                     <div class="card text-center">
                                         <div class="card-header inscripcione">
                                             <img class="img-fluid rounded-circle img-personal"
-                                                @if ($inscripcione->personale->user)
-                                                    {{ 'src='. $inscripcione->personale->user->adminlte_image().' alt=""' }}
+                                                @if ($inscripcione->personale->user) {{ 'src=' . $inscripcione->personale->user->adminlte_image() . ' alt=""' }}
                                                     @else
-                                                    {{ 'src=https://picsum.photos/300/300' }}
-                                                @endif
-                                            >
+                                                    {{ 'src=' . config('app.url') . '/img/pfj-lima-norte.png' }} @endif>
                                             <div class="card-text"><small
                                                     class="text-muted">{{ $inscripcione->role->name }}</small>
                                             </div>
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="card-text">
-                                                <a href="#">
-                                                    {{ $inscripcione->personale->contacto->nombres . ' ' .$inscripcione->personale->contacto->apellidos }}
+                                                <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}" class="txt-yellow-pfj">
+                                                    {{ $inscripcione->personale->contacto->nombres . ' ' . $inscripcione->personale->contacto->apellidos }}
                                                 </a>
                                             </div>
                                         </div>

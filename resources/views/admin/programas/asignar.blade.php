@@ -124,7 +124,6 @@
                 height: 60px;
             }
         }
-
     </style>
 @stop
 
@@ -133,9 +132,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script>
         window.onload = function() {
+            localStorage.clear();
             renderSortable();
             Livewire.on('pruebaAsignar', () => {
-                    renderSortable();
+                renderSortable();
             });
         }
 
@@ -145,7 +145,7 @@
             $('#guardar').attr('disabled', '')
         });
 
-        function renderSortable(){
+        function renderSortable() {
             const grupos = document.getElementsByClassName('group');
             const compas = document.getElementsByClassName('companerismo');
 
@@ -303,7 +303,6 @@
 
 
                 if ((k.includes('com-') || k.includes('cordis')) && value != '' && !k.includes('sinAsignar')) {
-                    result = false;
 
                     //console.log('compañerimso' + k.split('com-')[1])
                     var com = 0;
@@ -318,6 +317,7 @@
                     //console.log('cant inscripcioen:' + arr.length)
 
                     for (let j = 0; j < arr.length; j++) {
+                        result = false;
                         const ins = arr[j].split('ins-')[1];
                         console.log(ins + '-' + com)
                         $.post(`{{ route('admin.index') }}/inscripcione_companerismos/updateInscripcione/` +
@@ -340,6 +340,7 @@
                                 }
                             }
                         );
+
                     }
                 }
 
@@ -371,12 +372,12 @@
 
 
                 if (k.includes('grupo-') && value != '') {
-                    result = false;
                     // console.log('grupo' + k.split('grupo-')[1])
                     let grupo = k.split('grupo-')[1]
                     let arr = value.split('|');
                     //console.log('cant compañerismos:' + arr.length)
                     for (let j = 0; j < arr.length; j++) {
+                        result = false;
                         const comp = arr[j].split('com-')[1];
                         //console.log(comp)
 
@@ -417,7 +418,7 @@
                                             });
                                         } else {
                                             $('#success-alert').show().append(value +
-                                            "<br/>"); //this is my div with messages
+                                                "<br/>"); //this is my div with messages
                                         }
                                     });
                                 }

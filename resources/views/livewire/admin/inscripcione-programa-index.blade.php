@@ -84,6 +84,7 @@
                             <td>
                                 <img id="imgperfil" class="rounded-circle {{ $inscripcione->id }}" width="50"
                                     height="50"
+                                    style="object-fit: cover;"
                                     src="@if ($inscripcione->personale->user) {{ $inscripcione->personale->user->adminlte_image() }} @else {{ 'https://picsum.photos/300/300' }} @endif"
                                     alt="">
                             </td>

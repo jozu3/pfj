@@ -74,7 +74,7 @@ class User extends Authenticatable
         // if($this->personale->contacto->fotodrive){
         //     return $this->personale->contacto->fotodrive;
         // }
-        return 'https://picsum.photos/300/300';
+        return config('app.url').'/img/pfj-lima-norte.png' ;
     }
 
     /**

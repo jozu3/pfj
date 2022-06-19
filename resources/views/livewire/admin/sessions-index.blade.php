@@ -29,8 +29,7 @@
 						<td></td>
 						@endif
 						<td>{{ $session->ip_address }}</td>
-                        <td>{{ date('d/m/Y h:m:s', $session->last_activity) }}</td>
-						
+                        <td>{{ date('d/m/Y h:i:s', $session->last_activity) }}</td>
 						@can('admin.sessions.destroy')
 						<td width="10px">
 							
