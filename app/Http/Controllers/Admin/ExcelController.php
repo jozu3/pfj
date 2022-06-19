@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\InscripcionesExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Exports\PersonalesExport;
 use App\Imports\PersonalesImport;
-use App\Models\Grupo;
 use App\Models\Programa;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\ValidationException;
 
 class ExcelController extends Controller
 {
-    public function personalesGrupo(Grupo $grupo){
-        $alumExport = new PersonalesExport();
-        return $alumExport->forGroup($grupo->id)->download('personales.xlsx');
+    public function exportExcelPersonal(Programa $programa, $familia, $estaca, $estado, $rol){
+        $inscripciones = new InscripcionesExport();
+        return $inscripciones->programa($programa->id, $familia, $estaca, $estado, $rol)->download('inscripcionesPrograma.xlsx');
     }
 
     public function importExcelPersonal(Request $request, Programa $programa){

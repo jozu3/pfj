@@ -74,11 +74,7 @@ Route::post('capacitaciones/storeforgroup/{grupo}', [CapacitacioneController::cl
 Route::get('recibo-inscripcione/{idinscripcione}', [PDFController::class, 'reciboInscripcione'])->name('admin.print');
 Route::get('reportpagos', [PDFController::class, 'pagos'])->name('admin.print.pagos');
 
-/*Route::resource('grupos', GrupoController::class, ['except' => ['create']])->names('admin.grupos');
-Route::get('grupos/create/{id}', [GrupoController::class, 'create'])->name('admin.grupos.create');
-*/
-
-Route::get('/report-personales-grupo/{grupo}', [ExcelController::class, 'personalesGrupo'])->name('admin.excel.personalesGrupo');
+Route::get('/export-excel-personal/{programa}/{familia}/{estaca}/{estado}/{rol}', [ExcelController::class, 'exportExcelPersonal'])->name('admin.excel.exportExcelPersonal');
 Route::post('/import-excel-personal/{programa}', [ExcelController::class, 'importExcelPersonal'])->name('admin.excel.importExcelPersonal');
 
 Route::resource('materiales', MaterialeController::class)->names('admin.materiales');

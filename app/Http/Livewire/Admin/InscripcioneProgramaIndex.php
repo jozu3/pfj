@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Estaca;
 use App\Models\Funcione;
 use Livewire\Component;
 use App\Models\Inscripcione;
@@ -17,7 +18,10 @@ class InscripcioneProgramaIndex extends Component
     public $grupo_id;
     public $programa_id;
     public $search;
-    public $rol;
+    public $rol = 0;
+    public $estado = 1;
+    public $estaca = 0;
+    public $familia = 0;
     public $readyToLoad = false;
     public $functions_selecteds = [];
 
@@ -55,6 +59,7 @@ class InscripcioneProgramaIndex extends Component
     public function render()
     {
         $inscripciones = [];
+        $familias = null;
         if ($this->readyToLoad) {
             $that = $this;
             if ($this->grupo_id != '') {
@@ -68,9 +73,25 @@ class InscripcioneProgramaIndex extends Component
 
             if ($this->programa_id != '') {
                 $search = $this->search;
+                $estaca = $this->estaca;
+                $familia = $this->familia;
+                $estado = $this->estado;
+                $rol = $this->rol;
+
                 $functions_selecteds = $this->functions_selecteds;
-                $inscripciones = Inscripcione::where('programa_id', $this->programa_id)
-                    ->where('role_id', 'like', '%' . $this->rol);
+                $inscripciones = Inscripcione::where('programa_id', $this->programa_id);
+
+                //filtro por rol
+                if($rol != '0'){
+                    $inscripciones = $inscripciones->where('role_id', $rol);
+                }
+
+                //filtro por estado
+                if($estado != '-1'){
+                    $inscripciones = $inscripciones->where('estado', $this->estado);
+                }
+
+                //filtro por funciones
                 if (count($functions_selecteds) && $this->rol > 4) {
                     $i = 0;
                     foreach ($functions_selecteds as $function) {
@@ -86,26 +107,45 @@ class InscripcioneProgramaIndex extends Component
                     }
                 }
 
-                $inscripciones = $inscripciones->whereHas('personale', function ($q) use ($search) {
+                $inscripciones = $inscripciones->whereHas('personale', function ($q) use ($search, $estaca) {
                     $q->whereHas('contacto', function ($qu) use ($search) {
                         $qu->where('nombres', 'like', '%' . $search . '%')
                             ->orWhere('apellidos', 'like', '%' . $search . '%')
                             ->orWhere('telefono', 'like', '%' . $search . '%');
+                    })->whereHas('barrio', function($qu) use ($estaca){
+                        //filtro estaca
+                        if($estaca != '' && $estaca != '0'){
+                            $qu->where('estaca_id', $estaca);
+                        }
                     });
+                    
                 });
 
+                //filtro por familia
+                if($familia != '' && $familia != '0'){
+                    $inscripciones = $inscripciones->whereHas( 'inscripcioneCompanerismo', function($q) use ($familia) {
+                        $q->whereHas( 'companerismo', function($q) use ($familia) {
+                            $q->where('grupo_id', $familia);
+                        });
+                    });
+                }
 
 
 
-                $inscripciones = $inscripciones;
+
+
+
             }
             $this->emit('readytoload');
             $inscripciones = $inscripciones->orderBy('role_id')->paginate();
             $this->page = 1;
         }
+        $familias = Grupo::where('programa_id',$this->programa_id)->get();
         $roles = Role::whereNotIn('name', ['Admin'])->get();
+        $estacas = Estaca::orderBy('nombre')->get();
+
         $funciones = Funcione::where('programa_id', $this->programa_id)->get();
 
-        return view('livewire.admin.inscripcione-programa-index', compact('inscripciones', 'roles', 'funciones'));
+        return view('livewire.admin.inscripcione-programa-index', compact('inscripciones', 'roles', 'funciones', 'estacas', 'familias'));
     }
 }

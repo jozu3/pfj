@@ -31,7 +31,7 @@
                                                 <img class="img-fluid rounded-circle img-personal"
                                                     @if ($inscripcione->personale->user)
                                                         {{ 'src='. $inscripcione->personale->user->adminlte_image().' alt=""' }}
-                                                        @else
+                                                    @else
                                                         {{ 'src=https://picsum.photos/300/300' }}
                                                     @endif
                                                 >
@@ -69,7 +69,7 @@
                     <div class="card card-row card-primary">
                         <div class="card-header bg-yellow-pfj">
                             <h3 class="card-title">
-                                {{ $grupo->nombre . ' ' . $grupo->numero }}
+                                {{ 'Familia ' . $grupo->numero }}
                             </h3>
                             <div class="float-right">
                                 <i class="fas fa-edit" wire:click='editFamilia({{ $grupo }}, {{ $grupo->companerismos->where('role_id', 6)->count() }})' style="cursor: pointer;"></i>
@@ -101,7 +101,9 @@
                                                     </div>
                                                     <div class="card-body p-0">
                                                         <div class="card-text">
-                                                            {{ $inscripcioneCompanerismo->inscripcione->personale->contacto->nombres . ' ' .$inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos }}
+                                                            <a href="">
+                                                                {{ $inscripcioneCompanerismo->inscripcione->personale->contacto->nombres . ' ' .$inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos }}
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -184,7 +186,9 @@
                                         </div>
                                         <div class="card-body p-0">
                                             <div class="card-text">
-                                                {{ $inscripcione->personale->contacto->nombres . ' ' .$inscripcione->personale->contacto->apellidos }}
+                                                <a href="#">
+                                                    {{ $inscripcione->personale->contacto->nombres . ' ' .$inscripcione->personale->contacto->apellidos }}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -197,15 +201,4 @@
         </div>
     @endif
 
-
 </div>
-</div>
-</div>
-
-{{-- <script>
-    window.onload = function() {
-        Livewire.on('pruebaAsignar', () => {
-            alert("Esto tiene que salir")
-        });
-    }
-</script> --}}
