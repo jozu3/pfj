@@ -100,7 +100,6 @@ class AppServiceProvider extends ServiceProvider
                     $menu_organigrama = [
                         'text' => 'Organigrama',
                         'url' => '/admin/programas/' . session('programa_activo') . '/asignar',
-                        // 'route'  => ['admin.programas.asignar', $programa_activo],
                         'icon' => 'fas fa-sitemap',
                         'can'  =>   'admin.inscripcioneCompanerismos.edit'
                     ];
@@ -108,7 +107,6 @@ class AppServiceProvider extends ServiceProvider
                     $menu_personales = [
                         'text' => 'Personal',
                         'url' => '/admin/programas/' . session('programa_activo') . '/personal',
-                        // 'route'  => ['admin.programas.asignar', $programa_activo],
                         'icon' => 'fas fa-users',
                         'can'  =>   'admin.programas.edit'
                     ];

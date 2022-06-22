@@ -33,7 +33,15 @@
                             </th>
                             @forelse ($programa->tareas->sortBy('fecha_inicio') as $tarea)
                                 <th class="text-center border-left" style="50px">
-                                    {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} <br>al <br> {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}
+                                    <div>
+                                        @foreach ($tarea->tareaMateriales as $tareaMateriale)
+                                        {{ $tareaMateriale->tema }}
+                                        <br>
+                                        @endforeach
+                                    </div>
+                                    <div>
+                                        {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} <br>al <br> {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}
+                                    </div>
                                 </th>
                             @empty
                                 <th>No hay lecturas</th>
