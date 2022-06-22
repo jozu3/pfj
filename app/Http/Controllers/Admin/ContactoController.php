@@ -144,6 +144,7 @@ class ContactoController extends Controller
         if($contacto->personale && $contacto->personale->user){
 
             $contacto->personale->user->update([
+                'name' => $request->nombres. ' '. $request->apellidos,
                 'email' => $request->email
             ]);
         }
