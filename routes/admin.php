@@ -53,6 +53,7 @@ Route::get('/programas/{programa}/funciones', [ProgramaController::class, 'funci
 Route::resource('programas', ProgramaController::class)->names('admin.programas');
 Route::resource('capacitaciones', CapacitacioneController::class)->names('admin.capacitaciones');
 
+Route::get('/inscripciones/notificacion/{inscripcione}', [InscripcioneController::class, 'notificacion'])->name('admin.inscripciones.notificacion');
 Route::resource('inscripciones', InscripcioneController::class)->names('admin.inscripciones');
 Route::resource('obligaciones', ObligacioneController::class)->names('admin.obligaciones');
 Route::resource('pagos', PagoController::class)->names('admin.pagos');
@@ -78,4 +79,5 @@ Route::get('/export-excel-personal/{programa}/{familia}/{estaca}/{estado}/{rol}'
 Route::post('/import-excel-personal/{programa}', [ExcelController::class, 'importExcelPersonal'])->name('admin.excel.importExcelPersonal');
 
 Route::resource('materiales', MaterialeController::class)->names('admin.materiales');
+
 	

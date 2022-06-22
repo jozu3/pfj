@@ -4,6 +4,7 @@
 
 @section('content_header')
 	<a href="{{ route('admin.inscripciones.edit', $inscripcione) }}" class="btn btn-success btn-sm float-right">Modificar inscripción</a>
+	<a href="{{ route('admin.inscripciones.notificacion', $inscripcione) }}" class="btn btn-success btn-sm float-right mr-2"><i class="fas fa-envelope"></i> Enviar Notificación</a>
 	{{-- <a href="{{ route('admin.print', 'recibo-inscripcione?idinscripcione='.$inscripcione->id) }}" class="btn btn-danger btn-sm float-right mr-2" target="_blank"><i class="fas fa-file-pdf"></i> Imprimir recibo</a> --}}
     <h1>Personale: {{ $inscripcione->personale->contacto->nombres.' '.$inscripcione->personale->contacto->apellidos }}</h1>
 @stop

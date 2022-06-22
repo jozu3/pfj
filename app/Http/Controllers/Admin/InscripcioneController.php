@@ -129,11 +129,11 @@ class InscripcioneController extends Controller
 
         //enviar notification de inscripcione al personale
         $user = $personale->user;
-        //$user->notify(new InscripcioneNotification($inscripcione));
+        // $user->notify(new InscripcioneNotification($inscripcione));
         
         return redirect()->route('admin.inscripciones.show', $inscripcione)->with('info', 'Inscripción registrada correctamente.');
     }
-
+    
     /**
      * Display the specified resource.
      *
@@ -144,7 +144,7 @@ class InscripcioneController extends Controller
     {
         return view('admin.inscripciones.show', compact('inscripcione'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -156,7 +156,7 @@ class InscripcioneController extends Controller
         $roles = Role::whereIn('id', [2,3,4,5,6])->pluck('name', 'id');
         return view('admin.inscripciones.edit', compact('inscripcione', 'roles'));
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
@@ -168,12 +168,12 @@ class InscripcioneController extends Controller
     {   
         $inscripcione->update($request->all());
         $inscripcione->funciones()->sync($request->funciones);
-
-
-                
+        
+        
+        
         return redirect()->route('admin.programas.personal', $inscripcione->programa)->with('info','Se actualizaron los datos correctamente');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -189,7 +189,14 @@ class InscripcioneController extends Controller
             $personale->delete();
             $user->delete();
         }
-
+        
         return redirect()->route('admin.inscripciones.index')->with('eliminar','Ok');
+    }
+    
+    public function notificacion(Inscripcione $inscripcione){
+        $user =  $inscripcione->personale->user; 
+        $user->notify(new InscripcioneNotification($inscripcione));
+        
+        return redirect()->route('admin.inscripciones.show', $inscripcione)->with('info', 'Se envío la notificación correctamente al correo '.  $user->email);
     }
 }
