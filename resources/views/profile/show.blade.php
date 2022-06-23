@@ -25,7 +25,9 @@
             <x-jet-section-border />
             
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
-                @livewire('profile.update-profile-information-form')
+                <div class="mt-10 sm:mt-0">
+                    @livewire('profile.update-profile-information-form')
+                </div>
 
                 <x-jet-section-border />
             @endif
