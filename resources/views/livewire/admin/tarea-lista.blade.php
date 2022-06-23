@@ -150,8 +150,26 @@
                             </div>
                         </div>
                         <div>
-                            <div class="collapse" id="collapse{{ $tarea->id }}" data-parent="#accordion{{$tarea->id}}">
-                                <div class="row text-warning">
+                            <div class="collapse px-3" id="collapse{{ $tarea->id }}" data-parent="#accordion{{$tarea->id}}">
+                                <table class="table table-sm table-striped">
+                                    <thead>
+                                        <tr class="text-warning">
+                                            <th scope="col">Material</th>
+                                            <th scope="col">Tema</th>
+                                            <th scope="col">Enlace</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($tarea->tareaMateriales as $item)
+                                        <tr>
+                                            <td>{{ $item->materiale->descripcion }}</td>
+                                            <td>{{ $item->tema }}</td>
+                                            <td>{{ $item->link }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                {{-- <div class="row text-warning">
                                     <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
                                     <span class="text text-center" style="width: 300px">Material</span>
                                     <span class="text text-center" style="width: 300px">Temas</span>
@@ -170,7 +188,7 @@
                                             <p style="font-weight: normal;">{{ $item->link }}</p>
                                         </span>
                                     </div>
-                                @endforeach
+                                @endforeach --}}
                             </div>
                         </div>
                     </li>

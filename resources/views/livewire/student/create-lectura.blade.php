@@ -28,7 +28,15 @@
                             </label>
                             <ul>
                             @foreach ($tarea->tareaMateriales as $tareaMateriale)                                
-                                    <li class="text-center">{{ $tareaMateriale->materiale->descripcion }}: {{$tareaMateriale->tema}}</li>                                
+                                    <li class="text-center">
+                                        @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
+                                            <a href="{{$tareaMateriale->link}}" class="text-blue-800">
+                                                {{ $tareaMateriale->materiale->descripcion }}: {{$tareaMateriale->tema}}
+                                            </a>                                            
+                                        @else
+                                            {{ $tareaMateriale->materiale->descripcion }}: {{$tareaMateriale->tema}}    
+                                        @endif
+                                    </li>                                
                             @endforeach
                         </ul>
                             
