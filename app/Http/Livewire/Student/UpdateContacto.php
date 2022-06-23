@@ -16,7 +16,7 @@ class UpdateContacto extends Component
         'nombres' => 'required',
         'apellidos' => 'required',
         'fecnac' => 'required|date',
-        'telefono' => 'required|integer',
+        'telefono' => 'required|numeric',
     ];
 
     public function updateContacto(){
