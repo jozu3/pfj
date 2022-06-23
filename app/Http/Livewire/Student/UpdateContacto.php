@@ -16,7 +16,7 @@ class UpdateContacto extends Component
         'nombres' => 'required',
         'apellidos' => 'required',
         'fecnac' => 'required|date',
-        'telefono' => 'required',
+        'telefono' => 'required|integer',
     ];
 
     public function updateContacto(){
@@ -29,7 +29,11 @@ class UpdateContacto extends Component
             'telefono' => $this->telefono,
         ]);
 
-        if($update){
+        $update = auth()->user()->update([
+            'name' => $this->nombres. ' ' . $this->apellidos,
+        ]);
+
+        if($update){ 
             $this->emit('saved');
         }
 
