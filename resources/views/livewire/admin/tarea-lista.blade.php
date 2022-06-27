@@ -7,26 +7,21 @@
 
             </h3>
 
-            {{-- <div class="card-tools pagination pagination-sm">
+            <div class="card-tools pagination pagination-sm">
                 {{ $tareas->links() }}
-            </div> --}}
+            </div>
         </div>
 
         <div>
 
         </div>
-        <!-- /.card-header -->
         <div class="card-body">
-            {{-- <div class="float-right">
-            
-        </div> --}}
-
             <ul class="todo-list ui-sortable" data-widget="todo-list">
                 <li>
                     <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
                     <span class="text" style="width: 100px">FECHA</span>
                     <span class="text">LECTURA</span>
-                    <span class="float-right">
+                    <span class="">
                         <button type="button" class="btn btn-sm btn-primary" wire:click="$toggle('addTarea')">
                             <i class="fas fa-plus-circle"></i> Registrar tareas para la semana
                         </button>
@@ -123,34 +118,47 @@
                     </li>
                 @endif
                 @foreach ($tareas as $tarea)
-                    <li id="accordion{{$tarea->id}}">
+                    <li id="accordion{{ $tarea->id }}">
                         <div class="row">
-                            <span class="col-2 text">
-                                <i class="fas fa-bookmark text-warning"></i>&nbsp; Semana
+                            <span class="col-2  text">
+                                <i class="fas fa-bookmark text-warning"></i>&nbsp; 
+                                <span class="t-semana" >Semana</span>
                             </span>
-                            <span class="col-2 text">
-                                <div class="bg-info rounded-pill text-center">
-                                    {{ date( 'd/m/Y', strtotime($tarea->fecha_inicio)) }}
+                            <div class="col">
+                                <div class="form-row">
+
+
+                                    <span class="col-md-4 ">
+                                        <div class="bg-info rounded-pill text-center">
+                                            {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }}
+                                        </div>
+                                    </span>
+                                    <span class="col-md-4 text-center">al</span>
+                                    <span class="col-md-4 ">
+                                        <div class="bg-info rounded-pill text-center">
+                                            {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}
+                                        </div>
+                                    </span>
                                 </div>
-                            </span>
-                            <span class="col-1 text">al</span>
-                            <span class="col-2 text" style="width: 200px">
-                                <div class="bg-info rounded-pill text-center">
-                                    {{ date( 'd/m/Y', strtotime($tarea->fecha_final)) }}
-                                </div>
-                            </span>
-                            {{-- <span class="text">{{ $tarea->descripcion }}</span> --}}
-                            <div class="row"> {{-- col-4 col-md-3--}}
-                                <a class="col btn btn-link collapsed" data-toggle="collapse" href="#collapse{{ $tarea->id }}"
-                                    aria-expanded="false"><i class="fas fa-eye"></i></a>
-                                <button class="col btn btn-link btn-sm"><i class="fas fa-edit"
-                                        wire:click='editTarea({{ $tarea }})'></i></button>
-                                <button class="col btn btn-link btn-sm"><i class="fas fa-trash-alt"
-                                        wire:click='removeTarea({{ $tarea->id }})'></i></button>
                             </div>
+
+                            {{-- <span class="text">{{ $tarea->descripcion }}</span> --}}
+                            <div class="col">
+                                <div class="row"> {{-- col-4 col-md-3 --}}
+                                    <a class="col-md-4 btn btn-link collapsed" data-toggle="collapse"
+                                        href="#collapse{{ $tarea->id }}" aria-expanded="false"><i
+                                            class="fas fa-eye"></i></a>
+                                    <button class="col-md-4 btn btn-link btn-sm"><i class="fas fa-edit"
+                                            wire:click='editTarea({{ $tarea }})'></i></button>
+                                    <button class="col-md-4 btn btn-link btn-sm"><i class="fas fa-trash-alt"
+                                            wire:click='removeTarea({{ $tarea->id }})'></i></button>
+                                </div>
+                            </div>
+
                         </div>
                         <div>
-                            <div class="collapse px-3" id="collapse{{ $tarea->id }}" data-parent="#accordion{{$tarea->id}}">
+                            <div class="collapse px-3" id="collapse{{ $tarea->id }}"
+                                data-parent="#accordion{{ $tarea->id }}">
                                 <table class="table table-sm table-striped">
                                     <thead>
                                         <tr class="text-warning">
@@ -161,12 +169,12 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($tarea->tareaMateriales as $item)
-                                        <tr>
-                                            <td>{{ $item->materiale->descripcion }}</td>
-                                            <td>{{ $item->tema }}</td>
-                                            <td>{{ $item->link }}</td>
-                                        </tr>
-                                    @endforeach
+                                            <tr>
+                                                <td>{{ $item->materiale->descripcion }}</td>
+                                                <td>{{ $item->tema }}</td>
+                                                <td>{{ $item->link }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                                 {{-- <div class="row text-warning">

@@ -54,7 +54,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'description' => 'Para la Fortaleza de la Juventud (PFJ), es una actividad de casi una semana que está orientada a la juventud de 13 a 17 años de edad, y que se centra en la enseñanza de los principios de la Iglesia de Jesucristo de los Santos de los Últimos Dias. ',
+    'description' => 'Las conferencias Para la Fortaleza de la Juventud (PFJ) son actividades a gran escala que se llevan a cabo bajo la dirección de la Presidencia de Área para jóvenes entre 14 a 18 años. Una conferencia PFJ se basa en el lema anual de la Mutual y es una programa equilibrado de cinco días que incluye clases, devocionales y actividades cuidadosamente diseñadas para que los jóvenes logren hacer cambios específicos tantos espirituales como de comportamiento. El programa que se sugiere proporciona un equilibrio de oportunidades sociales, físicas, intelectuales y de servicio, diseñadas para profundizar la conversión, desarrollar amistadas apropiadas y acercarse más a Cristo',
 
     'asset_url' => env('ASSET_URL', null),
 

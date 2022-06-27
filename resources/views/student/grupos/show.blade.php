@@ -41,7 +41,7 @@
                                         <p class="text-gray-500 text-sm">{{ $companerismo->role->name }}</p>
                                         <div class="flex justify-center">
                                             @if ($inscripcioneCompanerismo->inscripcione->personale->user)
-                                                <img class="rounded-full border-gray-100 shadow-sm w-24 h-24"
+                                                <img class="rounded-full border-gray-100 shadow-sm w-24 h-24 object-cover"
                                                     src="{{ $inscripcioneCompanerismo->inscripcione->personale->user->adminlte_image() }}"
                                                     alt="user image">
                                             @else

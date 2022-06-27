@@ -1,10 +1,12 @@
 <x-app-layout programa_id="{{ $programa->id }}">
-    @can('admin.programas.viewList')
-        {{-- esto es cuando ungresa un administrador --}}
-        @php
-            $inscripcione = \App\Models\Inscripcione::where('programa_id', $programa->id)->first();
-        @endphp
-    @endcan
+    @if (!isset($inscripcione))
+        @can('admin.programas.viewList')
+            {{-- esto es cuando ingresa un administrador --}}
+            @php
+                $inscripcione = \App\Models\Inscripcione::where('programa_id', $programa->id)->first();
+            @endphp
+        @endcan
+    @endif
     <x-slot name="header">
         <h2 class="font-semibold text-3xl leading-tight text-white">
             @php
@@ -42,7 +44,8 @@
                                         <div class="text-center">
                                             @if ($inscripcione->programa->imageMatrimonioDirector)
                                                 <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioDirector->url) }}"
-                                                    alt="" class="object-top rounded-full m-auto" width="300px">
+                                                    alt="" class="object-top rounded-full m-auto"
+                                                    width="300px">
                                             @endif
                                         </div>
                                         <div class="md:text-left text-center">
@@ -69,7 +72,8 @@
                                         <div class="text-center">
                                             @if ($inscripcione->programa->imageMatrimonioLogistica)
                                                 <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioLogistica->url) }}"
-                                                    alt="" class="object-top rounded-full m-auto" width="300px">
+                                                    alt="" class="object-top rounded-full m-auto"
+                                                    width="300px">
                                             @endif
                                         </div>
                                         <div class="md:text-left text-center">
@@ -298,7 +302,8 @@
                                                                 <span
                                                                     class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                                                                     @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
-                                                                        <a href="{{ $tareaMateriale->link }}" target="_blank">
+                                                                        <a href="{{ $tareaMateriale->link }}"
+                                                                            target="_blank">
                                                                             {{ $tareaMateriale->tema }}
                                                                         </a>
                                                                     @else

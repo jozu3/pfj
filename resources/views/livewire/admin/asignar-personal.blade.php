@@ -7,6 +7,12 @@
                     Mostrar personal sin asignar
                 </label>
             </div>
+            <div class="custom-control custom-checkbox mr-sm-2 d-inline">
+                <input class="form-check-input" wire:model="renderSortable" type="checkbox" value="" id="renderSortable">
+                <label class="form-check-label" for="renderSortable">
+                    Mover personal
+                </label>
+            </div>
 
         </div>
     </div>
@@ -38,7 +44,8 @@
                                             </div>
                                             <div class="card-body p-0">
                                                 @if ($inscripcione->personale->user)
-                                                    <a href="{{ route('admin.contactos.show',  $inscripcione->personale->contacto) }}" class="txt-yellow-pfj">
+                                                    <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}"
+                                                        class="txt-yellow-pfj">
                                                         {{ $inscripcione->personale->user->name }}
                                                     </a>
                                                 @else
@@ -99,7 +106,8 @@
                                                     </div>
                                                     <div class="card-body p-0">
                                                         <div class="card-text">
-                                                            <a href="{{ route('admin.contactos.show', $inscripcioneCompanerismo->inscripcione->personale->contacto) }}" class="txt-yellow-pfj">
+                                                            <a href="{{ route('admin.contactos.show', $inscripcioneCompanerismo->inscripcione->personale->contacto) }}"
+                                                                class="txt-yellow-pfj">
                                                                 {{ $inscripcioneCompanerismo->inscripcione->personale->contacto->nombres . ' ' . $inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos }}
                                                             </a>
                                                         </div>
@@ -158,43 +166,46 @@
     </div>
 
     @if (count($programa->inscripcionesSinAsignar()))
-        <div class="cont-psinasignar @if (!$psinasignar) {{ 'd-none' }} @endif">
-            <div class="card card-row card-success">
-                <div class="card-header ">
-                    <h3 class="card-title">
-                        {{ 'Personal sin asignar' }}
-                    </h3>
-                </div>
-                <div class="card-body group" data-id="{{ 'grupo-' }}">
-                    <div class="" data-id="sinAsignar">
-                        <div class="companerismo row" data-id="sinAsignar">
-                            @foreach ($programa->inscripcionesSinAsignar() as $inscripcione)
-                                <div class="col-md-1" data-id="{{ 'ins-' . $inscripcione->id }}">
-                                    <div class="card text-center">
-                                        <div class="card-header inscripcione">
-                                            <img class="img-fluid rounded-circle img-personal"
-                                                @if ($inscripcione->personale->user) {{ 'src=' . $inscripcione->personale->user->adminlte_image() . ' alt=""' }}
+    {{-- nada --}}
+    @endif
+    <div class="cont-psinasignar @if (!$psinasignar) {{ 'd-none' }} @endif">
+        <div class="card card-row card-success">
+            <div class="card-header ">
+                <h3 class="card-title">
+                    {{ 'Personal sin asignar' }}
+                </h3>
+            </div>
+            <div class="card-body group" data-id="{{ 'grupo-' }}">
+                <div class="" data-id="sinAsignar">
+                    <div class="companerismo row" data-id="sinAsignar">
+                        @foreach ($programa->inscripcionesSinAsignar() as $inscripcione)
+                            <div class="col-md-1" data-id="{{ 'ins-' . $inscripcione->id }}">
+                                <div class="card text-center">
+                                    <div class="card-header inscripcione">
+                                        <img class="img-fluid rounded-circle img-personal"
+                                            @if ($inscripcione->personale->user) {{ 'src=' . $inscripcione->personale->user->adminlte_image() . ' alt=""' }}
                                                     @else
                                                     {{ 'src=' . config('app.url') . '/img/pfj-lima-norte.png' }} @endif>
-                                            <div class="card-text"><small
-                                                    class="text-muted">{{ $inscripcione->role->name }}</small>
-                                            </div>
+                                        <div class="card-text"><small
+                                                class="text-muted">{{ $inscripcione->role->name }}</small>
                                         </div>
-                                        <div class="card-body p-0">
-                                            <div class="card-text">
-                                                <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}" class="txt-yellow-pfj">
-                                                    {{ $inscripcione->personale->contacto->nombres . ' ' . $inscripcione->personale->contacto->apellidos }}
-                                                </a>
-                                            </div>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="card-text">
+                                            <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}"
+                                                class="txt-yellow-pfj">
+                                                {{ $inscripcione->personale->contacto->nombres . ' ' . $inscripcione->personale->contacto->apellidos }}
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
-    @endif
+    </div>
+
 
 </div>

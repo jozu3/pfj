@@ -11,6 +11,7 @@ class AsignarPersonal extends Component
 {
     public $programa;
     public $psinasignar;
+    public $renderSortable = true;
     // public
 
     public $addFamilia;
@@ -24,6 +25,10 @@ class AsignarPersonal extends Component
         'compCantidad' => 'required',
 
     ];
+
+    public function updatedRenderSortable(){
+        $this->emit('habilitarSortable');
+    }
 
     public function createFamilia()
     {

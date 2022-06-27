@@ -5,7 +5,7 @@
     </div>
     <div class="grid grid-cols-6 my-4 mx-2">
         {{-- {{ $programa->nombre }} --}}
-        @foreach ($programa->tareas->sortByDesc('fecha') as $tarea)
+        @foreach ($programa->tareas->sortBy('fecha_inicio') as $tarea)
             <div class="col-span-4 lg:col-span-2 border-3 bg-yellow-100 p-2 m-1 shadow-md">
                 <div class="">
                     <div class="form-check">

@@ -82,7 +82,7 @@ class CapacitacioneController extends Controller
         $capacitacione->update($request->all());
         $programa = Programa::find($capacitacione->programa_id);
 
-        return redirect()->route('admin.programas.edit', compact('programa'))
+        return redirect()->route('admin.programas.planificador', compact('programa'))
                 ->with('info_capacitacione', 'La capacitación se editó correctamente');
     }
 

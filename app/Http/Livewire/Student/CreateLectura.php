@@ -15,6 +15,7 @@ class CreateLectura extends Component
     {
         $programa = $this->programa;
         $inscripcione = Inscripcione::where('personale_id', auth()->user()->personale->id)->where('programa_id', $this->programa->id)->first();
+        // dd($programa->id);
         $inscripcioneTareas = InscripcioneTarea::where('inscripcione_id', $inscripcione->id)->get();
 
         $total_tareas = $programa->tareas->count();

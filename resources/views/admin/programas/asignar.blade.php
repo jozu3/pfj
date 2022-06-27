@@ -84,6 +84,7 @@
             bottom: 0;
             right: 0;
             margin-left: 250px;
+            min-width: 80%;
         }
 
         .cont-psinasignar>.card>.card-body {
@@ -137,6 +138,26 @@
             Livewire.on('pruebaAsignar', () => {
                 renderSortable();
             });
+
+            Livewire.on('habilitarSortable', () => {
+                
+                for (let i = 0; i < objGrupos.length; i++) {
+                    const sortable = objGrupos[i];
+                    var state = sortable.option("disabled"); // get
+                    sortable.option("disabled", !state); // set
+                    
+                }
+
+                for (let i = 0; i < objCompas.length; i++) {
+                    const sortable = objCompas[i];
+                    var state = sortable.option("disabled"); // get
+                    sortable.option("disabled", !state); // set
+                    
+                }
+
+            });
+
+            
         }
 
         $().ready(function() {
@@ -145,12 +166,15 @@
             $('#guardar').attr('disabled', '')
         });
 
+        var objGrupos = [];
+        var objCompas = [];
+
         function renderSortable() {
             const grupos = document.getElementsByClassName('group');
             const compas = document.getElementsByClassName('companerismo');
 
             for (var i = 0; i < grupos.length; i++) {
-                new Sortable(grupos[i], {
+                objGrupos[i] = new Sortable(grupos[i], {
                     group: 'grupo',
                     sort: false,
                     animation: 150,
@@ -184,9 +208,8 @@
                 });
             }
 
-
             for (var i = 0; i < compas.length; i++) {
-                new Sortable(compas[i], {
+                objCompas[i] = new Sortable(compas[i], {
                     group: 'companerismo',
                     sort: false,
                     animation: 150,

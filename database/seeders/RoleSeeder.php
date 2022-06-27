@@ -52,10 +52,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.seguimientos.destroy', 'description' => 'Eliminar comentarios'])->syncRoles([$role1, $role2, $role3]);
         
         //Permisos personale
-        Permission::create(['name' => 'admin.personales.index', 'description' => 'Ver listado de personales'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
-        Permission::create(['name' => 'admin.personales.create', 'description' => 'Crear personales'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
-        Permission::create(['name' => 'admin.personales.edit', 'description' => 'Editar personales'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
-        Permission::create(['name' => 'admin.personales.destroy', 'description' => 'Eliminar personales'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create(['name' => 'admin.personales.index', 'description' => 'Ver listado de personales'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.personales.create', 'description' => 'Crear personales'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.personales.edit', 'description' => 'Editar personales'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.personales.destroy', 'description' => 'Eliminar personales'])->syncRoles([$role1, $role2, $role3, $role4]);
 
         //Permisos pfj
         Permission::create(['name' => 'admin.pfjs.index', 'description' => 'Ver listado de pfjs'])->syncRoles([$role1]);
