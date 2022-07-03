@@ -4,9 +4,9 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="text-center w-100" id="exampleModalLabel">Modal title</div>
-
-
+                <div class="text-center w-100" id="exampleModalLabel">
+                    <img src="" alt="">
+                </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

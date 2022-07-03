@@ -11,3 +11,4 @@ Route::resource('', HomeController::class)->names('st');
 Route::resource('programas', ProgramaController::class)->names('st.programas');
 Route::resource('grupos', GrupoController::class)->names('st.grupos');
 Route::get('programas/{programa}/mislecturas', [TareaController::class, 'mislecturas'])->name('st.tareas.mislecturas');
+Route::get('inscripciones', [TareaController::class, 'mislecturas'])->name('st.inscripciones');

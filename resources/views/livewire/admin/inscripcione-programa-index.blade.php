@@ -90,6 +90,8 @@
                             </td>
                             <td>
                                 {{ $inscripcione->personale->contacto->nombres }}
+                                {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" wire:click="$emitTo('admin.modal-detalle-contacto', 'showcontacto', '{{$inscripcione->id}}')">
+                                  </button> --}}
                             </td>
                             <td>{{ $inscripcione->personale->contacto->apellidos }}</td>
                             <td>

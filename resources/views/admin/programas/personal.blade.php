@@ -52,7 +52,7 @@
 
         <div class="col-md-12">
 
-            @livewire('admin.inscripcione-programa-index', ['programa_id' => $programa->id])
+            @livewire('admin.inscripcione-programa-index', ['programa_id' => $programa->id], key('asdasd'))
 
         </div>
     </div>
@@ -108,7 +108,8 @@
             </div>
         </div>
     </div>
-
+ 
+    @livewire('admin.modal-detalle-contacto', key('as5648deAFAEF'))
 @stop
 
 @section('css')
