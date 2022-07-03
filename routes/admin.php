@@ -22,9 +22,11 @@ use App\Http\Controllers\Admin\InscripcioneCompanerismoController;
 use App\Http\Controllers\Admin\ExcelController;
 use App\Http\Controllers\Admin\CompanerismoController;
 use App\Http\Controllers\Admin\AnuncioController;
+use App\Http\Controllers\Admin\BarrioController;
 use App\Http\Controllers\Admin\FuncioneController;
 use App\Http\Controllers\Admin\MaterialeController;
 use App\Http\Controllers\Admin\ReporteController;
+use App\Http\Controllers\Admin\EstacaController;
 
 Route::resource('', HomeController::class)->names('admin');
 
@@ -32,6 +34,9 @@ Route::get('/users/sessions', [UserController::class, 'listSessions'])->name('ad
 Route::resource('users', UserController::class)->names('admin.users');
 Route::resource('personales', PersonaleController::class)->names('admin.personales');
 Route::resource('roles', RoleController::class)->names('admin.roles');
+Route::resource('estacas', EstacaController::class)->names('admin.estacas');
+Route::resource('barrios', BarrioController::class)->names('admin.barrios');
+Route::get('/estacas/{estaca}/barrios', [BarrioController::class, 'show'])->name('admin.barrios.show');
 Route::resource('contactos', ContactoController::class)->names('admin.contactos');
 Route::resource('seguimientos', SeguimientoController::class)->names('admin.seguimientos');
 Route::resource('pfjs', PfjController::class)->names('admin.pfjs');
