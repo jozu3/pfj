@@ -9,6 +9,6 @@ use App\Http\Controllers\Student\PersonaleUnidadeController;
 
 Route::resource('', HomeController::class)->names('st');
 Route::resource('programas', ProgramaController::class)->names('st.programas');
+Route::get('programas/{programa_id}/inscripciones', [ProgramaController::class, 'inscripciones'])->name('st.programas.inscripciones');
 Route::resource('grupos', GrupoController::class)->names('st.grupos');
 Route::get('programas/{programa}/mislecturas', [TareaController::class, 'mislecturas'])->name('st.tareas.mislecturas');
-Route::get('inscripciones', [TareaController::class, 'mislecturas'])->name('st.inscripciones');

@@ -100,7 +100,7 @@
 
                             </x-jet-dropdown>
                         </div>
-                        <x-jet-nav-link href="{{ route('st.inscripciones') }}" :active="request()->routeIs('st.index')">
+                        <x-jet-nav-link href="{{ route('st.inscripciones') }}" :active="request()->routeIs('st.inscripciones')">
                             {{ __('Inscripciones') }}
                         </x-jet-nav-link>
                         {{-- <x-jet-nav-link href="{{ route('st.index') }}" :active="request()->routeIs('st.lectura.index')">
