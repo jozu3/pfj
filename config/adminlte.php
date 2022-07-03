@@ -276,6 +276,11 @@ return [
             'can'  =>   'admin.roles.index'
         ],
         [
+            'text' => 'Estacas',
+            'route' => 'admin.estacas.index',
+            'icon' => 'fas fa-fw fa-landmark'
+        ],
+        [
             'text'        => 'PFJ\'s',
             'route'         => 'admin.pfjs.index',
             'icon'        => 'fas fa-chalkboard-teacher',

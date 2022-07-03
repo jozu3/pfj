@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ConsejoCoordinacione;
 
 class Estaca extends Model
 {
@@ -11,8 +12,8 @@ class Estaca extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function consejoCoodinacione(){
-    	return $this->belongsTo(consejoCoodinacione::class);
+    public function consejoCoordinacione(){
+    	return $this->belongsTo(ConsejoCoordinacione::class);
     }
 
     public function barrios(){
