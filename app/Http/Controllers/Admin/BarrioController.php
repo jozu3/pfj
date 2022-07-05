@@ -44,6 +44,15 @@ class BarrioController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nombre' => 'required',
+            'estaca_id' => 'required'
+        ]);
+
+        $barrio = Barrio::create($request->all());
+
+        if ($barrio->id)
+            return redirect()->route('admin.barrios.show', $barrio->estaca)->with('info', 'El barrio se creó correctamente');
     }
 
     /**
@@ -56,7 +65,7 @@ class BarrioController extends Controller
     {
         //
         $barrios = Barrio::where('estaca_id', $estaca->id)->get();
-        return view('admin.barrios.index', compact('barrios'));
+        return view('admin.barrios.index', compact('barrios', 'estaca'));
     }
 
     /**
