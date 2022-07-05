@@ -3,7 +3,7 @@
 @section('title', 'Estacas')
 
 @section('content_header')
-    <h1>Lista de estacas</h1>
+    <h1>Lista de barrios</h1>
     <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal"
         data-route="{{ route('admin.estacas.create') }}">
         Nueva estaca
