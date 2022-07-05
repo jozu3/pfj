@@ -268,4 +268,8 @@ class ProgramaController extends Controller
         session(['programa_activo' => $programa->id]);
         return redirect()->route('admin.index');
     }
+
+    public function participantes(Programa $programa){
+        return view('admin.programas.participantes', compact('programa'));
+    }
 }

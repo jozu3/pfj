@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\InscripcionesExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ParticipantesImport;
 use Illuminate\Http\Request;
 use App\Imports\PersonalesImport;
 use App\Models\Programa;
@@ -37,6 +38,22 @@ class ExcelController extends Controller
             //      $failure->errors(); // Actual error messages from Laravel validator
             //      $failure->values(); // The values of the row that has failed.
             //  }
+        }
+
+        return back()->with('info', 'Importación de personal completada.');
+    }
+
+    public function importExcelParticipantes(Request $request, Programa $programa){
+        $file = $request->file('file');
+        //return $file;
+
+        try {
+            Excel::import(new ParticipantesImport($programa), $file);
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            
+            $exception = ValidationException::withMessages(collect($failures)->map->toArray()->all());
+            throw $exception;
         }
 
         return back()->with('info', 'Importación de personal completada.');

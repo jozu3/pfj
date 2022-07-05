@@ -55,8 +55,10 @@ Route::get('/programas/{programa}/personal', [ProgramaController::class, 'person
 Route::get('/programas/{programa}/dashboard', [ProgramaController::class, 'dashboard'])->name('admin.programas.dashboard');
 Route::get('/programas/{programa}/tareas', [ProgramaController::class, 'tareas'])->name('admin.programas.tareas');
 Route::get('/programas/{programa}/funciones', [ProgramaController::class, 'funciones'])->name('admin.programas.funciones');
+Route::get('/programas/{programa}/participantes', [ProgramaController::class, 'participantes'])->name('admin.programas.participantes');
 Route::resource('programas', ProgramaController::class)->names('admin.programas');
 Route::resource('capacitaciones', CapacitacioneController::class)->names('admin.capacitaciones');
+Route::resource('materiales', MaterialeController::class)->names('admin.materiales');
 
 Route::get('/inscripciones/notificacion/{inscripcione}', [InscripcioneController::class, 'notificacion'])->name('admin.inscripciones.notificacion');
 Route::resource('inscripciones', InscripcioneController::class)->names('admin.inscripciones');
@@ -74,15 +76,13 @@ Route::delete('capacitaciones/destroyfromgroup/{grupo}', [CapacitacioneControlle
 Route::post('capacitaciones/storeforgroup/{grupo}', [CapacitacioneController::class, 'storeforgroup'])->name('admin.capacitaciones.storeforgroup');
 
 
-  
-
 //Route::resource('pdfs', PDFController::class)->names('pdfs');
 Route::get('recibo-inscripcione/{idinscripcione}', [PDFController::class, 'reciboInscripcione'])->name('admin.print');
 Route::get('reportpagos', [PDFController::class, 'pagos'])->name('admin.print.pagos');
 
 Route::get('/export-excel-personal/{programa}/{familia}/{estaca}/{estado}/{rol}', [ExcelController::class, 'exportExcelPersonal'])->name('admin.excel.exportExcelPersonal');
 Route::post('/import-excel-personal/{programa}', [ExcelController::class, 'importExcelPersonal'])->name('admin.excel.importExcelPersonal');
+Route::post('/import-excel-participantes/{programa}', [ExcelController::class, 'importExcelParticipantes'])->name('admin.excel.importExcelParticipantes');
 
-Route::resource('materiales', MaterialeController::class)->names('admin.materiales');
 
 	

@@ -17,8 +17,7 @@
                             {{ __('Inicio') }}
                         </x-jet-nav-link>
                     @endcan
-                    @if ((
-                        auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count()) ||
+                    @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count() ||
                         auth()->user()->can('admin.programas.viewList'))
 
                         <div class="inline-flex items-center px-1 pt-1">
@@ -48,7 +47,7 @@
                                             {{-- Si puede 'Ver los grupos de su sesión' --}}
                                             @foreach ($inscripcione->programa->grupos as $grupo)
                                                 <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                                    {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
+                                                    {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
                                                 </x-jet-dropdown-link>
                                             @endforeach
                                         @else
@@ -57,7 +56,7 @@
                                                     $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
                                                 @endphp
                                                 <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                                    {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
+                                                    {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
                                                 </x-jet-dropdown-link>
                                             @endif
                                         @endcan
@@ -103,38 +102,33 @@
                         <div class="inline-flex items-center px-1 pt-1">
                             <x-jet-dropdown align="right" width="48">
                                 <x-slot name="trigger">
-                                    
-                                            <button type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                                <div>
-                                                    {{ 'Inscripciones'}}
 
-                                                </div>
-        
-                                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </button>
+                                    <button type="button"
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                        <div>
+                                            {{ 'Inscripciones' }}
+
+                                        </div>
+
+                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
                                 </x-slot>
-        
+
                                 <x-slot name="content">
-                                  
                                     @foreach (Auth::user()->personale->inscripciones as $inscripcione)
-                                        <x-jet-dropdown-link href="{{ route('st.programas.inscripciones', $inscripcione) }}">
+                                        <x-jet-dropdown-link
+                                            href="{{ route('st.programas.inscripciones', $inscripcione->programa) }}">
                                             {{ $inscripcione->programa->nombre }}
                                         </x-jet-dropdown-link>
-                                    @endforeach 
-        
-                        
+                                    @endforeach
                                 </x-slot>
                             </x-jet-dropdown>
                         </div>
-                        {{-- <x-jet-nav-link href="{{ route('st.index') }}" :active="request()->routeIs('st.lectura.index')">
-                            {{ __('Mis lecturas') }}
-                        </x-jet-nav-link> --}}
 
                         @can('admin.home')
                             <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
@@ -292,7 +286,8 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
+                                <x-jet-dropdown-link href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Cerrar sesión') }}
                                 </x-jet-dropdown-link>
@@ -310,8 +305,8 @@
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden"
-                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
@@ -326,9 +321,8 @@
                     {{ __('Inicio') }}
                 </x-jet-responsive-nav-link>
             @endcan
-            @if ((
-                auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count()) ||
-                auth()->user()->can('admin.programas.viewList') )
+            @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count() ||
+                auth()->user()->can('admin.programas.viewList'))
                 <!-- Account Management -->
                 <x-jet-dropdown>
                     <x-slot name="trigger">
@@ -357,7 +351,7 @@
                                 {{-- Si puede 'Ver los grupos de su sesión' --}}
                                 @foreach ($inscripcione->programa->grupos as $grupo)
                                     <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                        {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
+                                        {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
                                     </x-jet-dropdown-link>
                                 @endforeach
                             @else
@@ -366,7 +360,7 @@
                                         $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
                                     @endphp
                                     <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                        {{ 'Familia '. $grupo->numero. ' ' . $grupo->nombre }}
+                                        {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
                                     </x-jet-dropdown-link>
                                 @endif
                             @endcan
@@ -415,8 +409,8 @@
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="flex-shrink-0 mr-3">
-                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
-                            alt="{{ Auth::user()->name }}" />
+                        <img class="h-10 w-10 rounded-full object-cover"
+                            src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                     </div>
                 @endif
 
@@ -442,7 +436,8 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault();
+                    <x-jet-responsive-nav-link href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
                                     this.closest('form').submit();">
                         {{ __('Cerrar Sessión') }}
                     </x-jet-responsive-nav-link>

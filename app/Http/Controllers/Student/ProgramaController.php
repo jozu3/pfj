@@ -60,11 +60,6 @@ class ProgramaController extends Controller
         $inscripcione = Inscripcione::where('programa_id', $programa->id)->where('personale_id', $personale->id)->first();
         // $inscripcioneCompanerismos = InscripcioneCompanerismo::where('inscripcione_id', $inscripcione->id)->get();
         
-        if(auth()->user()->can(['admin.programas.viewList'])){
-            
-        }
-        // return view('student.programas.show', compact('inscripcioneCompanerismos', 'inscripcione'));
-
         $tarea_actuales = $programa->tareas->where('fecha_inicio','<=', date('Y-m-d'))->where('fecha_final','>=',date('Y-m-d'));
 
         return view('student.programas.show', compact('inscripcione', 'programa', 'tarea_actuales'));
@@ -106,6 +101,6 @@ class ProgramaController extends Controller
     }
 
     public function inscripciones(Programa $programa){
-        return view('student.programas.inscripciones');
+        return view('student.programas.inscripciones', compact('programa'));
     }
 }

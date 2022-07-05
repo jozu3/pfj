@@ -154,6 +154,12 @@ class AppServiceProvider extends ServiceProvider
                         'icon' => 'fas fa-chart-line',
                         'can' => 'admin.programas.planning'
                     ];
+                    $menu_participantes = [
+                        'text' => 'Participantes',
+                        'url' => 'admin/programas/' . session('programa_activo') . '/participantes',
+                        'icon' => 'fas fa-child',
+                        'can' => 'admin.programas.participantes'
+                    ];
 
                     $header = [
                         'header' => 'Dashboard',
@@ -164,6 +170,7 @@ class AppServiceProvider extends ServiceProvider
                     
                     // $event->menu->addAfter('programa', $menu_funciones);
                     // $event->menu->addAfter('programa', $menu_tareas);
+                    $event->menu->addAfter('programa', $menu_participantes);
                     $event->menu->addAfter('programa', $menu_asistencias);
                     $event->menu->addAfter('programa', $menu_anuncios);
                     $event->menu->addAfter('programa', $menu_organigrama);

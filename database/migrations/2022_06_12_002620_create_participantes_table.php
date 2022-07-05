@@ -17,6 +17,7 @@ class CreateParticipantesTable extends Migration
             $table->id();
             $table->string('nombres');
             $table->string('apellidos');
+            $table->string('documento')->nullable();
             $table->date('fecnac');
             $table->boolean('genero');
             $table->string('telefono');
