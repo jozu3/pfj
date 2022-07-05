@@ -52,8 +52,9 @@
 
 @section('js')
 <script>
-    $('#barrio_content').on('show.bs.modal', function(event) {
+    $('#saveBarrio').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
+        var route = button.data('route')
         var modal = $(this)           
 
         $.get(route, function(data) {
