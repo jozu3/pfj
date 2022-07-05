@@ -5,7 +5,7 @@
 @section('content_header')
     <h1>Lista de barrios</h1>
     <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#saveBarrio"
-        data-route="{{ route('admin.barrios.create') }}">
+        data-route="{{ route('admin.barrios.create') }}" data-estaca="{{ $estaca->id }}">
         Nuevo barrio
     </button>
 @stop
@@ -55,10 +55,12 @@
     $('#saveBarrio').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
         var route = button.data('route')
+        var estaca = button.data('estaca')
         var modal = $(this)           
 
         $.get(route, function(data) {
             $("#barrio_content").html(data);
+            modal.find('#estaca_id').val(estaca)
         });
 
     })

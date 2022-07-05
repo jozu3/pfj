@@ -1,4 +1,4 @@
-{!! Form::open(['route' => 'admin.estacas.store']) !!}
+{!! Form::open(['route' => 'admin.barrios.store']) !!}
 
 <div class="modal-header">
     <h5 class="modal-title" >Nueva estaca</h5>
