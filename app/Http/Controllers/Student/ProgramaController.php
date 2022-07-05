@@ -104,4 +104,8 @@ class ProgramaController extends Controller
     {
         //
     }
+
+    public function inscripciones(Programa $programa){
+        return view('student.programas.inscripciones');
+    }
 }
