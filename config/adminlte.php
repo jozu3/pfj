@@ -278,7 +278,8 @@ return [
         [
             'text' => 'Estacas',
             'route' => 'admin.estacas.index',
-            'icon' => 'fas fa-fw fa-landmark'
+            'icon' => 'fas fa-fw fa-landmark',
+            'can'  =>   'admin.estacas.index'
         ],
         [
             'text'        => 'PFJ\'s',
@@ -297,6 +298,12 @@ return [
             'route'  => 'admin.inscripciones.index',
             'icon' => 'fas fa-address-card',
             'can'  =>   'admin.inscripciones.index'
+        ], 
+        [
+            'text' => 'Locales',
+            'route'  => 'admin.locales.index',
+            'icon' => 'fas fa-map-marker-alt',
+            'can'  =>   'admin.locales.index'
         ],   
         [
             'header' => 'Inscripción', 

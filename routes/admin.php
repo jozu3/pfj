@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\FuncioneController;
 use App\Http\Controllers\Admin\MaterialeController;
 use App\Http\Controllers\Admin\ReporteController;
 use App\Http\Controllers\Admin\EstacaController;
+use App\Http\Controllers\Admin\LocaleController;
 use App\Http\Controllers\Admin\ParticipanteController;
 
 Route::resource('', HomeController::class)->names('admin');
@@ -61,6 +62,7 @@ Route::resource('programas', ProgramaController::class)->names('admin.programas'
 Route::resource('capacitaciones', CapacitacioneController::class)->names('admin.capacitaciones');
 Route::resource('materiales', MaterialeController::class)->names('admin.materiales');
 Route::resource('participantes', ParticipanteController::class)->names('admin.participantes');
+Route::resource('locales', LocaleController::class)->names('admin.locales');
 
 Route::get('/inscripciones/notificacion/{inscripcione}', [InscripcioneController::class, 'notificacion'])->name('admin.inscripciones.notificacion');
 Route::resource('inscripciones', InscripcioneController::class)->names('admin.inscripciones');
