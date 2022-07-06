@@ -56,7 +56,7 @@ class ParticipantesImport implements ToCollection, WithHeadingRow
                 'nombres' => $row['nombres'],
                 'apellidos' => $row['apellidos'],
                 'documento' => $row['documento'],
-                'fecnac' => Date::excelToDateTimeObject($row['cumpleanos']),
+                'fecnac' => $row['cumpleanos'],
                 'genero' => $row['sexo'],
                 'telefono' => $row['telefono'] == null ? '': $row['telefono'],
                 'informacion_medica' => $row['informacion_medica'],
