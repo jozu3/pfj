@@ -26,6 +26,10 @@ class Programa extends Model
     	return $this->hasMany(Inscripcione::class);
     }
 
+    public function participantes(){
+    	return $this->hasMany(Participante::class);
+    }
+
     public function capacitaciones(){
     	return $this->hasMany(Capacitacione::class);
     }

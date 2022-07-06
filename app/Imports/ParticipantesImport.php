@@ -2,16 +2,84 @@
 
 namespace App\Imports;
 
+use App\Models\Barrio;
+use App\Models\Participante;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class ParticipantesImport implements ToCollection
+class ParticipantesImport implements ToCollection, WithHeadingRow
 {
     /**
     * @param Collection $collection
     */
     public function collection(Collection $collection)
     {
-        //
+        foreach ($collection as $row) 
+        {
+            //genero
+            switch ($row['sexo']) {
+                case 'Mujer':
+                    $row['sexo'] = '0';
+                    break;
+                case 'Hombre':
+                    $row['sexo'] = '1';
+                    break;
+                
+            }
+
+            //barrio
+            $row['barrio'] = Barrio::where('nombre', $row['barrio'])->first();
+            if ($row['barrio']) {
+                $row['barrio'] = $row['barrio']->id;
+            } else {
+                $row['barrio'] = 1;//desconocido seeder
+            }
+
+            //estado
+            if ($row['estado'] == 'Aprobados') {
+                $row['estado'] = 1;
+            } else {
+                $row['estado'] = 0;
+            }
+
+            //vacunas
+            if ($row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'] == 'true') {
+                $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'] = 1;
+            } else {
+                $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'] = 0;
+            }
+
+
+            Participante::create([
+                'nombres' => $row['nombres'],
+                'apellidos' => $row['apellidos'],
+                'documento' => $row['documento'],
+                'fecnac' => Date::excelToDateTimeObject($row['cumpleanos']),
+                'genero' => $row['sexo'],
+                'telefono' => $row['telefono'] == null ? '': $row['telefono'],
+                'informacion_medica' => $row['informacion_medica'],
+                'talla' => $row['tamano_de_camiseta'],
+                'informacion_alimentaria' => $row['informacion_alimentaria'],
+                'contacto1' => $row['contacto_1'] == null ? '': $row['contacto_1'] ,
+                'contacto2' => $row['contacto_2'] == null ? '': $row['contacto_2'] ,
+                'age' => $row['age'],
+                'age_2022' => $row['cuantos_anos_cumples_en_el_2022'],
+                'barrio_id' => $row['barrio'],
+                'estado_aprobacion' => $row['estado'],
+                'obispo' => $row['obispo'],
+                'sangre' => $row['grupo_sanguineo_y_factor_rh'],
+                'alergia' => $row['sufres_de_alergia'],
+                'tratamiento_medico' => $row['recibes_algun_tratamiento_medico'],
+                'diabetico_asmatico' => $row['eres_diabetico_o_asmatico'],
+                'seguro_medico' => $row['seguro_medico'],
+                'vacunas' => $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'],
+                'programa_id' => session('programa_activo'),
+                'estado' => 0,//inscrito
+                'tipo_ingreso' => $row[''],
+                'horallegada' => $row[''],
+            ]);
+        }
     }
 }

@@ -18,6 +18,12 @@ class ExcelController extends Controller
         return $inscripciones->programa($programa->id, $familia, $estaca, $estado, $rol)->download('inscripcionesPrograma.xlsx');
     }
 
+    public function exportExcelParticipantes(Programa $programa, $compania, $estaca, $estado){
+        // $inscripciones = new ParticipantesExport();
+        // return $inscripciones->programa($programa->id, $compania, $estaca, $estado)->download('ParticipantesPrograma.xlsx');
+    }
+
+
     public function importExcelPersonal(Request $request, Programa $programa){
         $file = $request->file('file');
         //return $file;
@@ -56,6 +62,6 @@ class ExcelController extends Controller
             throw $exception;
         }
 
-        return back()->with('info', 'Importación de personal completada.');
+        return back()->with('info', 'Importación de participantes completada.');
     }
 }

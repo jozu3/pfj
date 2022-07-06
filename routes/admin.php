@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\FuncioneController;
 use App\Http\Controllers\Admin\MaterialeController;
 use App\Http\Controllers\Admin\ReporteController;
 use App\Http\Controllers\Admin\EstacaController;
+use App\Http\Controllers\Admin\ParticipanteController;
 
 Route::resource('', HomeController::class)->names('admin');
 
@@ -59,6 +60,7 @@ Route::get('/programas/{programa}/participantes', [ProgramaController::class, 'p
 Route::resource('programas', ProgramaController::class)->names('admin.programas');
 Route::resource('capacitaciones', CapacitacioneController::class)->names('admin.capacitaciones');
 Route::resource('materiales', MaterialeController::class)->names('admin.materiales');
+Route::resource('participantes', ParticipanteController::class)->names('admin.participantes');
 
 Route::get('/inscripciones/notificacion/{inscripcione}', [InscripcioneController::class, 'notificacion'])->name('admin.inscripciones.notificacion');
 Route::resource('inscripciones', InscripcioneController::class)->names('admin.inscripciones');
@@ -81,6 +83,7 @@ Route::get('recibo-inscripcione/{idinscripcione}', [PDFController::class, 'recib
 Route::get('reportpagos', [PDFController::class, 'pagos'])->name('admin.print.pagos');
 
 Route::get('/export-excel-personal/{programa}/{familia}/{estaca}/{estado}/{rol}', [ExcelController::class, 'exportExcelPersonal'])->name('admin.excel.exportExcelPersonal');
+Route::get('/export-excel-participantes/{programa}/{compania}/{estaca}/{estado}', [ExcelController::class, 'exportExcelParticipantes'])->name('admin.excel.exportExcelParticipantes');
 Route::post('/import-excel-personal/{programa}', [ExcelController::class, 'importExcelPersonal'])->name('admin.excel.importExcelPersonal');
 Route::post('/import-excel-participantes/{programa}', [ExcelController::class, 'importExcelParticipantes'])->name('admin.excel.importExcelParticipantes');
 

@@ -47,7 +47,7 @@
 
         <div class="col-md-12">
 
-            {{-- @livewire('admin.inscripcione-programa-index', ['programa_id' => $programa->id], key('asdasd')) --}}
+            @livewire('admin.participantes-programa', ['programa_id' => $programa->id])
 
         </div>
     </div>
@@ -77,8 +77,8 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="importExcelPersonalLabel">Importar datos de usuario</h5>
-                        <a href="{{ config('app.url') . '/files/PERSONAL-PLANTILLA.xlsx' }}"
+                        <h5 class="modal-title" id="importExcelPersonalLabel">Importar participants de la sesión {{ $programa->nombre }}</h5>
+                        <a href="{{ config('app.url') . '/files/PARTICIPANTES-PLANTILLA.xlsx' }}"
                             class="btn btn-yellow-pfj ml-5" download><i class="far fa-file-excel"></i> Descargar
                             plantilla</a>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -424,23 +424,7 @@
             $("#danger-alert").hide();
 
         });
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-
-        Livewire.on('alert', function(result) {
-            if (result) {
-                $("#success-alert").show();
-                $("#success-alert").fadeTo(1000, 500).slideUp(500, function() {
-                    $("#success-alert").slideUp(500);
-                });
-            } else {
-                $("#danger-alert").show();
-                $("#danger-alert").fadeTo(1000, 500).slideUp(500, function() {
-                    $("#danger-alert").slideUp(500);
-                });
-            }
-        });
+  
     </script>
     <script type="text/javascript" src="{{ config('app.url') }}/js/toggle-bootstrap.js"></script>
 

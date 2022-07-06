@@ -40,8 +40,8 @@ class CreateParticipantesTable extends Migration
 
             $table->foreignId('programa_id')->constrained();
             $table->tinyInteger('estado');
-            $table->tinyInteger('tipo_ingreso');
-            $table->dateTime('horallegada');
+            $table->tinyInteger('tipo_ingreso')->nullable();
+            $table->dateTime('horallegada')->nullable();
             
             $table->timestamps();
         });

@@ -14,8 +14,12 @@ class Barrio extends Model
     	return $this->belongsTo(Estaca::class);
     }
 
-    public function personaless(){
+    public function personales(){
         return $this->hasMany(Personales::class);
+    }
+    
+    public function participantes(){
+        return $this->hasMany(Participante::class);
     }
 
 
