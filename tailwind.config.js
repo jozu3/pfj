@@ -14,6 +14,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'search-participante': "url('http://localhost/pfj/public/img/portada.jpg')",
+            },
         },
     },
 

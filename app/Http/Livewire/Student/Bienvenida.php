@@ -9,6 +9,7 @@ class Bienvenida extends Component
 {
     public $search;
     public $programa;
+    public $open = false;
 
     public function render()
     {
