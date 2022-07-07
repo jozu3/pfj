@@ -24,8 +24,11 @@
                 <div class="col">
                     <select name="" id="" class="form-control" wire:model="estado">
                         <option value="-1">-- Todos --</option>
-                        <option value="0">Inactivo</option>
-                        <option value="1">Activo</option>
+                        <option value="0">Inscrito</option>
+                        <option value="1">Ingresado</option>
+                        <option value="2">Permutado</option>
+                        <option value="3">Terminado</option>
+                        <option value="4">Retirado</option>
                     </select>
                 </div>
                 {{-- <div class="col">
@@ -48,6 +51,7 @@
                         <th>Correo electrónico</th>
                         <th>Fecha de nacimiento</th>
                         <th>Edad</th>
+                        <th>Tipo de sangre</th>
                         <th>Activo</th>
                     </tr>
                 </thead>
@@ -72,13 +76,12 @@
                             <td>
                                 @if ($participante->participante_compania)
                                     {{ $participante->participante_compania->companerismo->numero }}
-                                    
                                 @endif
                             </td>
                             <td>
                                 <span>
-                                    <a href="tel:{{ $participante->telefono }}"
-                                        alt="Llamar por teléfono" data-toggle="tooltip" data-placement="top"
+                                    <a href="tel:{{ $participante->telefono }}" alt="Llamar por teléfono"
+                                        data-toggle="tooltip" data-placement="top"
                                         title="Llamar por teléfono">{{ $participante->telefono }}</a>
                                     <a href="https://api.whatsapp.com/send?phone=51{{ $participante->telefono }}"
                                         class="text-success" target="_blank" alt="Enviar Whatsapp" data-toggle="tooltip"
@@ -91,24 +94,39 @@
                                         data-toggle="tooltip" data-placement="top"
                                         title="Enviar email">{{ $participante->email }}</a>
                                 @else
-                                   
                                 @endif
                             </td>
                             <td>
-                                {{ date( 'd/m/Y' , strtotime($participante->fecnac)) }}
+                                {{ date('d/m/Y', strtotime($participante->fecnac)) }}
                             </td>
                             <td>
                                 {{ $participante->age }}
                             </td>
                             <td>
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" @if ($participante->estado) checked @endif
-                                        data-participante="{{ $participante->id }}"
-                                        class="custom-control-input prevent-inactive"
-                                        id="customSwitch{{ $participante->id }}">
-                                    <label class="custom-control-label"
-                                        for="customSwitch{{ $participante->id }}"></label>
-                                </div>
+                                {{ $participante->sangre }}
+                            </td>
+                            <td>
+                                @switch($participante->estado)
+                                    @case(0)
+                                        {{ 'Inscrito' }}
+                                    @break
+
+                                    @case(1)
+                                        {{ 'ingresado' }}
+                                    @break
+
+                                    @case(2)
+                                        {{ 'permutado' }}
+                                    @break
+
+                                    @case(3)
+                                        {{ 'terminado' }}
+                                    @break
+                                    @case(4)
+                                        {{ 'retirado' }}
+                                    @break
+                                    @default
+                                @endswitch
                             </td>
                             <td width="10px">
                                 <a href="{{ route('admin.participantes.show', $participante) }}"
@@ -134,11 +152,12 @@
                             {{ $participantes->links() }}
                         </div>
                         <div class="col">
-                            Viendo <b> {{ count($participantes) }}</b> de un total de <b> {{ $participantes->total() }}</b>
+                            Viendo <b> {{ count($participantes) }}</b> de un total de <b>
+                                {{ $participantes->total() }}</b>
                         </div>
                     @endif
                 </div>
-                
+
             </div>
         </div>
     </div>

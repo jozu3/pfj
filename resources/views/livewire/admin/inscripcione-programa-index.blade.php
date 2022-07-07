@@ -166,20 +166,20 @@
                                     class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
                         </tr>
-                        @empty
-                            <tr>
-                                <td colspan="100%">
-                                    <div class=" text-warning">
-                                        {{ 'No hay personal' }}
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-            <div class="card-footer">
-                @include('admin.programas.partials.card-footer-personal')
-            </div>
+                    @empty
+                        <tr>
+                            <td colspan="100%">
+                                <div class=" text-warning">
+                                    {{ 'No hay personal' }}
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            @include('admin.programas.partials.card-footer-personal')
         </div>
     </div>
+</div>

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Edificio;
+use App\Models\Habitacione;
 use App\Http\Controllers\Controller;
-use App\Models\Locale;
 use Illuminate\Http\Request;
 
-class EdificioController extends Controller
+class HabitacioneController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,8 +25,7 @@ class EdificioController extends Controller
      */
     public function create()
     {
-        $locales = Locale::pluck('nombre', 'id');
-        return view('admin.edificios.create', compact('locales'));
+        //
     }
 
     /**
@@ -38,25 +36,16 @@ class EdificioController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required',
-            'locale_id' => 'required',
-        ]);
-
-        $edificio = Edificio::create($request->all());
-
-        $locale = $edificio->locale;
-
-        return redirect()->route('admin.locales.show', $locale)->with('info', 'El edificio se creó correctamente');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Edificio  $edificio
+     * @param  \App\Models\Habitacione  $habitacione
      * @return \Illuminate\Http\Response
      */
-    public function show(Edificio $edificio)
+    public function show(Habitacione $habitacione)
     {
         //
     }
@@ -64,23 +53,22 @@ class EdificioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Edificio  $edificio
+     * @param  \App\Models\Habitacione  $habitacione
      * @return \Illuminate\Http\Response
      */
-    public function edit(Edificio $edificio)
+    public function edit(Habitacione $habitacione)
     {
-        $locales = Locale::all();
-        return view('admin.edificios.edit', compact('locales'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Edificio  $edificio
+     * @param  \App\Models\Habitacione  $habitacione
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Edificio $edificio)
+    public function update(Request $request, Habitacione $habitacione)
     {
         //
     }
@@ -88,10 +76,10 @@ class EdificioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Edificio  $edificio
+     * @param  \App\Models\Habitacione  $habitacione
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Edificio $edificio)
+    public function destroy(Habitacione $habitacione)
     {
         //
     }

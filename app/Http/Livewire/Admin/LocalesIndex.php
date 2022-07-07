@@ -3,11 +3,15 @@
 namespace App\Http\Livewire\Admin;
 
 use Livewire\Component;
+use App\Models\Locale;
 
 class LocalesIndex extends Component
 {
+    public $search;
+
     public function render()
     {
-        return view('livewire.admin.locales-index');
+        $locales = Locale::all();
+        return view('livewire.admin.locales-index', compact('locales'));
     }
 }
