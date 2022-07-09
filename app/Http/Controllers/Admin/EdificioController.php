@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Edificio;
 use App\Http\Controllers\Controller;
 use App\Models\Locale;
+use App\Models\Piso;
 use Illuminate\Http\Request;
 
 class EdificioController extends Controller
@@ -41,13 +42,21 @@ class EdificioController extends Controller
         $request->validate([
             'nombre' => 'required',
             'locale_id' => 'required',
+            'pisos' => 'required|min:1',
         ]);
 
         $edificio = Edificio::create($request->all());
 
+        for ($i=1; $i <= $request->pisos; $i++) { 
+            Piso::create([
+                'num' => $i,
+                'edificio_id' => $edificio->id
+            ]);
+        }
+
         $locale = $edificio->locale;
 
-        return redirect()->route('admin.locales.show', $locale)->with('info', 'El edificio se creó correctamente');
+        return redirect()->route('admin.locales.show', $locale)->with('info', 'El edificio se creó correctamente con '. $request->pisos . ' pisos.');
     }
 
     /**

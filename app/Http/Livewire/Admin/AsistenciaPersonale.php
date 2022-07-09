@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin;
 
 use App\Models\Grupo;
 use App\Models\Inscripcione;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,12 +14,31 @@ class AsistenciaPersonale extends Component
     public $search;
     public $familia;
     public $aprobacion;
+    public $cantpages = 15;
+	public $sortBy = 'contactos.nombres';
+    public $sortDirection = 'asc';
 
     use WithPagination;
 
 	protected $paginationTheme = 'bootstrap';
 
     protected $listeners = ['update_totales' => 'render'];
+
+    public function sortBy($field)
+    {
+        $this->sortDirection = $this->sortBy === $field
+            ? $this->reverseSort()
+            : 'asc';
+
+        $this->sortBy = $field;
+    }
+
+    public function reverseSort()
+    {
+        return $this->sortDirection === 'asc'
+            ? 'desc'
+            : 'asc';
+    }
 
     public function render()
     {   
@@ -33,13 +53,14 @@ class AsistenciaPersonale extends Component
                                     // ->join('grupos', 'companerismos.grupo_id', '=', 'grupos.id')
                                     ->join('personales', 'inscripciones.personale_id', '=', 'personales.id')
                                     ->join('contactos', 'personales.contacto_id', '=', 'contactos.id')
+                                    // ->join('asistencias', 'inscripciones.id', '=', 'asistencias.inscripcione_id')
                                     ->select(
                                             'inscripciones.id as inscripcione_id', 
                                             'contactos.id as contacto_id', 
                                             'contactos.nombres as contacto_nombres', 
                                             'contactos.apellidos as contacto_apellidos',
                                             'personales.estado_rtemplo as personale_estado_rtemplo',
-                                            'personales.obs_rtemplo as personale_obs_rtemplo',
+                                            'personales.obs_rtemplo as personale_obs_rtemplo'
                                             )
                                     ->whereHas('personale', function ($q) use($search){
                                         $q->whereHas('contacto', function ($q) use ( $search){
@@ -65,10 +86,10 @@ class AsistenciaPersonale extends Component
                                                         });
                                     }
                                    
-        $inscripciones = $inscripciones->orderBy('contactos.nombres');
+        $inscripciones = $inscripciones->orderBy($this->sortBy, $this->sortDirection);
         
         $inscripciones_all_ids = $inscripciones->pluck('inscripciones.inscripcione_id'); 
-        $inscripciones = $inscripciones->paginate();
+        $inscripciones = $inscripciones->paginate($this->cantpages);
         $this->page = 1;
 
         $capacitaciones = $this->programa->capacitaciones->where('tipo', '1');

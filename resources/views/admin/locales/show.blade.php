@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-	@if (session('info'))
+    @if (session('info'))
         <div class="alert alert-success">
             {{ session('info') }}
         </div>
@@ -18,7 +18,20 @@
             {{ session('error') }}
         </div>
     @endif
-    @livewire('admin.locale-edificios')
+
+    <div class="card">
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+            {!! Form::model($locale, ['route' => ['admin.locales.update', $locale], 'method' => 'put']) !!}
+            @include('admin.locales.partials.form')
+            {!! Form::submit('Editar local', ['class' => 'btn btn-primary']) !!}
+            {!! Form::close() !!}
+        </div>
+    </div>
+
+    @livewire('admin.locale-edificios', ['locale' => $locale])
 @stop
 
 @section('css')
@@ -30,5 +43,7 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script>
+        console.log('Hi!');
+    </script>
 @stop

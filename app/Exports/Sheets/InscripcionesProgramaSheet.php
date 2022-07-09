@@ -7,7 +7,9 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 use Illuminate\Contracts\View\View;
 use App\Models\Grupo;
 use App\Models\Asistencia;
+use App\Models\Capacitacione;
 use App\Models\Inscripcione;
+use App\Models\Tarea;
 
 class InscripcionesProgramaSheet implements FromView, WithTitle
 {
@@ -59,8 +61,10 @@ class InscripcionesProgramaSheet implements FromView, WithTitle
         }
         
         $inscripciones = $inscripciones->get();
+        $capacitaciones = Capacitacione::where('programa_id', $this->programa)->where('tipo', '1')->get();
+        $tareas = Tarea::where('programa_id', $this->programa)->get();
 
-        return view('admin.exports.inscripcione-programa', compact('inscripciones'));
+        return view('admin.exports.inscripcione-programa', compact('inscripciones', 'capacitaciones', 'tareas'));
     }
 
     public function title() : string{

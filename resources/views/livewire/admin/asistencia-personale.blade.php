@@ -1,7 +1,27 @@
 <div>
     <div class="card cont-pestaña">
         <div class="card-header">
-            <h3>Listado de Personal</h3>
+            <div class="form-row">
+                <div class="col">
+                    <h3>Listado de Personal</h3>
+
+                </div>
+                <div class="col">
+            @include('admin.programas.partials.card-footer-personal')
+
+                </div>
+                <div class="col-md-1 d-flex align-items-center justify-content-end">
+                    Ver:
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                        <select name="" id="" class="form-control" wire:model="cantpages">
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                </div>
+            </div>
             <div class="form-row">
                 <div class="col">
                     <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un personal">
@@ -23,8 +43,9 @@
                         <th class="apellido-fijo fijo border-0">
                             Familia
                         </th>
-                        <th class="nombre-fijo fijo border-0">
+                        <th class="nombre-fijo fijo border-0" wire:click="sortBy('contactos.nombres')" style="cursor:pointer">
                             Nombres y Apellidos
+                            @include('partials._sort-icon', ['field' => 'contactos.nombres'])
                         </th>
                         <th class="text-center align-middle border-left">
                             Asistencia (%/#)

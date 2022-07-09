@@ -6,8 +6,11 @@ use Livewire\Component;
 
 class LocaleEdificios extends Component
 {
+    public $locale;
     public function render()
     {
-        return view('livewire.admin.locale-edificios');
+        $edificios = $this->locale->edificios;
+
+        return view('livewire.admin.locale-edificios', compact('edificios'));
     }
 }

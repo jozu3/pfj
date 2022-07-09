@@ -61,6 +61,7 @@ Route::get('/programas/{programa}/dashboard', [ProgramaController::class, 'dashb
 Route::get('/programas/{programa}/tareas', [ProgramaController::class, 'tareas'])->name('admin.programas.tareas');
 Route::get('/programas/{programa}/funciones', [ProgramaController::class, 'funciones'])->name('admin.programas.funciones');
 Route::get('/programas/{programa}/participantes', [ProgramaController::class, 'participantes'])->name('admin.programas.participantes');
+Route::get('/programas/{programa}/companias', [ProgramaController::class, 'companias'])->name('admin.programas.companias');
 Route::resource('programas', ProgramaController::class)->names('admin.programas');
 Route::resource('capacitaciones', CapacitacioneController::class)->names('admin.capacitaciones');
 Route::resource('materiales', MaterialeController::class)->names('admin.materiales');

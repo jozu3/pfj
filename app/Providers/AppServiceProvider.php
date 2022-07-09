@@ -161,6 +161,13 @@ class AppServiceProvider extends ServiceProvider
                         'can' => 'admin.programas.participantes'
                     ];
 
+                    $menu_companias = [
+                        'text' => 'Compañias',
+                        'url' => 'admin/programas/' . session('programa_activo') . '/companias',
+                        'icon' => 'fas fa-child',
+                        'can' => 'admin.programas.companias'
+                    ];
+
                     $header = [
                         'header' => 'Dashboard',
                         'can'  =>   'admin.programas.edit',
