@@ -329,6 +329,11 @@ return [
             'can'  =>   'admin.programas.misprogramas',
             'key' => 'programa',
         ],
+        [
+            'header' => 'Participantes',
+            'can'  =>   'admin.programas.participantes',
+            'key' => 'participantes',
+        ],
         // [
         //     'text' => 'Funciones',
         //     'route'  => 'admin.funciones.index',

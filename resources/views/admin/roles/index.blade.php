@@ -4,6 +4,7 @@
 
 @section('content_header')
 <a href="{{ route('admin.roles.create') }}" class="btn btn-secondary float-right">Nuevo rol</a>
+<a href="{{ route('admin.permissions.create') }}" class="btn btn-secondary float-right">Nuevo permiso</a>
     <h1>Lista de roles</h1>
 @stop
 

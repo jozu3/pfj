@@ -30,8 +30,8 @@
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active" id="nav-personal-tab" data-toggle="tab" href="#nav-personal"
                             role="tab" aria-controls="nav-personal" aria-selected="true">Capacitaciones</a>
-                        {{-- <a class="nav-item nav-link" id="nav-comp-tab" data-toggle="tab" href="#nav-comp" role="tab"
-                            aria-controls="nav-comp" aria-selected="true">Familias</a> --}}
+                        <a class="nav-item nav-link" id="nav-comp-tab" data-toggle="tab" href="#nav-comp" role="tab"
+                            aria-controls="nav-comp" aria-selected="true">Familias</a>
                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                             aria-controls="nav-profile" aria-selected="false">Lecturas</a>
                             <a class="nav-item nav-link" id="nav-materiales-tab" data-toggle="tab" href="#nav-materiales" role="tab"
@@ -43,9 +43,9 @@
                         aria-labelledby="nav-personal-tab">
 						@livewire('admin.capacitaciones-index', [ 'programa' => $programa])
                     </div>
-                    {{-- <div class="tab-pane fade show" id="nav-comp" role="tabpanel" aria-labelledby="nav-comp-tab">
+                    <div class="tab-pane fade show" id="nav-comp" role="tabpanel" aria-labelledby="nav-comp-tab">
 						@livewire('admin.grupos-index', [ 'programa' => $programa])
-                    </div> --}}
+                    </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 						@livewire('admin.tarea-lista', ['programa' => $programa])
                     </div>

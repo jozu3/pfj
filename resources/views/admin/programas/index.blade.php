@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-	@if (session('info'))
+    @if (session('info'))
         <div class="alert alert-success">
             {{ session('info') }}
         </div>
@@ -20,11 +20,13 @@
         .card-body {
             overflow: auto;
         }
-        td{
-            vertical-align: middle!important
+
+        td {
+            vertical-align: middle !important
         }
-        .avatar-circle{
-            width:130px;
+
+        .avatar-circle {
+            width: 130px;
             height: 130px;
             object-fit: cover;
             object-position: center
@@ -33,9 +35,10 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!');
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
+    <script>
+        console.log('Hi!');
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
         })
- </script>
+    </script>
 @stop

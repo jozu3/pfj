@@ -272,4 +272,8 @@ class ProgramaController extends Controller
     public function participantes(Programa $programa){
         return view('admin.programas.participantes', compact('programa'));
     }
+
+    public function companias(Programa $programa){
+        return view('admin.programas.companias', compact('programa'));
+    }
 }

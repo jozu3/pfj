@@ -118,4 +118,23 @@ class RoleController extends Controller
 
         return redirect()->route('admin.roles.index')->with('info', 'El rol se eliminó con éxito'); 
     }
+
+    public function createPermission()
+    {
+
+        return view('admin.permissions.create');
+    }
+    
+    public function storePermission(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $role1 = Role::where('name', 'Admin')->first();
+        Permission::create(['name' => $request->name, 'description' => $request->description])->syncRoles([$role1]);
+
+        return redirect()->route('admin.roles.index')->with('info', 'El permiso se creó correctamente');
+    }
 }

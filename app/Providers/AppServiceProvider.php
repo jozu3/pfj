@@ -177,7 +177,8 @@ class AppServiceProvider extends ServiceProvider
                     
                     // $event->menu->addAfter('programa', $menu_funciones);
                     // $event->menu->addAfter('programa', $menu_tareas);
-                    $event->menu->addAfter('programa', $menu_participantes);
+                    $event->menu->addAfter('participantes', $menu_companias);
+                    $event->menu->addAfter('participantes', $menu_participantes);
                     $event->menu->addAfter('programa', $menu_asistencias);
                     $event->menu->addAfter('programa', $menu_anuncios);
                     $event->menu->addAfter('programa', $menu_organigrama);

@@ -18,6 +18,10 @@ class Participante extends Model
     {
         return $this->belongsTo(Programa::class);
     }
+
+    public function participanteCompania(){
+        return $this->hasOne(ParticipanteCompania::class);
+    }
 }
 /*
 

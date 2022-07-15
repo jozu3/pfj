@@ -17,6 +17,8 @@ class CreateCompanerismosTable extends Migration
             $table->id();
             $table->string('numero')->nullable();
             $table->string('nombre')->nullable();
+            $table->tinyInteger('edadmin')->nullable();
+            $table->tinyInteger('edadmax')->nullable();
             $table->foreignId('role_id')->constrained();
             $table->foreignId('grupo_id')->constrained();
             $table->timestamps();

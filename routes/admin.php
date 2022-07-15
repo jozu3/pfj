@@ -38,6 +38,8 @@ Route::resource('', HomeController::class)->names('admin');
 Route::get('/users/sessions', [UserController::class, 'listSessions'])->name('admin.users.sessions');
 Route::resource('users', UserController::class)->names('admin.users');
 Route::resource('personales', PersonaleController::class)->names('admin.personales');
+Route::get('/permissions/create', [RoleController::class, 'createPermission'])->name('admin.permissions.create');
+Route::post('/permissions/create', [RoleController::class, 'storePermission'])->name('admin.permissions.store');
 Route::resource('roles', RoleController::class)->names('admin.roles');
 Route::resource('estacas', EstacaController::class)->names('admin.estacas');
 Route::resource('barrios', BarrioController::class)->names('admin.barrios');

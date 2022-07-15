@@ -18,6 +18,10 @@ class Programa extends Model
         return $this->hasMany(Grupo::class);
     }
 
+    public function edadRangos(){
+        return $this->hasMany(EdadRango::class);
+    }
+
     public function pfj(){
         return $this->belongsTo(Pfj::class);
     }
@@ -89,6 +93,15 @@ class Programa extends Model
         return $this->morphOne(Image::class, 'imageable')->where('tipo', 'ml');
     }
 
+    public function companias(){
+        
+        $that = $this;
+        $companias = Companerismo::where('role_id', 6)->whereHas('grupo', function ($q) use ($that){
+            $q->where('programa_id', $that->id);
+        })->get();
+
+        return $companias;
+    }
 
 }
 /*
