@@ -125,17 +125,30 @@
                         </div>
                         <div class="card-body">
                             @forelse ($rangosPrograma as $rango)
-                                <div class="form-row">
+                                <div class="">
                                     <h3>Rango: {{ $rango->edadmin . ' - ' . $rango->edadmax }}</h3>
+                                    <span> Seleccione solo: <b>{{ $rango->cantcompanias }}</b> compañias</span>
+                                {{-- @php
+                                    
+                                    $cant = 0;
+                                    foreach ($this->programa->companias() as $compania) {
+                                        if(array_key_exists($rango. '-'.$compania->id, $this->rangos)){
+                                            $cant++;
+                                        }
+                                    }
+                                    @endphp
+                                    {{ cantidadCompaniasSelectbyRango($rango->id) }}
+                                    {{count($programa->companias()) * count($programa->participantes->where('estado', 0)->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax)) / count($programa->participantes->where('estado', 0))}} --}}
                                 </div>
                                 <h2 class="h6">Lista de compañias</h2>
                                 <div class="form-row">
                                     @forelse ($companias as $compania)
                                         <div class="col-2">
-                                            {!! Form::checkbox('com'.$compania->id, $compania->id, null, [
+                                            {!! Form::checkbox('com', $compania->id, null, [
                                                 'class' => 'mr-1',
                                                 'id' => 'c' . $rango->id . $compania->id,
                                                 'wire:model' => 'rangos.' . $rango->id . '-' . $compania->id . '.compania',
+                                                'wire:click' => 'limpiarRangoCompania('.$rango->id.',' .$compania->id. ')'
                                             ]) !!}
                                             <label for="{{ 'c' . $rango->id . $compania->id }}" data-toggle="tooltip"
                                                 data-placement="top"
@@ -151,7 +164,13 @@
                                 </div>
                             @empty
                             @endforelse
-                            {{-- {{var_dump($rangos)}} --}}
+                            {{-- @forelse ($rangos as $rango)
+                                <div>
+                                    {{array_keys($rangos)[$loop->index]}} -- {{ $rango['compania'] }}
+                                </div>
+                            @empty
+                                
+                            @endforelse --}}
                         </div>
                         <div class="card-footer">
                             <button type="button" wire:loading.attr="disabled" wire:target="volverPaso"

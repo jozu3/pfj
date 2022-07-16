@@ -6,6 +6,7 @@ use App\Models\Companerismo;
 use App\Models\EdadRango;
 use App\Models\Participante;
 use App\Models\ParticipanteCompania;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use PhpOffice\PhpSpreadsheet\Calculation\LookupRef\Offset;
 use Swift;
@@ -45,9 +46,46 @@ class CompaniasPrograma extends Component
         }
     }
 
+    public function updatedRangos(){
+        foreach ($this->rangos as $rango) {
+            if (isset($rango['compania'])) {
+
+                // unset($this->rangos[$r->id.'-'.$comp]);
+            }
+
+        }
+    }
+    public function limpiarRangoCompania($rango, $comp){
+
+        $ran = EdadRango::where('programa_id', $this->programa->id)->get();
+        foreach ($ran as $r) {
+            if ($r->id != $rango) {
+                unset($this->rangos[$r->id.'-'.$comp]);
+            }
+            
+        }
+        
+        if ($this->rangos[$rango.'-'.$comp]['compania'] == false) {
+            unset($this->rangos[$rango.'-'.$comp]);
+        }
+
+
+    }
+    // public function cantidadCompaniasSelectbyRango($rango){
+    //     $cant = 0;
+    //     foreach ($this->programa->companias() as $compania) {
+    //         if(array_key_exists($rango. '-'.$compania->id, $this->rangos)){
+    //             $cant++;
+    //         }
+    //     }
+
+    //     return $cant;
+
+    // }
+
     public function crearCompanias()
     {
-
+        //paso 1
         $this->validate();
         $cantCompanias =  count($this->programa->companias());
         $result = false;
@@ -60,7 +98,7 @@ class CompaniasPrograma extends Component
             $participantes = $this->programa->participantes->where('estado', 0)->where('age_2022', '>=', $rango['edadmin'])->where('age_2022', '<=', $rango['edadmax']);
             if(count($participantes) != 0){
 
-                $razon = count($this->programa->participantes->where('estado', 0)) / count($participantes);
+                $razon = count($participantes)/count($this->programa->participantes->where('estado', 0));
                 $cantComp = round($cantCompanias * count($participantes) / count($this->programa->participantes->where('estado', 0)), 0);
 
                 EdadRango::create([
@@ -76,6 +114,37 @@ class CompaniasPrograma extends Component
             } else {
                 $this->addError('rangoParticipantes', 'Uno de los rangos no tiene participantes');
             }
+        }
+
+        $totalcreadas = EdadRango::select(DB::raw('sum(cantcompanias) as total'))->where('programa_id', $this->programa->id)->groupBy('programa_id')->first()->total;
+
+        if($cantCompanias != $totalcreadas){
+            $sobra = $cantCompanias - $totalcreadas;
+            // dd($sobra);
+            $mayor = 0;
+            $rangoMayor = 0;
+            $rangosCreados = EdadRango::where('programa_id', $this->programa->id)->get();
+
+            foreach ($rangosCreados as $rango) {
+                $participantes = $this->programa->participantes->where('estado', 0)->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax);
+
+                $cantcomp_ = ($cantCompanias * count($participantes) )/count($this->programa->participantes->where('estado', 0));
+                $roundcantComp = round($cantcomp_);
+                $residuo = $cantcomp_ - $roundcantComp;
+
+                if($mayor < $residuo){
+                    $mayor = $residuo;
+                    $rangoMayor = $rango;
+                }
+
+            }
+
+            // dd($rangoMayor.'+'.$mayor);
+
+            $rangoMayor->update([
+                'cantcompanias' => $rangoMayor->cantcompanias + $sobra
+            ]);
+
         }
 
         if ($result) {
@@ -99,7 +168,7 @@ class CompaniasPrograma extends Component
         ]);
 
         $rango_companias = array_keys($this->rangos);
-        
+
         foreach ($rango_companias as $rango_compania) {
             $result = false;
 
