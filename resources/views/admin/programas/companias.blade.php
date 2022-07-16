@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-    <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#sortCompanias">
+    <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#sortCompanias" data-backdrop="static" data-keyboard="false">
         <i class="far fa-plus"></i> Armar Compañias
     </button>
     <h1>Compañias por Sesión</h1>
@@ -17,7 +17,9 @@
         </div>
     @endif
 
-    @livewire('admin.companias-programa', ['programa' => $programa])
+    @livewire('admin.companias-programa', ['programa' => $programa], key($programa->id))
+
+
 @stop
 
 @section('css')
@@ -98,6 +100,9 @@
             flex-wrap: unset;
             text-align: center;
         }
+        .showLoading{
+
+        }
     </style>
 @stop
 
@@ -108,8 +113,24 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
 
-        Livewire.on('comp', ($result) => {
-                console.log($result)
-            });
+        // $('#modalloading').modal({
+        //     backdrop: 'static',
+        //     keyboard: false
+        // })
+
+      
+
+        Livewire.on('offmodalloading', () => {
+            console.log('offsortCompanias');
+            $('#sortCompanias').modal('hide')
+            Livewire.emit('render');
+
+        });
+
+        Livewire.on('onmodalloading', () => {
+            console.log('onmodalloading'); 
+            $('#modalloading').modal('show')
+        });
+
     </script>
 @stop

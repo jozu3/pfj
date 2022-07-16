@@ -40,7 +40,12 @@ class ParticipantesPrograma extends Component
                                         }
                                     });
 
-
+        //filtro por compañia
+        if($this->compania != '' && $this->compania != '0'){
+            $participantes = $participantes->whereHas('participanteCompania', function($q){
+                $q->where('companerismo_id', $this->compania);
+            });
+        }
 
         //filtro por estado
         if($this->estado != '-1'){

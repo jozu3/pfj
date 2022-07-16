@@ -74,8 +74,8 @@
                                 {{ $participante->barrio->estaca->nombre }}
                             </td>
                             <td>
-                                @if ($participante->participante_compania)
-                                    {{ $participante->participante_compania->companerismo->numero }}
+                                @if ($participante->participanteCompania)
+                                    {{ $participante->participanteCompania->companerismo->numero }}
                                 @endif
                             </td>
                             <td>

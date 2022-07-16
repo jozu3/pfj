@@ -14,4 +14,9 @@ class ParticipanteCompania extends Model
     {
         return $this->belongsTo(Participante::class);
     }
+
+    public function companerismo()
+    {
+        return $this->belongsTo(Companerismo::class);
+    }
 }

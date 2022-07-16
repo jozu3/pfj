@@ -6,7 +6,7 @@
                 @forelse ($programa->grupos as $grupo)
                     <a class="nav-item nav-link" id="nav-home-tab{{ $grupo->id }}" data-toggle="tab"
                         href="#nav-home{{ $grupo->id }}" role="tab" aria-controls="nav-home{{ $grupo->id }}"
-                        aria-selected="">{{ 'Grupo ' . $grupo->numero }}</a>
+                        aria-selected="">{{ 'Familia ' . $grupo->numero }}</a>
                 @empty
                 @endforelse
             </div>
@@ -15,7 +15,12 @@
             @forelse ($programa->grupos as $grupo)
                 <div class="tab-pane fade show" id="nav-home{{ $grupo->id }}" role="tabpanel"
                     aria-labelledby="nav-home-tab{{ $grupo->id }}">
-                    @livewire('admin.companias-participantes', ['compania' => $grupo->id], key($grupo->id))
+                    {{'familia:' . $grupo->numero}}
+                    @forelse ($grupo->companerismos->where('role_id',6) as $companerismo)
+                        @livewire('admin.companias-participantes', ['companerismo' => $companerismo], key($companerismo->id))
+                    @empty
+                        
+                    @endforelse
                 </div>
             @empty
                 <div class="card">
@@ -32,11 +37,10 @@
     <!-- Modal -->
     <div wire:ignore.self class="modal fade" id="sortCompanias" tabindex="-1" role="dialog"
         aria-labelledby="sortCompaniasLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form wire:submit.prevent="" method="post">
-                    @csrf
-                    @if ($paso1)
+        <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content @if(!$paso1) {{ 'd-none' }}@endif">
+                    <form wire:submit.prevent="" method="post">
+                        @csrf
                         <div class="modal-header">
                             <h5 class="modal-title" id="sortCompaniasLabel">Crear Rangos de edad</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -51,7 +55,7 @@
                                     'placeholder' => 'Ingrese la cantidad de compañias a crear',
                                     'min' => '1',
                                     'wire:model' => 'cantidad',
-                                    'disabled' => ''
+                                    'disabled' => '',
                                 ]) !!}
                                 @error('cantidad')
                                     <small>{{ $message }}</small>
@@ -66,7 +70,7 @@
                                 </div>
                             </div>
 
-                            @foreach ($newRangos as $newRango)
+                            @forelse ($newRangos as $newRango)
                                 <div class="form-row">
                                     <div class="col text text-center">
                                         <input type="text" class="form-control form-control-sm disabled:opacity-5"
@@ -88,18 +92,31 @@
                                             <i class="fas fa-times-circle"></i> Quitar</button>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                            @endforelse
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" wire:loading.attr="disabled" wire:target="crearCompanias"
-                                class="btn btn-success disabled:opacity-25" wire:click="crearCompanias">
-                                Crear y continuar
-                            </button>
+                            <div class="w-100 text-center">
+
+                                @error('rangoParticipantes')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div>
+
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" wire:loading.attr="disabled" wire:target="crearCompanias"
+                                    class="btn btn-success disabled:opacity-25" wire:click="crearCompanias">
+                                    Crear y continuar
+                                </button>
+                            </div>
 
                         </div>
-                    @endif
-                    @if ($paso2)
+                    </form>
+                </div>        
+                <div class="modal-content @if(!$paso2) {{ 'd-none' }}@endif">
+                    <form wire:submit.prevent="" method="post">
+                        @csrf
                         <div class="card-header">
                             <h5 class="modal-title" id="sortCompaniasLabel">Asignar rangos a las compañias</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -107,59 +124,69 @@
                             </button>
                         </div>
                         <div class="card-body">
-                            @foreach ($this->programa->edadRangos as $rango)
+                            @forelse ($rangosPrograma as $rango)
                                 <div class="form-row">
                                     <h3>Rango: {{ $rango->edadmin . ' - ' . $rango->edadmax }}</h3>
                                 </div>
                                 <h2 class="h6">Lista de compañias</h2>
                                 <div class="form-row">
-                                    @foreach ($this->programa->companias() as $compania)
-                                        <div class="col-1">
-                                            {!! Form::checkbox('com', $compania->id, null, [
+                                    @forelse ($companias as $compania)
+                                        <div class="col-2">
+                                            {!! Form::checkbox('com'.$compania->id, $compania->id, null, [
                                                 'class' => 'mr-1',
                                                 'id' => 'c' . $rango->id . $compania->id,
-                                                'wire:model' => 'rangos.'.$rango->id.'-'.$compania->id.'.compania'
+                                                'wire:model' => 'rangos.' . $rango->id . '-' . $compania->id . '.compania',
                                             ]) !!}
                                             <label for="{{ 'c' . $rango->id . $compania->id }}" data-toggle="tooltip"
                                                 data-placement="top"
-                                                title="@foreach ($compania->inscripcioneCompanerismos as $inscripcioneCompanerismo){!! $inscripcioneCompanerismo->inscripcione->personale->contacto->nombres .
+                                                title="@forelse ($compania->inscripcioneCompanerismos as $inscripcioneCompanerismo) {!! $inscripcioneCompanerismo->inscripcione->personale->contacto->nombres .
                                                     ' ' .
                                                     $inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos .
-                                                    '&#10;' !!}@endforeach">
+                                                    '&#10;' !!}@empty {{'No hay consejeros'}} @endforelse">
                                                 {{ $compania->numero }}
                                             </label>
                                         </div>
-                                    @endforeach
+                                    @empty
+                                    @endforelse
                                 </div>
-                            @endforeach
-                            {{ var_dump($rangos) }}
+                            @empty
+                            @endforelse
+                            {{-- {{var_dump($rangos)}} --}}
                         </div>
                         <div class="card-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" wire:loading.attr="disabled" wire:target="volverPaso"
+                                class="btn btn-success disabled:opacity-25" wire:click="volverPaso">
+                                Volver
+                            </button>
                             <button type="button" wire:loading.attr="disabled" wire:target="asginarCompaniasRangos"
                                 class="btn btn-success disabled:opacity-25" wire:click="asginarCompaniasRangos">
                                 Siguiente
                             </button>
                         </div>
-                    @endif
-                    @if ($paso3)
+                    </form>
+                </div>
+        
+                <div class="modal-content @if (!$paso3) {{ 'd-none' }}@endif">
+                    <form wire:submit.prevent="" method="post">
+                        @csrf
                         <div class="card-header">
                             Paso 3
                         </div>
-                        <div class="card-body">
-                            {{ $cPNA }}
+                        <div class="card-body text-center">
+                            <div class="spinner-border text-info d-none" role="status" wire:loading.class.remove="d-none" wire:target="finalizar">
+                                <span class="sr-only">Loading...</span>
+                            </div>
                         </div>
                         <div class="card-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" wire:click="volverPaso" wire:loading.attr="disabled"
+                                wire:target="finalizar">Volver</button>
                             <button type="button" wire:loading.attr="disabled" wire:target="finalizar"
                                 class="btn btn-success disabled:opacity-25" wire:click="finalizar">
-                                Siguiente
+                                Finalizar
                             </button>
                         </div>
-                    @endif
-
-                </form>
-            </div>
+                    </form>
+                </div>
         </div>
     </div>
 
