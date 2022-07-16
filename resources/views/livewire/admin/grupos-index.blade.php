@@ -76,6 +76,12 @@
 									<div class="col-3 mb-3">
 										{!! Form::number('numero', null, ['class' => 'form-control']) !!}
 									</div>
+									{{-- <div class="col-3 mb-3">
+										{!! Form::number('edadmin', null, ['class' => 'form-control']) !!}
+									</div>
+									<div class="col-3 mb-3">
+										{!! Form::number('edadmax', null, ['class' => 'form-control']) !!}
+									</div> --}}
 									<div class="col-3 mb-3">
 										{!! Form::select('role_id', $roles, null, ['class' => 'form-control ', 'placeholder' => 'Escoge un rol']); !!}
 										@error('role_id')

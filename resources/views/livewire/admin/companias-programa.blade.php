@@ -75,14 +75,14 @@
                                     <div class="col text text-center">
                                         <input type="text" class="form-control form-control-sm disabled:opacity-5"
                                             wire:model.defer="newRangos.{{ array_keys($newRangos)[$loop->index] }}.edadmin"
-                                            wire:loading.attr='disabled' wire:target='saveTarea'>
+                                            wire:loading.attr='disabled' wire:target='saveTarea' placeholder="Edad minima">
                                         <x-jet-input-error class="text-danger"
                                             for="newRangos.{{ array_keys($newRangos)[$loop->index] }}.edadmin" />
                                     </div>
                                     <div class="col text text-center">
                                         <input type="text" class="form-control form-control-sm disabled:opacity-5"
                                             wire:model.defer="newRangos.{{ array_keys($newRangos)[$loop->index] }}.edadmax"
-                                            wire:loading.attr='disabled' wire:target='saveTarea'>
+                                            wire:loading.attr='disabled' wire:target='saveTarea' placeholder="Edad máxima">
                                         <x-jet-input-error class="text-danger"
                                             for="newRangos.{{ array_keys($newRangos)[$loop->index] }}.edadmax" />
                                     </div>

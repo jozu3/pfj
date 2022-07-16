@@ -51,6 +51,7 @@
                         <th>Correo electrónico</th>
                         <th>Fecha de nacimiento</th>
                         <th>Edad</th>
+                        <th>Edad 2022</th>
                         <th>Tipo de sangre</th>
                         <th>Activo</th>
                     </tr>
@@ -101,6 +102,9 @@
                             </td>
                             <td>
                                 {{ $participante->age }}
+                            </td>
+                            <td>
+                                {{ $participante->age_2022 }}
                             </td>
                             <td>
                                 {{ $participante->sangre }}
