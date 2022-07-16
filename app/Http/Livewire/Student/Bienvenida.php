@@ -10,6 +10,8 @@ class Bienvenida extends Component
     public $search;
     public $programa;
     public $open = false;
+    public $formsearch = false;
+    // public $editData = false;
 
     public function render()
     {
