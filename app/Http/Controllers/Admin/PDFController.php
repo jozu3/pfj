@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Inscripcione;
 use App\Models\Pago;
+use App\Models\Participante;
 use PDF;
 
 class PDFController extends Controller
@@ -65,6 +66,20 @@ class PDFController extends Controller
         $pdf = PDF::setPaper('a4', 'vertical')->loadView('admin.reports.report_pagos', $data);
         
         //return view('admin.reports.report_pagos', compact('pagos', 'title'));
+        return $pdf->stream('imprimiendo.pdf');
+    }
+
+    public function ingresoParticipante(Participante $participante){
+
+        $data = [
+            'title' => 'Hola mundo estoy imprimiendo.com',
+            'date' => date('m/d/Y'),
+            'participante' => $participante
+        ];
+
+        $pdf = PDF::setPaper('a4', 'vertical')->loadView('admin.reports.ingreso_participante', $data);
+
+    	//return view('admin.reports.recibo_inscripcione', compact('inscripcione'));
         return $pdf->stream('imprimiendo.pdf');
     }
 }

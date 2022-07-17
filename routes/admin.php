@@ -91,7 +91,7 @@ Route::post('capacitaciones/storeforgroup/{grupo}', [CapacitacioneController::cl
 
 //Route::resource('pdfs', PDFController::class)->names('pdfs');
 Route::get('recibo-inscripcione/{idinscripcione}', [PDFController::class, 'reciboInscripcione'])->name('admin.print');
-Route::get('reportpagos', [PDFController::class, 'pagos'])->name('admin.print.pagos');
+Route::get('ingreso_participante/{participante}', [PDFController::class, 'ingresoParticipante'])->name('admin.pdf.ingreso_participante');
 
 Route::get('/export-excel-personal/{programa}/{familia}/{estaca}/{estado}/{rol}', [ExcelController::class, 'exportExcelPersonal'])->name('admin.excel.exportExcelPersonal');
 Route::get('/export-excel-participantes/{programa}/{compania}/{estaca}/{estado}', [ExcelController::class, 'exportExcelParticipantes'])->name('admin.excel.exportExcelParticipantes');

@@ -140,6 +140,9 @@
                                 <a href="{{ route('admin.participantes.show', $participante) }}"
                                     class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
+                            <td>
+                                <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" class="btn btn-sm btn-danger">pdf</a>
+                            </td>
                         </tr>
                         @empty
                             <tr>
