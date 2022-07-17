@@ -21,11 +21,14 @@
     </center>
     <center>
         <h3>Consejeros : </h3>
-        @foreach ($participante->participanteCompania->companerismo->inscripcioneCompanerismos as $consejero)
-            @if (isset($consejero->personale->contacto))
-                <div>{{ $consejero->personale->contacto->nombres . ' ' . $consejero->personale->contacto->apellidos }}</div>
-            @endif
-        @endforeach
+        @if (isset($participante->participanteCompania))
+            @foreach ($participante->participanteCompania->companerismo->inscripcioneCompanerismos as $consejero)
+                @if (isset($consejero->personale->contacto))
+                    <div>{{ $consejero->personale->contacto->nombres . ' ' . $consejero->personale->contacto->apellidos }}
+                    </div>
+                @endif
+            @endforeach
+        @endif
     </center>
     <br>
     <center>
