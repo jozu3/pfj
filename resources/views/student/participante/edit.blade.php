@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-3xl leading-tight text-white">
-
+            {{ $participante->programa->nombre }}
         </h2>
     </x-slot>
 
@@ -17,7 +17,7 @@
 
                         @include('student.participante.partials.form')
 
-                        {!! Form::submit('Actualizar Rol', ['class' => 'btn btn-primary']) !!}
+                        {!! Form::submit('Actualizar Participante', ['class' => 'p-2 bg-blue-400 mt-6 rounded-md text-white cursor-pointer']) !!}
                         {!! Form::close() !!}
 
                     </div>

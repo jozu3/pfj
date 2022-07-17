@@ -1,6 +1,10 @@
 <div class="grid grid-cols-12 gap-4">
 
+    @if (isset($_GET['programa_id']))
     {!! Form::hidden('programa_id', $_GET['programa_id']) !!}
+    @else
+    {!! Form::hidden('programa_id', null) !!}
+    @endif
     <div class="col-span-12 sm:col-span-6">
         {!! Form::label('nombres', 'Nombre del participante', ['class' => 'block font-medium text-sm text-gray-700']) !!}
         {!! Form::text('nombres', null, [

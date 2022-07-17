@@ -137,7 +137,7 @@
                                 @endswitch
                             </td>
                             <td width="10px">
-                                <a href="{{ route('admin.participantes.show', $participante) }}"
+                                <a href="{{ route('st.participantes.edit', $participante) }}"
                                     class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
                             <td>
