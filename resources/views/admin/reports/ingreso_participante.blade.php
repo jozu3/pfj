@@ -40,23 +40,27 @@
     <center>
         <h3>Talla de polo: {{ $participante->talla }}</h3>
     </center>
+
+	<div class="text-center">
+		----------------------------------------------------------------------
+	</div>
+	<center>
+		<div>Recoge tus materiales:</div>
+	</center>
+		<ul>
+			<li>Manual</li>
+			<li>Polo</li>
+			<li>Lapicero</li>
+			<li>Mochila</li>
+			<li>Fotocheck</li>
+			<li>Pulsera</li>
+		</ul>
+		
 @endsection
 @section('styles')
 
     <style>
-        .tpagos {
-            font-size: 10px;
-        }
-
-        .date {
-            position: absolute;
-            right: 0;
-            top: 0;
-            font-size: 12px
-        }
-
-        .filtros {
-            font-size: 12px
-        }
+		li{
+		}
     </style>
 @endsection
