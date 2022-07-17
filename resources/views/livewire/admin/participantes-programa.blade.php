@@ -45,6 +45,7 @@
                     <tr>
                         <th colspan="2">Nombres</th>
                         <th>Apellidos</th>
+                        <th>Documento</th>
                         <th>Estaca</th>
                         <th>Compañia</th>
                         <th>Telefono</th>
@@ -71,6 +72,9 @@
                                   </button> --}}
                             </td>
                             <td>{{ $participante->apellidos }}</td>
+                            <td>
+                                {{ $participante->documento }}
+                            </td>
                             <td>
                                 {{ $participante->barrio->estaca->nombre }}
                             </td>

@@ -46,30 +46,28 @@ class CompaniasPrograma extends Component
         }
     }
 
-    public function updatedRangos(){
+    public function updatedRangos()
+    {
         foreach ($this->rangos as $rango) {
             if (isset($rango['compania'])) {
 
                 // unset($this->rangos[$r->id.'-'.$comp]);
             }
-
         }
     }
-    public function limpiarRangoCompania($rango, $comp){
+    public function limpiarRangoCompania($rango, $comp)
+    {
 
         $ran = EdadRango::where('programa_id', $this->programa->id)->get();
         foreach ($ran as $r) {
             if ($r->id != $rango) {
-                unset($this->rangos[$r->id.'-'.$comp]);
+                unset($this->rangos[$r->id . '-' . $comp]);
             }
-            
-        }
-        
-        if ($this->rangos[$rango.'-'.$comp]['compania'] == false) {
-            unset($this->rangos[$rango.'-'.$comp]);
         }
 
-
+        if ($this->rangos[$rango . '-' . $comp]['compania'] == false) {
+            unset($this->rangos[$rango . '-' . $comp]);
+        }
     }
     // public function cantidadCompaniasSelectbyRango($rango){
     //     $cant = 0;
@@ -96,9 +94,9 @@ class CompaniasPrograma extends Component
             $result = false;
 
             $participantes = $this->programa->participantes->where('estado', 0)->where('age_2022', '>=', $rango['edadmin'])->where('age_2022', '<=', $rango['edadmax']);
-            if(count($participantes) != 0){
+            if (count($participantes) != 0) {
 
-                $razon = count($participantes)/count($this->programa->participantes->where('estado', 0));
+                $razon = count($participantes) / count($this->programa->participantes->where('estado', 0));
                 $cantComp = round($cantCompanias * count($participantes) / count($this->programa->participantes->where('estado', 0)), 0);
 
                 EdadRango::create([
@@ -109,7 +107,7 @@ class CompaniasPrograma extends Component
                     'cantparticipantes' => count($participantes),
                     'programa_id' => $this->programa->id
                 ]);
-                
+
                 $result = true;
             } else {
                 $this->addError('rangoParticipantes', 'Uno de los rangos no tiene participantes');
@@ -117,50 +115,56 @@ class CompaniasPrograma extends Component
         }
 
         $totalcreadas = EdadRango::select(DB::raw('sum(cantcompanias) as total'))->where('programa_id', $this->programa->id)->groupBy('programa_id')->first()->total;
+        $totalparticipantesCreados = EdadRango::select(DB::raw('sum(cantparticipantes) as total'))->where('programa_id', $this->programa->id)->groupBy('programa_id')->first()->total;
 
-        if($cantCompanias != $totalcreadas){
-            $sobra = $cantCompanias - $totalcreadas;
-            // dd($sobra);
-            $mayor = 0;
-            $rangoMayor = 0;
-            $rangosCreados = EdadRango::where('programa_id', $this->programa->id)->get();
+        if ($totalparticipantesCreados != count($this->programa->participantes->where('estado', '0'))) {
 
-            foreach ($rangosCreados as $rango) {
-                $participantes = $this->programa->participantes->where('estado', 0)->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax);
+            $this->addError('rangoParticipantes', 'Los rangos creados no contienen a todos los participantes inscritos.');
+        } else {
 
-                $cantcomp_ = ($cantCompanias * count($participantes) )/count($this->programa->participantes->where('estado', 0));
-                $roundcantComp = round($cantcomp_);
-                $residuo = $cantcomp_ - $roundcantComp;
 
-                if($mayor < $residuo){
-                    $mayor = $residuo;
-                    $rangoMayor = $rango;
+            if ($cantCompanias != $totalcreadas) {
+                $sobra = $cantCompanias - $totalcreadas;
+                // dd($sobra);
+                $mayor = 0;
+                $rangoMayor = 0;
+                $rangosCreados = EdadRango::where('programa_id', $this->programa->id)->get();
+
+                foreach ($rangosCreados as $rango) {
+                    $participantes = $this->programa->participantes->where('estado', 0)->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax);
+
+                    $cantcomp_ = ($cantCompanias * count($participantes)) / count($this->programa->participantes->where('estado', 0));
+                    $roundcantComp = round($cantcomp_);
+                    $residuo = $cantcomp_ - $roundcantComp;
+
+                    if ($mayor < $residuo) {
+                        $mayor = $residuo;
+                        $rangoMayor = $rango;
+                    }
                 }
 
+                // dd($rangoMayor.'+'.$mayor);
+
+                $rangoMayor->update([
+                    'cantcompanias' => $rangoMayor->cantcompanias + $sobra
+                ]);
             }
 
-            // dd($rangoMayor.'+'.$mayor);
-
-            $rangoMayor->update([
-                'cantcompanias' => $rangoMayor->cantcompanias + $sobra
-            ]);
-
-        }
-
-        if ($result) {
-            $this->rangos = null;
-            $this->paso1 = false;
-            $this->paso2 = true;
-            $this->companias = $this->programa->companias();
-            $this->rangosPrograma = EdadRango::where('programa_id', $this->programa->id)->get();
+            if ($result) {
+                $this->rangos = null;
+                $this->paso1 = false;
+                $this->paso2 = true;
+                $this->companias = $this->programa->companias();
+                $this->rangosPrograma = EdadRango::where('programa_id', $this->programa->id)->get();
+            }
         }
     }
 
     public function asginarCompaniasRangos()
     {
         $result = false;
-        
-        Companerismo::whereHas('grupo', function($q){
+
+        Companerismo::whereHas('grupo', function ($q) {
             $q->where('programa_id', $this->programa->id);
         })->update([
             'edadmin' => null,
@@ -196,7 +200,7 @@ class CompaniasPrograma extends Component
     public function finalizar()
     {
 
-        ParticipanteCompania::whereHas('participante', function($q){
+        ParticipanteCompania::whereHas('participante', function ($q) {
             $q->where('programa_id', $this->programa->id);
         })->delete();
 
@@ -205,37 +209,35 @@ class CompaniasPrograma extends Component
         $rangos = EdadRango::where('programa_id', $this->programa->id)->get();
         foreach ($rangos as $rango) {
             $result = false;
-            
-            $companias = Companerismo::whereHas('grupo', function($q){
+
+            $companias = Companerismo::whereHas('grupo', function ($q) {
                 $q->where('programa_id', $this->programa->id);
             })->where('edadmin', $rango->edadmin)->where('edadmax', $rango->edadmax)->get();
-            
-            
+
+
             //hombres
             $this->asignar(1, $rango, $companias);
-            
+
             //mujeres
             $this->asignar(0, $rango, $companias);
             // dd($compania);
             $result = true;
-            
         }
 
         if ($result) {
             $this->loadingAsign = false;
             $this->emit('offmodalloading');
         }
-
     }
-    
+
     public function asignar($genero, $rango, $companias)
     {
         $participantes = $this->programa->participantes->where('genero', $genero)->where('estado', '0')->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax);
-        
-        
+
+
         $cantidadParticipanteNoAsignados = count($participantes);
-        
-        $pna = Participante::where('programa_id', $this->programa->id)->where('genero', $genero )->where('estado', '0')->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax);
+
+        $pna = Participante::where('programa_id', $this->programa->id)->where('genero', $genero)->where('estado', '0')->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax);
         // dd($pna->doesntHave('participanteCompania')->get()->count());
 
         $cantcompanias = count($companias);
@@ -243,7 +245,7 @@ class CompaniasPrograma extends Component
 
 
         while ($cantidadParticipanteNoAsignados > 0) {
-            
+
             if (count($pna->doesntHave('participanteCompania')->get()) == 0) {
                 break;
             }
@@ -258,27 +260,26 @@ class CompaniasPrograma extends Component
             $cantidadParticipanteNoAsignados = $cant;
 
             $iComp++;
-            if($iComp == $cantcompanias){
+            if ($iComp == $cantcompanias) {
                 $iComp = 0;
             }
             $this->emit('comp', $cantidadParticipanteNoAsignados);
         }
     }
 
-    public function volverPaso(){
-       if ($this->paso2 === true) {
-        $this->paso1 = true;
-        $this->paso2 = false;
-        $this->paso3 = false;
-       } else {
-           if ($this->paso3 === true) {
-               $this->paso1 = false;
-               $this->paso2 = true;
-               $this->paso3 = false;
-           }
-
-       }
-           
+    public function volverPaso()
+    {
+        if ($this->paso2 === true) {
+            $this->paso1 = true;
+            $this->paso2 = false;
+            $this->paso3 = false;
+        } else {
+            if ($this->paso3 === true) {
+                $this->paso1 = false;
+                $this->paso2 = true;
+                $this->paso3 = false;
+            }
+        }
     }
 
     public function render()
