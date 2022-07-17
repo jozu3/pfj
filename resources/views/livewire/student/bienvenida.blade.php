@@ -132,7 +132,7 @@
                     {{-- Esto podría ir en el pie de página --}}
                     <div class="mt-1 grid grid-cols-2 gap-4">
                         {{-- <button class="btn btn-sm btn-info text-right"><i class="fas fa-print"></i> Imprimir</button> --}}
-                        <a href="{{route('admin.pdf.ingreso_participante', $participante)}}" class="btn btn-sm btn-info text-right"><i class="fas fa-print"></i> Imprimir</a>
+                        <a href="{{route('admin.pdf.ingreso_participante', $participante)}}" target="_blank" class="btn btn-sm btn-info text-right"><i class="fas fa-print"></i> Imprimir</a>
                         <a href="{{ route('st.participantes.edit', $participante) }}"
                             class="btn btn-sm btn-info text-left"><i class="fas fa-edit"></i>
                             Editar</button>
