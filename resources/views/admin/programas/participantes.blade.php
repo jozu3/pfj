@@ -9,8 +9,12 @@
         data-target="#importExcelParticipantes">
         <i class="far fa-file-excel"></i> Importar participantes
     </button>
-    <a href="{{ route('admin.contactos.create') }}" class="btn btn-success btn-sm float-right mr-3">
+    <a href="{{ route('st.participantes.create', 'programa_id='.$programa->id) }}" class="btn btn-success btn-sm float-right mr-3">
         <i class="fas fa-user-plus"></i> Nuevo participantes
+    </a>
+    <a href="{{ route('admin.participantes.deleteall', $programa) }}"
+        class="btn btn-danger btn-sm float-right mr-3 eliminar-participantes" data-prevent="">
+        <i class="fas fa-trash"></i> Eliminar todos participantes
     </a>
     <h1>
         <b class="text-pfj">{{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</b>
@@ -77,7 +81,8 @@
                     enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="importExcelPersonalLabel">Importar participants de la sesión {{ $programa->nombre }}</h5>
+                        <h5 class="modal-title" id="importExcelPersonalLabel">Importar participants de la sesión
+                            {{ $programa->nombre }}</h5>
                         <a href="{{ config('app.url') . '/files/PARTICIPANTES-PLANTILLA.xlsx' }}"
                             class="btn btn-yellow-pfj ml-5" download><i class="far fa-file-excel"></i> Descargar
                             plantilla</a>
@@ -181,14 +186,14 @@
     {{-- <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet"> --}}
     <style>
         /*\
-            |*| ========================================================================
-            |*| Bootstrap Toggle: bootstrap4-toggle.css v3.6.1
-            |*| https://gitbrent.github.io/bootstrap4-toggle/
-            |*| ========================================================================
-            |*| Copyright 2018-2019 Brent Ely
-            |*| Licensed under MIT
-            |*| ========================================================================
-            \*/
+                |*| ========================================================================
+                |*| Bootstrap Toggle: bootstrap4-toggle.css v3.6.1
+                |*| https://gitbrent.github.io/bootstrap4-toggle/
+                |*| ========================================================================
+                |*| Copyright 2018-2019 Brent Ely
+                |*| Licensed under MIT
+                |*| ========================================================================
+                \*/
         .btn-group-xs>.btn,
         .btn-xs {
             padding: .35rem .4rem .25rem .4rem;
@@ -423,8 +428,26 @@
             $("#success-alert").hide();
             $("#danger-alert").hide();
 
+
+            $('.eliminar-participantes').click(function(e) {
+
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Se necesita confirmación',
+                    text: "No se podrá recuperar los datos de los participantes.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, borrar difinitivamente!'
+                }).then((result) => {
+                    if (result.value) {
+                        window.location = this.getAttribute('href');
+                    }
+                })
+            });
+
         });
-  
     </script>
     <script type="text/javascript" src="{{ config('app.url') }}/js/toggle-bootstrap.js"></script>
 

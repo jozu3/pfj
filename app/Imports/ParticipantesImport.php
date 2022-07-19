@@ -20,10 +20,10 @@ class ParticipantesImport implements ToCollection, WithHeadingRow
         {
             //genero
             switch ($row['sexo']) {
-                case 'Mujer':
+                case 'Mujer' || 'mujer' || 'MUJER':
                     $row['sexo'] = '0';
                     break;
-                case 'Hombre':
+                case 'Hombre' || 'hombre' || 'HOMBRE':
                     $row['sexo'] = '1';
                     break;
                 
@@ -38,7 +38,7 @@ class ParticipantesImport implements ToCollection, WithHeadingRow
             }
 
             //estado
-            if ($row['estado'] == 'Aprobados') {
+            if ($row['estado'] == 'Aprobados' || $row['estado'] == 'aprobados' || $row['estado'] == 'aprobado' || $row['estado'] == 'APROBADO') {
                 $row['estado'] = 1;
             } else {
                 $row['estado'] = 0;
@@ -49,6 +49,10 @@ class ParticipantesImport implements ToCollection, WithHeadingRow
                 $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'] = 1;
             } else {
                 $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'] = 0;
+            }
+
+            if (is_numeric($row['cumpleanos'])) {
+                $row['cumpleanos'] = Date::excelToDateTimeObject($row['cumpleanos']);
             }
 
 

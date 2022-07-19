@@ -67,6 +67,7 @@ Route::get('/programas/{programa}/companias', [ProgramaController::class, 'compa
 Route::resource('programas', ProgramaController::class)->names('admin.programas');
 Route::resource('capacitaciones', CapacitacioneController::class)->names('admin.capacitaciones');
 Route::resource('materiales', MaterialeController::class)->names('admin.materiales');
+Route::get('/participantes/deleteall/{programa}', [ParticipanteController::class, 'deleteAll'])->name('admin.participantes.deleteall');
 Route::resource('participantes', ParticipanteController::class)->names('admin.participantes');
 Route::resource('locales', LocaleController::class)->names('admin.locales');
 Route::resource('edificios', EdificioController::class)->names('admin.edificios');

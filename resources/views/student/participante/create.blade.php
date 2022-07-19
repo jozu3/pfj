@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-3xl leading-tight text-white">
-            {{ \App\Models\Programa::find($_GET['programa_id'])->first()->nombre }}
+            {{ \App\Models\Programa::where('id',$_GET['programa_id'])->first()->nombre }}
         </h2>
     </x-slot>
 
