@@ -72,7 +72,7 @@ class PDFController extends Controller
     public function ingresoParticipante(Participante $participante){
 
         $data = [
-            'title' => 'Hola mundo estoy imprimiendo.com',
+            'title' => 'Registro de participantes',
             'date' => date('m/d/Y'),
             'participante' => $participante
         ];

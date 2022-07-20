@@ -13,3 +13,4 @@ Route::get('programas/{programa}/inscripciones', [ProgramaController::class, 'in
 Route::resource('grupos', GrupoController::class)->names('st.grupos');
 Route::get('programas/{programa}/mislecturas', [TareaController::class, 'mislecturas'])->name('st.tareas.mislecturas');
 Route::resource('participantes', ParticipanteController::class)->names('st.participantes');
+//Route::get('participantes/{programa}/mislecturas', [ParticipanteController::class, 'registro'])->name('st.participantes.registro');
