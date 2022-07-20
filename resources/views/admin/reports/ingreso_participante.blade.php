@@ -103,7 +103,6 @@
 
 @endsection
 @section('styles')
-
     <style>
         td{
             font-size: 20px

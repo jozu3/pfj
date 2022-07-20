@@ -80,6 +80,6 @@ class PDFController extends Controller
         $pdf = PDF::setPaper('a4', 'vertical')->loadView('admin.reports.ingreso_participante', $data);
 
     	//return view('admin.reports.recibo_inscripcione', compact('inscripcione'));
-        return $pdf->stream('imprimiendo.pdf');
+        return $pdf->stream('IngresoParticipantes.pdf');
     }
 }
