@@ -20,14 +20,21 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
         foreach ($collection as $row) 
         {
             //genero
-            switch ($row['sexo']) {
-                case 'Mujer' || 'mujer' || 'MUJER':
-                    $row['sexo'] = '0';
-                    break;
-                case 'Hombre' || 'hombre' || 'HOMBRE':
-                    $row['sexo'] = '1';
-                    break;
+            // switch ($row['sexo']) {
+            //     case 'Mujer' || 'mujer' || 'MUJER':
+            //         $row['sexo'] = '0';
+            //         break;
+            //     case 'Hombre' || 'hombre' || 'HOMBRE':
+                //         $row['sexo'] = '1';
+                //         break;
                 
+                // }
+                
+            if ($row['sexo'] == 'Mujer' || $row['sexo'] == 'mujer' || $row['sexo'] == 'MUJER') {
+                $row['sexo'] = '0';
+            }
+            if ($row['sexo'] == 'Hombre' || $row['sexo'] == 'hombre' || $row['sexo'] == 'HOMBRE') {
+                $row['sexo'] = '1';
             }
 
             //barrio

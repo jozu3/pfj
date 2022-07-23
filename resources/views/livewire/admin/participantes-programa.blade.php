@@ -45,6 +45,7 @@
                     <tr>
                         <th colspan="1">Nombres</th>
                         <th>Apellidos</th>
+                        <th>Genero</th>
                         <th>Documento</th>
                         <th>Estaca</th>
                         <th>Barrio</th>
@@ -57,7 +58,7 @@
                         <th>Edad</th>
                         {{-- <th>Edad 2022</th> --}}
                         {{-- <th>Tipo de sangre</th> --}}
-                        <th>Activo</th>
+                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,6 +76,18 @@
                                   </button> --}}
                             </td>
                             <td>{{ $participante->apellidos }}</td>
+                            <td>
+                                @switch($participante->genero)
+                                    @case(false)
+                                        {{ 'Mujer'}}
+                                    @break
+                                    @case(true)
+                                        {{ 'Hombre'}} 
+                                        @break
+                                    @default
+                                        
+                                @endswitch
+                            </td>
                             <td>
                                 {{ $participante->documento }}
                             </td>
