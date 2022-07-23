@@ -61,6 +61,7 @@ class ProgramaController extends Controller
             'fecha_inicio' => ['required', 'date'],
             'fecha_fin' => ['required', 'date'],
             'estado' => ['required', 'numeric'],
+            'mostrarGrupos' => ['required', 'numeric'],
         ]);
 
         $programa = Programa::create($request->all());
@@ -124,6 +125,7 @@ class ProgramaController extends Controller
             'fecha_inicio' => ['required', 'date'],
             'fecha_fin' => ['required', 'date'],
             'estado' => ['required', 'numeric'],
+            'mostrarGrupos' => ['required', 'numeric'],
         ]);
 
         $programa->update($request->all());

@@ -51,13 +51,19 @@
                                                 </x-jet-dropdown-link>
                                             @endforeach
                                         @else
-                                            @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
-                                                @php
-                                                    $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
-                                                @endphp
-                                                <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                                    {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
-                                                </x-jet-dropdown-link>
+                                            @if ($inscripcione->programa->mostrarGrupos == 1)
+                                                @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
+                                                    @php
+                                                        $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
+                                                    @endphp
+                                                    <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                                        {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
+                                                    </x-jet-dropdown-link>
+                                                @endif
+                                            @else
+                                            <div class="p-2">
+                                                {{'Se están realizando cambios'}}
+                                            </div>
                                             @endif
                                         @endcan
                                     @endforeach
@@ -85,8 +91,7 @@
                                     </button>
                                 </x-slot>
                                 <x-slot name="content">
-                                    <x-jet-dropdown-link
-                                        href="{{ config('app.url') . '/img/PFJManualStaff2022.pdf' }}"
+                                    <x-jet-dropdown-link href="{{ config('app.url') . '/img/PFJManualStaff2022.pdf' }}"
                                         target="_blank">
                                         {{ __('Manual para el personal') }}
                                     </x-jet-dropdown-link>
@@ -241,8 +246,7 @@
                                 <button
                                     class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
                                     <img class="h-8 w-8 rounded-full object-cover"
-                                        src="{{ Auth::user()->profile_photo_url }}"
-                                        alt="{{ Auth::user()->name }}" />
+                                        src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                                 </button>
                             @else
                                 <span class="inline-flex rounded-md">
@@ -409,8 +413,8 @@
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="flex-shrink-0 mr-3">
-                        <img class="h-10 w-10 rounded-full object-cover"
-                            src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}"
+                            alt="{{ Auth::user()->name }}" />
                     </div>
                 @endif
 

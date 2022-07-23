@@ -34,6 +34,16 @@
 		<small class="text-danger">{{ $message }}</small>
 	@enderror
 </div> 
+<div class="col-md-3">
+	{!! Form::label('mostrarGrupos', 'Mostrar Grupos') !!}
+	{!! Form::select('mostrarGrupos', [
+			'0' => 'No mostrar',
+			'1' => 'Mostrar',
+		], null, ['class' => 'form-control', 'placeholder' => '--Seleccione--']); !!}
+	@error('mostrarGrupos')
+		<small class="text-danger">{{ $message }}</small>
+	@enderror
+</div> 
 <div class="col-md-12 mt-3">
 	{!! Form::label('img', 'Foto del Matrimonio Director') !!}
 

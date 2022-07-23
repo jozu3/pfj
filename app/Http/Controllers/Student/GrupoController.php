@@ -51,8 +51,15 @@ class GrupoController extends Controller
      */
     public function show(Grupo $grupo)
     {
-        $personale = auth()->user()->personale;
 
+        if ($grupo->programa->mostrarGrupos == 0) {
+            if (!auth()->user()->can('admin.programas.grupos')) {
+                abort('403');
+            }
+        }
+
+        $personale = auth()->user()->personale;
+        
         // $inscripciones = Inscripcione::where('personale_id', $personale->id)->get();
         // $grupo = Grupo::where('numero',)        
         return view('student.grupos.show', compact('grupo'));        
