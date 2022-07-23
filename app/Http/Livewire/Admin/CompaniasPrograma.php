@@ -129,25 +129,29 @@ class CompaniasPrograma extends Component
                 $mayor = 0;
                 $rangoMayor = 0;
                 $rangosCreados = EdadRango::where('programa_id', $this->programa->id)->get();
+                if (count($rangosCreados)) {
+                    foreach ($rangosCreados as $rango) {
+                        $participantes = $this->programa->participantes->where('estado', 0)->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
 
-                foreach ($rangosCreados as $rango) {
-                    $participantes = $this->programa->participantes->where('estado', 0)->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
+                        $cantcomp_ = ($cantCompanias * count($participantes)) / count($this->programa->participantes->where('estado', 0));
+                        $roundcantComp = round($cantcomp_);
+                        $residuo = $cantcomp_ - $roundcantComp;
 
-                    $cantcomp_ = ($cantCompanias * count($participantes)) / count($this->programa->participantes->where('estado', 0));
-                    $roundcantComp = round($cantcomp_);
-                    $residuo = $cantcomp_ - $roundcantComp;
-
-                    if ($mayor < $residuo) {
-                        $mayor = $residuo;
-                        $rangoMayor = $rango;
+                        if ($mayor < $residuo) {
+                            $mayor = $residuo;
+                            $rangoMayor = $rango;
+                        }
                     }
+
+                    // dd($rangoMayor.'+'.$mayor);
+                    if ($rangoMayor) {
+                        $rangoMayor->update([
+                            'cantcompanias' => $rangoMayor->cantcompanias + $sobra
+                        ]);
+                    }
+                } else {
+                    $this->addError('rangoParticipantes', 'No se crearon los rangos. Ocurrió un error desconocido.! :(');
                 }
-
-                // dd($rangoMayor.'+'.$mayor);
-
-                $rangoMayor->update([
-                    'cantcompanias' => $rangoMayor->cantcompanias + $sobra
-                ]);
             }
 
             if ($result) {
