@@ -43,13 +43,16 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th colspan="2">Nombres</th>
+                        <th colspan="1">Nombres</th>
                         <th>Apellidos</th>
                         <th>Documento</th>
                         <th>Estaca</th>
+                        <th>Barrio</th>
+                        <th>Obispo</th>
+                        <th>Habitación</th>
                         <th>Compañia</th>
+                        <th>Consejeros</th>
                         <th>Telefono</th>
-                        <th>Correo electrónico</th>
                         <th>Fecha de nacimiento</th>
                         <th>Edad</th>
                         <th>Edad 2022</th>
@@ -60,12 +63,12 @@
                 <tbody>
                     @forelse ($participantes as $participante)
                         <tr>
-                            <td>
+                            {{-- <td>
                                 <img id="imgperfil" class="rounded-circle {{ $participante->id }}" width="50"
                                     height="50" style="object-fit: cover;"
                                     src="@if ($participante->image) {{ $participante->image() }} @else {{ 'https://picsum.photos/300/300' }} @endif"
                                     alt="">
-                            </td>
+                            </td> --}}
                             <td>
                                 {{ $participante->nombres }}
                                 {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" wire:click="$emitTo('admin.modal-detalle-contacto', 'showcontacto', '{{$participante->id}}')">
@@ -79,28 +82,58 @@
                                 {{ $participante->barrio->estaca->nombre }}
                             </td>
                             <td>
+                                {{ $participante->barrio->nombre }}
+                            </td>
+                            <td>
+                                {{ $participante->obispo }}
+                            </td>
+                            <td>
+                                @if (isset($participante->alojamiento))
+                                {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} -
+                                {{ $participante->alojamiento->habitacione->piso->num }} - 
+                                {{ $participante->alojamiento->habitacione->numero }}
+                                @endif
+                            </td>
+                            <td>
                                 @if ($participante->participanteCompania)
                                     {{ $participante->participanteCompania->companerismo->numero }}
+                                @endif
+                            </td>
+                            <td width="200px">
+                                @if (isset($participante->participanteCompania))
+                                    @php
+                                    $insComps =$participante->participanteCompania->companerismo->inscripcioneCompanerismos
+                                    @endphp
+                                    @foreach ($insComps as $consejero)
+                                        {{ $consejero->inscripcione->personale->contacto->nombres . ' ' . $consejero->inscripcione->personale->contacto->apellidos,  }}
+                                        <br>
+                                        {{-- @if (isset($consejero->inscripcione->personale->contacto))
+                                        @endif
+                                        @if ( $loop->index != (count($insComps) -1) )
+                                        {{ ' y ' }}
+                                        <br>
+                                        @endif --}}
+                                    @endforeach
                                 @endif
                             </td>
                             <td>
                                 <span>
                                     <a href="tel:{{ $participante->telefono }}" alt="Llamar por teléfono"
                                         data-toggle="tooltip" data-placement="top"
-                                        title="Llamar por teléfono">{{ $participante->telefono }}</a>
-                                    <a href="https://api.whatsapp.com/send?phone=51{{ $participante->telefono }}"
+                                        title="Llamar por teléfono">{{ str_replace( ' ', "", $participante->telefono) }}</a>
+                                    <a href="https://api.whatsapp.com/send?phone=51{{ str_replace( ' ', "", $participante->telefono) }}"
                                         class="text-success" target="_blank" alt="Enviar Whatsapp" data-toggle="tooltip"
                                         data-placement="top" title="Enviar Whatsapp"><i class="fab fa-whatsapp"></i></a>
                                 </span>
                             </td>
-                            <td>
+                            {{-- <td>
                                 @if ($participante)
                                     <a href="mailto:{{ $participante->email }}" alt="Enviar email"
                                         data-toggle="tooltip" data-placement="top"
                                         title="Enviar email">{{ $participante->email }}</a>
                                 @else
                                 @endif
-                            </td>
+                            </td> --}}
                             <td>
                                 {{ date('d/m/Y', strtotime($participante->fecnac)) }}
                             </td>
@@ -141,7 +174,7 @@
                                     class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" class="btn btn-sm btn-danger">pdf</a>
+                                <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" target="_blank" class="btn btn-sm btn-danger">pdf</a>
                             </td>
                         </tr>
                         @empty

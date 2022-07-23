@@ -31,7 +31,7 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
             }
 
             //barrio
-            $row['barrio'] = Barrio::where('nombre', $row['barrio'])->first();
+            $row['barrio'] = Barrio::where('nombre', 'like', '%'.$row['barrio'].'%')->first();
             if ($row['barrio']) {
                 $row['barrio'] = $row['barrio']->id;
             } else {
