@@ -50,22 +50,23 @@ class ParticipanteController extends Controller
         $request->validate([
             'nombres' => 'required',
             'apellidos' => 'required',
-            'documento' => 'required',
+            // 'documento' => 'required',
             'fecnac' => 'required',
             'genero' => 'required',
             // 'telefono' => 'required',
             'talla' => 'required',
             'tipo_ingreso' => 'required',
-            'vacunas' => 'required',
+            'vacunas' => 'required|numeric',
             'sangre' => 'required',
-            // 'diabetico_asmatico' => 'required',
-            // 'alergia' => 'required',
-            // 'tratamiento_medico' => 'required',
+            'diabetico_asmatico' => 'required',
+            'alergia' => 'required',
+            'tratamiento_medico' => 'required',
             'seguro_medico' => 'required',
-            // 'informacion_medica' => 'required',
-            // 'informacion_alimentaria' => 'required',
+            'informacion_medica' => 'required',
+            'informacion_alimentaria' => 'required',
             'barrio_id' => 'required',
             'estado_aprobacion' => 'required',
+            'estado' => 'required',
             'obispo' => 'required'
         ]);
 
@@ -73,13 +74,13 @@ class ParticipanteController extends Controller
         $fecha2 = date_create($request['fecnac']);
 
         $request['age'] = date_diff($fecha1, $fecha2)->y;
-        $request['age_2022'] = date_diff($fecha1, $fecha2)->y;
+        $request['age_2022'] = date_diff(date_create(date('Y').'-12-31'), $fecha2)->y;
         $request['horallegada'] = date('Y-m-d H:i:s');
 
         $participante = Participante::create($request->all());
         // $participante = Participante::find($participante_id);
 
-        return redirect()->route('st.participantes.edit', $participante)->with('info', 'Se actualizó y asigno los roles correctamente');
+        return redirect()->route('st.participantes.edit', $participante)->with('info', 'Se creo al participante y se registró su ingreso.');
     }
 
     /**
@@ -146,7 +147,7 @@ class ParticipanteController extends Controller
 
         $participante->update($request->all());
 
-        return redirect()->route('st.participantes.edit', $participante)->with('info', 'Se actualizó y asigno los roles correctamente');
+        return redirect()->route('st.participantes.edit', $participante)->with('info', 'Se actualizó los datos del participante');
     }
 
     /**

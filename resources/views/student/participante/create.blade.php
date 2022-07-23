@@ -6,6 +6,11 @@
             {{ \App\Models\Programa::where('id',$_GET['programa_id'])->first()->nombre }}
         </h2>
     </x-slot>
+    @if (session('info'))
+        <div class="p-2 bg-green-400 mt-6 rounded-sm text-white w-full">
+            {{ session('info') }}
+        </div>
+    @endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -18,7 +23,7 @@
 
                         @include('student.participante.partials.form')
 
-                        {!! Form::submit('Crear inscripción', ['class' => 'btn btn-primary']) !!}
+                        {!! Form::submit('Crear inscripción', ['class' => 'p-2 bg-blue-400 mt-6 rounded-md text-white cursor-pointer']) !!}
                         {!! Form::close() !!}
 
                     </div>

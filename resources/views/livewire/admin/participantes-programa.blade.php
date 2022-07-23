@@ -171,10 +171,10 @@
                             </td>
                             <td width="10px">
                                 <a href="{{ route('st.participantes.edit', $participante) }}"
-                                    class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
+                                    class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" target="_blank" class="btn btn-sm btn-danger">pdf</a>
+                                <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" target="_blank" class="btn btn-sm btn-danger"><i class="fas fa-file-pdf"></i></a>
                             </td>
                         </tr>
                         @empty

@@ -12,6 +12,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese el nombre del participante',
         ]) !!}
+        @error('nombres')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
     <div class="col-span-12 sm:col-span-6">
         {!! Form::label('apellidos', 'Apellidos del participante', [
@@ -22,6 +25,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese lo apellidos del particpante',
         ]) !!}
+        @error('apellidos')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
 </div>
 <div class="grid grid-cols-12 gap-4">
@@ -40,6 +46,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese la fecha de nacimiento',
         ]) !!}
+         @error('fecnac')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
     <div class="col-span-12 mt-3 sm:col-span-4">
         {!! Form::label('genero', 'Seleccione el género', ['class' => 'block font-medium text-sm text-gray-700']) !!}
@@ -48,6 +57,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Seleccione el género',
         ]) !!}
+        @error('genero')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
 </div>
 <div class="grid grid-cols-12 gap-4">
@@ -74,6 +86,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese la talla',
         ]) !!}
+        @error('talla')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
     <div class="col-span-12 mt-3 sm:col-span-4">
         {!! Form::label('tipo_ingreso', 'Tipo de ingreso', ['class' => 'block font-medium text-sm text-gray-700']) !!}
@@ -82,16 +97,28 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Seleccione',
         ]) !!}
+        @error('tipo_ingreso')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
 </div>
 <div class="grid grid-cols-12 gap-4">
     <div class="col-span-12 mt-3 sm:col-span-2">
         {!! Form::label('vacunas', 'Vacunas', ['class' => 'block font-medium text-sm text-gray-700']) !!}
-        {!! Form::select('vacunas', ['1' => 'Sí', '0' => 'No'], null, [
+        {!! Form::number('vacunas', null, [
+            'class' => 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
+            'placeholder' => 'Ingrese cuantas dosis tiene el participante',
+            'min' => '0',
+            'step' => '1'
+        ]) !!} 
+        {{-- {!! Form::select('vacunas', ['1' => 'Sí', '0' => 'No'], null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Seleccione',
-        ]) !!}
+        ]) !!} --}}
+        @error('vacunas')
+            <small class="text-red-600">{{ $message . ' Si no tiene ponga "0".' }}</small>
+        @enderror
     </div>
     <div class="col-span-12 mt-3 sm:col-span-2">
         {!! Form::label('sangre', 'Tipo de sangre', ['class' => 'block font-medium text-sm text-gray-700']) !!}
@@ -100,6 +127,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese el tipo de sangre',
         ]) !!}
+        @error('sangre')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
     <div class="col-span-12 mt-3 sm:col-span-3">
         {!! Form::label('diabetico_asmatico', '¿Diabético o asmático?', [
@@ -108,8 +138,11 @@
         {!! Form::text('diabetico_asmatico', null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
-            'placeholder' => 'Ingrese la alergia',
+            'placeholder' => 'Indique si es diabeitco o asmático',
         ]) !!}
+        @error('diabetico_asmatico')
+            <small class="text-red-600">{{ $message . ' Si no tiene ponga "no".' }}</small>
+        @enderror
     </div>
     <div class="col-span-12 mt-3 sm:col-span-5">
         {!! Form::label('alergia', 'Alergia', ['class' => 'block font-medium text-sm text-gray-700']) !!}
@@ -118,6 +151,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese la alergia',
         ]) !!}
+        @error('alergia')
+            <small class="text-red-600">{{ $message . ' Si no tiene ponga "no".' }}</small>
+        @enderror
     </div>
 
 
@@ -130,6 +166,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese el tratamiento',
         ]) !!}
+        @error('tratamiento_medico')
+            <small class="text-red-600">{{ $message . ' Si no tiene ponga "no".' }}</small>
+        @enderror
     </div>
 
     <div class="col-span-12 mt-3 sm:col-span-5">
@@ -141,6 +180,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese el seguro médico',
         ]) !!}
+        @error('seguro_medico')
+            <small class="text-red-600">{{ $message . ' Si no tiene ponga "no".' }}</small>
+        @enderror
     </div>
 
 
@@ -156,6 +198,9 @@
             'rows' => 3,
             'placeholder' => 'Ingrese la información médica',
         ]) !!}
+        @error('informacion_medica')
+            <small class="text-red-600">{{ $message . ' Si no tiene ponga "no".' }}</small>
+        @enderror
     </div>
 </div>
 <div class="grid grid-cols-12 gap-4">
@@ -169,6 +214,9 @@
             'rows' => 3,
             'placeholder' => 'Ingrese la información alimentaria',
         ]) !!}
+        @error('informacion_alimentaria')
+            <small class="text-red-600">{{ $message . ' Si no tiene ponga "no".' }}</small>
+        @enderror
     </div>
 </div>
 <div class="grid grid-cols-12 gap-4">
@@ -179,6 +227,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese el contacto',
         ]) !!}
+        @error('contacto1')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
     <div class="col-span-12 mt-3 sm:col-span-4">
         {!! Form::label('contacto2', 'Número de contacto 2', ['class' => 'block font-medium text-sm text-gray-700']) !!}
@@ -197,6 +248,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Seleccione',
         ]) !!}
+        @error('barrio_id')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
     <div class="col-span-12 sm:col-span-4">
         {!! Form::label('estado_aprobacion', 'Estado de aprobación', [
@@ -207,6 +261,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Seleccione',
         ]) !!}
+        @error('estado_aprobacion')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
     <div class="col-span-12 sm:col-span-4">
         {!! Form::label('obispo', 'Nombre del obispo o presidente de rama', [
@@ -217,6 +274,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese el nombre del obispo o presidente de rama',
         ]) !!}
+        @error('obispo')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
     <div class="col-span-12 sm:col-span-4">
         {!! Form::label('estado', 'Estado del participante', [
@@ -232,5 +292,8 @@
                 'placeholder' => 'Seleccione',
             ],
         ) !!}
+        @error('estado')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
 </div>

@@ -33,6 +33,7 @@ class ParticipantesPrograma extends Component
 
         $participantes = Participante::where('programa_id', $this->programa_id)
                                     ->where('nombres','like', '%'. $this->search .'%')
+                                    ->orWhere('documento', $this->search)
                                     ->whereHas('barrio', function($qu) use ($estaca){
                                         //filtro estaca
                                         if($estaca != '' && $estaca != '0'){
