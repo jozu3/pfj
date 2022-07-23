@@ -45,8 +45,8 @@ class ParticipantesImport implements ToCollection, WithHeadingRow
             }
 
             //vacunas
-            if ($row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'] == 'true') {
-                $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'] = 1;
+            if (is_int($row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'])) {
+                //$row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid']
             } else {
                 $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'] = 0;
             }
