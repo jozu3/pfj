@@ -93,7 +93,7 @@ class CompaniasPrograma extends Component
         foreach ($this->newRangos as $rango) {
             $result = false;
 
-            $participantes = $this->programa->participantes->where('estado', 0)->where('age_2022', '>=', $rango['edadmin'])->where('age_2022', '<=', $rango['edadmax']);
+            $participantes = $this->programa->participantes->where('estado', 0)->where('age', '>=', $rango['edadmin'])->where('age', '<=', $rango['edadmax']);
             if (count($participantes) != 0) {
 
                 $razon = count($participantes) / count($this->programa->participantes->where('estado', 0));
@@ -131,7 +131,7 @@ class CompaniasPrograma extends Component
                 $rangosCreados = EdadRango::where('programa_id', $this->programa->id)->get();
 
                 foreach ($rangosCreados as $rango) {
-                    $participantes = $this->programa->participantes->where('estado', 0)->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax);
+                    $participantes = $this->programa->participantes->where('estado', 0)->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
 
                     $cantcomp_ = ($cantCompanias * count($participantes)) / count($this->programa->participantes->where('estado', 0));
                     $roundcantComp = round($cantcomp_);
@@ -232,12 +232,12 @@ class CompaniasPrograma extends Component
 
     public function asignar($genero, $rango, $companias)
     {
-        $participantes = $this->programa->participantes->where('genero', $genero)->where('estado', '0')->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax);
+        $participantes = $this->programa->participantes->where('genero', $genero)->where('estado', '0')->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
 
 
         $cantidadParticipanteNoAsignados = count($participantes);
 
-        $pna = Participante::where('programa_id', $this->programa->id)->where('genero', $genero)->where('estado', '0')->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax);
+        $pna = Participante::where('programa_id', $this->programa->id)->where('genero', $genero)->where('estado', '0')->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
         // dd($pna->doesntHave('participanteCompania')->get()->count());
 
         $cantcompanias = count($companias);

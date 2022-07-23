@@ -53,10 +53,10 @@
                         <th>Compañia</th>
                         <th>Consejeros</th>
                         <th>Telefono</th>
-                        <th>Fecha de nacimiento</th>
+                        {{-- <th>Fecha de nacimiento</th> --}}
                         <th>Edad</th>
-                        <th>Edad 2022</th>
-                        <th>Tipo de sangre</th>
+                        {{-- <th>Edad 2022</th> --}}
+                        {{-- <th>Tipo de sangre</th> --}}
                         <th>Activo</th>
                     </tr>
                 </thead>
@@ -134,18 +134,18 @@
                                 @else
                                 @endif
                             </td> --}}
-                            <td>
+                            {{-- <td>
                                 {{ date('d/m/Y', strtotime($participante->fecnac)) }}
-                            </td>
+                            </td> --}}
                             <td>
                                 {{ $participante->age }}
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ $participante->age_2022 }}
-                            </td>
-                            <td>
+                            </td> --}}
+                            {{-- <td>
                                 {{ $participante->sangre }}
-                            </td>
+                            </td> --}}
                             <td>
                                 @switch($participante->estado)
                                     @case(0)
