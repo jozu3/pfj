@@ -7,9 +7,10 @@ use App\Models\Participante;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
-class ParticipantesImport implements ToCollection, WithHeadingRow
+class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidation
 {
     /**
     * @param Collection $collection
@@ -59,7 +60,7 @@ class ParticipantesImport implements ToCollection, WithHeadingRow
             Participante::create([
                 'nombres' => $row['nombres'],
                 'apellidos' => $row['apellidos'],
-                'documento' => $row['documento'],
+                'documento' => $row['documento'] == null ? '': $row['documento'] ,
                 'fecnac' => $row['cumpleanos'],
                 'genero' => $row['sexo'],
                 'telefono' => $row['telefono'] == null ? '': $row['telefono'],
@@ -81,9 +82,47 @@ class ParticipantesImport implements ToCollection, WithHeadingRow
                 'vacunas' => $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'],
                 'programa_id' => session('programa_activo'),
                 'estado' => 0,//inscrito
-                'tipo_ingreso' => $row[''],
-                'horallegada' => $row[''],
+                'tipo_ingreso' => null,
+                'horallegada' => null,
             ]);
         }
+    }
+
+    public function rules(): array
+    {
+        return [
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'cumpleanos' => 'required',
+            'sexo' => 'required',
+            'informacion_medica' => 'required',
+            'tamano_de_camiseta' => 'required',
+            'informacion_alimentaria' => 'required',
+            'age' => 'required',
+            'cuantos_anos_cumples_en_el_2022' => 'required',
+            'estado' => 'required',
+            'obispo' => 'required',
+            'grupo_sanguineo_y_factor_rh' => 'required',
+            'sufres_de_alergia' => 'required',
+            'recibes_algun_tratamiento_medico' => 'required',
+            'eres_diabetico_o_asmatico' => 'required',
+            'seguro_medico' => 'required',
+            'cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid' => 'required',
+
+            // '4' => 'required',
+           /* '5' => function ($attribute, $value, $onFailure) {
+                if (User::where('email', $value)->count()) {
+                    $onFailure('El correo ' . $value . ' ya está en uso.');
+                }
+            }*/
+        ];
+    }
+
+    public function customValidationMessages()
+    {
+        return [
+            'cuantos_anos_cumples_en_el_2022.required' => 'El campo ¿cuantos años cumples en el 2022? es requerido.',
+            '4.required' => 'El campo teléfono es requerido.',
+        ];
     }
 }

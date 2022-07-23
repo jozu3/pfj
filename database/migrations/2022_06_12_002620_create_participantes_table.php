@@ -24,8 +24,8 @@ class CreateParticipantesTable extends Migration
             $table->string('informacion_medica');
             $table->string('talla');
             $table->string('informacion_alimentaria');
-            $table->string('contacto1');
-            $table->string('contacto2');
+            $table->string('contacto1')->nullable();
+            $table->string('contacto2')->nullable();
             $table->integer('age');
             $table->integer('age_2022');
             $table->foreignId('barrio_id')->constrained();
