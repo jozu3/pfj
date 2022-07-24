@@ -8,7 +8,8 @@
                 </label>
             </div>
             <div class="custom-control custom-checkbox mr-sm-2 d-inline">
-                <input class="form-check-input" wire:model="renderSortable" type="checkbox" value="" id="renderSortable">
+                <input class="form-check-input" wire:model="renderSortable" type="checkbox" value=""
+                    id="renderSortable">
                 <label class="form-check-label" for="renderSortable">
                     Mover personal
                 </label>
@@ -89,9 +90,24 @@
                             @foreach ($grupo->companerismos as $companerismo)
                                 <div class="card @if ($companerismo->role_id == 5) {{ 'bg-cordauxiliar' }}@else {{ 'card-primary' }} @endif  card-outline "
                                     data-id="{{ 'com-' . $companerismo->id }}">
+                                    <div class="card-header text-center">
+                                        <a href="{{ route('admin.programas.planificador', [
+                                            'programa' => $companerismo->grupo->programa,
+                                            'grupo' => $companerismo->grupo,
+                                        ]) }}"
+                                            class="float-right">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        @if ($companerismo->role_id == 6)
+                                            {{ 'Compañia: ' . $companerismo->numero }}
+                                        @endif
+                                        @if ($companerismo->role_id == 5)
+                                            {{ 'Coordinadores Auxiliares' }}
+                                        @endif
+                                    </div>
                                     <div class="card-header companerismo row"
                                         data-id="{{ 'com-' . $companerismo->id . '-' . str_replace(' ', '', $companerismo->role->name) }}">
-                                        @foreach ($companerismo->inscripcioneCompanerismos as $inscripcioneCompanerismo)
+                                        @forelse ($companerismo->inscripcioneCompanerismos as $inscripcioneCompanerismo)
                                             <div class="col-6"
                                                 data-id="{{ 'ins-' . $inscripcioneCompanerismo->inscripcione->id }}">
                                                 <div class="card text-center">
@@ -114,7 +130,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        @empty
+                                        {{-- <div class="text-center">
+                                            {{'0 asignados.'}}
+                                        </div> --}}
+                                        @endforelse
                                     </div>
                                 </div>
                             @endforeach
@@ -166,7 +186,7 @@
     </div>
 
     @if (count($programa->inscripcionesSinAsignar()))
-    {{-- nada --}}
+        {{-- nada --}}
     @endif
     <div class="cont-psinasignar @if (!$psinasignar) {{ 'd-none' }} @endif">
         <div class="card card-row card-success">

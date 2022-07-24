@@ -89,7 +89,7 @@
 
 @section('js')
 
-	@if (session('info_comp'))
+	@if (session('info_comp') || isset($_GET['grupo']))
         <script>
 			$().ready(function() {
 				$('#nav-comp-tab').click();
@@ -102,7 +102,7 @@
 
 		</script>
     @endif
-	@if (session('info_grupo'))
+	@if (session('info_grupo') || isset($_GET['grupo']))
         <script>
 			$().ready(function() {
 				$('#nav-comp-tab').click();

@@ -1,9 +1,9 @@
 <div class="grid grid-cols-12 gap-4">
 
     @if (isset($_GET['programa_id']))
-    {!! Form::hidden('programa_id', $_GET['programa_id']) !!}
+        {!! Form::hidden('programa_id', $_GET['programa_id']) !!}
     @else
-    {!! Form::hidden('programa_id', null) !!}
+        {!! Form::hidden('programa_id', null) !!}
     @endif
     <div class="col-span-12 sm:col-span-6">
         {!! Form::label('nombres', 'Nombre del participante', ['class' => 'block font-medium text-sm text-gray-700']) !!}
@@ -38,6 +38,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese el documento de identidad',
         ]) !!}
+        @error('documento')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
     <div class="col-span-12 mt-3 sm:col-span-4">
         {!! Form::label('fecnac', 'Fecha de nacimiento', ['class' => 'block font-medium text-sm text-gray-700']) !!}
@@ -46,7 +49,7 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese la fecha de nacimiento',
         ]) !!}
-         @error('fecnac')
+        @error('fecnac')
             <small class="text-red-600">{{ $message }}</small>
         @enderror
     </div>
@@ -70,6 +73,9 @@
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese el teléfono',
         ]) !!}
+        @error('telefono')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
     </div>
     {{-- <div class="col-span-12 mt-3 sm:col-span-4">
         {!! Form::label('age', 'Edad', ['class' => 'block font-medium text-sm text-gray-700']) !!}
@@ -106,11 +112,12 @@
     <div class="col-span-12 mt-3 sm:col-span-2">
         {!! Form::label('vacunas', 'Vacunas', ['class' => 'block font-medium text-sm text-gray-700']) !!}
         {!! Form::number('vacunas', null, [
-            'class' => 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
+            'class' =>
+                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese cuantas dosis tiene el participante',
             'min' => '0',
-            'step' => '1'
-        ]) !!} 
+            'step' => '1',
+        ]) !!}
         {{-- {!! Form::select('vacunas', ['1' => 'Sí', '0' => 'No'], null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',

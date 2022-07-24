@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Barrio;
 use App\Models\Estaca;
 use App\Models\Participante;
+use App\Models\ParticipanteCompania;
 use Illuminate\Http\Request;
 
 class ParticipanteController extends Controller
@@ -55,7 +56,7 @@ class ParticipanteController extends Controller
             'genero' => 'required',
             // 'telefono' => 'required',
             'talla' => 'required',
-            'tipo_ingreso' => 'required',
+            // 'tipo_ingreso' => 'required',
             'vacunas' => 'required|numeric',
             'sangre' => 'required',
             'diabetico_asmatico' => 'required',
@@ -109,6 +110,15 @@ class ParticipanteController extends Controller
         foreach ($estacas as $estaca) {
             $estacasselect[$estaca->nombre] = Barrio::where('estaca_id', $estaca->id)->pluck('nombre', 'id');
         }
+
+        if ($participante->participanteCompania) {
+            $participante['compania'] = $participante->participanteCompania->companerismo_id;
+        }
+
+        $companias = [];
+
+        
+
         return view('student.participante.edit', compact('participante', 'estacasselect'));
     }
 
@@ -125,12 +135,12 @@ class ParticipanteController extends Controller
         $request->validate([
             'nombres' => 'required',
             'apellidos' => 'required',
-            'documento' => 'required',
+            // 'documento' => 'required',
             'fecnac' => 'required',
             'genero' => 'required',
             // 'telefono' => 'required',
             'talla' => 'required',
-            'tipo_ingreso' => 'required',
+            // 'tipo_ingreso' => 'required',
             'vacunas' => 'required',
             'sangre' => 'required',
             // 'diabetico_asmatico' => 'required',
@@ -146,6 +156,12 @@ class ParticipanteController extends Controller
         ]);
 
         $participante->update($request->all());
+
+        if (isset($request->compania)) {
+            $parComp = ParticipanteCompania::where('participante_id', $participante->id)->first()->update(['companerismo_id' => $request->compania]);
+            // dd($parComp);
+        }
+        
 
         return redirect()->route('st.participantes.edit', $participante)->with('info', 'Se actualizó los datos del participante');
     }

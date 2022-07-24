@@ -22,4 +22,8 @@ class Companerismo extends Model
     public function inscripcioneCompanerismos()   {
         return $this->hasMany(InscripcioneCompanerismo::class);
     }
+
+    public function participanteCompanias(){
+        return $this->hasMany(ParticipanteCompania::class);
+    }
 }

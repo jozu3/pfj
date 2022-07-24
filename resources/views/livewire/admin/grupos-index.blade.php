@@ -51,16 +51,19 @@
 					<td colspan="5">
 						<div class="collapse multi-collapse" id="list-companerismos{{ $grupo->id }}">
 							<div class="row">
-								<div class="col-3 px-4 py-2">
+								<div class="col px-4 py-2">
 									<b>Compañerismo</b>
 								</div>
-								<div class="col-3 px-4 py-2">
+								<div class="col px-4 py-2">
 									<b>Número de compañia</b>
 								</div>
-								<div class="col-3 px-4 py-2">
+								<div class="col px-4 py-2">
 									<b>Rol</b>
 								</div>
-								<div class="col-3 px-4 py-2">
+								<div class="col px-4 py-2">
+									<b>Personal asignado</b>
+								</div>
+								<div class="col px-4 py-2">
 								</div>
 							</div>
 							@foreach ($grupo->companerismos as $companerismo)
@@ -69,26 +72,35 @@
 
 									{!! Form::model($companerismo, ['route' => ['admin.companerismos.update', $companerismo], 'method' => 'put']) !!}
 									<div class="row">
-									<div class="col-3 mb-3">
+									<div class="col mb-3">
 										{!!Form::hidden('grupo_id', null) !!}
 										{!! Form::text('nombre', null, ['class' => 'form-control']) !!}
 									</div>
-									<div class="col-3 mb-3">
+									<div class="col mb-3">
 										{!! Form::number('numero', null, ['class' => 'form-control']) !!}
 									</div>
-									{{-- <div class="col-3 mb-3">
+									{{-- <div class="col mb-3">
 										{!! Form::number('edadmin', null, ['class' => 'form-control']) !!}
 									</div>
-									<div class="col-3 mb-3">
+									<div class="col mb-3">
 										{!! Form::number('edadmax', null, ['class' => 'form-control']) !!}
 									</div> --}}
-									<div class="col-3 mb-3">
+									<div class="col mb-3">
 										{!! Form::select('role_id', $roles, null, ['class' => 'form-control ', 'placeholder' => 'Escoge un rol']); !!}
 										@error('role_id')
 										<small class="text-danger">{{ $message }}</small>
 										@enderror
 									</div>
-									<div class="col-3 mb-3">
+									<div class="col mb-3">
+										@if (isset($companerismo->inscripcioneCompanerismos))
+											@foreach ($companerismo->inscripcioneCompanerismos as $inscripcioneCompanerismo)
+												{{$inscripcioneCompanerismo->inscripcione->personale->user->name}}
+												<br>
+											@endforeach
+										@else
+										@endif
+									</div>
+									<div class="col mb-3">
 										{!! Form::submit('Actualizar',  ['class' => 'btn btn-sm btn-primary'])!!}
 									</div>
 								</div>

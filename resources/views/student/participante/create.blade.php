@@ -6,16 +6,18 @@
             {{ \App\Models\Programa::where('id',$_GET['programa_id'])->first()->nombre }}
         </h2>
     </x-slot>
-    @if (session('info'))
-        <div class="p-2 bg-green-400 mt-6 rounded-sm text-white w-full">
-            {{ session('info') }}
-        </div>
-    @endif
-
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">
+                    @if (session('info'))
+                        <div class="p-2 bg-green-400 mt-6 rounded-sm text-white w-full">
+                            {{ session('info') }}
+                        </div>
+                    @endif
+                    <x-jet-validation-errors class="mb-4" />
+
                     <h1 class="my-2 text-2xl">Editar datos del participante</h1>
                     <div>
                         {!! Form::open(['route' => 'st.participantes.store']) !!}
