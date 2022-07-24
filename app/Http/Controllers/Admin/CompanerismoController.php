@@ -112,6 +112,6 @@ class CompanerismoController extends Controller
 
         $companerismo->delete();
 
-        return redirect()->route('admin.programas.edit', $companerismo->grupo->programa)->with('info', 'El compañerismo se eliminó con éxito'); 
+        return redirect()->route('admin.programas.planificador', $companerismo->grupo->programa)->with('info', 'El compañerismo se eliminó con éxito'); 
     }
 }
