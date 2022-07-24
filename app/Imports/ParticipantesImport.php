@@ -63,6 +63,10 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
                 $row['cumpleanos'] = Date::excelToDateTimeObject($row['cumpleanos']);
             }
 
+            if (isset($row['correo_electronico'])) {
+                # code...
+            }
+
 
             Participante::create([
                 'nombres' => $row['nombres'],
@@ -71,6 +75,7 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
                 'fecnac' => $row['cumpleanos'],
                 'genero' => $row['sexo'],
                 'telefono' => $row['telefono'] == null ? '': $row['telefono'],
+                'email' => $row['correo_electronico'] == null ? '': $row['correo_electronico'],
                 'informacion_medica' => $row['informacion_medica'],
                 'talla' => $row['tamano_de_camiseta'],
                 'informacion_alimentaria' => $row['informacion_alimentaria'],
@@ -80,13 +85,13 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
                 'age_2022' => $row['cuantos_anos_cumples_en_el_2022'],
                 'barrio_id' => $row['barrio'],
                 'estado_aprobacion' => $row['estado'],
-                'obispo' => $row['obispo'],
-                'sangre' => $row['grupo_sanguineo_y_factor_rh'],
-                'alergia' => $row['sufres_de_alergia'],
-                'tratamiento_medico' => $row['recibes_algun_tratamiento_medico'],
-                'diabetico_asmatico' => $row['eres_diabetico_o_asmatico'],
-                'seguro_medico' => $row['seguro_medico'],
-                'vacunas' => $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'],
+                'obispo' => $row['obispo'] == null ? '' : $row['obispo'],
+                'sangre' => $row['grupo_sanguineo_y_factor_rh'] == null ? '' : $row['grupo_sanguineo_y_factor_rh'],
+                'alergia' => $row['sufres_de_alergia'] == null ? '' : $row['sufres_de_alergia'],
+                'tratamiento_medico' => $row['recibes_algun_tratamiento_medico'] == null ? '' : $row['recibes_algun_tratamiento_medico'],
+                'diabetico_asmatico' => $row['eres_diabetico_o_asmatico'] == null ? '' : $row['eres_diabetico_o_asmatico'],
+                'seguro_medico' => $row['seguro_medico'] == null ? '' : $row['seguro_medico'],
+                'vacunas' => $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'] == null ? '0' : $row['cuentas_con_las_dosis_requeridas_de_vacunacion_contra_covid'],
                 'programa_id' => session('programa_activo'),
                 'estado' => 0,//inscrito
                 'tipo_ingreso' => null,
