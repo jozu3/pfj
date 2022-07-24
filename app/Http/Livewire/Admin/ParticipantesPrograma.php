@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Barrio;
 use App\Models\Companerismo;
 use App\Models\Estaca;
 use App\Models\Participante;
@@ -17,7 +18,9 @@ class ParticipantesPrograma extends Component
     public $search;
     public $compania= 0;
     public $estaca = 0;
+    public $barrio = 0;
     public $estado = 0;
+    public $barriosEstaca = [];
 
     public function loadParticipantes(){
         
@@ -31,6 +34,8 @@ class ParticipantesPrograma extends Component
         //filtros
         $estaca = $this->estaca;
 
+        $this->barriosEstaca = Barrio::where('estaca_id', $estaca)->get();
+
         $participantes = Participante::where('programa_id', $this->programa_id)
                                     ->where(function ($q){
                                         $q->where('apellidos','like', '%'. $this->search .'%')
@@ -43,6 +48,12 @@ class ParticipantesPrograma extends Component
                                             $qu->where('estaca_id', $estaca);
                                         }
                                     });
+
+        //filtro por barrio
+        if ($this->barrio != '' && $this->barrio != '0') {
+            $participantes = $participantes->where('barrio_id', $this->barrio);
+        }
+
 
         //filtro por compañia
         if($this->compania != '' && $this->compania != '0'){

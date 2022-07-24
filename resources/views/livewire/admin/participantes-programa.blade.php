@@ -7,15 +7,23 @@
                 </div>
                 <div class="col">
                     <select name="" id="" class="form-control" wire:model="estaca">
-                        <option value="0">-- Estaca --</option>
+                        <option value="0">-- Todas las estacas --</option>
                         @foreach ($estacas as $stk)
                             <option value="{{ $stk->id }}">{{ $stk->nombre }}</option>
                         @endforeach
                     </select>
+                    @if (count($barriosEstaca))
+                        <select name="" id="" class="form-control mt-2" wire:model="barrio">
+                            <option value="0">-- Barrios --</option>
+                            @foreach ($barriosEstaca as $barrio)
+                            <option value="{{ $barrio->id }}">{{ $barrio->nombre }}</option>
+                            @endforeach
+                        </select>
+                    @endif
                 </div>
                 <div class="col">
                     <select name="" id="" class="form-control" wire:model="compania">
-                        <option value="0">-- Compañia --</option>
+                        <option value="0">-- Todas las compañias --</option>
                         @foreach ($companerismos as $compania)
                             <option value="{{ $compania->id }}">{{ $compania->numero }}</option>
                         @endforeach
