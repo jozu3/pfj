@@ -35,9 +35,9 @@
 
 
     <!-- Modal -->
-    <div wire:ignore.self class="modal fade" id="sortCompanias" tabindex="-1" role="dialog"
+    <div wire:ignore.self class="modal fade bd-example-modal-xl" id="sortCompanias" tabindex="-1" role="dialog"
         aria-labelledby="sortCompaniasLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content @if(!$paso1) {{ 'd-none' }}@endif">
                     <form wire:submit.prevent="" method="post">
                         @csrf
@@ -125,20 +125,9 @@
                         </div>
                         <div class="card-body">
                             @forelse ($rangosPrograma as $rango)
-                                <div class="">
+                                <div class="bg-warning my-3 px-2 rounded-lg">
                                     <h3>Rango: {{ $rango->edadmin . ' - ' . $rango->edadmax }}</h3>
                                     <span> Seleccione solo: <b>{{ $rango->cantcompanias }}</b> compañias</span>
-                                {{-- @php
-                                    
-                                    $cant = 0;
-                                    foreach ($this->programa->companias() as $compania) {
-                                        if(array_key_exists($rango. '-'.$compania->id, $this->rangos)){
-                                            $cant++;
-                                        }
-                                    }
-                                    @endphp
-                                    {{ cantidadCompaniasSelectbyRango($rango->id) }}
-                                    {{count($programa->companias()) * count($programa->participantes->where('estado', 0)->where('age_2022', '>=', $rango->edadmin)->where('age_2022', '<=', $rango->edadmax)) / count($programa->participantes->where('estado', 0))}} --}}
                                 </div>
                                 <h2 class="h6">Lista de compañias</h2>
                                 <div class="form-row">
@@ -151,12 +140,21 @@
                                                 'wire:click' => 'limpiarRangoCompania('.$rango->id.',' .$compania->id. ')'
                                             ]) !!}
                                             <label for="{{ 'c' . $rango->id . $compania->id }}" data-toggle="tooltip"
+                                                class="bg-info px-2 rounded-lg"
                                                 data-placement="top"
                                                 title="@forelse ($compania->inscripcioneCompanerismos as $inscripcioneCompanerismo) {!! $inscripcioneCompanerismo->inscripcione->personale->contacto->nombres .
                                                     ' ' .
                                                     $inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos .
                                                     '&#10;' !!}@empty {{'No hay consejeros'}} @endforelse">
-                                                {{ $compania->numero }}
+                                                    <div class="">
+                                                        Compañia: {{ $compania->numero }}
+                                                    </div>
+                                            </label>
+                                            <label for="{{ 'c' . $rango->id . $compania->id }}" class="w-100">
+                                                @foreach ($compania->inscripcioneCompanerismos as $insCompanerismo)
+                                                    {{ '- '. $insCompanerismo->inscripcione->personale->contacto->nombres . ' '. $insCompanerismo->inscripcione->personale->contacto->apellidos }}
+                                                    <br>
+                                                @endforeach
                                             </label>
                                         </div>
                                     @empty
