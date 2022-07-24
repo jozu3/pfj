@@ -63,8 +63,8 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
                 $row['cumpleanos'] = Date::excelToDateTimeObject($row['cumpleanos']);
             }
 
-            if (isset($row['correo_electronico'])) {
-                # code...
+            if (!isset($row['correo_electronico'])) {
+                $row['correo_electronico'] = '';
             }
 
 
