@@ -94,7 +94,7 @@
 									<div class="col mb-3">
 										@if (isset($companerismo->inscripcioneCompanerismos))
 											@foreach ($companerismo->inscripcioneCompanerismos as $inscripcioneCompanerismo)
-												{{$inscripcioneCompanerismo->inscripcione->personale->user->name}}
+												{{$inscripcioneCompanerismo->inscripcione->personale->contacto->nombres.' '.$inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos}}
 												<br>
 											@endforeach
 										@else
