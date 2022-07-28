@@ -291,7 +291,7 @@
         ]) !!}
         {!! Form::select(
             'estado',
-            ['0' => 'Inscrito', '1' => 'Ingresado', '2' => 'Permutado', '3' => 'Terminado', '4' => 'Retirado'],
+            ['0' => 'Inscrito', '1' => 'Ingresado', '2' => 'Permutado', '3' => 'Terminado', '4' => 'Retirado', '5' => 'En espera', '6' => 'Canceló inscripción'],
             null,
             [
                 'class' =>

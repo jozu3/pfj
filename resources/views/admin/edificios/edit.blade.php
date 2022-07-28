@@ -9,7 +9,7 @@
 @section('content')
 	<div class="card">
 		<div class="card-body">
-			{!! Form::model($edificio, ['route' => 'admin.edificios.update', $edificio, 'method' => 'put']) !!}				
+			{!! Form::model($edificio, ['route' => ['admin.edificios.update', $edificio], 'method' => 'put']) !!}				
 				@include('admin.edificios.partials.form')
 				{!! Form::submit('Editar edificio', ['class' => 'btn btn-primary']) !!}
 			{!! Form::close() !!}

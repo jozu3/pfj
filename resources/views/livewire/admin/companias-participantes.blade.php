@@ -1,5 +1,16 @@
 <div wire:init="loadParticipantes">
-    <h2>{{ 'Compañia:' .$companerismo->numero }}</h2>
+    <h2 class="mt-3">{{ 'Compañia:' .$companerismo->numero }}</h2>
+    <div class="form-row">
+        @if ($participantes != [])
+            <div class="col">
+                {{ $participantes->links() }}
+            </div>
+            <div class="col">
+                Viendo <b> {{ count($participantes) }}</b> de un total de <b>
+                    {{ $participantes->total() }}</b>
+            </div>
+        @endif
+    </div>
     <div class="card">
         <div class="card-header">
             <div class="form-row">
@@ -30,6 +41,8 @@
                         <option value="2">Permutado</option>
                         <option value="3">Terminado</option>
                         <option value="4">Retirado</option>
+                        <option value="5">En espera</option>
+                        <option value="4">Canceló inscripción</option>
                     </select>
                 </div>
                 {{-- <div class="col">
@@ -138,6 +151,12 @@
                                     @break
                                     @case(4)
                                         {{ 'retirado' }}
+                                    @break
+                                    @case(5)
+                                        {{ 'En espera' }}
+                                    @break
+                                    @case(6)
+                                        {{ 'Canceló inscripción' }}
                                     @break
                                     @default
                                 @endswitch

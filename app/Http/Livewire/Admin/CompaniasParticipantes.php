@@ -52,7 +52,7 @@ class CompaniasParticipantes extends Component
             $participantes = $participantes->where('estado', $this->estado);
         }
 
-        $participantes = $participantes->paginate();
+        $participantes = $participantes->paginate(50);
 
 
         $this->page = 1;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Inscripcione;
+use App\Models\Participante;
 use Illuminate\Http\Request;
 use App\Models\Pfj;
 use App\Models\Programa;
@@ -129,6 +130,21 @@ class ProgramaController extends Controller
         ]);
 
         $programa->update($request->all());
+
+        if ($programa->estado = 1)//estado: Iniciado
+        {
+            Participante::where('programa_id', $programa->id)->where('estado', 0)->update(['estado' => 5]);//estado: en espera
+        }
+
+        if ($programa->estado = 0)//estado: por iniciar
+        {
+            Participante::where('programa_id', $programa->id)->whereIn('estado', [5, 3, 4])->update(['estado' => 0]);//estado: inscrito
+        }
+
+        if ($programa->estado = 2)//estado: terminado
+        {
+            Participante::where('programa_id', $programa->id)->where('estado', 2)->update(['estado' => 3]);//estado: terminado
+        }
         
         if ($request->file('imgMatrimonioDirector')) {
             $urlMD = Storage::put('programas', $request->file('imgMatrimonioDirector'));

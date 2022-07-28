@@ -61,10 +61,11 @@
 									<b>Rol</b>
 								</div>
 								<div class="col px-4 py-2">
-									<b>Personal asignado</b>
+									<b>Rango de edad/Personal asignado</b>
 								</div>
 								<div class="col px-4 py-2">
 								</div>
+								
 							</div>
 							@foreach ($grupo->companerismos as $companerismo)
 							<div class="row">
@@ -92,6 +93,11 @@
 										@enderror
 									</div>
 									<div class="col mb-3">
+										@if (isset($companerismo->edadmin) && isset($companerismo->edadmax) )
+										<div class="text-center">
+											{{ $companerismo->edadmin .' - '. $companerismo->edadmax .' años' }}
+										</div>
+										@endif
 										@if (isset($companerismo->inscripcioneCompanerismos))
 											@foreach ($companerismo->inscripcioneCompanerismos as $inscripcioneCompanerismo)
 												{{$inscripcioneCompanerismo->inscripcione->personale->contacto->nombres.' '.$inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos}}

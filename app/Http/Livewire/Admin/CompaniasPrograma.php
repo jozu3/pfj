@@ -93,11 +93,12 @@ class CompaniasPrograma extends Component
         foreach ($this->newRangos as $rango) {
             $result = false;
 
-            $participantes = $this->programa->participantes->where('estado', 0)->where('age', '>=', $rango['edadmin'])->where('age', '<=', $rango['edadmax']);
+            //participantes: inscrito, ingresao, en espera
+            $participantes = $this->programa->participantes->whereIn('estado', [0,1,5])->where('age', '>=', $rango['edadmin'])->where('age', '<=', $rango['edadmax']);
             if (count($participantes) != 0) {
 
-                $razon = count($participantes) / count($this->programa->participantes->where('estado', 0));
-                $cantComp = round($cantCompanias * count($participantes) / count($this->programa->participantes->where('estado', 0)), 0);
+                $razon = count($participantes) / count($this->programa->participantes->whereIn('estado', [0,1,5]));
+                $cantComp = round($cantCompanias * count($participantes) / count($this->programa->participantes->whereIn('estado', [0,1,5])), 0);
 
                 EdadRango::create([
                     'edadmin' => $rango['edadmin'],
@@ -117,7 +118,7 @@ class CompaniasPrograma extends Component
         $totalcreadas = EdadRango::select(DB::raw('sum(cantcompanias) as total'))->where('programa_id', $this->programa->id)->groupBy('programa_id')->first()->total;
         $totalparticipantesCreados = EdadRango::select(DB::raw('sum(cantparticipantes) as total'))->where('programa_id', $this->programa->id)->groupBy('programa_id')->first()->total;
 
-        if ($totalparticipantesCreados != count($this->programa->participantes->where('estado', '0'))) {
+        if ($totalparticipantesCreados != count($this->programa->participantes->whereIn('estado', [0,1,5]))) {
 
             $this->addError('rangoParticipantes', 'Los rangos creados no contienen a todos los participantes inscritos.');
         } else {
@@ -131,9 +132,9 @@ class CompaniasPrograma extends Component
                 $rangosCreados = EdadRango::where('programa_id', $this->programa->id)->get();
                 if (count($rangosCreados)) {
                     foreach ($rangosCreados as $rango) {
-                        $participantes = $this->programa->participantes->where('estado', 0)->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
+                        $participantes = $this->programa->participantes->whereIn('estado', [0,1,5])->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
 
-                        $cantcomp_ = ($cantCompanias * count($participantes)) / count($this->programa->participantes->where('estado', 0));
+                        $cantcomp_ = ($cantCompanias * count($participantes)) / count($this->programa->participantes->whereIn('estado', [0,1,5]));
                         $roundcantComp = round($cantcomp_);
                         $residuo = $cantcomp_ - $roundcantComp;
 
@@ -236,12 +237,12 @@ class CompaniasPrograma extends Component
 
     public function asignar($genero, $rango, $companias)
     {
-        $participantes = $this->programa->participantes->where('genero', $genero)->where('estado', '0')->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
+        $participantes = $this->programa->participantes->where('genero', $genero)->whereIn('estado', [0,1,5])->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
 
 
         $cantidadParticipanteNoAsignados = count($participantes);
 
-        $pna = Participante::where('programa_id', $this->programa->id)->where('genero', $genero)->where('estado', '0')->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
+        $pna = Participante::where('programa_id', $this->programa->id)->where('genero', $genero)->whereIn('estado', [0,1,5])->where('age', '>=', $rango->edadmin)->where('age', '<=', $rango->edadmax);
         // dd($pna->doesntHave('participanteCompania')->get()->count());
 
         $cantcompanias = count($companias);

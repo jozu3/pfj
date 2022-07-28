@@ -16,7 +16,7 @@
                         <select name="" id="" class="form-control mt-2" wire:model="barrio">
                             <option value="0">-- Barrios --</option>
                             @foreach ($barriosEstaca as $barrio)
-                            <option value="{{ $barrio->id }}">{{ $barrio->nombre }}</option>
+                                <option value="{{ $barrio->id }}">{{ $barrio->nombre }}</option>
                             @endforeach
                         </select>
                     @endif
@@ -37,6 +37,8 @@
                         <option value="2">Permutado</option>
                         <option value="3">Terminado</option>
                         <option value="4">Retirado</option>
+                        <option value="5">En espera</option>
+                        <option value="6">Canceló inscripción</option>
                     </select>
                 </div>
                 {{-- <div class="col">
@@ -87,13 +89,14 @@
                             <td>
                                 @switch($participante->genero)
                                     @case(false)
-                                        {{ 'Mujer'}}
+                                        {{ 'Mujer' }}
                                     @break
+
                                     @case(true)
-                                        {{ 'Hombre'}} 
-                                        @break
+                                        {{ 'Hombre' }}
+                                    @break
+
                                     @default
-                                        
                                 @endswitch
                             </td>
                             <td>
@@ -110,9 +113,9 @@
                             </td>
                             <td>
                                 @if (isset($participante->alojamiento))
-                                {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} -
-                                {{ $participante->alojamiento->habitacione->piso->num }} - 
-                                {{ $participante->alojamiento->habitacione->numero }}
+                                    {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} -
+                                    {{ $participante->alojamiento->habitacione->piso->num }} -
+                                    {{ $participante->alojamiento->habitacione->numero }}
                                 @endif
                             </td>
                             <td>
@@ -123,14 +126,14 @@
                             <td width="200px">
                                 @if (isset($participante->participanteCompania))
                                     @php
-                                    $insComps =$participante->participanteCompania->companerismo->inscripcioneCompanerismos
+                                        $insComps = $participante->participanteCompania->companerismo->inscripcioneCompanerismos;
                                     @endphp
                                     @foreach ($insComps as $consejero)
-                                        {{ $consejero->inscripcione->personale->contacto->nombres . ' ' . $consejero->inscripcione->personale->contacto->apellidos,  }}
+                                        {{ $consejero->inscripcione->personale->contacto->nombres . ' ' . $consejero->inscripcione->personale->contacto->apellidos }}
                                         <br>
                                         {{-- @if (isset($consejero->inscripcione->personale->contacto))
                                         @endif
-                                        @if ( $loop->index != (count($insComps) -1) )
+                                        @if ($loop->index != count($insComps) - 1)
                                         {{ ' y ' }}
                                         <br>
                                         @endif --}}
@@ -141,8 +144,8 @@
                                 <span>
                                     <a href="tel:{{ $participante->telefono }}" alt="Llamar por teléfono"
                                         data-toggle="tooltip" data-placement="top"
-                                        title="Llamar por teléfono">{{ str_replace( ' ', "", $participante->telefono) }}</a>
-                                    <a href="https://api.whatsapp.com/send?phone=51{{ str_replace( ' ', "", $participante->telefono) }}"
+                                        title="Llamar por teléfono">{{ str_replace(' ', '', $participante->telefono) }}</a>
+                                    <a href="https://api.whatsapp.com/send?phone=51{{ str_replace(' ', '', $participante->telefono) }}"
                                         class="text-success" target="_blank" alt="Enviar Whatsapp" data-toggle="tooltip"
                                         data-placement="top" title="Enviar Whatsapp"><i class="fab fa-whatsapp"></i></a>
                                 </span>
@@ -167,26 +170,45 @@
                             {{-- <td>
                                 {{ $participante->sangre }}
                             </td> --}}
-                            <td>
+                            <td width="10px">
                                 @switch($participante->estado)
                                     @case(0)
                                         {{ 'Inscrito' }}
                                     @break
 
                                     @case(1)
-                                        {{ 'ingresado' }}
+                                        {{ 'Ingresado' }}
                                     @break
 
                                     @case(2)
-                                        {{ 'permutado' }}
+                                        {{ 'Permutado' }}
                                     @break
 
                                     @case(3)
-                                        {{ 'terminado' }}
+                                        {{ 'Terminado' }}
                                     @break
+
                                     @case(4)
-                                        {{ 'retirado' }}
+                                        {{ 'Retirado' }}
                                     @break
+
+                                    @case(5)
+                                        <div class="d-flex items-center">
+                                            <div style="width:20px; height: 100%; align-items: center" class="">
+                                                <div class="spinner-grow text-success" style="width:20px; height: 20px;" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </div>
+                                            <div style="width: 80px">
+                                                {{ 'En espera' }}
+                                            </div>
+                                        </div>
+                                    @break
+
+                                    @case(6)
+                                        {{ 'Canceló inscripción' }}
+                                    @break
+
                                     @default
                                 @endswitch
                             </td>
@@ -195,7 +217,8 @@
                                     class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
                             <td>
-                                <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" target="_blank" class="btn btn-sm btn-danger"><i class="fas fa-file-pdf"></i></a>
+                                <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" target="_blank"
+                                    class="btn btn-sm btn-danger"><i class="fas fa-file-pdf"></i></a>
                             </td>
                         </tr>
                         @empty

@@ -31,5 +31,7 @@ Estado de participante
 2	permutado
 3	terminado
 4	retirado
+'5' => 'En espera', 
+'6' => 'Canceló inscripción'
 
 */

@@ -3,24 +3,24 @@
         <nav class="navbar navbar-dark bg-yellow-pfj">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nombre-sesion" href="#">{{ $programa->nombre }}</a>
-                @forelse ($programa->grupos as $grupo)
-                    <a class="nav-item nav-link" id="nav-home-tab{{ $grupo->id }}" data-toggle="tab"
-                        href="#nav-home{{ $grupo->id }}" role="tab" aria-controls="nav-home{{ $grupo->id }}"
-                        aria-selected="">{{ 'Familia ' . $grupo->numero }}</a>
+                @forelse ($programa->companias() as $compania)
+                    <a class="nav-item nav-link" id="nav-home-tab{{ $compania->id }}" data-toggle="tab"
+                        href="#nav-home{{ $compania->id }}" role="tab" aria-controls="nav-home{{ $compania->id }}"
+                        aria-selected="">{{ 'Compañia ' . $compania->numero }}</a>
                 @empty
                 @endforelse
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            @forelse ($programa->grupos as $grupo)
-                <div class="tab-pane fade show" id="nav-home{{ $grupo->id }}" role="tabpanel"
-                    aria-labelledby="nav-home-tab{{ $grupo->id }}">
-                    {{'familia:' . $grupo->numero}}
-                    @forelse ($grupo->companerismos->where('role_id',6) as $companerismo)
-                        @livewire('admin.companias-participantes', ['companerismo' => $companerismo], key($companerismo->id))
+            @forelse ($programa->companias() as $compania)
+                <div class="tab-pane fade show" id="nav-home{{ $compania->id }}" role="tabpanel"
+                    aria-labelledby="nav-home-tab{{ $compania->id }}">
+                    {{-- {{'familia:' . $compania->numero}} --}}
+                    @livewire('admin.companias-participantes', ['companerismo' => $compania], key($compania->id))
+                    {{-- @forelse ($compania as $companerismo)
                     @empty
                         
-                    @endforelse
+                    @endforelse --}}
                 </div>
             @empty
                 <div class="card">
