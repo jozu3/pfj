@@ -180,6 +180,7 @@ class ParticipanteController extends Controller
 
     public function compania(Companerismo $companerismo){
 
+
         return view('student.participante.compania', compact('companerismo'));
     }
 }

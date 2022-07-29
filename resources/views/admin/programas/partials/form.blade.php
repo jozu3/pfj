@@ -35,7 +35,7 @@
 	@enderror
 </div> 
 <div class="col-md-3">
-	{!! Form::label('mostrarGrupos', 'Mostrar familias') !!}
+	{!! Form::label('mostrarGrupos', 'Mostrar familias y compañias') !!}
 	{!! Form::select('mostrarGrupos', [
 			'0' => 'No mostrar',
 			'1' => 'Mostrar',

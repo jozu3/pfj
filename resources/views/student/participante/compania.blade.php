@@ -6,6 +6,8 @@
             {{-- {{var_dump($companerismo)}} --}}
         </h2>
     </x-slot>
+    @if ($companerismo->grupo->programa->mostrarGrupos == 1)
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="col-span-4 bg-white text-center border-2 rounded-lg p-4 flex  shadow-md">
@@ -130,6 +132,17 @@
             </div>
         </div>
     </div>
+
+    @else
+    <div class="py-2">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white p-6 overflow-hidden shadow-xl sm:rounded-lg text-center">
+
+                <h2 class="text-2xl font-medium  ">Espera un poco más...</h2>
+            </div>
+        </div>
+    </div>
+    @endif
 
     <script src="{{ config('app.url') }}/tw-elements/dist/js/index.min.js"></script>
 </x-app-layout>
