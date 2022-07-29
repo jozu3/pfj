@@ -57,7 +57,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th colspan="2">Nombres</th>
+                        <th colspan="1">Nombres</th>
                         <th>Apellidos</th>
                         <th>Género</th>
                         <th>Estaca</th>
@@ -66,19 +66,41 @@
                         <th>Correo electrónico</th>
                         <th>Fecha de nacimiento</th>
                         <th>Edad</th>
+                        <th>Contacto 1</th>
+                        <th>Contacto 2</th>
                         <th>Tipo de sangre</th>
-                        <th>Activo</th>
+                        <th> 
+                            Informacion médica 
+                        </th>
+                        <th> 
+                            Tratamiento médico 
+                        </th>
+                        <th> 
+                            Diabetico o asmático 
+                        </th>
+                        <th> 
+                            Seguro médico 
+                        </th>
+                        <th> 
+                            Informacion alimentaria 
+                        </th>
+                        <th> 
+                            Vacunas 
+                        </th>
+                        <th>
+                            Estado
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($participantes as $participante)
                         <tr>
-                            <td>
+                            {{-- <td>
                                 <img id="imgperfil" class="rounded-circle {{ $participante->id }}" width="50"
                                     height="50" style="object-fit: cover;"
                                     src="@if ($participante->image) {{ $participante->image() }} @else {{ 'https://picsum.photos/300/300' }} @endif"
                                     alt="">
-                            </td>
+                            </td> --}}
                             <td>
                                 {{ $participante->nombres }}
                                 {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" wire:click="$emitTo('admin.modal-detalle-contacto', 'showcontacto', '{{$participante->id}}')">
@@ -130,22 +152,43 @@
                                 {{ $participante->age }}
                             </td>
                             <td>
+                                {{ $participante->contacto1 }}
+                            </td>
+                            <td>
+                                {{ $participante->contacto2 }}
+                            </td>
+                            <td>
                                 {{ $participante->sangre }}
+                            </td>
+                            <td>
+                                {{ $participante->informacion_medica}}
+                            </td>
+                            <td>
+                                {{ $participante->tratamiento_medico}}
+                            </td>
+                            <td>
+                                {{ $participante->diabetico_asmatico}}
+                            </td>
+                            <td>
+                                {{ $participante->seguro_medico}}
+                            </td>
+                            <td>
+                                {{ $participante->informacion_alimentaria}}
+                            </td>
+                            <td>
+                                {{ $participante->vacunas}}
                             </td>
                             <td>
                                 @switch($participante->estado)
                                     @case(0)
                                         {{ 'Inscrito' }}
                                     @break
-
                                     @case(1)
                                         {{ 'ingresado' }}
                                     @break
-
                                     @case(2)
                                         {{ 'permutado' }}
                                     @break
-
                                     @case(3)
                                         {{ 'terminado' }}
                                     @break

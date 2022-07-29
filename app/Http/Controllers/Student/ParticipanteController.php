@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barrio;
+use App\Models\Companerismo;
 use App\Models\Estaca;
 use App\Models\Participante;
 use App\Models\ParticipanteCompania;
@@ -175,5 +176,10 @@ class ParticipanteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function compania(Companerismo $companerismo){
+
+        return view('student.participante.compania', compact('companerismo'));
     }
 }

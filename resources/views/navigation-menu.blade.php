@@ -26,7 +26,6 @@
                                     <button
                                         class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                         <div>Mi familia</div>
-
                                         <div class="ml-1">
                                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 20 20">
@@ -36,9 +35,7 @@
                                             </svg>
                                         </div>
                                     </button>
-
                                 </x-slot>
-
                                 <x-slot name="content">
                                     <!-- User Management -->
                                     @foreach (Auth::user()->personale->inscripciones as $inscripcione)
@@ -68,10 +65,8 @@
                                         @endcan
                                     @endforeach
                                 </x-slot>
-
                             </x-jet-dropdown>
                         </div>
-
                         <div class="inline-flex items-center px-1 pt-1">
                             <x-jet-dropdown>
                                 <x-slot name="trigger">
@@ -140,6 +135,24 @@
                                 {{ __('Panel administrativo') }}
                             </x-jet-nav-link>
                         @endcan
+                        @php
+                            $hasCompania = false;
+                            $countCompanias = 0;
+                            $companerismo = null;
+                            foreach (auth()->user()->personale->inscripciones as $inscripcione) {
+                                if (isset($inscripcione->inscripcioneCompanerismo)) {
+                                    $hasCompania = true;
+                                    $countCompanias++;
+                                    $companerismo = $inscripcione->inscripcioneCompanerismo->companerismo;
+                                    // break;
+                                }
+                            }
+                        @endphp
+                        @if ($hasCompania)
+                            <x-jet-nav-link href="{{ route('st.participante.compania', $companerismo) }}" :active="request()->routeIs('st.participante.compania')">
+                                {{ __('Mi compañia') . $countCompanias . $companerismo}}
+                            </x-jet-nav-link>
+                        @endif
                         @can('admin.programas.viewList')
                             <div class="inline-flex items-center px-1 pt-1">
                                 <x-jet-dropdown>
@@ -325,6 +338,11 @@
                     {{ __('Inicio') }}
                 </x-jet-responsive-nav-link>
             @endcan
+            @if ($hasCompania)
+                    <x-jet-nav-link href="{{ route('st.participante.compania', $companerismo) }}" :active="request()->routeIs('st.participante.compania')">
+                {{ __('Mi compañia') . $countCompanias . $companerismo}}
+            </x-jet-nav-link>
+        @endif
             @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count() ||
                 auth()->user()->can('admin.programas.viewList'))
                 <!-- Account Management -->

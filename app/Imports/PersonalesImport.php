@@ -56,6 +56,7 @@ class PersonalesImport implements ToModel, WithValidation
         $apellidos = $row[1];
         $fec_nac = null;
         if ($row[2] != '') {
+            
             $fec_nac = Date::excelToDateTimeObject($row[2]);
         }
 
