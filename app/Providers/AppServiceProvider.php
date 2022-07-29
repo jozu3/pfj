@@ -147,6 +147,13 @@ class AppServiceProvider extends ServiceProvider
                         'can' => 'admin.programas.edit'
                     ];
 
+                    $menu_dashboard_bienvenida = [
+                        'text' => 'Dashboard Bienvenida',
+                        'url' => 'admin/programas/' . session('programa_activo') . '/dashboard-bienvenida',
+                        'icon' => 'fas fa-chart-line',
+                        'can' => 'admin.programas.edit'
+                    ];
+
                     /* * */
                     $menu_planificador = [
                         'text' => 'Planificador',
@@ -187,6 +194,8 @@ class AppServiceProvider extends ServiceProvider
                     $event->menu->addAfter('programa', $menu_configuracion);
                     $event->menu->addBefore('programa', $header);
                     $event->menu->addAfter('dashboard', $menu_dashboard);
+                    $event->menu->addAfter('dashboard', $menu_dashboard_bienvenida);
+                    
                 }
 
                 $menu_change_sesion = [

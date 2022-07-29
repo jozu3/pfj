@@ -20,6 +20,12 @@ class Bienvenida extends Component
         $this->search = '';
     }
 
+    public function ingresar($id){
+        Participante::where('id', $id)->first()->update([
+            'estado' => 1
+        ]);
+    }
+
     public function render()
     {
         $participantes = [];

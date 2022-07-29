@@ -150,7 +150,7 @@
                         @endphp
                         @if ($hasCompania)
                             <x-jet-nav-link href="{{ route('st.participante.compania', $companerismo) }}" :active="request()->routeIs('st.participante.compania')">
-                                {{ __('Mi compañia') . $countCompanias . $companerismo}}
+                                {{ __('Mi compañia') }}
                             </x-jet-nav-link>
                         @endif
                         @can('admin.programas.viewList')
@@ -340,7 +340,7 @@
             @endcan
             @if ($hasCompania)
                     <x-jet-nav-link href="{{ route('st.participante.compania', $companerismo) }}" :active="request()->routeIs('st.participante.compania')">
-                {{ __('Mi compañia') . $countCompanias . $companerismo}}
+                {{ __('Mi compañia')}}
             </x-jet-nav-link>
         @endif
             @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count() ||

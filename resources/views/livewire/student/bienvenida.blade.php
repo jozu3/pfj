@@ -143,7 +143,7 @@
                     <div class="mt-1 grid grid-cols-2 gap-4">
                         {{-- <button class="btn btn-sm btn-info text-right"><i class="fas fa-print"></i> Imprimir</button> --}}
                         <a href="{{ route('admin.pdf.ingreso_participante', $participanteSelected) }}" target="_blank"
-                            class="btn btn-sm btn-info text-right"><i class="fas fa-print"></i> Registrar ingreso e Imprimir</a>
+                            class="btn btn-sm btn-info text-right" wire:click="ingresar({{$participanteSelected->id}})" ><i class="fas fa-print"></i> Registrar ingreso e Imprimir</a>
                         <a href="{{ route('st.participantes.edit', $participanteSelected) }}"
                             class="btn btn-sm btn-info text-left"><i class="fas fa-edit"></i>
                             Editar</button>

@@ -294,4 +294,9 @@ class ProgramaController extends Controller
     public function companias(Programa $programa){
         return view('admin.programas.companias', compact('programa'));
     }
+    
+    public function dashboardBienvenida(Programa $programa){
+        
+        return view('admin.programas.dashboard-bienvenida', compact('programa'));
+    }
 }

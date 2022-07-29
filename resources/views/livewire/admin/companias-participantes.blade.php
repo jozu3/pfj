@@ -62,12 +62,19 @@
                         <th>Género</th>
                         <th>Estaca</th>
                         <th>Compañia</th>
+                        <th>Habitación</th>
                         <th>Telefono</th>
                         <th>Correo electrónico</th>
                         <th>Fecha de nacimiento</th>
                         <th>Edad</th>
                         <th>Contacto 1</th>
+                        <th>Teléfono de Contacto 1</th>
+                        <th>Correo electrónico de Contacto 1</th>
                         <th>Contacto 2</th>
+                        <th>Teléfono de Contacto 2</th>
+                        <th>Correo electrónico de Contacto 2</th>
+                        <th>Obispo</th>
+                        <th>Correo electrónico del obispo</th>
                         <th>Tipo de sangre</th>
                         <th> 
                             Informacion médica 
@@ -75,6 +82,7 @@
                         <th> 
                             Tratamiento médico 
                         </th>
+                        <th>Alergia</th>
                         <th> 
                             Diabetico o asmático 
                         </th>
@@ -128,20 +136,25 @@
                                 @endif
                             </td>
                             <td>
+                                <span class="text-secondary" >
+                                    {{ 'No asignado' }}
+                                </span>
+                            </td>
+                            <td>
                                 <span>
-                                    <a href="tel:{{ $participante->telefono }}" alt="Llamar por teléfono"
+                                    <a href="tel:{{ str_replace(' ', '', $participante->telefono) }}" alt="Llamar por teléfono"
                                         data-toggle="tooltip" data-placement="top"
-                                        title="Llamar por teléfono">{{ $participante->telefono }}</a>
-                                    <a href="https://api.whatsapp.com/send?phone=51{{ $participante->telefono }}"
+                                        title="Llamar por teléfono">{{ str_replace(' ', '', $participante->telefono) }}</a>
+                                    <a href="https://api.whatsapp.com/send?phone=51{{ str_replace(' ', '', $participante->telefono) }}"
                                         class="text-success" target="_blank" alt="Enviar Whatsapp" data-toggle="tooltip"
                                         data-placement="top" title="Enviar Whatsapp"><i class="fab fa-whatsapp"></i></a>
                                 </span>
                             </td>
                             <td>
                                 @if ($participante)
-                                    <a href="mailto:{{ $participante->email }}" alt="Enviar email"
+                                    <a href="mailto:{{ str_replace(' ', '', $participante->email) }}" alt="Enviar email"
                                         data-toggle="tooltip" data-placement="top"
-                                        title="Enviar email">{{ $participante->email }}</a>
+                                        title="Enviar email">{{ str_replace(' ', '', $participante->email) }}</a>
                                 @else
                                 @endif
                             </td>
@@ -155,7 +168,25 @@
                                 {{ $participante->contacto1 }}
                             </td>
                             <td>
+                                {{ $participante->contacto1_phone }}
+                            </td>
+                            <td>
+                                {{ $participante->contacto1_email }}
+                            </td>
+                            <td>
                                 {{ $participante->contacto2 }}
+                            </td>
+                            <td>
+                                {{ $participante->contacto2_phone }}
+                            </td>
+                            <td>
+                                {{ $participante->contacto2_email }}
+                            </td>
+                            <td>
+                                {{ $participante->obispo }}
+                            </td>
+                            <td>
+                                {{ $participante->obispo_email }}
                             </td>
                             <td>
                                 {{ $participante->sangre }}
@@ -165,6 +196,9 @@
                             </td>
                             <td>
                                 {{ $participante->tratamiento_medico}}
+                            </td>
+                            <td>
+                                {{ $participante->alergia}}
                             </td>
                             <td>
                                 {{ $participante->diabetico_asmatico}}
