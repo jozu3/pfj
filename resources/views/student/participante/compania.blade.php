@@ -81,7 +81,13 @@
                                 Barrio
                             </th>
                             <th>
+                                Fecha de nacimiento
+                            </th>
+                            <th>
                                 Edad
+                            </th>
+                            <th>
+                                Teléfono
                             </th>
                             <!--th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                           Unidades completadas
@@ -110,7 +116,13 @@
                                     {{ $participante->barrio->nombre }}
                                 </td>
                                 <td>
+                                    {{ $participante->fecnac }}
+                                </td>
+                                <td>
                                     {{ $participante->age }}
+                                </td>
+                                <td>
+                                    {{ $participante->telefono }}
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap">
