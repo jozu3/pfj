@@ -63,7 +63,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white overflow-x-auto shadow-xl sm:rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
@@ -95,7 +95,7 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach ($companerismo->participanteCompanias as $participanteCompania)
+                        @foreach ($companerismo->participanteCompanias->sortBy('participante.nombres') as $participanteCompania)
                             @php
                                 $participante = $participanteCompania->participante;
                             @endphp
@@ -116,7 +116,7 @@
                                     {{ $participante->barrio->nombre }}
                                 </td>
                                 <td>
-                                    {{ $participante->fecnac }}
+                                    {{ date('d/m/Y',  strtotime($participante->fecnac)) }}
                                 </td>
                                 <td>
                                     {{ $participante->age }}
