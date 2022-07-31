@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Alojamiento;
 use App\Http\Controllers\Controller;
@@ -30,7 +30,11 @@ class AlojamientoController extends Controller
     {
         $participantes = Participante::select('id', DB::raw('concat(nombres, " ", apellidos) as nombre_completo'))->where('programa_id', session('programa_activo'))->orderBy('nombre_completo')->get()->pluck('nombre_completo', 'id');
 
-        $habitaciones = Habitacione::select('');
+        $habitaciones = Habitacione::select('habitaciones.id as habitacion', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num, " - ", habitaciones.numero) as nivel'))
+                            ->join('pisos', 'habitaciones.piso_id', '=', 'pisos.id')
+                            ->join('edificios', 'pisos.edificio_id', '=', 'edificios.id')
+                            ->join('locales', 'edificios.locale_id', '=', 'locales.id')
+                            ->pluck('nivel', 'habitacion');
 
         return view('admin.alojamientos.create', compact('participantes', 'habitaciones'));
     }
@@ -47,6 +51,8 @@ class AlojamientoController extends Controller
             'participante_id' => 'required',
             'habitacione_id' => 'required',
         ]);
+
+        Alojamiento::where('participante_id', $request->participante_id)->delete();
 
         Alojamiento::create($request->all());
 

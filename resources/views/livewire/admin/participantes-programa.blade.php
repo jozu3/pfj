@@ -113,8 +113,7 @@
                             </td>
                             <td>
                                 @if (isset($participante->alojamiento))
-                                    {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} -
-                                    {{ $participante->alojamiento->habitacione->piso->num }} -
+                                    {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} - Piso: {{ $participante->alojamiento->habitacione->piso->num }} -
                                     {{ $participante->alojamiento->habitacione->numero }}
                                 @endif
                             </td>

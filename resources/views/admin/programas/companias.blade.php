@@ -11,6 +11,9 @@
     <a href="{{route('admin.participanteCompanias.create')}}" class="btn btn-success btn-sm float-right mr-3">
         <i class="far fa-plus"></i> Asignar Participante-Compañia
     </a>
+    <a href="{{route('admin.alojamientos.create')}}" class="btn btn-success btn-sm float-right mr-3">
+        <i class="far fa-plus"></i> Asignar Habitación-Participante
+    </a>
     <h1>Compañias por Sesión</h1>
 @stop
 

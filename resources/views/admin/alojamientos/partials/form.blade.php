@@ -7,7 +7,7 @@
 </div> 
 <div class="form-group">
 	{!! Form::label('habitacione_id', 'Habitación') !!}
-	{!! Form::select('habitacione_id', $companerismos, null, ['class' => 'form-control', 'placeholder' => 'Escoja la habitación a asignar']) !!}
+	{!! Form::select('habitacione_id', $habitaciones, null, ['class' => 'form-control', 'placeholder' => 'Escoja la habitación a asignar']) !!}
 	@error('habitacione_id')
 		<small>{{$message}}</small>
 	@enderror

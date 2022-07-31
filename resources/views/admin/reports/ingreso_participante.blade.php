@@ -48,9 +48,10 @@
         <br>
         <center>
             <h4>
-                Habitación : @if (isset($participante->alojamiento))
-                    {{ $participante->alojamiento }}
-                @endif
+                Habitación :  @if (isset($participante->alojamiento))
+                {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} - Piso: {{ $participante->alojamiento->habitacione->piso->num }} -
+                {{ $participante->alojamiento->habitacione->numero }}
+            @endif
             </h4>
         </center>
         <div class="border-bottom mx-5"></div>

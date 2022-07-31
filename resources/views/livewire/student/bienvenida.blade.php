@@ -2,7 +2,7 @@
     <div class="w-100 text-center">
         <div class="grid grid-cols-2 gap-4">
             @if ($formsearch)
-                <div class="col-span-2 relative">
+                <div class="col-span-2 relative p-5">
                     <button type="button" wire:click="$toggle('formsearch')">
                         <i class="fas fa-lg fa-arrow-circle-left"></i>
                     </button><br><br>
@@ -102,10 +102,21 @@
                             {{ ' ' . $participanteSelected->talla }}
                         </div>
                         <div>
-                            <i class="fas fa-users text-yellow-500"></i> Compañía
+                            <i class="fas fa-users text-yellow-500"></i> 
+                            {{'Compañia: '}}
+                            @if ($participanteSelected->participanteCompania)
+                                {{ $participanteSelected->participanteCompania->companerismo->numero }}
+
+                            @endif
                         </div>
                         <div>
-                            <i class="fas fa-bed text-yellow-500"></i> Habitación
+                            <i class="fas fa-bed text-yellow-500"></i> 
+                            @if (isset($participanteSelected->alojamiento))
+                                {{ $participanteSelected->alojamiento->habitacione->piso->edificio->nombre }} - Piso: {{ $participanteSelected->alojamiento->habitacione->piso->num }} -
+                                {{ $participanteSelected->alojamiento->habitacione->numero }}
+                            @else 
+                                {{'Habitación'}}
+                            @endif
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-1 py-3">

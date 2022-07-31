@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\AlojamientoController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
@@ -33,8 +34,6 @@ use App\Http\Controllers\Admin\LocaleController;
 use App\Http\Controllers\Admin\ParticipanteCompaniaController;
 use App\Http\Controllers\Admin\ParticipanteController;
 use App\Http\Controllers\Admin\PisoController;
-use App\Http\Controllers\AlojamientoController;
-use App\Models\ParticipanteCompania;
 
 Route::resource('', HomeController::class)->names('admin');
 
