@@ -30,8 +30,10 @@ use App\Http\Controllers\Admin\ReporteController;
 use App\Http\Controllers\Admin\EstacaController;
 use App\Http\Controllers\Admin\HabitacioneController;
 use App\Http\Controllers\Admin\LocaleController;
+use App\Http\Controllers\Admin\ParticipanteCompaniaController;
 use App\Http\Controllers\Admin\ParticipanteController;
 use App\Http\Controllers\Admin\PisoController;
+use App\Models\ParticipanteCompania;
 
 Route::resource('', HomeController::class)->names('admin');
 
@@ -74,6 +76,7 @@ Route::resource('locales', LocaleController::class)->names('admin.locales');
 Route::resource('edificios', EdificioController::class)->names('admin.edificios');
 Route::resource('pisos', PisoController::class)->names('admin.pisos');
 Route::resource('habitaciones', HabitacioneController::class)->names('admin.habitaciones');
+Route::resource('participanteCompanias', ParticipanteCompaniaController::class)->names('admin.participanteCompanias');
 
 Route::get('/inscripciones/notificacion/{inscripcione}', [InscripcioneController::class, 'notificacion'])->name('admin.inscripciones.notificacion');
 Route::resource('inscripciones', InscripcioneController::class)->names('admin.inscripciones');

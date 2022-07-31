@@ -4,9 +4,13 @@
 
 @section('content_header')
 
-    <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#sortCompanias" data-backdrop="static" data-keyboard="false">
+    <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#sortCompanias"
+        data-backdrop="static" data-keyboard="false">
         <i class="far fa-plus"></i> Armar Compañias
     </button>
+    <a href="{{route('admin.participanteCompanias.create')}}" class="btn btn-success btn-sm float-right mr-3">
+        <i class="far fa-plus"></i> Asignar Participante-Compañia
+    </a>
     <h1>Compañias por Sesión</h1>
 @stop
 
@@ -100,9 +104,8 @@
             flex-wrap: unset;
             text-align: center;
         }
-        .showLoading{
 
-        }
+        .showLoading {}
     </style>
 @stop
 
@@ -118,7 +121,7 @@
         //     keyboard: false
         // })
 
-      
+
 
         Livewire.on('offmodalloading', () => {
             console.log('offsortCompanias');
@@ -128,9 +131,8 @@
         });
 
         Livewire.on('onmodalloading', () => {
-            console.log('onmodalloading'); 
+            console.log('onmodalloading');
             $('#modalloading').modal('show')
         });
-
     </script>
 @stop
