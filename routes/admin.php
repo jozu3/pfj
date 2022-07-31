@@ -33,6 +33,7 @@ use App\Http\Controllers\Admin\LocaleController;
 use App\Http\Controllers\Admin\ParticipanteCompaniaController;
 use App\Http\Controllers\Admin\ParticipanteController;
 use App\Http\Controllers\Admin\PisoController;
+use App\Http\Controllers\AlojamientoController;
 use App\Models\ParticipanteCompania;
 
 Route::resource('', HomeController::class)->names('admin');
@@ -77,12 +78,10 @@ Route::resource('edificios', EdificioController::class)->names('admin.edificios'
 Route::resource('pisos', PisoController::class)->names('admin.pisos');
 Route::resource('habitaciones', HabitacioneController::class)->names('admin.habitaciones');
 Route::resource('participanteCompanias', ParticipanteCompaniaController::class)->names('admin.participanteCompanias');
+Route::resource('alojamientos', AlojamientoController::class)->names('admin.alojamientos');
 
 Route::get('/inscripciones/notificacion/{inscripcione}', [InscripcioneController::class, 'notificacion'])->name('admin.inscripciones.notificacion');
 Route::resource('inscripciones', InscripcioneController::class)->names('admin.inscripciones');
-Route::resource('obligaciones', ObligacioneController::class)->names('admin.obligaciones');
-Route::resource('pagos', PagoController::class)->names('admin.pagos');
-Route::resource('cuentas', CuentaController::class)->names('admin.cuentas');
 Route::post('inscripcione_companerismos/deleteInscripcioneCompanerismo', [InscripcioneCompanerismoController::class, 'deleteInscripcioneCompanerismo'])->name('admin.inscripcione_companerismos.deleteInscripcioneCompanerismo');
 Route::post('inscripcione_companerismos/updateInscripcione/{inscripcione}', [InscripcioneCompanerismoController::class, 'updateInscripcione'])->name('admin.inscripcione_companerismos.updateInscripcione');
 Route::resource('inscripcione_companerismos', InscripcioneCompanerismoController::class)->names('admin.inscripcione_companerismos');

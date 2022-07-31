@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Habitacione;
 use App\Http\Controllers\Controller;
+use App\Models\Piso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HabitacioneController extends Controller
 {
@@ -15,7 +17,7 @@ class HabitacioneController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.habitaciones.index');
     }
 
     /**
@@ -25,7 +27,13 @@ class HabitacioneController extends Controller
      */
     public function create()
     {
-        //
+
+        $pisos = Piso::select('pisos.id as pisoid', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num) as nivel'))
+                            ->join('edificios', 'pisos.edificio_id', '=', 'edificios.id')
+                            ->join('locales', 'edificios.locale_id', '=', 'locales.id')
+                            ->pluck('nivel', 'pisoid');
+
+        return view('admin.habitaciones.create', compact('pisos'));
     }
 
     /**
@@ -36,7 +44,15 @@ class HabitacioneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'numero' => 'required',
+            'cupos' => 'required',
+            'piso_id' => 'required',
+        ]);
+
+        Habitacione::create($request->all());
+
+        return redirect()->route('admin.habitaciones.create')->with('info', 'La habitación se creó con éxito');
     }
 
     /**
@@ -57,8 +73,14 @@ class HabitacioneController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Habitacione $habitacione)
-    {
-        //
+    {        
+        
+        $pisos = Piso::select('pisos.id as pisoid', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num) as nivel'))
+        ->join('edificios', 'pisos.edificio_id', '=', 'edificios.id')
+        ->join('locales', 'edificios.locale_id', '=', 'locales.id')
+        ->pluck('nivel', 'pisoid');
+
+        return view('admin.habitaciones.edit', compact('habitacione', 'pisos'));
     }
 
     /**
@@ -70,7 +92,15 @@ class HabitacioneController extends Controller
      */
     public function update(Request $request, Habitacione $habitacione)
     {
-        //
+        $request->validate([
+            'numero' => 'required',
+            'cupos' => 'required',
+            'piso_id' => 'required',
+        ]);
+
+        $habitacione->update($request->all());
+
+        return redirect()->route('admin.habitaciones.index')->with('info', 'La habitación se editó con éxito');
     }
 
     /**
@@ -81,6 +111,8 @@ class HabitacioneController extends Controller
      */
     public function destroy(Habitacione $habitacione)
     {
-        //
+        $habitacione->delete();
+
+        return redirect()->route('admin.habitaciones.index')->with('info', 'La habitación se eliminó con éxito');
     }
 }

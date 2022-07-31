@@ -14,4 +14,8 @@ class Habitacione extends Model
     public function piso(){
     	return $this->belongsTo(Piso::class);
     }
+
+    public function alojamientos(){
+    	return $this->hasMany(Alojamiento::class);
+    }
 }

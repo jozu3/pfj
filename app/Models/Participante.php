@@ -22,6 +22,10 @@ class Participante extends Model
     public function participanteCompania(){
         return $this->hasOne(ParticipanteCompania::class);
     }
+
+    public function alojamientos(){
+    	return $this->hasOne(Alojamiento::class);
+    }
 }
 /*
 

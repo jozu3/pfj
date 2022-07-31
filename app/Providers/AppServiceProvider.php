@@ -175,6 +175,14 @@ class AppServiceProvider extends ServiceProvider
                         'can' => 'admin.programas.companias'
                     ];
 
+                    $menu_habitaciones = [
+                        'text' => 'Habitaciones',
+                        // 'url' => 'admin/habitaciones',
+                        'route' => 'admin.habitaciones.index',
+                        'icon' => 'fas fa-hotel',
+                        'can' => 'admin.programas.participantes'
+                    ];
+
                     $header = [
                         'header' => 'Dashboard',
                         'can'  =>   'admin.programas.edit',
@@ -192,6 +200,7 @@ class AppServiceProvider extends ServiceProvider
                     $event->menu->addAfter('programa', $menu_personales);
                     $event->menu->addAfter('programa', $menu_planificador);
                     $event->menu->addAfter('programa', $menu_configuracion);
+                    $event->menu->addAfter('programa', $menu_habitaciones);
                     $event->menu->addBefore('programa', $header);
                     $event->menu->addAfter('dashboard', $menu_dashboard);
                     $event->menu->addAfter('dashboard', $menu_dashboard_bienvenida);
