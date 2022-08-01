@@ -3,8 +3,11 @@
 @section('title', 'PFJ')
 
 @section('content_header')
+<a href="{{ route('admin.alojamientos.asignarParticipantesHabitacion', session('programa_activo') ) }}" class="btn btn-success btn-sm float-right">Asignar varios participantes</a>
+
     <h1>Alojar participante</h1>
 @stop
+
 
 @section('content')
     @if (session('info'))

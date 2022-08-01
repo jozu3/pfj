@@ -6,6 +6,7 @@ use App\Models\Alojamiento;
 use App\Http\Controllers\Controller;
 use App\Models\Habitacione;
 use App\Models\Participante;
+use App\Models\Programa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -102,5 +103,48 @@ class AlojamientoController extends Controller
     public function destroy(Alojamiento $alojamiento)
     {
         //
+    }
+
+    public function asignarParticipantesHabitacion(Programa $programa){
+
+        $habitaciones = Habitacione::select('habitaciones.id as habitacion', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num, " - ", habitaciones.numero) as nivel'))
+        ->join('pisos', 'habitaciones.piso_id', '=', 'pisos.id')
+        ->join('edificios', 'pisos.edificio_id', '=', 'edificios.id')
+        ->join('locales', 'edificios.locale_id', '=', 'locales.id')
+        ->pluck('nivel', 'habitacion');
+
+        $companias = $programa->companias();
+
+        return view('admin.alojamientos.asignarParticipantesHabitacion', compact('companias', 'habitaciones'));
+    }
+
+    public function storeParticipantesHabitacion(Request $request){
+
+        $request->validate([
+            'participantes' => 'required',
+            'habitacione_id' => 'required',
+        ]);
+
+        $programa = Programa::find(session('programa_activo'));
+
+        // dd($request->participantes);
+        $habitacione = Habitacione::find($request->habitacione_id);
+        $nota = '';
+
+        foreach ($request->participantes as $participante_id){
+
+            if($habitacione->alojamientos->count() < $habitacione->cupos){
+                Alojamiento::where('participante_id', $participante_id)->delete();
+                Alojamiento::create([
+                    'participante_id' => $participante_id,
+                    'habitacione_id' => $request->habitacione_id,
+                ]);
+
+            } else {
+                $nota= 'Nota: Algunos participantes no se alojaron porque la habitación está llena.';
+            }
+        }
+
+        return redirect()->route('admin.alojamientos.asignarParticipantesHabitacion', $programa)->with('info', 'Se alojó correctamente'. $nota);
     }
 }

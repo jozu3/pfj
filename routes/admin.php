@@ -77,7 +77,11 @@ Route::resource('edificios', EdificioController::class)->names('admin.edificios'
 Route::resource('pisos', PisoController::class)->names('admin.pisos');
 Route::resource('habitaciones', HabitacioneController::class)->names('admin.habitaciones');
 Route::resource('participanteCompanias', ParticipanteCompaniaController::class)->names('admin.participanteCompanias');
+
+Route::get('alojamientos/asignarParticipantesHabitacion/{programa}', [AlojamientoController::class, 'asignarParticipantesHabitacion'])->name('admin.alojamientos.asignarParticipantesHabitacion');
+Route::post('alojamientos/storeParticipantesHabitacion', [AlojamientoController::class, 'storeParticipantesHabitacion'])->name('admin.alojamientos.storeParticipantesHabitacion');
 Route::resource('alojamientos', AlojamientoController::class)->names('admin.alojamientos');
+
 
 Route::get('/inscripciones/notificacion/{inscripcione}', [InscripcioneController::class, 'notificacion'])->name('admin.inscripciones.notificacion');
 Route::resource('inscripciones', InscripcioneController::class)->names('admin.inscripciones');

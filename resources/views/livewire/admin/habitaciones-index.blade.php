@@ -50,6 +50,7 @@
                             <th>Edificio - Piso</th>
                             <th>Número o nombre</th>
                             <th>Cupos</th>
+                            <th>Ocupados</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -63,6 +64,9 @@
                                 </td>
                                 <td>
                                     {{ $habitacione->cupos }}
+                                </td>
+                                <td>
+                                    {{ $habitacione->alojamientos->count() }}
                                 </td>
                                 <td width="10px">
                                     <a href="{{ route('admin.habitaciones.edit', $habitacione) }}"
