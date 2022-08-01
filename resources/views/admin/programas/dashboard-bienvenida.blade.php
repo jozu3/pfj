@@ -86,6 +86,10 @@
                                     </td>
                                     <td>
                                         {{ $companerismo->participanteCompanias->count() }}
+                                        <br>
+                                        {{ 'H:'. $companerismo->participantes()->where('genero', 1)->count() }}
+                                        {{ 'M:'. $companerismo->participantes()->where('genero', 0)->count() }}
+
                                     </td>
                                     <td>
                                         {{ $companerismo->participantes()->where('estado', '0')->count() }}
@@ -129,6 +133,9 @@
                                         </td>
                                         <td>
                                             {{ $estaca->participantes()->count() }}
+                                            <br>
+                                            {{ 'H:'. $estaca->participantes()->where('genero', 1)->count() }}
+                                            {{ 'M:'. $estaca->participantes()->where('genero', 0)->count() }}
                                         </td>
                                         <td>
                                             {{ $estaca->participantes()->where('estado', '0')->count() }}
