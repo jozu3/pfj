@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\Alojamiento;
 use App\Models\Barrio;
 use App\Models\Companerismo;
 use App\Models\Estaca;
@@ -164,6 +165,7 @@ class ParticipanteController extends Controller
         }
         if($participante->estado == 6){
             ParticipanteCompania::where('participante_id', $participante->id)->delete();
+            Alojamiento::where('participante_id', $participante->id)->delete();
         }
         
 
