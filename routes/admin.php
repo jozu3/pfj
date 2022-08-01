@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AlojamientoController;
+use App\Http\Controllers\Admin\AlojamientoPersonaleController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RoleController;
@@ -34,6 +35,7 @@ use App\Http\Controllers\Admin\LocaleController;
 use App\Http\Controllers\Admin\ParticipanteCompaniaController;
 use App\Http\Controllers\Admin\ParticipanteController;
 use App\Http\Controllers\Admin\PisoController;
+use App\Models\AlojamientoPersonale;
 
 Route::resource('', HomeController::class)->names('admin');
 
@@ -81,6 +83,10 @@ Route::resource('participanteCompanias', ParticipanteCompaniaController::class)-
 Route::get('alojamientos/asignarParticipantesHabitacion/{programa}', [AlojamientoController::class, 'asignarParticipantesHabitacion'])->name('admin.alojamientos.asignarParticipantesHabitacion');
 Route::post('alojamientos/storeParticipantesHabitacion', [AlojamientoController::class, 'storeParticipantesHabitacion'])->name('admin.alojamientos.storeParticipantesHabitacion');
 Route::resource('alojamientos', AlojamientoController::class)->names('admin.alojamientos');
+
+Route::get('alojamientosPersonale/asignarInscripcionesHabitacion/{programa}', [AlojamientoPersonaleController::class, 'asignarInscripcionesHabitacion'])->name('admin.alojamientosPersonale.asignarInscripcionesHabitacione');
+Route::post('alojamientosPersonale/storeInscripcionesHabitacion', [AlojamientoPersonaleController::class, 'storeInscripcionesHabitacion'])->name('admin.alojamientosPersonale.storeInscripcionesHabitacione');
+Route::resource('alojamientosPersonale', AlojamientoPersonaleController::class)->names('admin.alojamientosPersonale');
 
 
 Route::get('/inscripciones/notificacion/{inscripcione}', [InscripcioneController::class, 'notificacion'])->name('admin.inscripciones.notificacion');

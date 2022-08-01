@@ -193,6 +193,38 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Personal</th>
+                                <th>Alojados</th>
+                                <th>No alojados</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hombres</td>
+                                <td>
+                                    {{ $totalPersonalHombresAlojados }}
+                                </td>
+                                <td>
+                                    {{ $totalPersonalHombres - $totalPersonalHombresAlojados }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mujeres</td>
+                                <td>
+                                    {{ $totalPersonalMujeresAlojados }}
+                                </td>
+                                <td>
+                                    {{ $totalPersonalMujeres - $totalPersonalMujeresAlojados }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

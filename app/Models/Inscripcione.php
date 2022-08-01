@@ -72,6 +72,10 @@ class Inscripcione extends Model
     {
         return $this->belongsToMany(Funcione::class);
     }
+
+    public function alojamientoPersonale(){
+        return $this->hasOne(AlojamientoPersonale::class);
+    }
 }
 /*
     Estados = [

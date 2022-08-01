@@ -18,4 +18,8 @@ class Habitacione extends Model
     public function alojamientos(){
     	return $this->hasMany(Alojamiento::class);
     }
+
+    public function alojamientosPersonales(){
+    	return $this->hasMany(AlojamientoPersonale::class);
+    }
 }

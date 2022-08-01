@@ -17,6 +17,11 @@
     <a href="{{ route('admin.programas.funciones', $programa) }}" class="btn btn-success btn-sm float-right mr-3">
         <i class="fas fa-address-card"></i> Funciones
     </a>
+    <a href="{{ route('admin.alojamientosPersonale.asignarInscripcionesHabitacione', $programa) }}" class="btn btn-success btn-sm float-right mr-3">
+        <i class="fas fa-address-card"></i> Asignar habitaciones
+    </a>
+
+    
 
     <h1><b class="text-pfj">{{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</b>
     </h1>

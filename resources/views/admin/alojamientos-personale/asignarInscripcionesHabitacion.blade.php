@@ -14,7 +14,7 @@
     @endif
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.alojamientos.storeParticipantesHabitacion']) !!}
+            {!! Form::open(['route' => 'admin.alojamientosPersonale.storeInscripcionesHabitacione']) !!}
 
             <div class="form-group">
                 {!! Form::label('habitacione_id', 'Habitación') !!}
@@ -29,23 +29,23 @@
 
 
             <div class="" style="height: 60vh; overflow-y: auto;">
-                @forelse ($companias as $compania)
+                {{-- @forelse ($companias as $compania) --}}
 
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col-12">
                                 <h3>
-                                    {!! Form::label('compania', 'Compañia: ' . $compania->numero) !!}
+                                    {!! Form::label('compania', 'Personal: ('.$programa->inscripciones->where('estado', '1')->count().' personas)') !!}
                                 </h3>
                             </div>
-                            @foreach ($compania->participantes()->sortBy('age') as $participante)
+                            @foreach ($programa->inscripciones->where('estado', '1') as $inscripcione)
                                 @php
-                                    switch ($participante->genero) {
-                                        case '0':
+                                    switch ($inscripcione->personale->contacto->genero) {
+                                        case 'Mujer':
                                             $s = 'M';
                                             $color_sexo = 'warning';
                                             break;
-                                            case '1':
+                                        case 'Hombre':
                                             $s = 'H';
                                             $color_sexo = 'primary';
                                             break;
@@ -55,19 +55,19 @@
                                     }
                                 @endphp
                                 <div class="col-2 border d-flex align-items-start">
-                                    {!! Form::checkbox('participantes[]', $participante->id, null, [
+                                    {!! Form::checkbox('inscripciones[]', $inscripcione->id, null, [
                                         'class' => 'mr-1 mt-2',
-                                        'id' => 'part' . $participante->id,
+                                        'id' => 'insc' . $inscripcione->id,
                                     ]) !!}
-                                    <label for="{{ 'part' . $participante->id }}" class="w-100">
-                                        {{ $participante->nombres . ' ' . $participante->apellidos }}
+                                    <label for="{{ 'insc' . $inscripcione->id }}" class="w-100">
+                                        {{ $inscripcione->personale->contacto->nombres . ' ' . $inscripcione->personale->contacto->apellidos }}
+                                        <span class="text-secondary">{{', '. $inscripcione->role->name }}</span>
                                         <span class="text-{{ $color_sexo }}">{{ '('. $s. ')' }}</span>
-                                        <span class="text-info">{{ '(' . $participante->age . ')' }}</span>
-                                        @if (isset($participante->alojamiento))
+                                        @if (isset($inscripcione->alojamientoPersonale))
                                             <div class="text-danger">
-                                                {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} -
-                                                Piso: {{ $participante->alojamiento->habitacione->piso->num }} -
-                                                {{ $participante->alojamiento->habitacione->numero }}
+                                                {{ $inscripcione->alojamientoPersonale->habitacione->piso->edificio->nombre }} -
+                                                Piso: {{ $inscripcione->alojamientoPersonale->habitacione->piso->num }} -
+                                                {{ $inscripcione->alojamientoPersonale->habitacione->numero }}
                                             </div>
                                         @endif
                                     </label>
@@ -76,10 +76,10 @@
                         </div>
                     </div>
 
-                @empty
-                @endforelse
+                {{-- @empty
+                @endforelse --}}
             </div>
-            @error('participantes')
+            @error('inscripciones')
                 <small>{{ $message }}</small>
             @enderror
 
