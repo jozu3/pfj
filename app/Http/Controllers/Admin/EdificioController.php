@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Edificio;
 use App\Http\Controllers\Controller;
+use App\Models\Alojamiento;
+use App\Models\Habitacione;
 use App\Models\Locale;
 use App\Models\Piso;
 use Illuminate\Http\Request;
@@ -102,6 +104,23 @@ class EdificioController extends Controller
      */
     public function destroy(Edificio $edificio)
     {
-        //
+        $locale = $edificio->locale;
+
+        Alojamiento::whereHas('habitacione', function($q) use($edificio){
+            $q->whereHas('piso', function($qu) use($edificio){
+                $qu->where('edificio_id', $edificio->id);
+                });
+            })->delete();
+
+        Habitacione::whereHas('piso', function($q) use($edificio){
+            $q->where('edificio_id', $edificio->id);
+        })->delete();
+
+        Piso::where('edificio_id', $edificio->id)->delete();
+
+        $edificio->delete();
+
+        return redirect()->route('admin.locales.show', $locale)->with('info', 'Se eliminó el edificio correctamente');
+
     }
 }

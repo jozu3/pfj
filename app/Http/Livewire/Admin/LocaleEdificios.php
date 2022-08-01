@@ -7,6 +7,7 @@ use Livewire\Component;
 class LocaleEdificios extends Component
 {
     public $locale;
+    
     public function render()
     {
         $edificios = $this->locale->edificios;

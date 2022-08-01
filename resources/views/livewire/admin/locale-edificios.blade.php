@@ -20,7 +20,15 @@
                             <td>
                                 {{ count($edificio->pisos) }}
                             </td>
-                            <td></td>
+                            @can('admin.edificios.destroy')
+                            <td width="10px">
+                               <form method="POST" action="{{ route('admin.edificios.destroy', $edificio) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger ">Eliminar</button>
+                                </form>
+                            </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>
