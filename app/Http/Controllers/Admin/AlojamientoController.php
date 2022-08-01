@@ -128,10 +128,10 @@ class AlojamientoController extends Controller
         $programa = Programa::find(session('programa_activo'));
 
         // dd($request->participantes);
-        $habitacione = Habitacione::find($request->habitacione_id);
         $nota = '';
-
+        
         foreach ($request->participantes as $participante_id){
+            $habitacione = Habitacione::find($request->habitacione_id);
 
             if($habitacione->alojamientos->count() < $habitacione->cupos){
                 Alojamiento::where('participante_id', $participante_id)->delete();
