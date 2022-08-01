@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estaca;
 use App\Models\Inscripcione;
 use App\Models\Participante;
 use Illuminate\Http\Request;
@@ -296,7 +297,7 @@ class ProgramaController extends Controller
     }
     
     public function dashboardBienvenida(Programa $programa){
-        
-        return view('admin.programas.dashboard-bienvenida', compact('programa'));
+        $estacas = Estaca::all();
+        return view('admin.programas.dashboard-bienvenida', compact('programa', 'estacas'));
     }
 }

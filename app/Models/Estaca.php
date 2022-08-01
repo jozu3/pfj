@@ -20,4 +20,10 @@ class Estaca extends Model
         return $this->hasMany(Barrio::class);
     }
 
+    public function participantes(){
+        $participantes = Participante::whereHas('barrio', function($q){
+            $q->where('estaca_id', $this->id);
+        })->get();
+        return $participantes;
+    }
 }

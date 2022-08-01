@@ -26,4 +26,11 @@ class Companerismo extends Model
     public function participanteCompanias(){
         return $this->hasMany(ParticipanteCompania::class);
     }
+
+    public function participantes(){
+        $participantes = Participante::whereHas('participanteCompania', function($q){
+            $q->where('companerismo_id', $this->id);
+        })->get();
+        return $participantes;
+    }
 }
