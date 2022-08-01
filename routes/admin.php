@@ -108,6 +108,7 @@ Route::get('ingreso_participante/{participante}', [PDFController::class, 'ingres
 
 Route::get('/export-excel-personal/{programa}/{familia}/{estaca}/{estado}/{rol}', [ExcelController::class, 'exportExcelPersonal'])->name('admin.excel.exportExcelPersonal');
 Route::get('/export-excel-participantes/{programa}/{compania}/{estaca}/{estado}', [ExcelController::class, 'exportExcelParticipantes'])->name('admin.excel.exportExcelParticipantes');
+Route::get('/export-participantes/{programa}', [ExcelController::class, 'exportParticipantes'])->name('admin.excel.exportParticipantes');
 Route::post('/import-excel-personal/{programa}', [ExcelController::class, 'importExcelPersonal'])->name('admin.excel.importExcelPersonal');
 Route::post('/import-excel-participantes/{programa}', [ExcelController::class, 'importExcelParticipantes'])->name('admin.excel.importExcelParticipantes');
 

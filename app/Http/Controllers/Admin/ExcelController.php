@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\InscripcionesExport;
+use App\Exports\ParticipantesExport;
 use App\Http\Controllers\Controller;
 use App\Imports\ParticipantesImport;
 use Illuminate\Http\Request;
@@ -63,5 +64,11 @@ class ExcelController extends Controller
         }
 
         return back()->with('info', 'Importación de participantes completada.');
+    }
+
+
+    public function exportParticipantes(Programa $programa){
+        $partis = new ParticipantesExport();
+        return $partis->programa($programa->id)->download('inscripcionesPrograma.xlsx');
     }
 }

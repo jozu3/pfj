@@ -16,6 +16,12 @@
         class="btn btn-danger btn-sm float-right mr-3 eliminar-participantes" data-prevent="">
         <i class="fas fa-trash"></i> Eliminar todos participantes
     </a>
+    <a href="{{ route('admin.excel.exportParticipantes', $programa) }}"
+        class="btn btn-danger btn-sm float-right mr-3 eliminar-participantes" data-prevent="">
+     Exportar participantes
+    </a>
+
+    
     <h1>
         <b class="text-pfj">{{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</b>
     </h1>

@@ -82,4 +82,18 @@ class PDFController extends Controller
     	//return view('admin.reports.recibo_inscripcione', compact('inscripcione'));
         return $pdf->stream('IngresoParticipantes.pdf');
     }
+
+
+    public function reporteParticipantes(){
+        $data = [
+            'title' => 'Lista de Participantes',
+            'date' => date('m/d/Y'),
+            'participantes' => $participantes
+        ];
+
+        $pdf = PDF::setPaper('a4', 'vertical')->loadView('admin.reports.participantes-index', $data);
+
+    	//return view('admin.reports.recibo_inscripcione', compact('inscripcione'));
+        return $pdf->stream('IngresoParticipantes.pdf');
+    }
 }
