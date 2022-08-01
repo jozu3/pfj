@@ -19,10 +19,15 @@
                 <td>{{ $participante->barrio->estaca->nombre }}</td>
                 <td>{{ $participante->barrio->nombre }}</td>
                 <td>{{ $participante->age }}</td>
-                <td>{{ $participante->participanteCompania->companerismo->numero }}</td>
+                <td>
+                    @if ($participante->participanteCompania)
+                        {{ $participante->participanteCompania->companerismo->numero }}
+                    @endif
+                </td>
                 <td>
                     @if (isset($participante->alojamiento))
-                        {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} - Piso: {{ $participante->alojamiento->habitacione->piso->num }} -
+                        {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} - Piso:
+                        {{ $participante->alojamiento->habitacione->piso->num }} -
                         {{ $participante->alojamiento->habitacione->numero }}
                     @endif
                 </td>
