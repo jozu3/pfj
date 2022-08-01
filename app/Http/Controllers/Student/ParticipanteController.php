@@ -162,6 +162,9 @@ class ParticipanteController extends Controller
             $parComp = ParticipanteCompania::where('participante_id', $participante->id)->first()->update(['companerismo_id' => $request->compania]);
             // dd($parComp);
         }
+        if($participante->estado == 6){
+            ParticipanteCompania::where('participante_id', $participante->id)->delete();
+        }
         
 
         return redirect()->route('st.participantes.edit', $participante)->with('info', 'Se actualizó los datos del participante');

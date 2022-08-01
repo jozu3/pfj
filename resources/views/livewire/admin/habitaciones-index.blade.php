@@ -2,8 +2,16 @@
     <div class="card">
         <div class="card-header">
             <div class="form-row align-items-center">
-                <div class="col-md-10 my-1">
+                <div class="col-md-5 my-1">
                     <input wire:model="search" class="form-control" placeholder="Ingrese la habitación que desea buscar">
+                </div>
+                <div class="col-md-5 my-1">
+                    <select name="" id="" class="form-control" wire:model="locale">
+                        <option value="">-- Escoja un local --</option>
+                        @foreach ($locales as $locale)
+                            <option value="{{ $locale->id }}">{{$locale->nombre}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="col-md-1 my-1">
                     <div style="text-align:right; font-weight:bold">Mostrar:</div>
