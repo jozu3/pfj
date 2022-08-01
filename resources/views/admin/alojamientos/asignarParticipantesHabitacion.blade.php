@@ -39,6 +39,21 @@
                                 </h3>
                             </div>
                             @foreach ($compania->participantes()->sortBy('age') as $participante)
+                                @php
+                                    switch ($participante->genero) {
+                                        case '0':
+                                            $s = 'M';
+                                            $color_sexo = 'warning';
+                                            break;
+                                            case '1':
+                                            $s = 'H';
+                                            $color_sexo = 'primary';
+                                            break;
+                                        default:
+                                            # code...
+                                            break;
+                                    }
+                                @endphp
                                 <div class="col-2">
                                     {!! Form::checkbox('participantes[]', $participante->id, null, [
                                         'class' => 'mr-1',
@@ -46,7 +61,8 @@
                                     ]) !!}
                                     <label for="{{ 'part' . $participante->id }}" class="w-100">
                                         {{ $participante->nombres . ' ' . $participante->apellidos }}
-                                        <span class="text-info">{{ ' (' . $participante->age . ')' }}</span>
+                                        <span class="text-{{ $color_sexo }}">{{ '('. $s. ')' }}</span>
+                                        <span class="text-info">{{ '(' . $participante->age . ')' }}</span>
                                         @if (isset($participante->alojamiento))
                                             <div class="text-danger">
                                                 {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} -
