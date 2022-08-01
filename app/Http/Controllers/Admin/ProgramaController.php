@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Alojamiento;
 use App\Models\Estaca;
 use App\Models\Inscripcione;
 use App\Models\Participante;
@@ -298,6 +299,10 @@ class ProgramaController extends Controller
     
     public function dashboardBienvenida(Programa $programa){
         $estacas = Estaca::all();
-        return view('admin.programas.dashboard-bienvenida', compact('programa', 'estacas'));
+
+        $alojados = Participante::where('programa_id', $programa->id)->whereHas('alojamiento', function(){})->whereIn('estado', ['0','1','5','2'])->get();
+        $total = Participante::where('programa_id', $programa->id)->whereIn('estado', ['0','1','5','2'])->get();
+
+        return view('admin.programas.dashboard-bienvenida', compact('programa', 'estacas', 'alojados', 'total'));
     }
 }

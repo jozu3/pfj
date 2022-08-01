@@ -145,6 +145,6 @@ class AlojamientoController extends Controller
             }
         }
 
-        return redirect()->route('admin.alojamientos.asignarParticipantesHabitacion', $programa)->with('info', 'Se alojó correctamente'. $nota);
+        return redirect()->route('admin.alojamientos.asignarParticipantesHabitacion', $programa)->with('info', 'Se alojó correctamente. '. $nota);
     }
 }

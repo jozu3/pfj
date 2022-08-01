@@ -87,8 +87,8 @@
                                     <td>
                                         {{ $companerismo->participanteCompanias->count() }}
                                         <br>
-                                        {{ 'H:'. $companerismo->participantes()->where('genero', 1)->count() }}
-                                        {{ 'M:'. $companerismo->participantes()->where('genero', 0)->count() }}
+                                        {{ 'H:' .$companerismo->participantes()->where('genero', 1)->count() }}
+                                        {{ 'M:' .$companerismo->participantes()->where('genero', 0)->count() }}
 
                                     </td>
                                     <td>
@@ -134,8 +134,8 @@
                                         <td>
                                             {{ $estaca->participantes()->count() }}
                                             <br>
-                                            {{ 'H:'. $estaca->participantes()->where('genero', 1)->count() }}
-                                            {{ 'M:'. $estaca->participantes()->where('genero', 0)->count() }}
+                                            {{ 'H:' .$estaca->participantes()->where('genero', 1)->count() }}
+                                            {{ 'M:' .$estaca->participantes()->where('genero', 0)->count() }}
                                         </td>
                                         <td>
                                             {{ $estaca->participantes()->where('estado', '0')->count() }}
@@ -149,6 +149,46 @@
                                     </tr>
                                 @endif
                             @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Alojamiento</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Participantes</th>
+                                <th>Alojados</th>
+                                <th>No alojados</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hombres</td>
+                                <td>
+                                    {{ $alojados->where('genero', '1')->count() }}
+                                </td>
+                                <td>
+                                    {{ $total->count() - $alojados->count() }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mujeres</td>
+                                <td>
+                                    {{ $alojados->where('genero', '0')->count() }}
+                                </td>
+                                <td>
+                                    {{ $total->where('genero', 0)->count() - $alojados->where('genero', 0)->count() }}
+                                </td>
+                            </tr>
 
                         </tbody>
                     </table>
