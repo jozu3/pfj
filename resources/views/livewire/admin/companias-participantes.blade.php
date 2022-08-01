@@ -1,5 +1,5 @@
 <div wire:init="loadParticipantes">
-    <h2 class="mt-3">{{ 'Compañia:' .$companerismo->numero }}</h2>
+    <h2 class="mt-3">{{ 'Compañia:' . $companerismo->numero }}</h2>
     <div class="form-row">
         @if ($participantes != [])
             <div class="col">
@@ -76,24 +76,24 @@
                         <th>Obispo</th>
                         <th>Correo electrónico del obispo</th>
                         <th>Tipo de sangre</th>
-                        <th> 
-                            Informacion médica 
+                        <th>
+                            Informacion médica
                         </th>
-                        <th> 
-                            Tratamiento médico 
+                        <th>
+                            Tratamiento médico
                         </th>
                         <th>Alergia</th>
-                        <th> 
-                            Diabetico o asmático 
+                        <th>
+                            Diabetico o asmático
                         </th>
-                        <th> 
-                            Seguro médico 
+                        <th>
+                            Seguro médico
                         </th>
-                        <th> 
-                            Informacion alimentaria 
+                        <th>
+                            Informacion alimentaria
                         </th>
-                        <th> 
-                            Vacunas 
+                        <th>
+                            Vacunas
                         </th>
                         <th>
                             Estado
@@ -118,13 +118,14 @@
                             <td>
                                 @switch($participante->genero)
                                     @case(0)
-                                        {{ 'Mujer'}}
+                                        {{ 'Mujer' }}
                                     @break
+
                                     @case(1)
-                                        {{ 'Hombre'}} 
-                                        @break
+                                        {{ 'Hombre' }}
+                                    @break
+
                                     @default
-                                        
                                 @endswitch
                             </td>
                             <td>
@@ -136,14 +137,20 @@
                                 @endif
                             </td>
                             <td>
-                                <span class="text-secondary" >
-                                    {{ 'No asignado' }}
-                                </span>
+                                @if (isset($participante->alojamiento))
+                                    {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} - Piso:
+                                    {{ $participante->alojamiento->habitacione->piso->num }} -
+                                    {{ $participante->alojamiento->habitacione->numero }}
+                                @else
+                                    <span class="text-secondary">
+                                        {{ 'No asignado' }}
+                                    </span>
+                                @endif
                             </td>
                             <td>
                                 <span>
-                                    <a href="tel:{{ str_replace(' ', '', $participante->telefono) }}" alt="Llamar por teléfono"
-                                        data-toggle="tooltip" data-placement="top"
+                                    <a href="tel:{{ str_replace(' ', '', $participante->telefono) }}"
+                                        alt="Llamar por teléfono" data-toggle="tooltip" data-placement="top"
                                         title="Llamar por teléfono">{{ str_replace(' ', '', $participante->telefono) }}</a>
                                     <a href="https://api.whatsapp.com/send?phone=51{{ str_replace(' ', '', $participante->telefono) }}"
                                         class="text-success" target="_blank" alt="Enviar Whatsapp" data-toggle="tooltip"
@@ -152,8 +159,8 @@
                             </td>
                             <td>
                                 @if ($participante)
-                                    <a href="mailto:{{ str_replace(' ', '', $participante->email) }}" alt="Enviar email"
-                                        data-toggle="tooltip" data-placement="top"
+                                    <a href="mailto:{{ str_replace(' ', '', $participante->email) }}"
+                                        alt="Enviar email" data-toggle="tooltip" data-placement="top"
                                         title="Enviar email">{{ str_replace(' ', '', $participante->email) }}</a>
                                 @else
                                 @endif
@@ -192,49 +199,56 @@
                                 {{ $participante->sangre }}
                             </td>
                             <td>
-                                {{ $participante->informacion_medica}}
+                                {{ $participante->informacion_medica }}
                             </td>
                             <td>
-                                {{ $participante->tratamiento_medico}}
+                                {{ $participante->tratamiento_medico }}
                             </td>
                             <td>
-                                {{ $participante->alergia}}
+                                {{ $participante->alergia }}
                             </td>
                             <td>
-                                {{ $participante->diabetico_asmatico}}
+                                {{ $participante->diabetico_asmatico }}
                             </td>
                             <td>
-                                {{ $participante->seguro_medico}}
+                                {{ $participante->seguro_medico }}
                             </td>
                             <td>
-                                {{ $participante->informacion_alimentaria}}
+                                {{ $participante->informacion_alimentaria }}
                             </td>
                             <td>
-                                {{ $participante->vacunas}}
+                                {{ $participante->vacunas }}
                             </td>
                             <td>
                                 @switch($participante->estado)
                                     @case(0)
                                         {{ 'Inscrito' }}
                                     @break
+
                                     @case(1)
                                         {{ 'ingresado' }}
                                     @break
+
                                     @case(2)
                                         {{ 'permutado' }}
                                     @break
+
                                     @case(3)
                                         {{ 'terminado' }}
                                     @break
+
                                     @case(4)
                                         {{ 'retirado' }}
                                     @break
+
                                     @case(5)
                                         {{ 'En espera' }}
                                     @break
+
                                     @case(6)
                                         {{ 'Canceló inscripción' }}
                                     @break
+
                                     @default
                                 @endswitch
                             </td>
@@ -243,34 +257,34 @@
                                     class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="100%">
-                                <div class=" text-warning">
-                                    {{ 'No hay personal' }}
-                                </div>
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer">
-            <div class="form-row">
-                @if ($participantes != [])
-                    <div class="col">
-                        {{ $participantes->links() }}
-                    </div>
-                    <div class="col">
-                        Viendo <b> {{ count($participantes) }}</b> de un total de <b>
-                            {{ $participantes->total() }}</b>
-                    </div>
-                @endif
+                        @empty
+                            <tr>
+                                <td colspan="100%">
+                                    <div class=" text-warning">
+                                        {{ 'No hay personal' }}
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
+            <div class="card-footer">
+                <div class="form-row">
+                    @if ($participantes != [])
+                        <div class="col">
+                            {{ $participantes->links() }}
+                        </div>
+                        <div class="col">
+                            Viendo <b> {{ count($participantes) }}</b> de un total de <b>
+                                {{ $participantes->total() }}</b>
+                        </div>
+                    @endif
+                </div>
 
+            </div>
         </div>
+
+
+
     </div>
-
-
-    
-</div>
