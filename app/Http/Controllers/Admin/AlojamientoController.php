@@ -107,7 +107,7 @@ class AlojamientoController extends Controller
 
     public function asignarParticipantesHabitacion(Programa $programa){
 
-        $habitaciones = Habitacione::select('habitaciones.id as habitacion', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num, " - ", habitaciones.numero) as nivel'))
+        $habitaciones = Habitacione::select('habitaciones.id as habitacion', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num, " - ", habitaciones.numero, " (", habitaciones.cupos," personas)") as nivel'))
         ->join('pisos', 'habitaciones.piso_id', '=', 'pisos.id')
         ->join('edificios', 'pisos.edificio_id', '=', 'edificios.id')
         ->join('locales', 'edificios.locale_id', '=', 'locales.id')
