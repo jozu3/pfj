@@ -131,7 +131,7 @@ class AlojamientoController extends Controller
         $nota = '';
         
         foreach ($request->participantes as $participante_id){
-            $habitacione = Habitacione::find($request->habitacione_id);
+            $habitacione = Habitacione::where('id', $request->habitacione_id)->first();
 
             if($habitacione->alojamientos->count() < $habitacione->cupos){
                 Alojamiento::where('participante_id', $participante_id)->delete();
