@@ -16,6 +16,8 @@ class HabitacionesIndex extends Component
     public $locale;
 
     use WithPagination;
+
+   protected $paginationTheme = 'bootstrap';
     
     public function render()
     { 
