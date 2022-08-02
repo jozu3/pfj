@@ -7,6 +7,7 @@
             <th>Barrio</th>
             <th>Edad</th>
             <th>Fecha de nacimiento</th>
+            <th>Edad que cumple el 2022</th>
             <th>Compañia</th>
             <th>Habitación</th>
             <th>Estado</th>
