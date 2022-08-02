@@ -67,6 +67,7 @@
                         <th colspan="2">Nombres</th>
                         <th>Apellidos</th>
                         <th>Estaca</th>
+                        <th>Habitación</th>
                         <th>Asignación</th>
                         <th>Familia</th>
                         {{-- <th>Grupo - Compañerismo</th> --}}
@@ -96,6 +97,12 @@
                             <td>{{ $inscripcione->personale->contacto->apellidos }}</td>
                             <td>
                                 {{ $inscripcione->personale->barrio->estaca->nombre }}
+                            </td>
+                            <td>
+                                @if (isset($inscripcione->alojamientoPersonale))
+                                {{ $inscripcione->alojamientoPersonale->habitacione->piso->edificio->nombre }} - Piso: {{ $inscripcione->alojamientoPersonale->habitacione->piso->num }} -
+                                {{ $inscripcione->alojamientoPersonale->habitacione->numero }}
+                                @endif
                             </td>
                             <td>
                                 {{ $inscripcione->role->name }}

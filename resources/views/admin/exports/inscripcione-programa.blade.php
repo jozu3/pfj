@@ -4,6 +4,7 @@
             <th>Nombres</th>
             <th>Apellidos</th>
             <th>Estaca</th>
+            <th>Habitación</th>
             <th>Asignación</th>
             <th>Familia</th>
             {{-- <th>Grupo - Compañerismo</th> --}}
@@ -32,6 +33,13 @@
                 <td style="width:12px">
                     {{ $inscripcione->personale->barrio->estaca->nombre }}
                 </td>
+                <td>
+                    @if (isset($inscripcione->alojamientoPersonale))
+                        {{ $inscripcione->alojamientoPersonale->habitacione->piso->edificio->nombre }} - Piso:
+                        {{ $inscripcione->alojamientoPersonale->habitacione->piso->num }} -
+                        {{ $inscripcione->alojamientoPersonale->habitacione->numero }}
+                    @endif
+                </td>
                 <td style="width:20px">
                     {{ $inscripcione->role->name }}
                     @forelse ($inscripcione->funciones as $funcione)
@@ -40,7 +48,9 @@
                     @endforelse
 
                 </td>
-                @if ($inscripcione->role->name == 'Matrimonio Director' || $inscripcione->role->name == 'Matrimonio de Logística' || $inscripcione->role->name == 'Coordinador')
+                @if ($inscripcione->role->name == 'Matrimonio Director' ||
+                    $inscripcione->role->name == 'Matrimonio de Logística' ||
+                    $inscripcione->role->name == 'Coordinador')
                     <td style="width:20px">{{ $inscripcione->role->name }}</td>
                 @else
                     @if ($inscripcione->inscripcioneCompanerismo != null)
@@ -116,19 +126,25 @@
 
                 </td>
                 <td style="width:20px">
-                    <span class="bg-{{ $color_c }} rounded-lg p-1 ">
-                        {{ $inscripcione->asistencias->where('asistencia', '0')->count() }}
-                    </span>
+                    @if ($capacitaciones->count())
+                        <span class="bg-{{ $color_c }} rounded-lg p-1 ">
+                            {{ $inscripcione->asistencias->where('asistencia', '0')->count() }}
+                        </span>
+                    @endif
                 </td>
                 <td style="width:20px">
+                    @if ($capacitaciones->count())
                     <span class="bg-{{ $color_c }} rounded-lg p-1 ">
                         {{ $inscripcione->asistencias->where('asistencia', '1')->count() }}
                     </span>
+                    @endif
                 </td>
                 <td style="width:20px">
+                    @if ($capacitaciones->count())
                     <span class="bg-{{ $color_c }} rounded-lg p-1 ">
                         {{ $inscripcione->asistencias->where('asistencia', '2')->count() }}
                     </span>
+                    @endif
                 </td>
                 <td style="width:20px">
                     {{ $capacitaciones->count() }}
@@ -151,7 +167,7 @@
                         @endphp
                         <div class="porcentaje-lecturas">
                             <span class="bg-{{ $color_p }} rounded-lg p-1 pdiv-porcentaje">
-                                {{ $porcentaje/100 }}
+                                {{ $porcentaje / 100 }}
                             </span>
                         </div>
                     @else
@@ -160,9 +176,11 @@
 
                 </td>
                 <td style="width:20px">
+                    @if ($tareas->count())
                     <span class="bg-{{ $color_c }} rounded-lg p-1 ">
                         {{ $inscripcione->inscripcioneTareas->where('realizado', '1')->count() }}
                     </span>
+                    @endif
                 </td>
                 <td style="width:20px">
                     {{ $inscripcione->inscripcioneTareas->where('realizado', '0')->count() }}
