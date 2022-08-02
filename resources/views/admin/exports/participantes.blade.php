@@ -6,9 +6,38 @@
             <th>Estaca</th>
             <th>Barrio</th>
             <th>Edad</th>
+            <th>Fecha de nacimiento</th>
             <th>Compañia</th>
             <th>Habitación</th>
             <th>Estado</th>
+            <th>Contacto 1</th>
+            <th>Teléfono de Contacto 1</th>
+            <th>Correo electrónico de Contacto 1</th>
+            <th>Contacto 2</th>
+            <th>Teléfono de Contacto 2</th>
+            <th>Correo electrónico de Contacto 2</th>
+            <th>Obispo</th>
+            <th>Correo electrónico del obispo</th>
+            <th>Tipo de sangre</th>
+            <th>
+                Informacion médica
+            </th>
+            <th>
+                Tratamiento médico
+            </th>
+            <th>Alergia</th>
+            <th>
+                Diabetico o asmático
+            </th>
+            <th>
+                Seguro médico
+            </th>
+            <th>
+                Informacion alimentaria
+            </th>
+            <th>
+                Vacunas
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +48,8 @@
                 <td>{{ $participante->barrio->estaca->nombre }}</td>
                 <td>{{ $participante->barrio->nombre }}</td>
                 <td>{{ $participante->age }}</td>
+                <td>{{ date('d/m/Y', strtotime($participante->fecnac)) }}</td>
+                <td>{{ $participante->age_22 }}</td>
                 <td>
                     @if ($participante->participanteCompania)
                         {{ $participante->participanteCompania->companerismo->numero }}
@@ -63,6 +94,54 @@
 
                         @default
                     @endswitch
+                </td>
+                <td>
+                    {{ $participante->contacto1 }}
+                </td>
+                <td>
+                    {{ $participante->contacto1_phone }}
+                </td>
+                <td>
+                    {{ $participante->contacto1_email }}
+                </td>
+                <td>
+                    {{ $participante->contacto2 }}
+                </td>
+                <td>
+                    {{ $participante->contacto2_phone }}
+                </td>
+                <td>
+                    {{ $participante->contacto2_email }}
+                </td>
+                <td>
+                    {{ $participante->obispo }}
+                </td>
+                <td>
+                    {{ $participante->obispo_email }}
+                </td>
+                <td>
+                    {{ $participante->sangre }}
+                </td>
+                <td>
+                    {{ $participante->informacion_medica }}
+                </td>
+                <td>
+                    {{ $participante->tratamiento_medico }}
+                </td>
+                <td>
+                    {{ $participante->alergia }}
+                </td>
+                <td>
+                    {{ $participante->diabetico_asmatico }}
+                </td>
+                <td>
+                    {{ $participante->seguro_medico }}
+                </td>
+                <td>
+                    {{ $participante->informacion_alimentaria }}
+                </td>
+                <td>
+                    {{ $participante->vacunas }}
                 </td>
             </tr>
         @endforeach

@@ -69,6 +69,6 @@ class ExcelController extends Controller
 
     public function exportParticipantes(Programa $programa){
         $partis = new ParticipantesExport();
-        return $partis->programa($programa->id)->download('inscripcionesPrograma.xlsx');
+        return $partis->programa($programa->id)->download('ParticipantesPrograma.xlsx');
     }
 }
