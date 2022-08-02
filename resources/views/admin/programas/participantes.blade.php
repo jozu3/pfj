@@ -17,8 +17,8 @@
         <i class="fas fa-trash"></i> Eliminar todos participantes
     </a>
     <a href="{{ route('admin.excel.exportParticipantes', $programa) }}"
-        class="btn btn-danger btn-sm float-right mr-3 eliminar-participantes" data-prevent="">
-     Exportar participantes
+        class="btn btn-success btn-sm float-right mr-3">
+        <i class="far fa-file-excel"></i> Exportar participantes
     </a>
 
     
