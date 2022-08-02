@@ -3,14 +3,15 @@
         <tr>
             <th>Nombres</th>
             <th>Apellidos</th>
-            <th>Estaca</th>
-            <th>Barrio</th>
-            <th>Edad</th>
-            <th>Fecha de nacimiento</th>
-            <th>Edad que cumple el 2022</th>
+            <th>Sexo</th>
             <th>Compañia</th>
             <th>Habitación</th>
             <th>Estado</th>
+            <th>Edad</th>
+            <th>Fecha de nacimiento</th>
+            <th>Edad que cumple el 2022</th>
+            <th>Estaca</th>
+            <th>Barrio</th>
             <th>Contacto 1</th>
             <th>Teléfono de Contacto 1</th>
             <th>Correo electrónico de Contacto 1</th>
@@ -46,11 +47,17 @@
             <tr>
                 <td>{{ $participante->nombres }}</td>
                 <td>{{ $participante->apellidos }}</td>
-                <td>{{ $participante->barrio->estaca->nombre }}</td>
-                <td>{{ $participante->barrio->nombre }}</td>
-                <td>{{ $participante->age }}</td>
-                <td>{{ date('d/m/Y', strtotime($participante->fecnac)) }}</td>
-                <td>{{ $participante->age_22 }}</td>
+                <td>
+                    @switch($participante->genero)
+                        @case(1)
+                            {{'Hombre'}}
+                            @break
+                        @case(0)
+                            {{'Mujer'}}
+                            @break
+                        @default
+                    @endswitch
+                </td>
                 <td>
                     @if ($participante->participanteCompania)
                         {{ $participante->participanteCompania->companerismo->numero }}
@@ -96,6 +103,11 @@
                         @default
                     @endswitch
                 </td>
+                <td>{{ $participante->age }}</td>
+                <td>{{ date('d/m/Y', strtotime($participante->fecnac)) }}</td>
+                <td>{{ $participante->age_22 }}</td>
+                <td>{{ $participante->barrio->estaca->nombre }}</td>
+                <td>{{ $participante->barrio->nombre }}</td>
                 <td>
                     {{ $participante->contacto1 }}
                 </td>
