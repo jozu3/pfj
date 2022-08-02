@@ -19,7 +19,7 @@ class ParticipantesPrograma extends Component
     public $compania= 0;
     public $estaca = 0;
     public $barrio = 0;
-    public $estado = 0;
+    public $estado = -1;
     public $barriosEstaca = [];
 
     public function loadParticipantes(){

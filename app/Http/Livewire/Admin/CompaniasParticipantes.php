@@ -18,7 +18,7 @@ class CompaniasParticipantes extends Component
     public $search;
     public $compania= 0;
     public $estaca = 0;
-    public $estado = 0;
+    public $estado = -1;
 
     protected $listeners = ['render'];
 
