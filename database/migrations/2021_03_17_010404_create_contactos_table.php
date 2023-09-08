@@ -34,6 +34,38 @@ class CreateContactosTable extends Migration
             $table->string('genero');
             $table->tinyInteger('mretornado')->default(0);
             $table->tinyInteger('newassign')->default(1);
+            
+            $table->tinyInteger('primeros_auxilios')->default(0);
+            $table->string('email_obispo')->nullable();
+            $table->foreignId('barrio_id')->constrained();
+            $table->string('otro_barrio')->nullable();
+            $table->string('otra_estaca')->nullable();
+            $table->string('mes_recomendacion')->nullable();
+            $table->string('anio_recomendacion')->nullable();
+            $table->string('mision')->nullable();
+            $table->string('estudios')->nullable();
+            $table->string('llamamiento')->nullable();
+            $table->string('ocupacion')->nullable();
+
+            $table->longText('informacion_medica')->nullable();
+            $table->string('talla')->nullable();
+            $table->longText('informacion_alimentaria');
+            $table->string('contacto1')->nullable();
+            $table->string('contacto1_phone')->nullable();
+            $table->string('contacto1_email')->nullable();
+            $table->string('contacto2')->nullable();
+            $table->string('contacto2_phone')->nullable();
+            $table->string('contacto2_email')->nullable();
+            $table->integer('age')->nullable();
+            $table->integer('age_aniopfj')->nullable();
+            $table->tinyInteger('estado_aprobacion')->nullable();
+            $table->string('sangre')->nullable();
+            $table->longText('alergia')->nullable();
+            $table->longText('tratamiento_medico')->nullable();
+            $table->longText('diabetico_asmatico')->nullable();
+            $table->string('seguro_medico')->nullable();
+            $table->boolean('vacunas')->nullable();
+
             $table->timestamps();
         });
     }

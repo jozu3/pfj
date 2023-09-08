@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Public\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\InscripcioneNotification;
@@ -31,3 +32,6 @@ Route::get('/notification', function () {
     $user->notify(new InscripcioneNotification($inscripcione));
     return 'asdsad';
 });
+
+Route::get('consejeros/preinscripcion', [HomeController::class, 'preinscripcione'])->name('public.pre-inscripcione');
+Route::post('consejeros/preinscripcionstore', [HomeController::class, 'contactoStore'])->name('public.pre-inscripcione.contacto-store');
