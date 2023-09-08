@@ -40,12 +40,12 @@ class CreateContactosTable extends Migration
             $table->foreignId('barrio_id')->constrained();
             $table->string('otro_barrio')->nullable();
             $table->string('otra_estaca')->nullable();
-            $table->string('mes_recomendacion')->nullable();
-            $table->string('anio_recomendacion')->nullable();
             $table->string('mision')->nullable();
             $table->string('estudios')->nullable();
-            $table->string('llamamiento')->nullable();
             $table->string('ocupacion')->nullable();
+            $table->string('llamamiento')->nullable();
+            $table->string('mes_recomendacion')->nullable();
+            $table->string('anio_recomendacion')->nullable();
 
             $table->longText('informacion_medica')->nullable();
             $table->string('talla')->nullable();
