@@ -37,7 +37,7 @@ class CreateContactosTable extends Migration
             
             $table->tinyInteger('primeros_auxilios')->default(0);
             $table->string('email_obispo')->nullable();
-            $table->foreignId('barrio_id')->constrained();
+            $table->foreignId('barrio_id')->default(1);
             $table->string('otro_barrio')->nullable();
             $table->string('otra_estaca')->nullable();
             $table->string('mision')->nullable();
@@ -49,7 +49,7 @@ class CreateContactosTable extends Migration
 
             $table->longText('informacion_medica')->nullable();
             $table->string('talla')->nullable();
-            $table->longText('informacion_alimentaria');
+            $table->longText('informacion_alimentaria')->nullable();
             $table->string('contacto1')->nullable();
             $table->string('contacto1_phone')->nullable();
             $table->string('contacto1_email')->nullable();

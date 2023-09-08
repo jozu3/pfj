@@ -26,54 +26,54 @@ class MatrimonioUsersSeeder extends Seeder
         $pln2 = Programa::where('nombre', 'PFJ Lima Norte Sesión 2')->first();
         $pln1 = Programa::where('nombre', 'PFJ Lima Norte Sesión 1')->first();
 
-        //Sesion 1
-        if (!User::where('email', 'joslinovel@gmail.com')->first()) {
+        // //Sesion 1
+        // if (!User::where('email', 'joslinovel@gmail.com')->first()) {
 
-            $this->createPersonal([
-                'nom_m1' => 'Jose Galvani',
-                'ape_m1' => 'Lino Velasquez',
-                'correo_m1' => 'joslinovel@gmail.com',
-                'tel_m1' => '993275295',
-                'barrio' => '--',
-                'rol' => 'Matrimonio Director',
-                'genero' => 'Hombre',
-            ], $pln1);
+        //     $this->createPersonal([
+        //         'nom_m1' => 'Jose Galvani',
+        //         'ape_m1' => 'Lino Velasquez',
+        //         'correo_m1' => 'joslinovel@gmail.com',
+        //         'tel_m1' => '993275295',
+        //         'barrio' => '--',
+        //         'rol' => 'Matrimonio Director',
+        //         'genero' => 'Hombre',
+        //     ], $pln1);
 
-            $this->createPersonal([
-                'nom_m1' => 'Guisela Lourdes',
-                'ape_m1' => 'Pastor Tarazona',
-                'correo_m1' => 'guiselapastor@gmail.com',
-                'tel_m1' => '993275295',
-                'barrio' => '--',
-                'rol' => 'Matrimonio Director',
-                'genero' => 'Mujer',
-            ], $pln1);
-        }
-        //Sesion 2
-        if (!User::where('email', 'aryen.pan@gmail.com')->first()) {
+        //     $this->createPersonal([
+        //         'nom_m1' => 'Guisela Lourdes',
+        //         'ape_m1' => 'Pastor Tarazona',
+        //         'correo_m1' => 'guiselapastor@gmail.com',
+        //         'tel_m1' => '993275295',
+        //         'barrio' => '--',
+        //         'rol' => 'Matrimonio Director',
+        //         'genero' => 'Mujer',
+        //     ], $pln1);
+        // }
+        // //Sesion 2
+        // if (!User::where('email', 'aryen.pan@gmail.com')->first()) {
 
-            $this->createPersonal([
-                'nom_m1' => 'Ricardo Enmanuel',
-                'ape_m1' => 'Neyra Aliaga',
-                'correo_m1' => 'aryen.pan@gmail.com',
-                'tel_m1' => '923060776',
-                'barrio' => 'La Mar Ward',
-                'rol' => 'Matrimonio Director',
-                'genero' => 'Hombre',
-            ], $pln2);
-        }
-        if (!User::where('email', 'paola_3000@hotmail.com')->first()) {
+        //     $this->createPersonal([
+        //         'nom_m1' => 'Ricardo Enmanuel',
+        //         'ape_m1' => 'Neyra Aliaga',
+        //         'correo_m1' => 'aryen.pan@gmail.com',
+        //         'tel_m1' => '923060776',
+        //         'barrio' => 'La Mar Ward',
+        //         'rol' => 'Matrimonio Director',
+        //         'genero' => 'Hombre',
+        //     ], $pln2);
+        // }
+        // if (!User::where('email', 'paola_3000@hotmail.com')->first()) {
 
-            $this->createPersonal([
-                'nom_m1' => 'Jackeline Paola',
-                'ape_m1' => 'Mercado de Neyra',
-                'correo_m1' => 'paola_3000@hotmail.com',
-                'tel_m1' => '923060776',
-                'barrio' => 'La Mar Ward',
-                'rol' => 'Matrimonio Director',
-                'genero' => 'Mujer',
-            ], $pln2);
-        }
+        //     $this->createPersonal([
+        //         'nom_m1' => 'Jackeline Paola',
+        //         'ape_m1' => 'Mercado de Neyra',
+        //         'correo_m1' => 'paola_3000@hotmail.com',
+        //         'tel_m1' => '923060776',
+        //         'barrio' => 'La Mar Ward',
+        //         'rol' => 'Matrimonio Director',
+        //         'genero' => 'Mujer',
+        //     ], $pln2);
+        // }
 
 
         //Sesion 3
