@@ -6,9 +6,12 @@ use App\Models\Barrio;
 use App\Models\Contacto;
 use App\Models\Estaca;
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 
 class PreInscripcionConsejeros extends Component
 {
+    use WithFileUploads;
 
     public $nombres;
     public $apellidos;
@@ -26,10 +29,15 @@ class PreInscripcionConsejeros extends Component
     public $primeros_auxilios;
     public $ocupacion;
     public $llamamiento;
+    public $instituto;
     public $mretornado;
     public $mision;
     public $mes_recomendacion;
     public $anio_recomendacion;
+    public $imgperfil;
+
+    public $asiste_instituto;
+    public $recomendacion_vigente;
 
     public $result = false;
 
@@ -50,10 +58,11 @@ class PreInscripcionConsejeros extends Component
 		'primeros_auxilios' => 'required',
 		'ocupacion' => 'required',
 		'llamamiento' => 'required',
+		// 'instituto' => 'required',
 		'mretornado' => 'required',
 		'mision' => 'required_if:mretornado,1',
-		'mes_recomendacion' => 'required',
-		'anio_recomendacion' => 'required',
+		// 'mes_recomendacion' => 'required',
+		// 'anio_recomendacion' => 'required',
 	];
 
     public function guardar(){
@@ -76,6 +85,7 @@ class PreInscripcionConsejeros extends Component
             'primeros_auxilios' => $this->primeros_auxilios,
             'ocupacion' => $this->ocupacion,
             'llamamiento' => $this->llamamiento,
+            'instituto' => $this->instituto,
             'mretornado' => $this->mretornado,
             'mision' => $this->mision,
             'mes_recomendacion' => $this->mes_recomendacion,
@@ -84,9 +94,20 @@ class PreInscripcionConsejeros extends Component
         ]);
 
         if($contacto){
+     
+            if ($this->imgperfil) {
+                $url = Storage::put('contactos', $this->imgperfil);
+                $contacto->image()->create([
+                    'url' => $url
+                ]);
+            }
             $this->result = true;
         }
 
+    }
+
+    public function loadFormulario(){
+        $this->emitSelf('postAdded');
     }
 
     public function render()

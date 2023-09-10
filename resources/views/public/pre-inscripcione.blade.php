@@ -6,16 +6,20 @@
             <div class="text-center">
                 <x-jet-authentication-card-logo />
             </div>
-            <div class="text-center" style='color:#2d999b;font-family: system-ui;'>
+            <div class="text-center">
+                <img src="{{ config('ap-url') }}/img/lima_norte_2024.png" class="m-auto" width="50%" alt="">
+            </div>
+            {{-- <div class="text-center" style='color:#2d999b;font-family: system-ui;'>
                 <span class="text-5xl">pfj <b>2024</b></span>
                 <br>
                 <span class="text-xl">Lima Norte</span>
-            </div>
+            </div> --}}
         </x-slot>
 
         <div class="md:col-span-1">
             <div class="px-4 sm:px-0">
-                <h2 class="text-2xl text-center font-medium text-gray-900">{{ 'Ficha de preinscripción de consejeros' }}</h2>
+                <h2 class="text-2xl text-center font-black text-gray-900">{{ 'Ficha de preinscripción de consejeros' }}
+                </h2>
                 <x-jet-section-border />
                 <h4>Consejeros</h4>
                 <p class="mt-1 text-sm text-gray-600">
@@ -44,8 +48,36 @@
             </div>
         </div>
         <x-jet-section-border />
-        
+
         @livewire('public.pre-inscripcion-consejeros', key($user->id))
-        
+
     </x-jet-authentication-card>
+
+    <script>
+            // let stateCheck = setInterval(() => {
+            //     if (document.readyState === 'complete') {
+            //         clearInterval(stateCheck);
+            //         // document ready
+            //         console.log( "ready!" );
+            //         Livewire.on('postAdded', postId => {
+            //             alert('A post was added with the id of: ' + postId);
+            //         })
+            //     }
+            // }, 100);
+
+        document.getElementById('imgperfil').addEventListener('change', cambiarImagen);
+
+        function cambiarImagen(event) {
+            console.log('changee');
+            var file = event.target.files[0];
+
+            var reader = new FileReader();
+            reader.onload = (event) => {
+                document.getElementById("img-show").setAttribute('src', event.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+    </script>
 </x-guest-layout>

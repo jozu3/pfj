@@ -44,6 +44,7 @@ class CreateContactosTable extends Migration
             $table->string('estudios')->nullable();
             $table->string('ocupacion')->nullable();
             $table->string('llamamiento')->nullable();
+            $table->string('instituto')->nullable();
             $table->string('mes_recomendacion')->nullable();
             $table->string('anio_recomendacion')->nullable();
 

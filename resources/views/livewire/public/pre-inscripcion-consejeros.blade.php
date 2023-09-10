@@ -1,4 +1,4 @@
-<div>
+<div wire:init="loadFormulario">
     @if (!$result)
         <jet-validation-errors class="mb-4" />
         <form wire:submit.prevent="guardar">
@@ -6,8 +6,8 @@
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mt-3 sm:col-span-6">
                     <x-jet-label for="nombres" value="{{ __('Name') }}" class="font-black" />
-                    <x-jet-input id="nombres" class="block mt-1 w-full" type="text" name="nombres" wire:model="nombres" required
-                        autofocus autocomplete="given-name" />
+                    <x-jet-input id="nombres" class="block mt-1 w-full" type="text" name="nombres" wire:model="nombres"
+                        required autofocus autocomplete="given-name" />
                     @error('apellidos')
                         <small class="text-red-600">{{ $message }}</small>
                     @enderror
@@ -76,30 +76,31 @@
                     'wire:model' => 'barrio_id',
                 ]) !!}
             </div>
-            @if ($barrio_id == 1)      
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-12 mt-3 sm:col-span-6">
-                    <x-jet-label for="otro_barrio" value="{{ __('De qué barrio eres?') }}" class="font-black" />
-                    <x-jet-input id="otro_barrio" class="block mt-1 w-full" type="text" wire:model="otro_barrio" name="otro_barrio"
-                        required />
-                    @error('otro_barrio')
-                        <small class="text-red-600">{{ $message }}</small>
-                    @enderror
+            @if ($barrio_id == 1)
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12 mt-3 sm:col-span-6">
+                        <x-jet-label for="otro_barrio" value="{{ __('De qué barrio eres?') }}" class="font-black" />
+                        <x-jet-input id="otro_barrio" class="block mt-1 w-full" type="text" wire:model="otro_barrio"
+                            name="otro_barrio" required />
+                        @error('otro_barrio')
+                            <small class="text-red-600">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-span-12 mt-3 sm:col-span-6">
+                        <x-jet-label for="otra_estaca" value="{{ __('A qué estaca pertenece?') }}"
+                            class="font-black" />
+                        <x-jet-input id="otra_estaca" class="block mt-1 w-full" type="text" wire:model="otra_estaca"
+                            name="otra_estaca" required />
+                        @error('otra_estaca')
+                            <small class="text-red-600">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
-                <div class="col-span-12 mt-3 sm:col-span-6">
-                    <x-jet-label for="otra_estaca" value="{{ __('A qué estaca pertenece?') }}" class="font-black" />
-                    <x-jet-input id="otra_estaca" class="block mt-1 w-full" type="text" wire:model="otra_estaca" name="otra_estaca"
-                        required />
-                    @error('otra_estaca')
-                        <small class="text-red-600">{{ $message }}</small>
-                    @enderror
-                </div>
-            </div>
             @endif
             <div class="mt-4">
                 <x-jet-label for="obispo" value="{{ __('Nombre de tu obispo') }}" class="font-black" />
-                <x-jet-input id="obispo" class="block mt-1 w-full" type="text" wire:model="obispo" name="obispo"
-                    required />
+                <x-jet-input id="obispo" class="block mt-1 w-full" type="text" wire:model="obispo"
+                    name="obispo" required />
                 @error('obispo')
                     <small class="text-red-600">{{ $message }}</small>
                 @enderror
@@ -121,8 +122,7 @@
                 @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="llamamiento" value="{{ __('Cuál es tu llamamiento?') }}"
-                    class="font-black" />
+                <x-jet-label for="llamamiento" value="{{ __('Cuál es tu llamamiento?') }}" class="font-black" />
                 <x-jet-input id="llamamiento" class="block mt-1 w-full" type="text" wire:model="llamamiento"
                     name="llamamiento" required />
                 @error('llamamiento')
@@ -130,6 +130,38 @@
                 @enderror
 
             </div>
+            <div class="mt-4">
+                <x-jet-label for="asiste_instituto" value="{{ __('Asistes a institutos?') }}" class="font-black" />
+                <div class="mt-2 space-x-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" class="form-radio" wire:model="asiste_instituto"
+                            name="asiste_instituto" value="1"
+                            {{ old('asiste_instituto') === '1' ? 'checked' : '' }}>
+                        <span class="ml-2">{{ __('Yes') }}</span>
+                    </label>
+
+                    <label class="inline-flex items-center">
+                        <input type="radio" class="form-radio" wire:model="asiste_instituto"
+                            name="asiste_instituto" value="0"
+                            {{ old('asiste_instituto') === '0' ? 'checked' : '' }}>
+                        <span class="ml-2">{{ __('No') }}</span>
+                    </label>
+                </div>
+                @error('asiste_instituto')
+                    <small class="text-red-600">{{ $message }}</small>
+                @enderror
+            </div>
+            @if ($asiste_instituto == 1)
+                <div class="mt-4">
+                    <x-jet-label for="instituto" value="{{ __('A qué curso estás inscrito?') }}"
+                        class="font-black" />
+                    <x-jet-input id="instituto" class="block mt-1 w-full" type="text" wire:model="instituto"
+                        name="instituto" required />
+                    @error('instituto')
+                        <small class="text-red-600">{{ $message }}</small>
+                    @enderror
+                </div>
+            @endif
             <div class="mt-4">
                 <x-jet-label for="mretornado" value="{{ __('Eres misionero retornado?') }}" class="font-black" />
                 <div class="mt-2 space-x-4">
@@ -150,69 +182,90 @@
                 @enderror
             </div>
             @if ($mretornado == 1)
-                
+                <div class="mt-4">
+                    <x-jet-label for="mision" value="{{ __('Qué misión serviste y en qué año?') }}"
+                        class="font-black" />
+                    <x-jet-input id="mision" class="block mt-1 w-full" type="text" wire:model="mision"
+                        name="mision" required />
+                    @error('mision')
+                        <small class="text-red-600">{{ $message }}</small>
+                    @enderror
+                </div>
+            @endif
             <div class="mt-4">
-                <x-jet-label for="mision" value="{{ __('Qué misión serviste y en qué año?') }}"
-                    class="font-black" />
-                <x-jet-input id="mision" class="block mt-1 w-full" type="text" wire:model="mision"
-                    name="mision" required/>
-                @error('mision')
+                <x-jet-label for="recomendacion_vigente"
+                    value="{{ __('Posees una recomendación vigente para el Templo?') }}" class="font-black" />
+                <div class="mt-2 space-x-4">
+                    <label class="inline-flex items-center">
+                        <input type="radio" class="form-radio" wire:model="recomendacion_vigente"
+                            name="recomendacion_vigente" value="1"
+                            {{ old('recomendacion_vigente') === '1' ? 'checked' : '' }}>
+                        <span class="ml-2">{{ __('Yes') }}</span>
+                    </label>
+
+                    <label class="inline-flex items-center">
+                        <input type="radio" class="form-radio" wire:model="recomendacion_vigente"
+                            name="recomendacion_vigente" value="0"
+                            {{ old('recomendacion_vigente') === '0' ? 'checked' : '' }}>
+                        <span class="ml-2">{{ __('No') }}</span>
+                    </label>
+                </div>
+                @error('recomendacion_vigente')
                     <small class="text-red-600">{{ $message }}</small>
                 @enderror
             </div>
-            @endif
-            <div class="mt-4">
-                <x-jet-label for="vencimiento_recomendacion"
-                    value="{{ __('Cuándo vence tu recomendación para el templo?') }}" class="font-black" />
-                <div class="grid grid-cols-12 gap-4">
-                    <div class="col-span-12 mt-3 sm:col-span-6">
-                        <x-jet-label for="mes_recomendacion" value="{{ __('Month') }}" class="font-black" />
-                        {!! Form::select(
-                            'mes_recomendacion',
-                            [
-                                '1' => 'Enero',
-                                '2' => 'Febrero',
-                                '3' => 'Marzo',
-                                '4' => 'Abril',
-                                '5' => 'Mayo',
-                                '6' => 'Junio',
-                                '7' => 'Julio',
-                                '8' => 'Agosto',
-                                '9' => 'Septiembre',
-                                '10' => 'Octubre',
-                                '11' => 'Noviembre',
-                                '12' => 'Diciembre',
-                            ],
-                            null,
-                            [
-                                'class' =>
-                                    'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
-                                'placeholder' => '-- Seleccione --',
-                                'wire:model' => 'mes_recomendacion',
-                            ],
-                        ) !!}
-                        @error('mes_recomendacion')
-                            <small class="text-red-600">{{ $message }}</small>
-                        @enderror
+            @if ($recomendacion_vigente == 1)
+                <div class="mt-4">
+                    <x-jet-label for="vencimiento_recomendacion"
+                        value="{{ __('Cuándo vence tu recomendación para el templo?') }}" class="font-black" />
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 mt-3 sm:col-span-6">
+                            <x-jet-label for="mes_recomendacion" value="{{ __('Month') }}" class="font-black" />
+                            {!! Form::select(
+                                'mes_recomendacion',
+                                [
+                                    '1' => 'Enero',
+                                    '2' => 'Febrero',
+                                    '3' => 'Marzo',
+                                    '4' => 'Abril',
+                                    '5' => 'Mayo',
+                                    '6' => 'Junio',
+                                    '7' => 'Julio',
+                                    '8' => 'Agosto',
+                                    '9' => 'Septiembre',
+                                    '10' => 'Octubre',
+                                    '11' => 'Noviembre',
+                                    '12' => 'Diciembre',
+                                ],
+                                null,
+                                [
+                                    'class' =>
+                                        'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
+                                    'placeholder' => '-- Seleccione --',
+                                    'wire:model' => 'mes_recomendacion',
+                                ],
+                            ) !!}
+                            @error('mes_recomendacion')
+                                <small class="text-red-600">{{ $message }}</small>
+                            @enderror
 
-                    </div>
+                        </div>
+                        <div class="col-span-12 mt-3 sm:col-span-6">
+                            <x-jet-label for="anio_recomendacion" value="{{ __('Year') }}" class="font-black" />
+                            <x-jet-input id="anio_recomendacion" class="block mt-1 w-full" type="number"
+                                wire:model="anio_recomendacion" name="anio_recomendacion" required
+                                autocomplete="anio_recomendacion" />
+                            @error('anio_recomendacion')
+                                <small class="text-red-600">{{ $message }}</small>
+                            @enderror
 
-                    <div class="col-span-12 mt-3 sm:col-span-6">
-                        <x-jet-label for="anio_recomendacion" value="{{ __('Year') }}" class="font-black" />
-                        <x-jet-input id="anio_recomendacion" class="block mt-1 w-full" type="number"
-                            wire:model="anio_recomendacion" name="anio_recomendacion" required
-                            autocomplete="anio_recomendacion" />
-                        @error('anio_recomendacion')
-                            <small class="text-red-600">{{ $message }}</small>
-                        @enderror
-
+                        </div>
                     </div>
                 </div>
-
-            </div>
+            @endif
             <x-jet-section-border />
             <div class="mt-4">
-                <x-jet-label for="estudios" value="{{ __('Qué carrera estudias?') }}" class="font-black" />
+                <x-jet-label for="estudios" value="{{ __('Cuéntanos qué estudios tienes?') }}" class="font-black" />
                 <x-jet-input id="estudios" class="block mt-1 w-full" type="text" wire:model="estudios"
                     name="estudios" required />
                 @error('estudios')
@@ -251,6 +304,28 @@
                     <small class="text-red-600">{{ $message }}</small>
                 @enderror
             </div>
+            <x-jet-section-border />
+            <div class="mt-4" wire:ignore>
+                {!! Form::label('imgperfil', 'Tómate un selfie ;)', ['class' => 'font-black']) !!}
+                <div class="grid grid-cols-12 gap-4">
+                    <div class="col-span-12 mt-3 sm:col-span-12">
+                        <label class="custom-file-label" for="imgperfil">
+                            <img id="img-show" class="rounded-full object-cover m-auto" src="{{config('app.url')}}/img/user-pfj.png" alt="" width="148" height="148"
+                                style="width:148px!important;height: 148px!important;"
+                            >
+                        </label>
+                    </div>
+                    <div class="col-span-12 mt-3 sm:col-span-12">
+                        <div class="custom-file" style="display: none">
+                            {!! Form::file('imgperfil', ['class' => 'custom-file-input', 'accept' => 'image/*', "wire:model.defer" => "imgperfil"]) !!}
+                        </div>
+                        @error('imgperfil')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+            </div>
+            {{$imgperfil}}
             <div class="flex items-center justify-end mt-4">
                 <button
                     class='inline-flex items-center px-4 py-2 

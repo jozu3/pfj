@@ -3,17 +3,17 @@
     <head>
         <meta name="author" content="PFJ 2024">
         <meta name="description" content="{{ config('app.description', 'Para la Fortaleza de la Juventud' ) }}">
-        <meta property="og:image" content="{{ config('app.url', 'http://localhost/').'/img/pfj_logo_templo2.png' }}">
+        <meta property="og:image" content="{{ config('app.url', 'http://localhost/').'/img/logo_pfj2024.png' }}">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="shortcut icon" href="{{ asset('img/logo_pfj2022.jpg') }}">
+        <link rel="shortcut icon" href="{{ asset('img/logo_pfj2024.png') }}">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'PFJ') }}</title>
-        <link rel="shortcut icon" href="{{ config('app.url', 'https://www.pfjperu.com') }}/favicons/favicon.ico">
+        <link rel="shortcut icon" href="{{ config('app.url', 'https://www.pfjperu.com') }}/favicons/logo2024.png">
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
