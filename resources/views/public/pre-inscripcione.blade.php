@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <div class="pt-16">
+            <div id="inicio" class="pt-16">
             </div>
             <div class="text-center">
                 <x-jet-authentication-card-logo />
@@ -78,6 +78,6 @@
 
             reader.readAsDataURL(file);
         }
-
+        document.getElementById("inicio").scrollIntoView();
     </script>
 </x-guest-layout>
