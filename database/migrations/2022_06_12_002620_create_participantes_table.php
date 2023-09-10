@@ -21,6 +21,7 @@ class CreateParticipantesTable extends Migration
             $table->date('fecnac');
             $table->boolean('genero');
             $table->string('telefono');
+            $table->string('email');
             $table->string('informacion_medica');
             $table->string('talla');
             $table->string('informacion_alimentaria');
@@ -35,6 +36,7 @@ class CreateParticipantesTable extends Migration
             $table->foreignId('barrio_id')->constrained();
             $table->tinyInteger('estado_aprobacion');
             $table->string('obispo');
+            $table->string('obispo_email');
             $table->string('sangre');
             $table->string('alergia');
             $table->string('tratamiento_medico');

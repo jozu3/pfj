@@ -45,13 +45,13 @@ return [
     |
     */
 
-    'logo' => '<strong>PFJ</strong> 2022',
+    'logo' => '<strong>PFJ</strong> 2024',
     //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img' => 'img/logo_pfj2022.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'PFJ 2022',
+    'logo_img_alt' => 'PFJ 2024',
 
     /*
     |--------------------------------------------------------------------------

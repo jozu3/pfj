@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Contacto;
+use Illuminate\Support\Facades\Auth;
 
 class ContactoObserver
 {
@@ -15,9 +16,11 @@ class ContactoObserver
     public function creating(Contacto $contacto)
     {
         if (! \App::runningInConsole()) {
-            if (!auth()->user()->can('admin.contactos.asignarVendedor')) {
-              //  $contacto->personal_id = auth()->user()->personal->id;
-            }   
+            if(Auth::user()){
+                if (!auth()->user()->can('admin.contactos.asignarVendedor')) {
+                    //  $contacto->personal_id = auth()->user()->personal->id;
+                }   
+            }
         }
     }
 

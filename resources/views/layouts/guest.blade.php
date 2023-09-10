@@ -21,6 +21,9 @@
         <!-- Styles -->
         <!-- Styles -->
         <link rel="stylesheet" href="{{ config('app.url', 'https://www.pfjperu.com').'/css/app.css' }}">
+        <link rel="stylesheet" href="{{ config('app.url', 'https://www.pfjperu.com').'/vendor/fontawesome-free/css/all.min.css' }}">
+
+        @livewireStyles
 
         <!-- Scripts -->
         <script src="{{ config('app.url', 'https://www.pfjperu.com').'/js/app.js' }}" defer></script>
@@ -29,5 +32,9 @@
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+        
+        @stack('modals')
+
+        @livewireScripts
     </body>
 </html>

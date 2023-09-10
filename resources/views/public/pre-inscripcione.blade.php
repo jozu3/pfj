@@ -1,13 +1,21 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <div class="pt-16">
+            </div>
+            <div class="text-center">
+                <x-jet-authentication-card-logo />
+            </div>
+            <div class="text-center" style='color:#2d999b;font-family: system-ui;'>
+                <span class="text-5xl">pfj <b>2024</b></span>
+                <br>
+                <span class="text-xl">Lima Norte</span>
+            </div>
         </x-slot>
 
-        <x-jet-validation-errors class="mb-4" />
         <div class="md:col-span-1">
             <div class="px-4 sm:px-0">
-                <h2 class="text-lg font-medium text-gray-900">{{ 'Ficha de preinscripción de consejeros PFJ Lima Norte 2024' }}</h2>
+                <h2 class="text-2xl text-center font-medium text-gray-900">{{ 'Ficha de preinscripción de consejeros' }}</h2>
                 <x-jet-section-border />
                 <h4>Consejeros</h4>
                 <p class="mt-1 text-sm text-gray-600">
@@ -37,7 +45,7 @@
         </div>
         <x-jet-section-border />
         
-        @livewire('public.pre-inscripcion-consejeros')
+        @livewire('public.pre-inscripcion-consejeros', key($user->id))
         
     </x-jet-authentication-card>
 </x-guest-layout>

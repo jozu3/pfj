@@ -10,61 +10,96 @@ use Livewire\Component;
 class PreInscripcionConsejeros extends Component
 {
 
-    public $name;
-    public $lastname;
+    public $nombres;
+    public $apellidos;
     public $email;
     public $telefono;
-    public $gender;
-    public $obispo;
-    public $obispo_telefono;
-    public $obispo_email;
+    public $fecnac;
+    public $genero;
     public $barrio_id;
+    public $otro_barrio;
+    public $otra_estaca;
+    public $obispo;
+    public $telobispo;
+    public $email_obispo;
     public $estudios;
     public $primeros_auxilios;
-    public $trabajo;
+    public $ocupacion;
     public $llamamiento;
+    public $mretornado;
+    public $mision;
     public $mes_recomendacion;
     public $anio_recomendacion;
 
+    public $result = false;
+
     protected $rules = [
-		'name' => 'required',
-		'lastname' => 'required',
+		'nombres' => 'required',
+		'apellidos' => 'required',
 		'email' => 'required',
 		'telefono' => 'required',
-		'gender' => 'required',
-		'obispo' => 'required',
-		'obispo_telefono' => 'required',
+		'fecnac' => 'required',
+		'genero' => 'required',
 		'barrio_id' => 'required',
+		'otro_barrio' => 'required_if:barrio_id,1',
+		'otra_estaca' => 'required_if:barrio_id,1',
+		'obispo' => 'required',
+		'telobispo' => 'required',
+		'email_obispo' => 'required',
 		'estudios' => 'required',
 		'primeros_auxilios' => 'required',
-		'trabajo' => 'required',
+		'ocupacion' => 'required',
 		'llamamiento' => 'required',
+		'mretornado' => 'required',
+		'mision' => 'required_if:mretornado,1',
 		'mes_recomendacion' => 'required',
 		'anio_recomendacion' => 'required',
 	];
 
-    public function submitContacto(){
+    public function guardar(){
         $this->validate();
 
         $contacto = Contacto::create([
-
+            'nombres' => $this->nombres,
+            'apellidos' => $this->apellidos,
+            'email' => $this->email,
+            'telefono' => $this->telefono,
+            'fecnac' => $this->fecnac,
+            'genero' => $this->genero,
+            'barrio_id' => $this->barrio_id,
+            'otro_barrio' => $this->otro_barrio,
+            'otra_estaca' => $this->otra_estaca,
+            'obispo' => $this->obispo,
+            'telobispo' => $this->telobispo,
+            'email_obispo' => $this->email_obispo,
+            'estudios' => $this->estudios,
+            'primeros_auxilios' => $this->primeros_auxilios,
+            'ocupacion' => $this->ocupacion,
+            'llamamiento' => $this->llamamiento,
+            'mretornado' => $this->mretornado,
+            'mision' => $this->mision,
+            'mes_recomendacion' => $this->mes_recomendacion,
+            'anio_recomendacion' => $this->anio_recomendacion,
+            'estado' => 1
         ]);
 
-        
+        if($contacto){
+            $this->result = true;
+        }
 
     }
 
     public function render()
     {
 
-        $estacas = Estaca::get();
+        $estacas = Estaca::whereNotIn('id', ['1'])->get();
         $estacasselect = [];
 
         foreach ($estacas as $estaca) {
             $estacasselect[$estaca->nombre] = Barrio::where('estaca_id', $estaca->id)->pluck('nombre', 'id');
         }
 
-        $estacasselect["Desconocido"] = 'Otro';
+        $estacasselect["1"] = 'Otro';
 
         return view('livewire.public.pre-inscripcion-consejeros', compact('estacasselect'));
     }
