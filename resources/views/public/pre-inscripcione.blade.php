@@ -54,16 +54,15 @@
     </x-jet-authentication-card>
 
     <script>
-            // let stateCheck = setInterval(() => {
-            //     if (document.readyState === 'complete') {
-            //         clearInterval(stateCheck);
-            //         // document ready
-            //         console.log( "ready!" );
-            //         Livewire.on('postAdded', postId => {
-            //             alert('A post was added with the id of: ' + postId);
-            //         })
-            //     }
-            // }, 100);
+            let stateCheck = setInterval(() => {
+                if (document.readyState === 'complete') {
+                    clearInterval(stateCheck);
+                    // document ready
+                    console.log( "ready!" );
+                    document.getElementById("inicio").focus();
+                    document.getElementById("inicio").scrollIntoView();
+                }
+            }, 100);
 
         document.getElementById('imgperfil').addEventListener('change', cambiarImagen);
 
@@ -78,6 +77,6 @@
 
             reader.readAsDataURL(file);
         }
-        document.getElementById("inicio").scrollIntoView();
+      
     </script>
 </x-guest-layout>
