@@ -325,7 +325,7 @@
                     </div>
                 </div>
             </div>
-            {{$imgperfil}}
+            {{-- {{$imgperfil}} --}}
             <div class="flex items-center justify-end mt-4">
                 <button
                     class='inline-flex items-center px-4 py-2 
