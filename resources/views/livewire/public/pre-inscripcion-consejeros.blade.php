@@ -80,14 +80,16 @@
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-12 mt-3 sm:col-span-6">
                     <x-jet-label for="otro_barrio" value="{{ __('De qué barrio eres?') }}" class="font-black" />
-                    <x-jet-input id="otro_barrio" class="block mt-1 w-full" type="text" wire:model="otro_barrio" name="otro_barrio" />
+                    <x-jet-input id="otro_barrio" class="block mt-1 w-full" type="text" wire:model="otro_barrio" name="otro_barrio"
+                        required />
                     @error('otro_barrio')
                         <small class="text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="col-span-12 mt-3 sm:col-span-6">
                     <x-jet-label for="otra_estaca" value="{{ __('A qué estaca pertenece?') }}" class="font-black" />
-                    <x-jet-input id="otra_estaca" class="block mt-1 w-full" type="text" wire:model="otra_estaca" name="otra_estaca" />
+                    <x-jet-input id="otra_estaca" class="block mt-1 w-full" type="text" wire:model="otra_estaca" name="otra_estaca"
+                        required />
                     @error('otra_estaca')
                         <small class="text-red-600">{{ $message }}</small>
                     @enderror
@@ -153,7 +155,7 @@
                 <x-jet-label for="mision" value="{{ __('Qué misión serviste y en qué año?') }}"
                     class="font-black" />
                 <x-jet-input id="mision" class="block mt-1 w-full" type="text" wire:model="mision"
-                    name="mision" />
+                    name="mision" required/>
                 @error('mision')
                     <small class="text-red-600">{{ $message }}</small>
                 @enderror
