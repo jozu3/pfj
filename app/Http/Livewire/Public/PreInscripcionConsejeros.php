@@ -53,7 +53,7 @@ class PreInscripcionConsejeros extends Component
 		'otra_estaca' => 'required_if:barrio_id,1',
 		'obispo' => 'required',
 		'telobispo' => 'required',
-		'email_obispo' => 'required',
+		// 'email_obispo' => 'required',
 		'estudios' => 'required',
 		'primeros_auxilios' => 'required',
 		'ocupacion' => 'required',

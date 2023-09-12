@@ -23,7 +23,7 @@
 					<div class="col-md-12">
 							{!! Form::label('estado', 'Estado') !!}
 							{!! Form::select('estado', [
-									'1' => 'No contactado',
+									'1' => 'Preinscrito',
 									'2' => 'Contactado',
 									'3' => 'Probable',
 									'4' => 'Confirmado',

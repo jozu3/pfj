@@ -30,7 +30,7 @@
 				<div class="col-md-12">
 						{!! Form::label('estado', 'Estado') !!}
 						{!! Form::select('estado', [
-                                '1' => 'No contactado',
+                                '1' => 'Preinscrito',
                                 '2' => 'Enviado al obispo',
                                 '3' => 'Aprobado por el obispo',
                                 '4' => 'Confirmado',

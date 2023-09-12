@@ -5,7 +5,7 @@
             <div class="form-check mt-1 d-inline">
               <input class="form-check-input" wire:model= "nocontactado" type="checkbox" value="true" id="nocontac1">
               <label class="form-check-label" for="nocontac1">
-                No contactado
+                Preinscrito
               </label>
             </div>
             <div class="form-check mt-1 d-inline">
@@ -72,7 +72,7 @@
     			<tbody>
                     @php 
                         $estados = [
-                                '1' => 'No contactado',
+                                '1' => 'Preinscrito',
                                 '2' => 'Enviado al obispo',
                                 '3' => 'Aprobado por el obispo',
                                 '4' => 'Confirmado',

@@ -116,7 +116,7 @@
             <div class="mt-4">
                 <x-jet-label for="email_obispo" value="{{ __('Email de tu obispo') }}" class="font-black" />
                 <x-jet-input id="email_obispo" class="block mt-1 w-full" type="email" wire:model="email_obispo"
-                    name="email_obispo" required />
+                    name="email_obispo" />
                 @error('email_obispo')
                     <small class="text-red-600">{{ $message }}</small>
                 @enderror
