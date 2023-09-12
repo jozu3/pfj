@@ -17,7 +17,7 @@
     		{!! Form::model($personale, ['route' => ['admin.personales.update', $personale], 'method' => 'put']) !!}
     			@include('admin.personales.partials.form')
                 
-                {!! Form::submit('Guardar', ['class' => 'btn btn-yellow-pfj']) !!}
+                {!! Form::submit('Guardar', ['class' => 'btn btn-red40-pfj']) !!}
     		{!! Form::close() !!}
     	</div>
     </div>

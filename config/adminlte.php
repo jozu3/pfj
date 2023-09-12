@@ -107,7 +107,7 @@ return [
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
     'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-yellow-pfj',
+    'classes_auth_btn' => 'btn-flat btn-red40-pfj',
 
     /*
     |--------------------------------------------------------------------------
@@ -127,7 +127,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-yellow-pfj elevation-4',
+    'classes_sidebar' => 'sidebar-dark-red40-pfj elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',

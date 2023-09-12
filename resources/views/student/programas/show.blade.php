@@ -252,7 +252,7 @@
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('st.tareas.mislecturas', $inscripcione->programa) }}"
-                                                            class="bg-yellow-pfj sm:p-2 sm:text-md rounded-lg text-white p-1 text-sm">
+                                                            class="bg-red40-pfj sm:p-2 sm:text-md rounded-lg text-white p-1 text-sm">
                                                             <i class="fas fa-check-square"></i> Marcar
                                                         </a>
                                                     </td>

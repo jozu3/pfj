@@ -115,12 +115,12 @@
                         </td>
                         @can('admin.programas.edit')
     				  	<td width="10px">
-                            <a href="{{ route('admin.programas.edit', $programa) }}" class="btn btn-sm btn-yellow-pfj " alt="Administrar sesión" data-toggle="tooltip" data-placement="top" title="Administrar sesión"><i class="fas fa-cogs"></i></a>
+                            <a href="{{ route('admin.programas.edit', $programa) }}" class="btn btn-sm btn-red40-pfj " alt="Administrar sesión" data-toggle="tooltip" data-placement="top" title="Administrar sesión"><i class="fas fa-cogs"></i></a>
                         </td>
                         @endcan
                         @can(['admin.programas.edit'])
                         <td width="10px">
-                            <a href="{{ route('admin.programas.show', $programa) }}" class="btn btn-sm btn-yellow-pfj " alt="Personal" data-toggle="tooltip" data-placement="top" title="Personal"><i class="fas fa-user-friends"></i></a>
+                            <a href="{{ route('admin.programas.show', $programa) }}" class="btn btn-sm btn-red40-pfj " alt="Personal" data-toggle="tooltip" data-placement="top" title="Personal"><i class="fas fa-user-friends"></i></a>
                         </td>
                         @endcan
                         @can('admin.programas.destroy')

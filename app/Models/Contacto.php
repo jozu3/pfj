@@ -28,5 +28,8 @@ class Contacto extends Model
     public function image(){
         return $this->morphOne(Image::class, 'imageable');
     }
-
+    
+    public function barrio(){
+    	return $this->belongsTo(Barrio::class);
+    }
 }

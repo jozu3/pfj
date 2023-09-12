@@ -1,6 +1,6 @@
 <div>
     <div class="w-full bg-gray-100 rounded-full mt-2 mx-2">
-        <div class="bg-yellow-pfj text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-l-full"
+        <div class="bg-red40-pfj text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-l-full"
             style="width: {{ $avance }}%"> {{ $avance }}%</div>
     </div>
     <div class="grid grid-cols-6 my-4 mx-2">

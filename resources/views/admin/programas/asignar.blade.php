@@ -4,7 +4,7 @@
 
 @section('content_header')
     <button id="guardar" class="btn btn-success btn-sm">Guardar cambios</button>
-    <h2 class="txt-yellow-pfj font-weight-bold">{{ $programa->nombre }}</h2>
+    <h2 class="txt-red40-pfj font-weight-bold">{{ $programa->nombre }}</h2>
     <h1>Organizar Personal y Grupos</h1>
     <div>
         <a href="{{ route('admin.programa.directorio', $programa->id) }}" class="btn btn-info">Dirección</a>
@@ -41,11 +41,11 @@
             overflow: auto;
         }
 
-        .bg-yellow-pfj {
+        .bg-red40-pfj {
             background-color: #fe9a18 !important
         }
 
-        .txt-yellow-pfj {
+        .txt-red40-pfj {
             color: #fe9a18
         }
 

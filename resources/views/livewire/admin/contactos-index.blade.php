@@ -11,13 +11,13 @@
             <div class="form-check mt-1 d-inline">
               <input class="form-check-input" wire:model= "contactado" type="checkbox" value="true" id="contact1">
               <label class="form-check-label" for="contact1">
-                Contactado
+                Enviado al obispo
               </label>
             </div>
             <div class="form-check mt-1 d-inline">
               <input class="form-check-input" wire:model= "probable" type="checkbox" value="true" id="flexCheckDefault1">
               <label class="form-check-label" for="flexCheckDefault1">
-                Probable
+                Aprobado por el obispo
               </label>
             </div>
             <div class="form-check mt-1 d-inline">
@@ -58,7 +58,11 @@
                         <th wire:click="sortBy('estaca_id')" style="cursor:pointer">Estaca
                             @include('partials._sort-icon', ['field' => 'estaca_id'])
                         </th>
-                        <th wire:click="" style="">Comentarios de su vendedor actual
+                        <th wire:click="" style="">Edad
+                        </th> 
+                        <th wire:click="" style="">Recomendación para el templo
+                        </th> 
+                        <th wire:click="" style="">Comentarios
                         </th>
                         <th wire:click="" style="">Total de comentarios
                         </th>
@@ -66,6 +70,15 @@
     				</tr>
     			</thead>
     			<tbody>
+                    @php 
+                        $estados = [
+                                '1' => 'No contactado',
+                                '2' => 'Enviado al obispo',
+                                '3' => 'Aprobado por el obispo',
+                                '4' => 'Confirmado',
+                                '5' => 'Inscrito',
+                            ];
+                    @endphp
     				@foreach($contactos as $contacto)
                     <tr>
                         <td>{{ $contacto->id }}</td>
@@ -82,15 +95,6 @@
                             </span>
                         </td>
                         <td>
-                            @php 
-                                $estados = [
-                                        '1' => 'No contactado',
-                                        '2' => 'Contactado',
-                                        '3' => 'Probable',
-                                        '4' => 'Confirmado',
-                                        '5' => 'Inscrito',
-                                    ];
-                            @endphp
                             @switch($contacto->estado)
                                 @case (1)
                                      {{ $estados['1'] }}
@@ -141,7 +145,28 @@
                                     @if ($contacto->personale != null)
                                         {{$contacto->personale->barrio->estaca->nombre}}
                                     @else
-                                    {{ 'No se ha registrado' }}
+                                        @if ($contacto->barrio_id == 1)
+                                        
+                                        {{$contacto->otra_estaca}}
+                                        @else
+                                        {{$contacto->barrio->estaca->nombre}}
+                                        {{-- {{ 'No se ha registrado' }} --}}
+                                        @endif
+                                    @endif
+                                </td>
+                                <td>
+                                    @php
+                                        $fecha_nacimiento = new DateTime($contacto->fecnac);
+                                        $hoy = new DateTime();
+                                        echo (string)$hoy->diff($fecha_nacimiento)->format('%y');;
+                                    @endphp     
+                                </td>
+                                <td>    
+                                    @if (!empty($contacto->mes_recomendacion) || !empty($contacto->anio_recomendacion))
+                                        {{ $meses[$contacto->mes_recomendacion] . ' - '.$contacto->anio_recomendacion}}
+                                        
+                                    @else
+                                        --
                                     @endif
                                 </td>
                                 <td>

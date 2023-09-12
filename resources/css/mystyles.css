@@ -1,18 +1,22 @@
 .card-body, .card-header, .card-footer {
 	overflow: auto;
 }
-.bg-yellow-pfj{
-	background-color: #ffb900
-}
-.bg-yellow-pfj:hover{
-	background-color: #fe9a18
-}
 
 .bg-yellow-pfj{
-	background-color: #2d999b
+	background-color: #faa61a
 }
 .bg-yellow-pfj:hover{
-	background-color: #288b8d
+	background-color: #f68d2e
+}
+
+.btn-red40-pfj{
+	background-color: #e10f5a;
+    border-color: #e10f5a;
+    box-shadow: none;
+	color: white;
+}
+.btn-red40-pfj:hover{
+	background-color: #6e0d33
 }
 
 

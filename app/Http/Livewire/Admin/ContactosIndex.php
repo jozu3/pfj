@@ -12,6 +12,7 @@ class ContactosIndex extends Component
 {
 	use WithPagination;
 
+    public $meses;
     public $search;
     public $nocontactado = true;
     public $contactado = true;
@@ -43,6 +44,23 @@ class ContactosIndex extends Component
 	public function updatingSearch(){
 		$this->resetPage();
 	}
+
+    public function mount(){
+        $this->meses = [
+            '1' => 'Enero',
+            '2' => 'Febrero',
+            '3' => 'Marzo',
+            '4' => 'Abril',
+            '5' => 'Mayo',
+            '6' => 'Junio',
+            '7' => 'Julio',
+            '8' => 'Agosto',
+            '9' => 'Septiembre',
+            '10' => 'Octubre',
+            '11' => 'Noviembre',
+            '12' => 'Diciembre',
+        ];
+    }
 
  	public function render()
     {

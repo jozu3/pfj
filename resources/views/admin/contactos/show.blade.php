@@ -30,17 +30,17 @@
 				<div class="col-md-12">
 						{!! Form::label('estado', 'Estado') !!}
 						{!! Form::select('estado', [
-								'1' => 'No contactado',
-								'2' => 'Contactado',
-								'3' => 'Probable',
-								'4' => 'Confirmado',
-								'5' => 'Inscrito',
+                                '1' => 'No contactado',
+                                '2' => 'Enviado al obispo',
+                                '3' => 'Aprobado por el obispo',
+                                '4' => 'Confirmado',
+                                '5' => 'Inscrito',
 							], null, ['class' => 'form-control', 'placeholder' => 'Escoge', 'disabled' => 'disabled', 'style' => 'appearance: none; ']); !!}
 				</div>
 				</div>
 				<br>
 				<div class="form-group">
-				{!! Form::submit('Actualizar datos', ['class' => 'btn btn-yellow-pfj']) !!}
+				{!! Form::submit('Actualizar datos', ['class' => 'btn btn-red40-pfj']) !!}
 				</div>
 				{!! Form::close() !!}
 				
@@ -63,7 +63,7 @@
 
 						@include('admin.personales.partials.form')
 						
-						{!! Form::submit('Guardar', ['class' => 'btn btn-yellow-pfj']) !!}
+						{!! Form::submit('Guardar', ['class' => 'btn btn-red40-pfj']) !!}
 					{!! Form::close() !!}
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 						], null, ['class' => 'form-control']) !!}
 						</div>
 						@include('admin.inscripciones.partials.formedit')
-						{!! Form::submit('Guardar', ['class' => 'btn btn-yellow-pfj']) !!}
+						{!! Form::submit('Guardar', ['class' => 'btn btn-red40-pfj']) !!}
 						{!! Form::close() !!}
 					</div>  
 				</div>

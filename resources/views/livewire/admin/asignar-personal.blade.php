@@ -23,7 +23,7 @@
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="card card-row card-primary">
-                    <div class="card-header bg-yellow-pfj text-center">
+                    <div class="card-header bg-red40-pfj text-center">
                         <h3 class="card-title">
                             Coordinadores
                         </h3>
@@ -46,7 +46,7 @@
                                             <div class="card-body p-0">
                                                 @if ($inscripcione->personale->user)
                                                     <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}"
-                                                        class="txt-yellow-pfj">
+                                                        class="txt-red40-pfj">
                                                         {{ $inscripcione->personale->user->name }}
                                                     </a>
                                                 @else
@@ -73,7 +73,7 @@
             @foreach ($grupos as $grupo)
                 <div class="col-sm-6 col-md-4 col-lg-3">
                     <div class="card card-row card-primary">
-                        <div class="card-header bg-yellow-pfj">
+                        <div class="card-header bg-red40-pfj">
                             <h3 class="card-title">
                                 {{ 'Familia ' . $grupo->numero }}
                             </h3>
@@ -123,7 +123,7 @@
                                                     <div class="card-body p-0">
                                                         <div class="card-text">
                                                             <a href="{{ route('admin.contactos.show', $inscripcioneCompanerismo->inscripcione->personale->contacto) }}"
-                                                                class="txt-yellow-pfj">
+                                                                class="txt-red40-pfj">
                                                                 {{ $inscripcioneCompanerismo->inscripcione->personale->contacto->nombres . ' ' . $inscripcioneCompanerismo->inscripcione->personale->contacto->apellidos }}
                                                             </a>
                                                         </div>
@@ -213,7 +213,7 @@
                                     <div class="card-body p-0">
                                         <div class="card-text">
                                             <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}"
-                                                class="txt-yellow-pfj">
+                                                class="txt-red40-pfj">
                                                 {{ $inscripcione->personale->contacto->nombres . ' ' . $inscripcione->personale->contacto->apellidos }}
                                             </a>
                                         </div>

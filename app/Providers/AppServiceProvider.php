@@ -210,7 +210,7 @@ class AppServiceProvider extends ServiceProvider
                 $menu_change_sesion = [
                     'text' => $text_menu_sesion,
                     'topnav' => 'true',
-                    'classes' => 'btn btn-yellow-pfj',
+                    'classes' => 'btn btn-red40-pfj',
                     'submenu' => $missesiones
                 ];
 

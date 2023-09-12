@@ -17,6 +17,10 @@ class Barrio extends Model
     public function personales(){
         return $this->hasMany(Personales::class);
     }
+
+    public function contactos(){
+        return $this->hasMany(Contacto::class);
+    }
     
     public function participantes(){
         return $this->hasMany(Participante::class);

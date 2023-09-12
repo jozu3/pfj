@@ -36,7 +36,7 @@
             overflow: auto;
         }
 
-        .bg-yellow-pfj {
+        .bg-red40-pfj {
             background-color: #ffb900 !important;
 
         }

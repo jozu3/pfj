@@ -1,6 +1,6 @@
 <div>
     <div class="pgrupos">
-        <nav class="navbar navbar-dark bg-yellow-pfj">
+        <nav class="navbar navbar-dark bg-red40-pfj">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nombre-sesion" href="#">{{ $programa->nombre }}</a>
                 @forelse ($programa->companias() as $compania)

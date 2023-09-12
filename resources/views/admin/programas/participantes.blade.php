@@ -90,7 +90,7 @@
                         <h5 class="modal-title" id="importExcelPersonalLabel">Importar participants de la sesión
                             {{ $programa->nombre }}</h5>
                         <a href="{{ config('app.url') . '/files/PARTICIPANTES-PLANTILLA.xlsx' }}"
-                            class="btn btn-yellow-pfj ml-5" download><i class="far fa-file-excel"></i> Descargar
+                            class="btn btn-red40-pfj ml-5" download><i class="far fa-file-excel"></i> Descargar
                             plantilla</a>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>

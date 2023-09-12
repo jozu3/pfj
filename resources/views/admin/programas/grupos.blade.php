@@ -15,7 +15,7 @@
     @forelse (auth()->user()->personale->inscripciones as $inscripcione)
     <div>
         <div class="pgrupos">
-            <nav class="navbar navbar-dark bg-yellow-pfj">
+            <nav class="navbar navbar-dark bg-red40-pfj">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nombre-sesion" href="#">{{ $inscripcione->programa->nombre }}</a>
                 @forelse ($inscripcione->programa->grupos as $grupo)
@@ -60,7 +60,7 @@
         .card-body {
             overflow: auto;
         }
-        .bg-yellow-pfj{
+        .bg-red40-pfj{
             background-color: #ffb900!important;
             
         }
