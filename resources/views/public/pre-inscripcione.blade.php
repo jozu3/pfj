@@ -67,6 +67,7 @@
         document.getElementById('imgperfil').addEventListener('change', cambiarImagen);
 
         function cambiarImagen(event) {
+            Livewire.emit('cargar_foto');
             console.log('changee');
             var file = event.target.files[0];
 

@@ -33,7 +33,7 @@
             </div>
             <div class="mt-4">
                 <x-jet-label for="telefono" value="{{ __('Phone') }}" class="font-black" />
-                <x-jet-input id="telefono" class="block mt-1 w-full" type="text" wire:model="telefono"
+                <x-jet-input id="telefono" class="block mt-1 w-full" type="number" min="0" wire:model="telefono"
                     name="telefono" required />
                 @error('telefono')
                     <small class="text-red-600">{{ $message }}</small>
@@ -75,6 +75,9 @@
                     'placeholder' => 'Seleccione',
                     'wire:model' => 'barrio_id',
                 ]) !!}
+                   @error('barrio_id')
+                   <small class="text-red-600">{{ $message }}</small>
+               @enderror
             </div>
             @if ($barrio_id == 1)
                 <div class="grid grid-cols-12 gap-4">
@@ -106,10 +109,10 @@
                 @enderror
             </div>
             <div class="mt-4">
-                <x-jet-label for="telobispo" value="{{ __('Teléfono de tu obispo') }}" class="font-black" />
-                <x-jet-input id="telobispo" class="block mt-1 w-full" type="text" wire:model="telobispo"
-                    name="telobispo" required />
-                @error('telobispo')
+                <x-jet-label for="telefono_obispo" value="{{ __('Teléfono de tu obispo') }}" class="font-black" />
+                <x-jet-input id="telefono_obispo" class="block mt-1 w-full" type="number" min="0" wire:model="telefono_obispo"
+                    name="telefono_obispo" required />
+                @error('telefono_obispo')
                     <small class="text-red-600">{{ $message }}</small>
                 @enderror
             </div>
@@ -243,6 +246,7 @@
                                         'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
                                     'placeholder' => '-- Seleccione --',
                                     'wire:model' => 'mes_recomendacion',
+                                    'required' => ''
                                 ],
                             ) !!}
                             @error('mes_recomendacion')
@@ -319,21 +323,26 @@
                         <div class="custom-file" style="display: none">
                             {!! Form::file('imgperfil', ['class' => 'custom-file-input', 'accept' => 'image/*', "wire:model.defer" => "imgperfil"]) !!}
                         </div>
-                        @error('imgperfil')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
                     </div>
                 </div>
             </div>
-            {{-- {{$imgperfil}} --}}
+            @error('imgperfil')
+                <small class="text-red-600">{{ 'Tu foto es requerida.' }}</small>
+                <small class="text-red-600">{{ $message }}</small>
+                @enderror
+                {{-- {{$imgperfil}} --}}
+            @if ($disabled_enviar)
+                <small class="text-green-600 font-black">{{ 'Cargando...' }}</small>
+            @endif
             <div class="flex items-center justify-end mt-4">
                 <button
+                    id="enviar"
                     class='inline-flex items-center px-4 py-2 
                     bg-red40-pfj 
                     border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest 
                     hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 
                     focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150'
-                    type="submit">
+                    type="submit"  {{ $disabled_enviar }}>
                     {{ __('Enviar') }}
                 </button>
             </div>

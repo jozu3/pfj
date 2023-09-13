@@ -23,7 +23,7 @@ class PreInscripcionConsejeros extends Component
     public $otro_barrio;
     public $otra_estaca;
     public $obispo;
-    public $telobispo;
+    public $telefono_obispo;
     public $email_obispo;
     public $estudios;
     public $primeros_auxilios;
@@ -35,6 +35,7 @@ class PreInscripcionConsejeros extends Component
     public $mes_recomendacion;
     public $anio_recomendacion;
     public $imgperfil;
+    public $disabled_enviar = '';
 
     public $asiste_instituto;
     public $recomendacion_vigente;
@@ -45,25 +46,45 @@ class PreInscripcionConsejeros extends Component
 		'nombres' => 'required',
 		'apellidos' => 'required',
 		'email' => 'required',
-		'telefono' => 'required',
+		'telefono' => 'required|numeric|digits:9|min:0',
 		'fecnac' => 'required',
 		'genero' => 'required',
 		'barrio_id' => 'required',
 		'otro_barrio' => 'required_if:barrio_id,1',
 		'otra_estaca' => 'required_if:barrio_id,1',
 		'obispo' => 'required',
-		'telobispo' => 'required',
+		'telefono_obispo' => 'required|numeric|digits:9|min:0',
 		// 'email_obispo' => 'required',
 		'estudios' => 'required',
 		'primeros_auxilios' => 'required',
 		'ocupacion' => 'required',
 		'llamamiento' => 'required',
 		// 'instituto' => 'required',
+		'asiste_instituto' => 'required',
 		'mretornado' => 'required',
 		'mision' => 'required_if:mretornado,1',
-		// 'mes_recomendacion' => 'required',
-		// 'anio_recomendacion' => 'required',
+		'recomendacion_vigente' => 'required',
+		'mes_recomendacion' => 'required_if:recomendacion_vigente,1',
+		'anio_recomendacion' => 'required_if:recomendacion_vigente,1',
+		'imgperfil' => 'required|image|mimes:jpeg,png,jpg,gif',
 	];
+
+    protected $listeners = [
+        'cargar_foto' => 'cargarFoto'
+    ];
+
+    public function cargarFoto(){
+//        $this->imgperfil = '';
+        $this->disabled_enviar = 'disabled';
+    }
+    
+    public function updatedImgperfil(){
+        if($this->imgperfil == ''){
+            $this->disabled_enviar = 'disabled';
+        } else {
+            $this->disabled_enviar = '';
+        }
+    }
 
     public function guardar(){
         $this->validate();
@@ -79,7 +100,7 @@ class PreInscripcionConsejeros extends Component
             'otro_barrio' => $this->otro_barrio,
             'otra_estaca' => $this->otra_estaca,
             'obispo' => $this->obispo,
-            'telobispo' => $this->telobispo,
+            'telobispo' => $this->telefono_obispo,
             'email_obispo' => $this->email_obispo,
             'estudios' => $this->estudios,
             'primeros_auxilios' => $this->primeros_auxilios,
