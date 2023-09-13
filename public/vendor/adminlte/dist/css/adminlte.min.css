@@ -14,11 +14,12 @@
 	overflow: auto;
 }
 
-.bg-red40-pfj{
+.bg-yellow-pfj{
 	background-color: #faa61a
 }
-.bg-red40-pfj:hover{
-	background-color: #f68d2e
+
+.bg-red40-pfj{
+	background-color: #e10f5a
 }
 
 .btn-red40-pfj{

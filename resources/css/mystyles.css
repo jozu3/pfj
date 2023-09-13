@@ -5,10 +5,12 @@
 .bg-yellow-pfj{
 	background-color: #faa61a
 }
-.bg-yellow-pfj:hover{
+/*.bg-yellow-pfj:hover{
 	background-color: #f68d2e
+}*/
+.bg-red40-pfj{
+	background-color: #e10f5a
 }
-
 .btn-red40-pfj{
 	background-color: #e10f5a;
     border-color: #e10f5a;
