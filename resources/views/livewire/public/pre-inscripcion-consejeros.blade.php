@@ -329,9 +329,9 @@
             @error('imgperfil')
                 <small class="text-red-600">{{ 'Tu foto es requerida.' }}</small>
                 <small class="text-red-600">{{ $message }}</small>
-                @enderror
+            @enderror
                 {{-- {{$imgperfil}} --}}
-            @if ($disabled_enviar)
+            @if ($disabled_enviar == 'disabled')
                 <small class="text-green-600 font-black">{{ 'Cargando...' }}</small>
             @endif
             <div class="flex items-center justify-end mt-4">
