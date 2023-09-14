@@ -66,7 +66,7 @@ class PreInscripcionConsejeros extends Component
 		'recomendacion_vigente' => 'required',
 		'mes_recomendacion' => 'required_if:recomendacion_vigente,1',
 		'anio_recomendacion' => 'required_if:recomendacion_vigente,1',
-		'imgperfil' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+		'imgperfil' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
 	];
 
     public function updatedImgperfil(){
