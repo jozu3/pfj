@@ -45,8 +45,8 @@ class PreInscripcionConsejeros extends Component
     protected $rules = [
 		'nombres' => 'required',
 		'apellidos' => 'required',
-		'email' => 'required',
-		'telefono' => 'required|numeric|digits:9|min:0',
+		'email' => 'required|email|unique:App\Models\Contacto,email',
+		'telefono' => 'required|numeric|digits:9|min:0|unique:App\Models\Contacto,telefono',
 		'fecnac' => 'required',
 		'genero' => 'required',
 		'barrio_id' => 'required',
@@ -59,8 +59,8 @@ class PreInscripcionConsejeros extends Component
 		'primeros_auxilios' => 'required',
 		'ocupacion' => 'required',
 		'llamamiento' => 'required',
-		// 'instituto' => 'required',
 		'asiste_instituto' => 'required',
+        'instituto' => 'required_if:asiste_instituto,1',
 		'mretornado' => 'required',
 		'mision' => 'required_if:mretornado,1',
 		'recomendacion_vigente' => 'required',
@@ -69,21 +69,9 @@ class PreInscripcionConsejeros extends Component
 		'imgperfil' => 'required|image|mimes:jpeg,png,jpg,gif',
 	];
 
-    protected $listeners = [
-        'cargar_foto' => 'cargarFoto'
-    ];
-
-    public function cargarFoto(){
-//        $this->imgperfil = '';
-        $this->disabled_enviar = 'disabled';
-    }
-    
     public function updatedImgperfil(){
-        if($this->imgperfil == ''){
-            $this->disabled_enviar = 'disabled';
-        } else {
-            $this->disabled_enviar = '';
-        }
+        $this->validateOnly('imgperfil');
+        $this->emit('imagen_cargada');
     }
 
     public function guardar(){

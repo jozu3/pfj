@@ -54,6 +54,7 @@
     </x-jet-authentication-card>
 
     <script>
+        var temp_image = ''
         let stateCheck = setInterval(() => {
             if (document.readyState === 'complete') {
                 clearInterval(stateCheck);
@@ -64,18 +65,21 @@
 
 
                 document.getElementById('imgperfil').addEventListener('change', cambiarImagen);
-
+               
                 function cambiarImagen(event) {
-                    Livewire.emit('cargar_foto');
                     console.log('changee');
+                    document.getElementById("img-show").setAttribute('src', '{{config("app.url")}}/img/user-pfj.png');
                     var file = event.target.files[0];
 
                     var reader = new FileReader();
                     reader.onload = (event) => {
-                        document.getElementById("img-show").setAttribute('src', event.target.result);
+                        temp_image = event.target.result;
                     };
-
                     reader.readAsDataURL(file);
+                    
+                    Livewire.on('imagen_cargada', () => {
+                        document.getElementById("img-show").setAttribute('src', temp_image);
+                    })
                 }
 
             }
