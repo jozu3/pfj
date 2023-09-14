@@ -50,6 +50,8 @@
         <x-jet-section-border />
 
         @livewire('public.pre-inscripcion-consejeros', key($user->id))
+        <div id="inicio" class="pb-16">
+        </div>
 
     </x-jet-authentication-card>
 
