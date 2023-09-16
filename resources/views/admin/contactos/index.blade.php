@@ -4,7 +4,9 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <a href="{{ route('admin.contactos.create') }}" class="btn btn-success btn-sm float-right">Nuevo contacto</a>
+@can('admin.contactos.create')
+<a href="{{ route('admin.contactos.create') }}" class="btn btn-success btn-sm float-right">Nuevo contacto</a>
+@endcan
     <h1>Lista de contactos</h1>
 @stop
 
