@@ -20,6 +20,7 @@ class ContactosIndex extends Component
     public $estaca_id = 0;
     public $barrio_id = 0;
     public $barrios;
+    public $created_at;
 
     public $nocontactado = true;
     public $contactado = true;
@@ -95,6 +96,8 @@ class ContactosIndex extends Component
             '11' => 'Noviembre',
             '12' => 'Diciembre',
         ];
+
+        $this->created_at = '2023-09-10';
     }
 
  	public function render()
@@ -134,6 +137,7 @@ class ContactosIndex extends Component
                                 ->orWhere('telefono', 'like','%'.$that->search.'%');
                                 // ->orWhere('email', 'like','%'.$that->search.'%');
                     })
+                    ->where('created_at', '>=', $this->created_at)
                     ->orderBy($this->sortBy, $this->sortDirection)
                     ->paginate();
         } else if (auth()->user()->can(['admin.contactos.contactos_barrio'])) {//obispo
@@ -151,6 +155,7 @@ class ContactosIndex extends Component
                                     });    
                                 });
                             })
+                            ->where('created_at', '>=', $this->created_at)
                             ->orderBy($this->sortBy, $this->sortDirection)
                             ->paginate();
         }

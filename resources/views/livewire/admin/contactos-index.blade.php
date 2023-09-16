@@ -7,7 +7,6 @@
                 </div>
                 @can('admin.contactos.allcontactos')
                     <div class="col">
-                        {{ $estaca_id }}
                         <select name="" id="" class="form-control" wire:model="estaca_id">
                             <option value="0">-- Todas las estacas --</option>
                             @foreach ($estacas as $stk)
@@ -16,13 +15,21 @@
                         </select>
                     </div>
                     <div class="col">
-                        {{ $barrio_id }}
                         <select name="" id="" class="form-control" wire:model="barrio_id">
                             <option value="0">-- Todos los barrios --</option>
                             @foreach ($barrios as $ward)
                                 <option value="{{ $ward->id }}">{{ $ward->nombre }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="col">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Preinscrito a partir de:</span>
+                            </div>
+                            <input wire:model="created_at" type="date" class="form-control"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
                     </div>
                 @elsecan('admin.contactos.contactos_barrio')
                     <div class="col">
@@ -109,7 +116,7 @@
                             {{-- <th wire:click="" style="">Total de comentarios
                         </th> --}}
                             @if (Auth::user()->can('admin.contactos.edit') || Auth::user()->can('admin.contactos.destroy'))
-                              <th class="text-center">Acciones</th>
+                                <th class="text-center">Acciones</th>
                             @endif
                             @can('admin.contactos.aprobacionobispo')
                                 <th class="text-center">Aprobación del obispo</th>
@@ -211,7 +218,8 @@
                                         <div class="d-flex" style="align-items: center; ">
                                             @can('admin.contactos.edit')
                                                 <span class="mx-2">
-                                                    <a href="{{ route('admin.contactos.show', $contacto) }}" class="btn btn-success">
+                                                    <a href="{{ route('admin.contactos.show', $contacto) }}"
+                                                        class="btn btn-success">
                                                         <i class="fas fa-file-signature"></i> Ver / Editar</a>
                                                 </span>
                                             @endcan
@@ -240,8 +248,9 @@
                                                     <input type="checkbox" @if ($contacto->estado == 3) checked @endif
                                                         data-contacto="{{ $contacto->id }}"
                                                         class="custom-control-input prevent-inactive"
-                                                        id="customSwitch{{ $contacto->id }}"/>
-                                                    <label class="custom-control-label" for="customSwitch{{ $contacto->id }}"></label>
+                                                        id="customSwitch{{ $contacto->id }}" />
+                                                    <label class="custom-control-label"
+                                                        for="customSwitch{{ $contacto->id }}"></label>
                                                 </div>
                                             </span>
                                         @endcan
