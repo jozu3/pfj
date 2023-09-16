@@ -239,6 +239,7 @@ return [
             'text' => 'Portal PFJ',
             'route' => 'st.index',
             'topnav' => true,
+            'can' => 'student.home'
         ], 
       /*  [
             'text'        => 'Dashboard',
@@ -316,7 +317,7 @@ return [
             'label_color' => 'success',
             'route'  => 'admin.contactos.index',
             'icon' => 'fas fa-fw fa-user',
-            'can'  =>   'admin.inscripciones.index'
+            'can'  => 'admin.contactos.index', 
         ],
         // [
         //     'text' => 'Comentarios',

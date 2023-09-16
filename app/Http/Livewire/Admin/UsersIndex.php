@@ -15,10 +15,11 @@ class UsersIndex extends Component
 	public $search;
   public $admin = true;
   public $mdirector = true;
-  public $mlogística = true;
+  public $mlogistica = true;
   public $coordinador = true;
   public $cordauxiliar = true;	
   public $consejero = true;	
+  public $obispo = true;	
   public $otros = true;	
 	
 	protected $paginationTheme = 'bootstrap';
@@ -38,10 +39,11 @@ class UsersIndex extends Component
 
 		$this->admin == true ? array_push($roles_checked, "admin") : ''; 
     $this->mdirector == true ? array_push($roles_checked, "mdirector") : '';
-    $this->mlogística == true ? array_push($roles_checked, "mlogística") : '';
+    $this->mlogistica == true ? array_push($roles_checked, "mlogistica") : '';
     $this->coordinador == true ? array_push($roles_checked, "coordinador") : '';
     $this->cordauxiliar == true ? array_push($roles_checked, "cordauxiliar") : '';
     $this->consejero == true ? array_push($roles_checked, "consejero") : '';
+    $this->obispo == true ? array_push($roles_checked, "obispo") : '';
     $this->otros == true ? array_push($roles_checked, "otros") : '';
 
   	$users = User::where(function($query) use ($that) {

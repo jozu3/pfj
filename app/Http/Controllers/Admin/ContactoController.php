@@ -13,7 +13,7 @@ use App\Http\Requests\StoreContactoRequest;
 use App\Models\Barrio;
 use App\Models\Estaca;
 use DB;
-
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 
@@ -49,7 +49,14 @@ class ContactoController extends Controller
         //     $vendedores = Personale::select(DB::raw('concat(nombres, " ", apellidos) as nombre'), 'id')->pluck('nombre', 'id');
         // }
 
-        return view('admin.contactos.create', compact('vendedores'));
+        $estacas = Estaca::all();
+        $estacasselect = [];
+
+        foreach ($estacas as $estaca) {
+            $estacasselect[$estaca->nombre] = Barrio::where('estaca_id', $estaca->id)->pluck('nombre', 'id');
+        } 
+
+        return view('admin.contactos.create', compact('estacasselect'));
     }
 
     /**
@@ -96,7 +103,7 @@ class ContactoController extends Controller
 
         $barrios = Barrio::orderBy('nombre', 'asc')->get()->pluck('nombre', 'id');
         
-        $estacas = Estaca::orderBy('nombre', 'asc')->get();
+        // $estacas = Estaca::orderBy('nombre', 'asc')->get();
         // if (auth()->user()->hasRole(['Admin', 'Asistente'])) {
         //     $vendedores = Personale::select(DB::raw('concat(nombres, " ", apellidos) as nombre'), 'id')->pluck('nombre', 'id');
 
@@ -105,8 +112,14 @@ class ContactoController extends Controller
 
         $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
 
+        $estacas = Estaca::all();
+        $estacasselect = [];
 
-        return view('admin.contactos.show', compact('contacto','seguimientos', 'pfjs', 'barrios', 'estacas', 'roles'));
+        foreach ($estacas as $estaca) {
+            $estacasselect[$estaca->nombre] = Barrio::where('estaca_id', $estaca->id)->pluck('nombre', 'id');
+        }
+
+        return view('admin.contactos.show', compact('contacto','seguimientos', 'pfjs', 'barrios', 'estacasselect', 'roles'));
     }
 
     /**
@@ -180,10 +193,19 @@ class ContactoController extends Controller
      */
     public function destroy(Contacto $contacto)
     {
-        $this->authorize('vendiendo', $contacto);
-        
-        $contacto->delete();
-
+        $errors = [];
+        try {
+            if (isset($contacto->personale)) {
+                $errors['error_delete_contacto'] = 'No se puede eliminar porque. El contacto tiene un personal creado.';
+            } else {
+                $contacto->delete();
+            }
+        } catch (QueryException $qex) {
+            return redirect()->back()->withErrors(['error_delete_contacto' =>  $qex->getMessage()]);
+        }        
+        if (count($errors)) {
+            return redirect()->back()->withErrors($errors);
+        }
         return redirect()->route('admin.contactos.index')->with('info', 'Contacto eliminado con éxito');
     }
 }

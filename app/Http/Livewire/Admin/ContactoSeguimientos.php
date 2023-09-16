@@ -7,7 +7,8 @@ use App\Models\Pfj;
 use App\Models\Seguimiento;
 
 class ContactoSeguimientos extends Component
-{	public $contacto = [];
+{	
+	public $contacto = [];
 	public $vermis_comentarios = false;
 
     public function render()

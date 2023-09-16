@@ -1,7 +1,5 @@
-<div class="form-group">
+{{-- <div class="form-group">
     {!! Form::label('barrio_id', 'Barrio/Rama') !!}
-    {{-- {!! Form::select('barrio_id', 
-        $barrios, null, ['class' => 'form-control', 'placeholder' => '-- Escoge --', 'style' => 'appearance: none; ']); !!} --}}
     <select name="barrio_id" id="barrio_id" class="form-control" aria-placeholder="-- Escoge un barrio --" style="appearance: none">
         @foreach ($estacas as $estaca)
             <option value="" class="bg-light font-weight-bold">{{ 'Estaca '. $estaca->nombre }}</option>
@@ -10,7 +8,7 @@
             @endforeach
         @endforeach
     </select>
-</div>
+</div> --}}
 @error('barrio_id')
     <small class="text-danger">{{ $message }}</small>
 @enderror

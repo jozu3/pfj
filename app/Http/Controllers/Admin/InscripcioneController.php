@@ -51,8 +51,12 @@ class InscripcioneController extends Controller
         $roles = Role::whereNotIn('id', [1])->pluck('name', 'id');
         $barrios = Barrio::orderBy('nombre')->pluck('nombre', 'id');
         $estacas = Estaca::all();
+        $estacasselect = [];
 
-        return view('admin.inscripciones.create', compact('contacto', 'personale_existe', 'roles', 'barrios', 'estacas'));
+        foreach ($estacas as $estaca) {
+            $estacasselect[$estaca->nombre] = Barrio::where('estaca_id', $estaca->id)->pluck('nombre', 'id');
+        }
+        return view('admin.inscripciones.create', compact('contacto', 'personale_existe', 'roles', 'barrios', 'estacas', 'estacasselect'));
     }
 
     /**

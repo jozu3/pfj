@@ -1,11 +1,16 @@
 <div class="form-group">
 	{!! Form::label('name', 'Nombre') !!}
-	{!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del nuevo roles']) !!}
-
+	{!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre del nuevo rol']) !!}
 	@error('name')
 		<small>El campo nombre es obligatorio</small>
 	@enderror
-
+</div> 
+<div class="form-group">
+	{!! Form::label('slug', 'Slug') !!}
+	{!! Form::text('slug', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el slug del nuevo rol']) !!}
+	@error('slug')
+		<small>El campo nombre es obligatorio</small>
+	@enderror
 </div> 
 <h2 class="h3">Lista de permisos</h2>
 @foreach ($permissions as $permission)
