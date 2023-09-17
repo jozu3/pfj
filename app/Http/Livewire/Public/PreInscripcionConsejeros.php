@@ -45,7 +45,8 @@ class PreInscripcionConsejeros extends Component
     protected $rules = [
 		'nombres' => 'required',
 		'apellidos' => 'required',
-		'email' => 'required|email|unique:App\Models\Contacto,email',
+		'email' => 'required|email',
+		// 'email' => 'required|email|unique:App\Models\Contacto,email',
 		'telefono' => 'required|numeric|digits:9|min:0|unique:App\Models\Contacto,telefono',
 		'fecnac' => 'required',
 		'genero' => 'required',
