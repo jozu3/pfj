@@ -15,8 +15,14 @@ class HomeController extends Controller
 
         $inscripciones = auth()->user()->personale->inscripciones->where('estado', '1');
         
-        if ($inscripciones->count() == 1) {
-            return redirect()->route('st.programas.show', $inscripciones->first()->programa);
+        
+        if ($inscripciones->count() >= 1) {
+            foreach ($inscripciones as $inscripcione) {
+                if ($inscripcione->programa->pfj->estado == 1) {
+                    $programa = $inscripcione->programa;
+                }
+            }
+            return redirect()->route('st.programas.show', $programa);
         }
 
         return view('student.index', compact('inscripciones'));
