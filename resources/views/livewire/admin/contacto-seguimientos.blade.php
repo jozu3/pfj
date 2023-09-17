@@ -26,7 +26,7 @@
 								<td>{{$seg->fecha}}</td>
 								<td>{{$seg->pfj->nombre}}</td>
 								<td>{{$seg->comentario}}</td>
-								<td colspan="2">{{$seg->personal->user->name}}</td>
+								<td colspan="2">{{$seg->personale->user->name}}</td>
 								<td></td>
 							</tr>
 						@endforeach
@@ -35,7 +35,7 @@
 							{!! Form::hidden('contacto_id', $contacto->id) !!}
 							{!! Form::hidden('tipo', 0) !!}
 							{!! Form::hidden('user_id', auth()->user()->id) !!}
-							{!! Form::hidden('personal_id', auth()->user()->personale->id) !!}
+							{{-- {!! Form::hidden('personal_id', auth()->user()->personale->id) !!} --}}
 
                             <td width="100px">
 								{!! Form::date('', date('Y-m-d'), ['class' => 'form-control', 'disabled' => 'disabled']) !!}

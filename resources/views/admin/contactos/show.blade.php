@@ -3,8 +3,10 @@
 @section('title', 'PFJ')
 
 @section('content_header')
+    @can('admin.inscripciones.create')
     <a href="{{ route('admin.inscripciones.create', 'idcontacto=' . $contacto->id) }}"
         class="btn btn-success btn-sm float-right">Inscribir</a>
+    @endcan
     <h1>Contacto JAS: {{ $contacto->nombres . ' ' . $contacto->apellidos }}</h1>
 @stop
 
@@ -48,19 +50,19 @@
                         </div>
 
                         <div class="col-md-2 mt-4">
-							<div class="form-group">
-								{!! Form::submit('Actualizar datos', ['class' => 'btn btn-red40-pfj']) !!}
-							</div>
-						</div>
-						@if ($contacto->estado == 1)
-                        <div class="col-md-2 mt-4">
-							<div class="form-group">
-								@can('admin.contactos.aprobacionpfj')
-								@livewire('admin.contacto-aprobacion-pfj', ['contacto_id' => $contacto->id], key(auth()->user()->id))
-								@endcan
-							</div>
-						</div>
-						@endif
+                            <div class="form-group">
+                                {!! Form::submit('Actualizar datos', ['class' => 'btn btn-red40-pfj']) !!}
+                            </div>
+                        </div>
+                        @if ($contacto->estado == 1)
+                            <div class="col-md-2 mt-4">
+                                <div class="form-group">
+                                    @can('admin.contactos.aprobacionpfj')
+                                        @livewire('admin.contacto-aprobacion-pfj', ['contacto_id' => $contacto->id], key(auth()->user()->id))
+                                    @endcan
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     {!! Form::close() !!}
 
@@ -121,9 +123,9 @@
             @endforelse
         @endif
 
-        {{-- <div class="col-md-12">
-		@livewire('admin.contacto-seguimientos', ['contacto' => $contacto])
-	</div> --}}
+        <div class="col-md-12">
+            @livewire('admin.contacto-seguimientos', ['contacto' => $contacto])
+        </div>
     </div>
 @stop
 

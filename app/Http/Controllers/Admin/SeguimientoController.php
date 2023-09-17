@@ -42,6 +42,7 @@ class SeguimientoController extends Controller
     public function store(StoreSeguimientoRequest $request)
     {
         $request['fecha'] = date('Y-m-d');
+        $request['personale_id'] = auth()->user()->personale->id;
         $seguimiento = Seguimiento::create($request->all());
         $contacto = Contacto::find($request->contacto_id);
         $contacto->update(['estado' => $request->estado]);

@@ -16,6 +16,7 @@ class UsersIndex extends Component
   public $admin = true;
   public $mdirector = true;
   public $mlogistica = true;
+  public $matrimonio_apoyo = true;
   public $coordinador = true;
   public $cordauxiliar = true;	
   public $consejero = true;	
@@ -44,6 +45,7 @@ class UsersIndex extends Component
     $this->cordauxiliar == true ? array_push($roles_checked, "cordauxiliar") : '';
     $this->consejero == true ? array_push($roles_checked, "consejero") : '';
     $this->obispo == true ? array_push($roles_checked, "obispo") : '';
+    $this->matrimonio_apoyo == true ? array_push($roles_checked, "matrimonio_apoyo") : '';
     $this->otros == true ? array_push($roles_checked, "otros") : '';
 
   	$users = User::where(function($query) use ($that) {

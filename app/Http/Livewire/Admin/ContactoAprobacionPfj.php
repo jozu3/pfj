@@ -21,17 +21,17 @@ class ContactoAprobacionPfj extends Component
 
             if ($update) {
 
-              /*  $obispo = User::whereHas('personale', function($q) use ($contacto){
+                $obispo = User::whereHas('personale', function($q) use ($contacto){
                                 $q->whereHas('contacto', function($q) use ($contacto){
                                     $q->where('barrio_id', $contacto->barrio_id);
                                 });
                             })->whereHas('roles', function($q){
                                 $q->where('slug', 'obispo');
-                            })->first();*/
+                            })->first();
 
-                //$obispo->notify(new NewConsejeroObispoNotification($contacto));
+                $obispo->notify(new NewConsejeroObispoNotification($contacto));
 
-                return redirect()->route('admin.contactos.show', $this->contacto_id)->with('info', 'Se aprobó y envió al obispo '. $obispo->id);
+                return redirect()->route('admin.contactos.show', $this->contacto_id)->with('info', 'Se aprobó y envió al obispo.');
             }
 
         }

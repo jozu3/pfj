@@ -219,7 +219,7 @@
                                             @can('admin.contactos.edit')
                                                 <span class="mx-2">
                                                     <a href="{{ route('admin.contactos.show', $contacto) }}"
-                                                        class="btn btn-success">
+                                                        class="btn btn-sm btn-success">
                                                         <i class="fas fa-file-signature"></i> Ver / Editar</a>
                                                 </span>
                                             @endcan

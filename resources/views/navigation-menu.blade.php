@@ -338,6 +338,19 @@
                     {{ __('Inicio') }}
                 </x-jet-responsive-nav-link>
             @endcan
+            @php
+            $hasCompania = false;
+            $countCompanias = 0;
+            $companerismo = null;
+            foreach (auth()->user()->personale->inscripciones as $inscripcione) {
+                if (isset($inscripcione->inscripcioneCompanerismo)) {
+                    $hasCompania = true;
+                    $countCompanias++;
+                    $companerismo = $inscripcione->inscripcioneCompanerismo->companerismo;
+                    // break;
+                }
+            }
+        @endphp
             @if ($hasCompania)
                     <x-jet-nav-link href="{{ route('st.participante.compania', $companerismo) }}" :active="request()->routeIs('st.participante.compania')">
                 {{ __('Mi compañia')}}

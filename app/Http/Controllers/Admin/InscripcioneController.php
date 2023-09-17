@@ -117,7 +117,7 @@ class InscripcioneController extends Controller
 
                 $personale = $contacto->personale;
             } else {
-                 return redirect()->back()->with('error', 'El personale ya está inscrito en el grupo seleccionado.');
+                 return redirect()->back()->with('error', 'El personal ya está inscrito en la sesión seleccionada.');
             }
         }
 

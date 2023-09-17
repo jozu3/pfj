@@ -44,18 +44,36 @@ class InscripcioneNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $url_action = config('app.url_prod');
+        switch ($this->inscripcione->role->slug) {
+            case 'consejero':
+                $url_action = url('/st');
+                break;
+            case 'obispo':
+                $url_action = route('admin.contactos.index');
+                break;
+            case 'matrimonio_apoyo':
+                $url_action = route('admin.contactos.index');
+                break;
+            default:
+                $url_action = config('app.url_prod');
+                break;
+        }
+
+
         return (new MailMessage)
-                    ->from('no-reply@pfjperu.com', config('app.name'))
-                    ->subject('Notificación de Inscripción')
-                    ->greeting(Lang::get('Hello!') . ' ' . $this->inscripcione->personale->contacto->nombres)
-                    ->line('Te damos una cordial bienvenida al '.$this->inscripcione->programa->nombre.' que inicia el '.date( 'd/m/Y', strtotime($this->inscripcione->programa->fecha_inicio)).'. En este correo encontrarás tu usuario y contraseña de la plataforma MiPFJ')
-                    ->line('Debes ingresar a '. config('app.url'))
-                    ->line('Usuario: '.$this->inscripcione->personale->user->email)
-                    ->line('Contraseña: password')
-                    ->line('Te sugerimos que cambies tu contraseña en las próximas 24 horas, ingresando al menú perfil desde tu portal MiPFJ.')
-                    ->action('Portal MiPFJ ', url('/st'))
-                    ->line('Bienvenido a una nueva experiencia.')
-                    ->salutation($this->inscripcione->programa->pfj->lema);
+            ->from('no-reply@pfjperu.com', config('app.name'))
+            ->subject('Notificación de Inscripción')
+            ->greeting(Lang::get('Hello!') . ' ' . $this->inscripcione->personale->contacto->nombres)
+            ->line('Te damos una cordial bienvenida al '.$this->inscripcione->programa->nombre/*.' que inicia el '.date( 'd/m/Y', strtotime($this->inscripcione->programa->fecha_inicio))*/.'. En este correo encontrarás tu usuario y contraseña de la plataforma MiPFJ')
+            ->line('Debes ingresar a '. config('app.url'))
+            ->line('Rol: '. $this->inscripcione->role->name)
+            ->line('Usuario: '.$this->inscripcione->personale->user->email)
+            ->line('Contraseña: password')
+            ->line('Te sugerimos que cambies tu contraseña en las próximas 24 horas, ingresando al menú perfil desde tu portal MiPFJ.')
+            ->action('Portal MiPFJ ', $url_action)
+            ->line('Bienvenido a una nueva experiencia.')
+            ->salutation($this->inscripcione->programa->pfj->lema);
 
     }
 

@@ -21,7 +21,7 @@ class Seguimiento extends Model
         return $this->belongsTo(Pfj::class);
     }
 
-    public function personal(){
+    public function personale(){
         return $this->belongsTo(Personale::class);
     }
 }

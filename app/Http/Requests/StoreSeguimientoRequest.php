@@ -13,7 +13,7 @@ class StoreSeguimientoRequest extends FormRequest
      */
     public function authorize()
     {
-        if ($this->personal_id == auth()->user()->personal->id ) {
+        if (auth()->user()->can('admin.seguimientos.create') ) {
             return true;
         } else {
             return false;
@@ -31,7 +31,6 @@ class StoreSeguimientoRequest extends FormRequest
             'contacto_id' => 'required',
             'pfj_id' => 'required',
             'user_id' => 'required',
-            'personal_id' => 'required',
             'comentario' => 'required',
             'estado' => 'required',
         ];;

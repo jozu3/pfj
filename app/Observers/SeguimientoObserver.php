@@ -14,7 +14,7 @@ class SeguimientoObserver
      */
     public function created(Seguimiento $seguimiento)
     {
-        if(! \App::runningInConsole() && $seguimiento->contacto->newassign == 1 && $seguimiento->contacto->personal_id == auth()->user()->personal->id){
+        if(! \App::runningInConsole() && $seguimiento->contacto->newassign == 1 && $seguimiento->contacto->personal_id == auth()->user()->personale->id){
             $seguimiento->contacto->update([
                 'newassign' => 0,
             ]);
