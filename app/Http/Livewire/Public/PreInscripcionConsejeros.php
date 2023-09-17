@@ -48,7 +48,7 @@ class PreInscripcionConsejeros extends Component
 		'email' => 'required|email',
 		// 'email' => 'required|email|unique:App\Models\Contacto,email',
 		'telefono' => 'required|numeric|digits:9|min:0',
-		'telefono' => 'required|numeric|digits:9|min:0|unique:App\Models\Contacto,telefono',
+		// 'telefono' => 'required|numeric|digits:9|min:0|unique:App\Models\Contacto,telefono',
 		'fecnac' => 'required',
 		'genero' => 'required',
 		'barrio_id' => 'required',
