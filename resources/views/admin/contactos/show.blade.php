@@ -122,10 +122,11 @@
             @empty
             @endforelse
         @endif
-
-        <div class="col-md-12">
-            @livewire('admin.contacto-seguimientos', ['contacto' => $contacto])
-        </div>
+    @can('admin.seguimientos.create')
+    <div class="col-md-12">
+        @livewire('admin.contacto-seguimientos', ['contacto' => $contacto])
+    </div>
+    @endcan
     </div>
 @stop
 
