@@ -3,14 +3,14 @@
 @section('title', 'Panel')
 
 @section('content_header')
-    <h1>PFJ Lima Norte 2022</h1>
+    <h1>PFJ Lima Norte 2024</h1>
 @stop
 
 @section('content')
-    <p>Bienvenido al Panel Administrativo del <strong>PFJ 2022</strong></p>
+    <p>Bienvenido al Panel Administrativo del <strong>{{ config('app.name') }}</strong></p>
     <div>
         <div class="contimg">
-            <img src="{{ config('app.url', 'http://localhost/pfj/public').'/img/portada.jpg' }}" alt="">
+            <img src="{{ config('app.url', 'http://localhost/pfj/public').'/img/banner2024.png' }}" alt="">
         </div>
     </div>
 @stop
