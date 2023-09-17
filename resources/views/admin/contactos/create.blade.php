@@ -14,9 +14,9 @@
 				@include('admin.contactos.partials.form')
 				
 				<br>
-				<div class="form-group">
+				<div class="form-group w-100">
 					
-				{!! Form::submit('Crear contacto y agregar comentario', ['class' => 'btn btn-primary']) !!}
+				{!! Form::submit('Crear contacto', ['class' => 'btn btn-primary w-100 btn-red40-pfj']) !!}
 				</div>
 			{!! Form::close() !!}
 		</div>
