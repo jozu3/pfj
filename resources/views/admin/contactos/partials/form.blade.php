@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-4">
-        {!! Form::label('nombres', 'Nombre') !!}
+        {!! Form::label('nombres', 'Nombre') !!}<span class="text-danger">*</span>
         {!! Form::text('nombres', null, [
             'class' => 'form-control',
             'placeholder' => 'Ingrese el nombre del nuevo contacto',
@@ -21,7 +21,7 @@
     </div>
     <div class="col-md-4 mt-2">
 
-        {!! Form::label('telefono', 'Teléfono') !!}
+        {!! Form::label('telefono', 'Teléfono') !!}<span class="text-danger">*</span>
         {!! Form::text('telefono', null, [
             'class' => 'form-control',
             'placeholder' => 'Ingrese el teléfono del nuevo contacto',
@@ -53,7 +53,7 @@
     </div>
     <div class="col-md-4 mt-2">
 
-        {!! Form::label('email', 'Correo electrónico') !!}
+        {!! Form::label('email', 'Correo electrónico') !!}<span class="text-danger">*</span>
         {!! Form::text('email', null, [
             'class' => 'form-control',
             'placeholder' => 'Ingrese el email del nuevo contacto',
@@ -73,7 +73,7 @@
         @enderror
     </div>
     <div class="col-md-4 mt-2">
-        {!! Form::label('genero', 'Género') !!}
+        {!! Form::label('genero', 'Género') !!}<span class="text-danger">*</span>
         {!! Form::select(
             'genero',
             [
@@ -98,13 +98,13 @@
         <div class="border-top my-4"></div>
     </div>
     <div class="col-md-4 mt-2"">
-        {!! Form::label('barrio_id', 'Estaca / Barrio', ['class' => '']) !!}
+        {!! Form::label('barrio_id', 'Estaca / Barrio', ['class' => '']) !!}<span class="text-danger">*</span>
         {!! Form::select('barrio_id', $estacasselect, null, [
             'class' => 'form-control',
             'placeholder' => 'Seleccione',
         ]) !!}
         @error('barrio_id')
-            <small class="text-red-600">{{ $message }}</small>
+            <small class="text-danger">{{ $message }}</small>
         @enderror
     </div>
     @if ( isset($contacto) && $contacto->barrio_id == 1)

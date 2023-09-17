@@ -38,7 +38,9 @@ class StoreContactoRequest extends FormRequest
         } else {
 
             $rules = [
-                //'nombres' => 'required',
+                'nombres' => 'required',
+                'email' => 'required',
+                'barrio_id' => 'required',
                 'telefono' => 'required|numeric',
                 'genero' => 'required',
                 'imgperfil' => 'image',
