@@ -268,7 +268,7 @@
                             {{ $contactos->links() }}
                         </div>
                         <div class="col-md-6 d-flex align-items-center">
-                            Viendo <b> {{ count($contactos) }}</b> de un total de <b> {{ $contactos->total() }}</b>
+                            Viendo <b> {{ ' '. count($contactos) . ' ' }}</b> de un total de <b> {{ ' '. $contactos->total() }}</b>
                         </div>
                     @endif
                 </div>

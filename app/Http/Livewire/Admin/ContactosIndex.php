@@ -69,17 +69,10 @@ class ContactosIndex extends Component
             }
         }
     }
-   
-	public function updatingSearch(){
-		$this->resetPage();
-	}
-
+    
     public function updatedEstacaId(){
         $this->barrio_id = 0;
 	}
-    
-    public function showbarrios(){
-    }
     
     public function mount(){
         $this->meses = [
@@ -160,8 +153,7 @@ class ContactosIndex extends Component
                             ->paginate();
         }
 
-        $this->page = 1;
-
+        $this->resetPage();
         return view('livewire.admin.contactos-index',compact('contactos', 'personales', 'estacas'));
     }
 }
