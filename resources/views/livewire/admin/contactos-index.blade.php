@@ -262,7 +262,16 @@
                 </table>
             </div>
             <div class="card-footer">
-                {{ $contactos->links() }}
+                <div class="form-row">
+                    @if ($contactos != [])
+                        <div class="col-md-6 d-flex align-items-center">
+                            {{ $contactos->links() }}
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center">
+                            Viendo <b> {{ count($contactos) }}</b> de un total de <b> {{ $contactos->total() }}</b>
+                        </div>
+                    @endif
+                </div>
             </div>
         @else
             <div class="card-body">

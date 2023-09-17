@@ -13,7 +13,7 @@ class ContactoSeguimientos extends Component
 
     public function render()
     {	
-    	$pfjs = Pfj::pluck( 'nombre', 'id');
+    	$pfjs = Pfj::where('estado', '1')->first()->pluck( 'nombre', 'id');
     	$contacto = $this->contacto;
 
 		if ($this->vermis_comentarios) {

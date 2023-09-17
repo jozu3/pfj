@@ -41,7 +41,7 @@
 								{!! Form::date('', date('Y-m-d'), ['class' => 'form-control', 'disabled' => 'disabled']) !!}
                             </td>
                             <td>
-                            	{!! Form::select('pfj_id', $pfjs, null, ['class' => 'form-control', 'placeholder' => 'Escoge un pfj']); !!}
+                            	{!! Form::select('pfj_id', $pfjs, null, ['class' => 'form-control', 'readonly' => 'readonly']); !!}
 							@error('pfj_id')
 								<small class="text-danger">{{ $message }}</small>
 							@enderror
@@ -57,10 +57,11 @@
                             </td>
                             <td>
 								{!! Form::select('estado', [
-										'2' => 'Contactado',
-										'3' => 'Probable',
-										'4' => 'Confirmado',
-									], null, ['class' => 'form-control', 'placeholder' => 'Escoge', 'style' => '']); !!}
+                                    '1' => 'Preinscrito',
+                                    '2' => 'Enviado al obispo',
+                                    '3' => 'Aprobado por el obispo',
+                                    '5' => 'Inscrito',
+                                ], $contacto->estado, ['class' => 'form-control', 'placeholder' => 'Escoge', 'style' => '']); !!}
 								@error('estado')
 									<small class="text-danger">{{ $message }}</small>
 								@enderror
