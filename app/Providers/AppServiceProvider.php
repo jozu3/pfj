@@ -58,12 +58,14 @@ class AppServiceProvider extends ServiceProvider
                 $missesiones = [];
                 if (auth()->user()->can(['admin.programas.viewList'])) {
                     foreach (Programa::all() as $programa) {
-                        array_push($missesiones, [
-                            'text'  => $programa->nombre,
-                            'url' =>    '/admin/programas/changesession/' . $programa->id,
-                            // 'route' => ['admin.users.changesesion', 'programa' => $inscripcione->programa],
-                            // 'icon'  => 'fas  fa-users',
-                        ]);
+                        if ($programa->pfj->estado == 1) {
+                            array_push($missesiones, [
+                                'text'  => $programa->nombre,
+                                'url' =>    '/admin/programas/changesession/' . $programa->id,
+                                // 'route' => ['admin.users.changesesion', 'programa' => $inscripcione->programa],
+                                // 'icon'  => 'fas  fa-users',
+                            ]);
+                        }
                     }
                 } else {
                     $inscripciones = auth()->user()->personale->inscripciones->where('estado', '1');
@@ -71,12 +73,14 @@ class AppServiceProvider extends ServiceProvider
                     if ($inscripciones->count() != 0) {
 
                         foreach ($inscripciones as $inscripcione) {
-                            array_push($missesiones, [
-                                'text'  => $inscripcione->programa->nombre,
-                                'url' =>    '/admin/programas/changesession/' . $inscripcione->programa->id,
-                                // 'route' => ['admin.users.changesesion', 'programa' => $inscripcione->programa],
-                                // 'icon'  => 'fas  fa-users',
-                            ]);
+                            if ($inscripcione->programa->pfj->estado == 1) {
+                                array_push($missesiones, [
+                                    'text'  => $inscripcione->programa->nombre,
+                                    'url' =>    '/admin/programas/changesession/' . $inscripcione->programa->id,
+                                    // 'route' => ['admin.users.changesesion', 'programa' => $inscripcione->programa],
+                                    // 'icon'  => 'fas  fa-users',
+                                ]);
+                            }
                         }
 
                         if (count($inscripciones) == 1) {
