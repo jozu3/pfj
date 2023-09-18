@@ -2,28 +2,27 @@
     <div class="card">
         <div class="card-header">
             <div class="form-row">
-                <div class="col">
+                <div class="col-md-3 mt-2">
                     <input wire:model="search" class="form-control" placeholder="Ingrese nombre para buscar">
                 </div>
                 @can('admin.contactos.allcontactos')
-                    <div class="col">
-                        <select name="" id="" class="form-control" wire:model="estaca_id">
-                            <option value="0">-- Todas las estacas --</option>
+                    <div class="col-md-3 mt-2" wire:ignore>
+                        <select name="" id="estaca_ids" class="form-control" name="estaca_ids[]" multiple="multiple">
+                            {{-- <option value="0">-- Todas las estacas --</option> --}}
                             @foreach ($estacas as $stk)
                                 <option value="{{ $stk->id }}">{{ $stk->nombre }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col">
-                        <select name="" id="" class="form-control" wire:model="barrio_id">
-                            <option value="0">-- Todos los barrios --</option>
-                            @foreach ($barrios as $ward)
-                                <option value="{{ $ward->id }}">{{ $ward->nombre }}</option>
-                            @endforeach
-                        </select>
+                    <div class="col-md-3 mt-2">
+                        {!! Form::select('barrio_id', $barrios, null, [
+                            'class' => 'form-control',
+                            'placeholder' => 'Todos los barrios',
+                            'wire:model' => 'barrio_id',
+                        ]) !!}
                     </div>
-                    <div class="col">
-                        <div class="input-group mb-3">
+                    <div class="col-md-3 mt-2">
+                        <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Preinscrito a partir de:</span>
                             </div>
@@ -32,53 +31,27 @@
                         </div>
                     </div>
                 @elsecan('admin.contactos.contactos_barrio')
-                    <div class="col">
+                    <div class="col-md-3 mt-2">
                         <input name="" id="" class="form-control"
                             value="{{ auth()->user()->personale->contacto->barrio->nombre }}" disabled>
                     </div>
                 @endcan
-                {{-- <div class="col">
+                <div class="col-md-3 mt-2" wire:ignore>
+                    <select name="" id="states" class="form-control" name="states[]" multiple="multiple">
+                        {{-- <option value="0">-- Todas las estacas --</option> --}}
+                        @foreach ($states as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                {{-- <div class="col-md-3 mt-2">
                     <a href="{{ route('admin.excel.exportExcelPersonal', [$programa_id, $familia, $estaca, $estado, $rol]) }}"
                         class="btn btn-success float-right mr-3">
                         <i class="far fa-file-excel"></i> Descargar
                     </a>
                 </div> --}}
             </div>
-            @can('admin.contactos.allcontactos')
-                <div class="form-check mt-1 d-inline">
-                    <input class="form-check-input" wire:model="nocontactado" type="checkbox" value="true" id="nocontac1">
-                    <label class="form-check-label" for="nocontac1">
-                        Preinscrito
-                    </label>
-                </div>
-            @endcan
-            <div class="form-check mt-1 d-inline">
-                <input class="form-check-input" wire:model="contactado" type="checkbox" value="true" id="contact1">
-                <label class="form-check-label" for="contact1">
-                    Enviado al obispo
-                </label>
-            </div>
 
-            <div class="form-check mt-1 d-inline">
-                <input class="form-check-input" wire:model="probable" type="checkbox" value="true"
-                    id="flexCheckDefault1">
-                <label class="form-check-label" for="flexCheckDefault1">
-                    Aprobado por el obispo
-                </label>
-            </div>
-            {{-- <div class="form-check mt-1 d-inline">
-                <input class="form-check-input" wire:model="confirmado" type="checkbox" value="true" id="flexCheckDefault2">
-                <label class="form-check-label" for="flexCheckDefault2">
-                    Confirmado
-                </label>
-            </div> --}}
-            <div class="form-check mt-1 d-inline">
-                <input class="form-check-input" wire:model="inscrito" type="checkbox" value="true"
-                    id="flexCheckDefault3">
-                <label class="form-check-label" for="flexCheckDefault3">
-                    Inscrito
-                </label>
-            </div>
         </div>
         @if ($contactos->count())
             <div class="card-body">
@@ -113,9 +86,8 @@
                             </th>
                             <th wire:click="" style="">Observaciones
                             </th>
-                            {{-- <th wire:click="" style="">Total de comentarios
-                        </th> --}}
                             @if (Auth::user()->can('admin.contactos.edit') || Auth::user()->can('admin.contactos.destroy'))
+                                <th class="text-center">Creado en:</th>
                                 <th class="text-center">Acciones</th>
                             @endif
                             @can('admin.contactos.aprobacionobispo')
@@ -214,6 +186,7 @@
                                     {{ count($contacto->seguimientos) }}
                                 </td>
                                 @if (Auth::user()->can('admin.contactos.edit') || Auth::user()->can('admin.contactos.destroy'))
+                                    <td>{{ date('d/m/Y H:i:s', strtotime($contacto->created_at)) }}</td>
                                     <td width="">
                                         <div class="d-flex" style="align-items: center; ">
                                             @can('admin.contactos.edit')
@@ -279,4 +252,32 @@
             </div>
         @endif
     </div>
+    <script>
+        document.addEventListener('livewire:load', function(){
+            $('#estaca_ids').select2({
+                placeholder: "Todas las estacas",
+                allowClear: true
+            });
+            $('#states').select2({
+                placeholder: "Todas los estados",
+                allowClear: true
+            });
+
+            $('#estaca_ids').on('change', function(){
+                var ess = (JSON.stringify($('#estaca_ids').val()));
+                // ess = JSON.stringify(ess);
+                console.log( $('#estaca_ids').val())
+                console.log( ess)
+                @this.set('estaca_id', ess);
+            });
+
+            $('#states').on('change', function(){
+                var ess = (JSON.stringify($('#states').val()));
+                // ess = JSON.stringify(ess);
+                console.log( $('#states').val())
+                console.log( ess)
+                @this.set('estados_selecteds', ess);
+            });
+        });
+    </script>
 </div>

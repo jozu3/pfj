@@ -17,12 +17,16 @@ class HomeController extends Controller
         
         
         if ($inscripciones->count() >= 1) {
+            $programa = null;
             foreach ($inscripciones as $inscripcione) {
                 if ($inscripcione->programa->pfj->estado == 1) {
                     $programa = $inscripcione->programa;
                 }
             }
-            return redirect()->route('st.programas.show', $programa);
+
+            if($programa){
+                return redirect()->route('st.programas.show', $programa);
+            }
         }
 
         return view('student.index', compact('inscripciones'));

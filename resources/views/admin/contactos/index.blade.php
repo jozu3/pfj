@@ -2,6 +2,7 @@
 
 @section('title', 'Contactos')
 @section('plugins.Sweetalert2', true)
+@section('plugins.Select2', true)
 
 @section('content_header')
 @can('admin.contactos.create')
@@ -63,6 +64,14 @@
             top: 250px;
             right: 5px;
         }
+        .select2.select2-container{
+            width:100%;
+        }
+        .select2.select2-container .select2-selection, .select2-selection.select2-selection--multiple{
+            height: auto;
+            /* padding: 0.375rem 0.75rem; */
+        }
+        
     </style>
 @stop
 

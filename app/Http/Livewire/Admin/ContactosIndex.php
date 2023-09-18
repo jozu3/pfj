@@ -17,16 +17,13 @@ class ContactosIndex extends Component
 
     public $meses;
     public $search;
-    public $estaca_id = 0;
+    public $estaca_id;
     public $barrio_id = 0;
     public $barrios;
+    public $states;
     public $created_at;
+    public $estados_selecteds;
 
-    public $nocontactado = true;
-    public $contactado = true;
-    public $probable = true;
-	public $confirmado = true;
-	public $inscrito = true;
 	public $sortBy = 'newassign';
     public $sortDirection = 'desc';
     public $page = 1;
@@ -97,26 +94,40 @@ class ContactosIndex extends Component
     {
         $personales = Personale::all();
         $estacas = Estaca::all();
-        $vendedor = null;
         $that = $this;
-        $states = [];
-        $this->nocontactado == true ? array_push($states, "1") : ''; 
-        $this->contactado == true ? array_push($states, "2") : ''; 
-        $this->probable == true ? array_push($states, "3") : '';
-        $this->confirmado == true ? array_push($states, "4") : '';
-        $this->inscrito == true ? array_push($states, "5") : '';
 
+        $_estacas = [];
+        $_estacas = json_decode($this->estaca_id);
+        
         $this->barrios = [];
-        if($this->estaca_id > 0){
-            $this->barrios = Barrio::where('estaca_id', $this->estaca_id)->get();            
+        if( is_array($_estacas) && count($_estacas)){
+            $estacasselect = [];
+            $estacas_selecteds = Estaca::whereIn('id', $_estacas)->get();
+            
+            foreach ($estacas_selecteds as $stk_selected) {
+                $estacasselect[$stk_selected->nombre] = Barrio::where('estaca_id', $stk_selected->id)->pluck('nombre', 'id');
+            }
+            $this->barrios = $estacasselect;
+            
         }
+        $_estados_selected = [];
+        $_estados_selected = json_decode($this->estados_selecteds);
 
         if (auth()->user()->can(['admin.contactos.allcontactos'])) {
-            $contactos= Contacto::whereIn('estado', $states)
-                    ->where(function($query) use ($that) {
-                        if ($that->estaca_id > 0) {
-                            $query->whereHas('barrio', function($que) use ($that) {
-                                $que->where('estaca_id', $that->estaca_id);
+
+            $this->states =  [
+                '1' => 'Preinscrito',
+                '2' => 'Enviado al obispo',
+                '3' => 'Aprobado por el obispo',
+                // '4' => 'Confirmado',
+                '5' => 'Inscrito',
+            ];
+
+            $contactos= Contacto::whereIn('estado', is_array($_estados_selected) && count($_estados_selected)? $_estados_selected : array_keys($this->states))
+                    ->where(function($query) use ($that,$_estacas) {
+                        if (is_array($_estacas) && count($_estacas)) {
+                            $query->whereHas('barrio', function($que) use ($that,$_estacas) {
+                                $que->whereIn('estaca_id', $_estacas);
                             })->where(function($query) use ($that) {
                                 if ($that->barrio_id > 0) {
                                     $query->where('barrio_id', $that->barrio_id);
@@ -133,8 +144,17 @@ class ContactosIndex extends Component
                     ->where('created_at', '>=', $this->created_at)
                     ->orderBy($this->sortBy, $this->sortDirection)
                     ->paginate();
+
         } else if (auth()->user()->can(['admin.contactos.contactos_barrio'])) {//obispo
-            $contactos = Contacto::whereIn('estado', [2,3,5])->whereIn('estado', $states)->where('barrio_id', auth()->user()->personale->contacto->barrio_id ) 
+            $this->states =  [
+                // '1' => 'Preinscrito',
+                '2' => 'Enviado al obispo',
+                '3' => 'Aprobado por el obispo',
+                // '4' => 'Confirmado',
+                '5' => 'Inscrito',
+            ];
+            $contactos = Contacto::whereIn('estado', [2,3,5])->whereIn('estado',  is_array($_estados_selected) && count($_estados_selected)? $_estados_selected : array_keys($this->states))
+                            ->where('barrio_id', auth()->user()->personale->contacto->barrio_id ) 
                             ->where(function($query) use ($that) {
                                 $query->orWhere('nombres', 'like','%'.$that->search.'%')
                                         ->orWhere('apellidos', 'like','%'.$that->search.'%')
