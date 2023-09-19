@@ -23,6 +23,7 @@ class ContactosIndex extends Component
     public $states;
     public $created_at;
     public $estados_selecteds;
+    public $solo_obispos;
 
 	public $sortBy = 'newassign';
     public $sortDirection = 'desc';

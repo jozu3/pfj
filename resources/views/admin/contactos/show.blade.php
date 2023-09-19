@@ -91,10 +91,12 @@
                 </div>
             </div>
             @forelse ($contacto->personale->inscripciones as $inscripcione)
+                @if($inscripcione->programa->estado < 2 )
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Información de la inscripción a: {{ $inscripcione->programa->nombre }}</h3>
+                        	<a href="{{ route('admin.inscripciones.notificacion', $inscripcione) }}" class="btn btn-success btn-sm float-right mr-2"><i class="fas fa-envelope"></i> Enviar Notificación</a>
+                            <h3>Información de la inscripción a: {{' '. $inscripcione->programa->pfj->nombre. ' - '. $inscripcione->programa->nombre }}</h3>
                         </div>
                         <div class="card-body">
                             {!! Form::model($inscripcione, ['route' => ['admin.inscripciones.update', $inscripcione], 'method' => 'put']) !!}
@@ -118,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-
+                @endif
             @empty
             @endforelse
         @endif

@@ -60,6 +60,10 @@ class InscripcioneNotification extends Notification
                 break;
         }
 
+        $line_password = 'Contraseña: password';
+        if($this->inscripcione->personale->user->created_at != $this->inscripcione->personale->user->updated_at){
+            $line_password = '';
+        }
 
         return (new MailMessage)
             ->from('no-reply@pfjperu.com', config('app.name'))
@@ -69,8 +73,8 @@ class InscripcioneNotification extends Notification
             ->line('Debes ingresar a '. config('app.url'))
             ->line('Rol: '. $this->inscripcione->role->name)
             ->line('Usuario: '.$this->inscripcione->personale->user->email)
-            ->line('Contraseña: password')
-            ->line('Te sugerimos que cambies tu contraseña en las próximas 24 horas, ingresando al menú perfil desde tu portal MiPFJ.')
+            ->line($line_password)
+            ->line($line_password!= ''?'Te sugerimos que cambies tu contraseña en las próximas 24 horas, ingresando al menú perfil desde tu portal MiPFJ.': '')
             ->action('Portal MiPFJ ', $url_action)
             ->line('Bienvenido a una nueva experiencia.')
             ->salutation($this->inscripcione->programa->pfj->lema);

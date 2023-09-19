@@ -4,7 +4,7 @@
 
 @section('content_header')
 @can('admin.contactos.edit')
-<a href="{{ route('admin.contactos.edit', $inscripcione->personale->contacto) }}" class="btn btn-success btn-sm float-right">Editar Información</a>
+<a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}" class="btn btn-success btn-sm float-right">Editar Información</a>
 @endcan
 	<a href="{{ route('admin.inscripciones.notificacion', $inscripcione) }}" class="btn btn-success btn-sm float-right mr-2"><i class="fas fa-envelope"></i> Enviar Notificación</a>
 	{{-- <a href="{{ route('admin.print', 'recibo-inscripcione?idinscripcione='.$inscripcione->id) }}" class="btn btn-danger btn-sm float-right mr-2" target="_blank"><i class="fas fa-file-pdf"></i> Imprimir recibo</a> --}}

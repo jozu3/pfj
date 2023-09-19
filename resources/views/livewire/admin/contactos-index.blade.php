@@ -30,6 +30,12 @@
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
                     </div>
+                    <div class="col-md-3 mt-2">
+                        <div class="">
+                            <input wire:model="solo_obispos" type="checkbox" class="" name="soloobispos" id="soloobispos">
+                                <label for="soloobispos">Solo obispos</label>
+                        </div>
+                    </div>
                 @elsecan('admin.contactos.contactos_barrio')
                     <div class="col-md-3 mt-2">
                         <input name="" id="" class="form-control"
