@@ -73,7 +73,7 @@ class InscripcioneNotification extends Notification
             ->line('Debes ingresar a '. config('app.url'))
             ->line('Rol: '. $this->inscripcione->role->name)
             ->line('Usuario: '.$this->inscripcione->personale->user->email)
-            ->line($line_password)
+            ->line($line_password == '' ? 'Si olvidaste tu contraseña ingresa al link y pon olvidé mi contraseña.': $line_password)
             ->line($line_password!= ''?'Te sugerimos que cambies tu contraseña en las próximas 24 horas, ingresando al menú perfil desde tu portal MiPFJ.': '')
             ->action('Portal MiPFJ ', $url_action)
             ->line('Bienvenido a una nueva experiencia.')
