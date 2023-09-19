@@ -13,7 +13,10 @@ use App\Observers\ContactoObserver;
 use App\Observers\InscripcioneObserver;
 use App\Observers\SeguimientoObserver;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Support\Facades\Auth;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
+
+use function PHPUnit\Framework\isNull;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -139,11 +142,11 @@ class AppServiceProvider extends ServiceProvider
 
                     $menu_funciones = [
                         'text' => 'Funciones',
-                        'url' => 'admin/programas/'.session('programa_activo').'/funciones',
+                        'url' => 'admin/programas/' . session('programa_activo') . '/funciones',
                         'icon' => 'fas fa-tasks',
                         'can' => 'admin.funciones.index'
                     ];
-                    
+
                     $menu_dashboard = [
                         'text' => 'Dashboard',
                         'url' => 'admin/programas/' . session('programa_activo') . '/dashboard',
@@ -192,8 +195,8 @@ class AppServiceProvider extends ServiceProvider
                         'can'  =>   'admin.programas.edit',
                         'key' => 'dashboard'
                     ];
-                    
-                    
+
+
                     // $event->menu->addAfter('programa', $menu_funciones);
                     // $event->menu->addAfter('programa', $menu_tareas);
                     $event->menu->addAfter('participantes', $menu_companias);
@@ -208,7 +211,6 @@ class AppServiceProvider extends ServiceProvider
                     $event->menu->addBefore('programa', $header);
                     $event->menu->addAfter('dashboard', $menu_dashboard);
                     $event->menu->addAfter('dashboard', $menu_dashboard_bienvenida);
-                    
                 }
 
                 $menu_change_sesion = [
