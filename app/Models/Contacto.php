@@ -30,6 +30,6 @@ class Contacto extends Model
     }
     
     public function barrio(){
-    	return $this->belongsTo(Barrio::class);
+    	return $this->belongsTo(Barrio::class)->select('nombre', 'estaca_id');
     }
 }

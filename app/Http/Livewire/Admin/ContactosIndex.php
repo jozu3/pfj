@@ -124,8 +124,8 @@ class ContactosIndex extends Component
                 '5' => 'Inscrito',
             ];
 
-            $contactos= Contacto::join('barrios', 'contactos.barrio_id', '=', 'barrios.id')
-                    ->whereIn('estado', is_array($_estados_selected) && count($_estados_selected)? $_estados_selected : array_keys($this->states))
+            $contactos= Contacto::
+                    whereIn('estado', is_array($_estados_selected) && count($_estados_selected)? $_estados_selected : array_keys($this->states))
                     ->where(function($query) use ($that,$_estacas) {
                         if (is_array($_estacas) && count($_estacas)) {
                             $query->whereHas('barrio', function($que) use ($that,$_estacas) {

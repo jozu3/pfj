@@ -112,6 +112,7 @@
                                 '4' => 'Confirmado',
                                 '5' => 'Inscrito',
                             ];
+                            // dd($contactos);
                         @endphp
                         @foreach ($contactos as $contacto)
                             <tr>
