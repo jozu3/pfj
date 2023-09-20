@@ -22,6 +22,8 @@ class PermisosSeeder extends Seeder
         $role4 = Role::find(4);
         $role5 = Role::find(5);
         $role6 = Role::find(6);
+        $role7 = Role::find(7);
+        $role8 = Role::find(8);
 
         //Permisos materiales
         Permission::create(['name' => 'admin.materiales.index', 'description' => 'Ver listado de materiales'])->syncRoles([$role1, $role2, $role3, $role4]);

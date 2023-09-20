@@ -23,8 +23,10 @@ class RoleSeeder extends Seeder
         $role4 = Role::create(['name' => 'Coordinador', 'slug' => 'coordinador']);
         $role5 = Role::create(['name' => 'Coordinador auxiliar', 'slug' => 'cordauxiliar']);
         $role6 = Role::create(['name' => 'Consejero', 'slug' => 'consejero']);        
+        $role7 = Role::create(['name' => 'Obispo', 'slug' => 'obispo']);        
+        $role8 = Role::create(['name' => 'Matrimonio de apoyo', 'slug' => 'matrimonio_apoyo']);        
 
-        Permission::create(['name' => 'admin.home', 'description' => 'Ver el panel administratico'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
+        Permission::create(['name' => 'admin.home', 'description' => 'Ver el panel administratico'])->syncRoles([$role1, $role2, $role3, $role4, $role5, $role6, $role7]);
 
         //Permisos USUARIO
         Permission::create(['name' => 'admin.users.index', 'description' => 'Ver listado de usuarios'])->syncRoles([$role1]);
@@ -38,13 +40,17 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.roles.destroy', 'description' => 'Eliminar roles'])->syncRoles([$role1]);
         
         //Permisos Contacto
-        Permission::create(['name' => 'admin.contactos.index', 'description' => 'Ver listado de contactos'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.contactos.index', 'description' => 'Ver listado de contactos'])->syncRoles([$role1, $role2, $role3, $role4, $role7]);
         Permission::create(['name' => 'admin.contactos.create', 'description' => 'Crear contactos'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'admin.contactos.edit', 'description' => 'Editar contactos'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'admin.contactos.editAll', 'description' => 'Editar cualquier contacto'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'admin.contactos.destroy', 'description' => 'Eliminar Contactos'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'admin.contactos.destroyAll', 'description' => 'Eliminar cualquier contacto'])->syncRoles([$role1, $role2]);
-
+        Permission::create(['name' => 'admin.contactos.contactos_barrio', 'description' => 'Ver contactos de su barrio'])->syncRoles([$role1, $role2, $role7]);
+        Permission::create(['name' => 'admin.contactos.allcontactos', 'description' => 'Ver todos los contactos'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'admin.contactos.aprobacionobispo', 'description' => 'Aprobación por el obispo de un contacto'])->syncRoles([$role1, $role2, $role7]);
+        Permission::create(['name' => 'admin.contactos.aprobacionpfj', 'description' => 'Aprobar contacto y enviar al obispo'])->syncRoles([$role1, $role2]);
+        
         //Permisos Seguimiento
         Permission::create(['name' => 'admin.seguimientos.index', 'description' => 'Ver listado de comentarios'])->syncRoles([$role1, $role2, $role3]);
         Permission::create(['name' => 'admin.seguimientos.create', 'description' => 'Crear comentarios'])->syncRoles([$role1, $role2, $role3]);

@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'PFJ')
+@section('plugins.Sweetalert2', true)
 
 @section('content_header')
     @can('admin.inscripciones.create')

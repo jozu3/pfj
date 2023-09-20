@@ -31,10 +31,12 @@
                         </div>
                     </div>
                     {{-- <div class="col-md-3 mt-2">
-                        <div class="">
-                            <input wire:model="solo_obispos" type="checkbox" class="" name="soloobispos" id="soloobispos">
-                                <label for="soloobispos">Solo obispos</label>
-                        </div>
+                        <select name="" id="" class="form-control" wire:model="rol">
+                            <option value="0">-- Asignación --</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
                     </div> --}}
                 @elsecan('admin.contactos.contactos_barrio')
                     <div class="col-md-3 mt-2">
@@ -77,7 +79,7 @@
                             <th wire:click="sortBy('telefono')" style="cursor:pointer">Telefono
                                 @include('partials._sort-icon', ['field' => 'telefono'])
                             </th>
-                            <th wire:click="sortBy('estaca_id')" style="cursor:pointer">Estaca
+                            <th wire:click="sortBy('barrios.estaca_id')" style="cursor:pointer">Estaca
                                 @include('partials._sort-icon', ['field' => 'estaca_id'])
                             </th>
                             <th wire:click="sortBy('barrio_id')" style="cursor:pointer">Barrio
