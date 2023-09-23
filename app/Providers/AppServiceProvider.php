@@ -13,6 +13,8 @@ use App\Observers\ContactoObserver;
 use App\Observers\InscripcioneObserver;
 use App\Observers\SeguimientoObserver;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 
@@ -41,6 +43,14 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.env') === 'production') {
             \URL::forceScheme('https');
         }
+
+        Collection::macro('paginate', function ($perPage, $total = null, $page = null, $pageName = 'page') {
+            $page = $page ?: LengthAwarePaginator::resolveCurrentPage($pageName);
+            return new LengthAwarePaginator($this->forPage($page, $perPage), $total ?: $this->count(), $perPage, $page, [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+                'pageName' => $pageName,
+            ]);
+        });
 
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
 

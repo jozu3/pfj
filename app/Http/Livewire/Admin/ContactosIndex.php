@@ -28,6 +28,7 @@ class ContactosIndex extends Component
 	public $sortBy = 'newassign';
     public $sortDirection = 'desc';
     public $page = 1;
+    public $cant_pages = 15;
     public $readyToLoad = false;
 
     protected $listeners = ['changeEstado' => 'changeEstado'];
@@ -143,9 +144,44 @@ class ContactosIndex extends Component
                                 ->orWhere('telefono', 'like','%'.$that->search.'%');
                                 // ->orWhere('email', 'like','%'.$that->search.'%');
                     })
-                    ->where('contactos.created_at', '>=', $this->created_at)
-                    ->orderBy($this->sortBy, $this->sortDirection)
-                    ->paginate();
+                    ->where('contactos.created_at', '>=', $this->created_at);
+                    if (!str_contains($this->sortBy,'.')) {
+                        $contactos = $contactos->orderBy($this->sortBy, $this->sortDirection);
+                    } else {
+                    switch ($this->sortDirection) {
+                        case 'asc':
+                            $contactos = $contactos->get()->sortBy(function($item) use ($that) {
+                                switch ($that->sortBy) {
+                                    case 'barrio.estaca.nombre':
+                                    return $item->barrio->estaca->nombre;
+                                    break;
+                                    case 'barrio.nombre':
+                                    return $item->barrio->nombre;
+                                    break;
+                                    default:
+                                        break;
+                                }
+                            }); 
+                        break;
+                        case 'desc':
+                            $contactos = $contactos->get()->sortByDesc(function($item) use ($that) {
+                                switch ($that->sortBy) {
+                                    case 'barrio.estaca.nombre':
+                                    return $item->barrio->estaca->nombre;
+                                    break;
+                                    case 'barrio.nombre':
+                                    return $item->barrio->nombre;
+                                    break;
+                                    default:
+                                        break;
+                                }
+                            });
+                            break;                                    
+                        default:
+                            $contactos = $contactos;
+                            break;
+                    }}
+                    $contactos = $contactos->paginate($this->cant_pages);
 
         } else if (auth()->user()->can(['admin.contactos.contactos_barrio'])) {//obispo
             $this->states =  [
@@ -170,9 +206,11 @@ class ContactosIndex extends Component
                                     });    
                                 });
                             })
-                            ->where('created_at', '>=', $this->created_at)
-                            ->orderBy($this->sortBy, $this->sortDirection)
-                            ->paginate();
+                            ->where('created_at', '>=', $this->created_at);
+                            if (!str_contains($this->sortBy,'.')) {
+                                $contactos = $contactos->orderBy($this->sortBy, $this->sortDirection);
+                            }
+                            $contactos = $contactos->paginate($this->cant_pages);
         }
 
         $this->resetPage();

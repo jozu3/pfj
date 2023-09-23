@@ -30,14 +30,16 @@
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
                     </div>
-                    {{-- <div class="col-md-3 mt-2">
-                        <select name="" id="" class="form-control" wire:model="rol">
-                            <option value="0">-- Asignación --</option>
-                            @foreach ($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->name }}</option>
-                            @endforeach
+                    <div class="col-md-3 mt-2">
+                        <select name="" id="" class="form-control" wire:model="cant_pages">
+                            {{-- <option value="0">Todos(demora en cargar)</option> --}}
+                            <option value="3">Paginas: 3</option>
+                            <option value="15">Paginas: 15</option>
+                            <option value="30">Paginas: 30</option>
+                            <option value="50">Paginas: 50</option>
+                            <option value="100">Paginas: 100</option>
                         </select>
-                    </div> --}}
+                    </div>
                 @elsecan('admin.contactos.contactos_barrio')
                     <div class="col-md-3 mt-2">
                         <input name="" id="" class="form-control"
@@ -79,10 +81,10 @@
                             <th wire:click="sortBy('telefono')" style="cursor:pointer">Telefono
                                 @include('partials._sort-icon', ['field' => 'telefono'])
                             </th>
-                            <th wire:click="sortBy('barrios.estaca_id')" style="cursor:pointer">Estaca
+                            <th wire:click="sortBy('barrio.estaca.nombre')" style="cursor:pointer">Estaca
                                 @include('partials._sort-icon', ['field' => 'estaca_id'])
                             </th>
-                            <th wire:click="sortBy('barrio_id')" style="cursor:pointer">Barrio
+                            <th wire:click="sortBy('barrio.nombre')" style="cursor:pointer">Barrio
                                 @include('partials._sort-icon', ['field' => 'barrio_id'])
                             </th>
                             <th wire:click="" style="">Edad
@@ -112,9 +114,9 @@
                                 '4' => 'Confirmado',
                                 '5' => 'Inscrito',
                             ];
-                            // dd($contactos);
+                            $contactos_sorted = $contactos;
                         @endphp
-                        @foreach ($contactos as $contacto)
+                        @foreach ($contactos_sorted as $contacto)
                             <tr>
                                 <td>{{ $contacto->id }}</td>
                                 <td>{{ $contacto->nombres }}
@@ -250,7 +252,7 @@
                             {{ $contactos->links() }}
                         </div>
                         <div class="col-md-6 d-flex align-items-center">
-                            Viendo <b> {{ ' '. count($contactos) . ' ' }}</b> de un total de <b> {{ ' '. $contactos->total() }}</b>
+                            {!! 'Viendo  <b>'.$contactos->count().'</b> de un total de <b>'.$contactos->total().'</b>'!!}
                         </div>
                     @endif
                 </div>

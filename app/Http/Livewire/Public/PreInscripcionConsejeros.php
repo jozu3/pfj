@@ -13,6 +13,7 @@ class PreInscripcionConsejeros extends Component
 {
     use WithFileUploads;
 
+    public $requisitos = false;
     public $nombres;
     public $apellidos;
     public $email;
