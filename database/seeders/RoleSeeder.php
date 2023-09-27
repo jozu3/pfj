@@ -80,7 +80,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.programas.planning', 'description' => 'Ver el menu planificador'])->syncRoles([$role1, $role2, $role3, $role4, ]);
         Permission::create(['name' => 'admin.programas.participantes', 'description' => 'Ver el menu participante del programa'])->syncRoles([$role1, $role2, $role3, $role4, ]);
         Permission::create(['name' => 'admin.programas.companias', 'description' => 'Ver las compañias del programa'])->syncRoles([$role1, $role2, $role3, $role4]);
-        
+        Permission::create(['name' => 'admin.programas.lideres-locales', 'description' => 'Ver los líderes locales de la sesión'])->syncRoles([$role1, $role2, $role3, $role4]);
         
         //Permisos grupo
         Permission::create(['name' => 'admin.grupos.index', 'description' => 'Ver listado de grupos'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
