@@ -123,6 +123,10 @@ class User extends Authenticatable
     public function personale(){
         return $this->hasOne(Personale::class);
     }
+    public function fullname(){
+        $contacto = $this->personale->contacto;
+        return $contacto->nombres.' '.$contacto->apellidos;
+    }
 
 
 }

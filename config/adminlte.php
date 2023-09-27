@@ -326,7 +326,7 @@ return [
         //     'can'  =>   'admin.seguimientos.index'
         // ],
         [
-            'header' => 'Mis sesiones',
+            'header' => 'Mis sesión',
             'can'  =>   'admin.programas.misprogramas',
             'key' => 'programa',
         ],

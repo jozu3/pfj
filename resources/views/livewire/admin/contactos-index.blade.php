@@ -33,11 +33,11 @@
                     <div class="col-md-3 mt-2">
                         <select name="" id="" class="form-control" wire:model="cant_pages">
                             {{-- <option value="0">Todos(demora en cargar)</option> --}}
-                            <option value="3">Paginas: 3</option>
-                            <option value="15">Paginas: 15</option>
-                            <option value="30">Paginas: 30</option>
-                            <option value="50">Paginas: 50</option>
-                            <option value="100">Paginas: 100</option>
+                            <option value="3">3 por página</option>
+                            <option value="15">15 por página</option>
+                            <option value="30">30 por página</option>
+                            <option value="50">50 por página</option>
+                            <option value="100">100 por página</option>
                         </select>
                     </div>
                 @elsecan('admin.contactos.contactos_barrio')

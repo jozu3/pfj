@@ -170,5 +170,11 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.habitaciones.edit', 'description' => 'Editar habitaciones'])->syncRoles([$role1]);
         Permission::create(['name' => 'admin.habitaciones.destroy', 'description' => 'Eliminar habitaciones'])->syncRoles([$role1]);
 
+        // permisos comentarios
+        Permission::create(['name' => 'admin.comentarios.index', 'description' => 'Ver listado de comentarios'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.comentarios.create', 'description' => 'Crear comentarios'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.comentarios.edit', 'description' => 'Editar comentarios'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.comentarios.destroy', 'description' => 'Eliminar comentarios'])->syncRoles([$role1, $role2, $role3, $role4]);
+        
     }
 }

@@ -114,6 +114,13 @@ class AppServiceProvider extends ServiceProvider
                         'can'  =>   'admin.programas.edit'
                     ];
 
+                    $menu_lideres_locales = [
+                        'text' => 'Líderes locales',
+                        'url' => '/admin/programas/' . session('programa_activo') . '/lideres-locales',
+                        'icon' => 'fas fa-cogs',
+                        'can'  =>   'admin.programas.lideres-locales'
+                    ];
+
                     $menu_organigrama = [
                         'text' => 'Organigrama',
                         'url' => '/admin/programas/' . session('programa_activo') . '/asignar',
@@ -211,13 +218,13 @@ class AppServiceProvider extends ServiceProvider
                     // $event->menu->addAfter('programa', $menu_tareas);
                     $event->menu->addAfter('participantes', $menu_companias);
                     $event->menu->addAfter('participantes', $menu_participantes);
+                    $event->menu->addAfter('programa', $menu_habitaciones);
                     $event->menu->addAfter('programa', $menu_asistencias);
                     $event->menu->addAfter('programa', $menu_anuncios);
                     $event->menu->addAfter('programa', $menu_organigrama);
                     $event->menu->addAfter('programa', $menu_personales);
                     $event->menu->addAfter('programa', $menu_planificador);
                     $event->menu->addAfter('programa', $menu_configuracion);
-                    $event->menu->addAfter('programa', $menu_habitaciones);
                     $event->menu->addBefore('programa', $header);
                     $event->menu->addAfter('dashboard', $menu_dashboard);
                     $event->menu->addAfter('dashboard', $menu_dashboard_bienvenida);

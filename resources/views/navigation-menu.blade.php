@@ -18,7 +18,7 @@
                         </x-jet-nav-link>
                     @endcan
                     @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count() ||
-                        auth()->user()->can('admin.programas.viewList'))
+                            auth()->user()->can('admin.programas.viewList'))
 
                         <div class="inline-flex items-center px-1 pt-1">
                             <x-jet-dropdown>
@@ -39,30 +39,32 @@
                                 <x-slot name="content">
                                     <!-- User Management -->
                                     @foreach (Auth::user()->personale->inscripciones as $inscripcione)
-                                        <div class="p-2"> {{ $inscripcione->programa->nombre }}</div>
-                                        @can('admin.programas.grupos')
-                                            {{-- Si puede 'Ver los grupos de su sesión' --}}
-                                            @foreach ($inscripcione->programa->grupos as $grupo)
-                                                <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                                    {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
-                                                </x-jet-dropdown-link>
-                                            @endforeach
-                                        @else
-                                            @if ($inscripcione->programa->mostrarGrupos == 1)
-                                                @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
-                                                    @php
-                                                        $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
-                                                    @endphp
+                                        @if ($inscripcione->programa->pfj->estado == 1)
+                                            <div class="p-2"> {{ $inscripcione->programa->nombre }}</div>
+                                            @can('admin.programas.grupos')
+                                                {{-- Si puede 'Ver los grupos de su sesión' --}}
+                                                @foreach ($inscripcione->programa->grupos as $grupo)
                                                     <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
                                                         {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
                                                     </x-jet-dropdown-link>
-                                                @endif
+                                                @endforeach
                                             @else
-                                            <div class="p-2">
-                                                {{'Se están realizando cambios'}}
-                                            </div>
-                                            @endif
-                                        @endcan
+                                                @if ($inscripcione->programa->mostrarGrupos == 1)
+                                                    @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
+                                                        @php
+                                                            $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
+                                                        @endphp
+                                                        <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                                            {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
+                                                        </x-jet-dropdown-link>
+                                                    @endif
+                                                @else
+                                                    <div class="p-2">
+                                                        {{ 'Se están realizando cambios' }}
+                                                    </div>
+                                                @endif
+                                            @endcan
+                                        @endif
                                     @endforeach
                                 </x-slot>
                             </x-jet-dropdown>
@@ -70,7 +72,6 @@
                         <div class="inline-flex items-center px-1 pt-1">
                             <x-jet-dropdown>
                                 <x-slot name="trigger">
-
                                     <button
                                         class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                         <div>Manual PFJ</div>
@@ -99,36 +100,36 @@
 
                             </x-jet-dropdown>
                         </div>
-                        <div class="inline-flex items-center px-1 pt-1">
-                            <x-jet-dropdown align="right" width="48">
-                                <x-slot name="trigger">
-
-                                    <button type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                        <div>
-                                            {{ 'Inscripciones' }}
-
-                                        </div>
-
-                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                </x-slot>
-
-                                <x-slot name="content">
-                                    @foreach (Auth::user()->personale->inscripciones as $inscripcione)
-                                        <x-jet-dropdown-link
-                                            href="{{ route('st.programas.inscripciones', $inscripcione->programa) }}">
-                                            {{ $inscripcione->programa->nombre }}
-                                        </x-jet-dropdown-link>
-                                    @endforeach
-                                </x-slot>
-                            </x-jet-dropdown>
-                        </div>
+                        @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->first()->programa->estado == 1)
+                            <div class="inline-flex items-center px-1 pt-1">
+                                <x-jet-dropdown align="right" width="48">
+                                    <x-slot name="trigger">
+                                        <button type="button"
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                            <div>
+                                                {{ 'Inscripciones' }}
+                                            </div>
+                                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </x-slot>
+                                    <x-slot name="content">
+                                        @foreach (Auth::user()->personale->inscripciones as $inscripcione)
+                                            @if ($inscripcione->programa->pfj->estado == 1)
+                                                <x-jet-dropdown-link
+                                                    href="{{ route('st.programas.inscripciones', $inscripcione->programa) }}">
+                                                    {{ $inscripcione->programa->nombre }}
+                                                </x-jet-dropdown-link>
+                                            @endif
+                                        @endforeach
+                                    </x-slot>
+                                </x-jet-dropdown>
+                            </div>
+                        @endif
 
                         @can('admin.home')
                             <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
@@ -149,7 +150,8 @@
                             }
                         @endphp
                         @if ($hasCompania)
-                            <x-jet-nav-link href="{{ route('st.participante.compania', $companerismo) }}" :active="request()->routeIs('st.participante.compania')">
+                            <x-jet-nav-link href="{{ route('st.participante.compania', $companerismo) }}"
+                                :active="request()->routeIs('st.participante.compania')">
                                 {{ __('Mi compañia') }}
                             </x-jet-nav-link>
                         @endif
@@ -157,11 +159,9 @@
                             <div class="inline-flex items-center px-1 pt-1">
                                 <x-jet-dropdown>
                                     <x-slot name="trigger">
-
                                         <button
                                             class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                             <div>Ver como:</div>
-
                                             <div class="ml-1">
                                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 20 20">
@@ -184,9 +184,7 @@
                                             </x-jet-dropdown-link>
                                         @empty
                                         @endforelse --}}
-
                                     </x-slot>
-
                                 </x-jet-dropdown>
                             </div>
                         @endcan
@@ -339,25 +337,25 @@
                 </x-jet-responsive-nav-link>
             @endcan
             @php
-            $hasCompania = false;
-            $countCompanias = 0;
-            $companerismo = null;
-            foreach (auth()->user()->personale->inscripciones as $inscripcione) {
-                if (isset($inscripcione->inscripcioneCompanerismo)) {
-                    $hasCompania = true;
-                    $countCompanias++;
-                    $companerismo = $inscripcione->inscripcioneCompanerismo->companerismo;
-                    // break;
+                $hasCompania = false;
+                $countCompanias = 0;
+                $companerismo = null;
+                foreach (auth()->user()->personale->inscripciones as $inscripcione) {
+                    if (isset($inscripcione->inscripcioneCompanerismo)) {
+                        $hasCompania = true;
+                        $countCompanias++;
+                        $companerismo = $inscripcione->inscripcioneCompanerismo->companerismo;
+                        // break;
+                    }
                 }
-            }
-        @endphp
+            @endphp
             @if ($hasCompania)
-                    <x-jet-nav-link href="{{ route('st.participante.compania', $companerismo) }}" :active="request()->routeIs('st.participante.compania')">
-                {{ __('Mi compañia')}}
-            </x-jet-nav-link>
-        @endif
+                <x-jet-nav-link href="{{ route('st.participante.compania', $companerismo) }}" :active="request()->routeIs('st.participante.compania')">
+                    {{ __('Mi compañia') }}
+                </x-jet-nav-link>
+            @endif
             @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count() ||
-                auth()->user()->can('admin.programas.viewList'))
+                    auth()->user()->can('admin.programas.viewList'))
                 <!-- Account Management -->
                 <x-jet-dropdown>
                     <x-slot name="trigger">
@@ -381,28 +379,31 @@
 
                     <x-slot name="content">
                         @foreach (Auth::user()->personale->inscripciones as $inscripcione)
-                            <div class="p-2"> {{ $inscripcione->programa->nombre }}</div>
-                            @can('admin.programas.grupos')
-                                {{-- Si puede 'Ver los grupos de su sesión' --}}
-                                @foreach ($inscripcione->programa->grupos as $grupo)
-                                    <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                        {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
-                                    </x-jet-dropdown-link>
-                                @endforeach
-                            @else
-                                @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
-                                    @php
-                                        $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
-                                    @endphp
-                                    <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                        {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
-                                    </x-jet-dropdown-link>
-                                @endif
-                            @endcan
+                            @if ($inscripcione->programa->pfj->estado == 1)
+                                <div class="p-2"> {{ $inscripcione->programa->nombre }}</div>
+                                @can('admin.programas.grupos')
+                                    {{-- Si puede 'Ver los grupos de su sesión' --}}
+                                    @foreach ($inscripcione->programa->grupos as $grupo)
+                                        <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                            {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
+                                        </x-jet-dropdown-link>
+                                    @endforeach
+                                @else
+                                    @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
+                                        @php
+                                            $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
+                                        @endphp
+                                        <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                            {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
+                                        </x-jet-dropdown-link>
+                                    @endif
+                                @endcan
+                            @endif
                         @endforeach
                     </x-slot>
 
                 </x-jet-dropdown>
+                {{-- Manual --}}
                 <x-jet-dropdown>
                     <x-slot name="trigger">
                         <button
@@ -430,7 +431,36 @@
                         </x-jet-dropdown-link>
                     </x-slot>
                 </x-jet-dropdown>
+                @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->first()->programa->estado == 1)
+                    <x-jet-dropdown align="right" width="48">
+                        <x-slot name="trigger">
 
+                            <button type="button"
+                                class="flex items-center block pl-3 pr-4 py-2 w-full  text-base text-sm font-medium focus:bg-indigo-100 focus:outline-none focus:text-indigo-800 focus:border-indigo-700 border-l-4 transition duration-150 ease-in-out ">
+                                <div>
+                                    {{ 'Inscripciones' }}
+                                </div>
+                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            @foreach (Auth::user()->personale->inscripciones as $inscripcione)
+                                @if ($inscripcione->programa->pfj->estado == 1)
+                                    <x-jet-dropdown-link
+                                        href="{{ route('st.programas.inscripciones', $inscripcione->programa) }}">
+                                        {{ $inscripcione->programa->nombre }}
+                                    </x-jet-dropdown-link>
+                                @endif
+                            @endforeach
+                        </x-slot>
+                    </x-jet-dropdown>
+                @endif
                 @can('admin.home')
                     <x-jet-responsive-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
                         {{ __('Panel Administrativo') }}

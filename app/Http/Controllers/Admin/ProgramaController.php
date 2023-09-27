@@ -347,4 +347,10 @@ class ProgramaController extends Controller
                                                                 'totalPersonalMujeres', 
                                                                 'totalPersonalMujeresAlojados'));
     }
+    
+    public function lideresLocales(Programa $programa){
+
+
+        return view('admin.programas.lideres-locales', compact('programa', 'estacas', 'alojados', 'total')); 
+    }
 }

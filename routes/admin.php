@@ -68,6 +68,7 @@ Route::get('/programas/{programa}/tareas', [ProgramaController::class, 'tareas']
 Route::get('/programas/{programa}/funciones', [ProgramaController::class, 'funciones'])->name('admin.programas.funciones');
 Route::get('/programas/{programa}/participantes', [ProgramaController::class, 'participantes'])->name('admin.programas.participantes');
 Route::get('/programas/{programa}/companias', [ProgramaController::class, 'companias'])->name('admin.programas.companias');
+Route::get('/programas/{programa}/lideres-locales', [ProgramaController::class, 'lideresLocales'])->name('admin.programas.lideres-locales');
 Route::get('/programas/{programa}/dashboard-bienvenida', [ProgramaController::class, 'dashboardBienvenida'])->name('admin.programas.dashboardbienvenida');
 Route::resource('programas', ProgramaController::class)->names('admin.programas');
 Route::resource('capacitaciones', CapacitacioneController::class)->names('admin.capacitaciones');

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Programa;
-use App\Models\Tarea;
 use Illuminate\Http\Request;
 
 class TareaController extends Controller
@@ -16,7 +15,7 @@ class TareaController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -43,21 +42,21 @@ class TareaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tarea  $tarea
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tarea $tarea)
+    public function show($id)
     {
-        return view('student.tareas.show', compact('tarea'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tarea  $tarea
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tarea $tarea)
+    public function edit($id)
     {
         //
     }
@@ -66,10 +65,10 @@ class TareaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tarea  $tarea
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tarea $tarea)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -77,10 +76,10 @@ class TareaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tarea  $tarea
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tarea $tarea)
+    public function destroy($id)
     {
         //
     }

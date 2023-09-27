@@ -28,9 +28,9 @@ class Inscripcione extends Model
         return $this->belongsTo(Role::class);
     }
 
-    public function obligaciones()
+    public function comentarios()
     {
-        return $this->hasMany(Obligacione::class);
+        return $this->hasMany(Comentario::class);
     }
 
     public function asistencias()

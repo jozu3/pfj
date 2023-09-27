@@ -32,6 +32,14 @@ class PermissionPersonaleSeeder extends Seeder
         Permission::create(['name' => 'student.capacitaciones.index', 'description' => 'Ver todos los anuncios'])->syncRoles([$role1, $role2, $role3, $role4, $role5, $role6]);
         Permission::create(['name' => 'student.lecturas.index', 'description' => 'Ver sus lecturas'])->syncRoles([$role1, $role2, $role3, $role4, $role5, $role6]);
         Permission::create(['name' => 'student.lecturas.edit', 'description' => 'Editar sus lecturas'])->syncRoles([$role1, $role2, $role3, $role4, $role5, $role6]);
+        Permission::create(['name' => 'student.lecturas.comentarios', 'description' => 'Ver comentarios de la lectura(tarea)'])->syncRoles([$role1, $role2, $role3, $role4, $role5, $role6]);
+
+        // permisos comentarios
+        Permission::create(['name' => 'student.comentarios.index', 'description' => 'Ver listado de comentarios'])->syncRoles([$role1, $role2, $role3, $role4, $role5, $role6]);
+        Permission::create(['name' => 'student.comentarios.index', 'description' => 'Ver listado de comentarios'])->syncRoles([$role1, $role2, $role3, $role4, $role5, $role6]);
+        Permission::create(['name' => 'student.comentarios.create', 'description' => 'Crear comentarios'])->syncRoles([$role1, $role2, $role3, $role4, $role5, $role6]);
+        Permission::create(['name' => 'student.comentarios.edit', 'description' => 'Editar comentarios'])->syncRoles([$role1, $role2, $role3, $role4, $role5, $role6]);
+        Permission::create(['name' => 'student.comentarios.destroy', 'description' => 'Eliminar comentarios'])->syncRoles([$role1, $role2, $role3, $role4, $role5, $role6]);
 
 
     }

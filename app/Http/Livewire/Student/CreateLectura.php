@@ -25,6 +25,10 @@ class CreateLectura extends Component
             $avance = ($inscripcioneTareas->where('realizado', true)->count() / $total_tareas) * 100;
         }
 
+        if ($avance > 0 && $avance < 100) {
+            $avance = number_format($avance,2);
+        }
+
 
         return view('livewire.student.create-lectura', compact( 'inscripcioneTareas', 'avance'));
     }
@@ -44,7 +48,6 @@ class CreateLectura extends Component
                 'tarea_id' => $tarea,
                 'realizado' => true,
             ]);
-
         }
 
         $inscripcioneTarea->save();        

@@ -19,32 +19,33 @@
                                 ? 'checked'
                                 : '';
                         @endphp
-                        <input
-                            class="form-check-input appearance-none w-4 border border-gray-300 rounded-sm bg-white checked:bg-yellow-600 checked:border-yellow-600 focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
-                            {{ $checkedTarea }} type="checkbox" id="flexCheckChecked{{ $tarea->id }}" style="color: #ed9934;"
-                            wire:click="realizado({{ $tarea->id }})">
-                            <label for="flexCheckChecked{{ $tarea->id }}" class="ml-2 text-sm  md:text-md">
-                                Semana del {{ date( 'd/m/Y' ,strtotime( $tarea->fecha_inicio))  }} al {{ date( 'd/m/Y' ,strtotime( $tarea->fecha_final))  }}
-                            </label>
-                            <ul>
-                            @foreach ($tarea->tareaMateriales as $tareaMateriale)                                
-                                    <li class="text-center">
-                                        @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
-                                            <a href="{{$tareaMateriale->link}}" class="text-blue-800">
-                                                {{ $tareaMateriale->materiale->descripcion }}: {{$tareaMateriale->tema}}
-                                            </a>                                            
-                                        @else
-                                            {{ $tareaMateriale->materiale->descripcion }}: {{$tareaMateriale->tema}}    
-                                        @endif
-                                    </li>                                
+                        <input class="form-check-input appearance-none w-4 border border-gray-300 rounded-sm bg-white checked:bg-yellow-600 checked:border-yellow-600 focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
+                            {{ $checkedTarea }} type="checkbox" id="flexCheckChecked{{ $tarea->id }}"
+                            style="color: #ed9934;" wire:click="realizado({{ $tarea->id }})">
+                        <label for="flexCheckChecked{{ $tarea->id }}" class="ml-2 text-sm  md:text-md">
+                            Semana del {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} al
+                            {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}
+                        </label>
+                        <ul>
+                            @foreach ($tarea->tareaMateriales as $tareaMateriale)
+                                <li class="text-center">
+                                    @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
+                                        <a href="{{ $tareaMateriale->link }}" class="text-blue-800">
+                                            {{ $tareaMateriale->materiale->descripcion }}: {{ $tareaMateriale->tema }}
+                                        </a>
+                                    @else
+                                        {{ $tareaMateriale->materiale->descripcion }}: {{ $tareaMateriale->tema }}
+                                    @endif
+                                </li>
                             @endforeach
-                        </ul>
-                            
+                        </ul>   
                     </div>
                 </div>
-                <div class="text-lg  md:text-2xl  text-center p-2 italic font-bold pb-4">
-                <label for="flexCheckChecked{{ $tarea->id }}">    {{ $tarea->descripcion }}</label>
-                </div>
+                @can('student.lecturas.comentarios')
+                    <div class="text-sm md:text-md  text-center p-2 italic font-bold text-blue-400 pb-4">
+                        <a href="{{route('st.tareas.show', $tarea)}}">Ver</a>
+                    </div>
+                @endcan
                 {{-- @if ($checkedTarea)
                     <div class="text-sm">Leído: {{ $tarea->updated_at }}</div>
                 @endif --}}
