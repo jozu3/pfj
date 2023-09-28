@@ -1,6 +1,6 @@
 <div>
     <div class="w-full bg-gray-100 rounded-full mt-2 mx-2">
-        <div class="bg-red40-pfj text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-l-full"
+        <div class="bg-red40-pfj text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
             style="width: {{ $avance }}%"> {{ $avance }}%</div>
     </div>
     <div class="grid grid-cols-6 my-4 mx-2">
@@ -30,7 +30,7 @@
                             @foreach ($tarea->tareaMateriales as $tareaMateriale)
                                 <li class="text-center">
                                     @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
-                                        <a href="{{ $tareaMateriale->link }}" class="text-blue-800">
+                                        <a href="{{ $tareaMateriale->link }}" target="_blank" class="text-blue-800 font-bold">
                                             {{ $tareaMateriale->materiale->descripcion }}: {{ $tareaMateriale->tema }}
                                         </a>
                                     @else

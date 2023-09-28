@@ -19,7 +19,7 @@
                                                 @foreach ($tarea->tareaMateriales as $tareaMateriale)
                                                     <li class="text-center">
                                                         @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
-                                                            <a href="{{ $tareaMateriale->link }}" class="text-blue-800">
+                                                            <a href="{{ $tareaMateriale->link }}" target="_blank" class="text-blue-800 font-bold">
                                                                 {{ $tareaMateriale->materiale->descripcion }}:
                                                                 {{ $tareaMateriale->tema }}
                                                             </a>
@@ -30,6 +30,16 @@
                                                     </li>
                                                 @endforeach
                                             </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container py-6">
+                                    <div  class="grid grid-cols-1 gap-4 place-content-center text-3xl text-center text-gray-900 border-b-2 mb-6 font-bold">
+                                    </div>
+
+                                    <div class="grid md:grid-cols-1 sm:grid-cols-1 gap-4 place-content-center mt-4">
+                                        <div class="text-left text-lg">
+                                          Cuentanos tus impresiones con esta asignación:
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +84,7 @@
                             <h3 class="text-base font-semibold leading-7 tracking-tight text-gray-900">{{auth()->user()->fullname()}}
                             </h3>
                             <p class="text-sm font-semibold leading-6 text-indigo-600">
-                                {!!Form::textarea('comentario', null, [ 'wire:model' => 'newcomentario', 'wire:keyup.enter' =>"saveComentario", 'class'=> 'border-0 w-full', 'rows' => '2', 'placeholder' => 'Agrega un comentario...'])!!}    
+                                {!!Form::textarea('comentario', null, [ 'wire:model' => 'newcomentario', 'class'=> 'border-0 w-full', 'rows' => '2', 'placeholder' => 'Agrega un comentario...'])!!}    
                             </p>
                             <div class="text-right">
                                 <button id="enviar"
