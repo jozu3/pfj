@@ -24,6 +24,7 @@ class ContactosIndex extends Component
     public $created_at;
     public $estados_selecteds;
     public $solo_obispos;
+    public $aprob_contacto = [];
 
 	public $sortBy = 'newassign';
     public $sortDirection = 'desc';
@@ -90,6 +91,10 @@ class ContactosIndex extends Component
         ];
 
         $this->created_at = '2023-09-10';
+    }
+
+    public function updatedAprobContacto($value, $key){
+        Contacto::find($key)->update(['estado_aprobacion' => $value]);
     }
 
  	public function render()

@@ -141,7 +141,7 @@
                             $countCompanias = 0;
                             $companerismo = null;
                             foreach (auth()->user()->personale->inscripciones as $inscripcione) {
-                                if (isset($inscripcione->inscripcioneCompanerismo)) {
+                                if ($inscripcione->programa->pfj->estado == 1 &&  isset($inscripcione->inscripcioneCompanerismo)) {
                                     $hasCompania = true;
                                     $countCompanias++;
                                     $companerismo = $inscripcione->inscripcioneCompanerismo->companerismo;
@@ -341,7 +341,7 @@
                 $countCompanias = 0;
                 $companerismo = null;
                 foreach (auth()->user()->personale->inscripciones as $inscripcione) {
-                    if (isset($inscripcione->inscripcioneCompanerismo)) {
+                    if ($inscripcione->programa->pfj->estado == 1 &&  isset($inscripcione->inscripcioneCompanerismo)) {
                         $hasCompania = true;
                         $countCompanias++;
                         $companerismo = $inscripcione->inscripcioneCompanerismo->companerismo;

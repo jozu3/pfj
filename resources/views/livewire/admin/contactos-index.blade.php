@@ -24,7 +24,8 @@
                     <div class="col-md-3 mt-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroup-sizing-default">Preinscrito a partir de:</span>
+                                <span class="input-group-text" id="inputGroup-sizing-default">Preinscrito a partir
+                                    de:</span>
                             </div>
                             <input wire:model="created_at" type="date" class="form-control"
                                 aria-describedby="inputGroup-sizing-default">
@@ -225,9 +226,9 @@
                                 @endif
 
                                 <td class="text-center">
-                                    @if (in_array($contacto->estado, [2, 3]))
+                                    {{-- @if (in_array($contacto->estado, [2, 3])) --}}
                                         @can('admin.contactos.aprobacionobispo')
-                                            <span class="mx-2">
+                                            {{-- <span class="mx-2">
                                                 <div class="custom-control custom-switch">
                                                     <input type="checkbox" @if ($contacto->estado == 3) checked @endif
                                                         data-contacto="{{ $contacto->id }}"
@@ -236,9 +237,25 @@
                                                     <label class="custom-control-label"
                                                         for="customSwitch{{ $contacto->id }}"></label>
                                                 </div>
-                                            </span>
+                                            </span> --}}
+                                            <div>
+                                                <input type="radio" class="btn-check d-none"
+                                                    name="options-outlined{{ $contacto->id }}"
+                                                    id="success-outlined{{ $contacto->id }}" value="1" wire:model="aprob_contacto.{{$contacto->id}}" wire:target="aprob_contacto.{{$contacto->id}}" wire:loading.attr="disabled">
+                                                <label class="label-radio-aprob btn @if($contacto->estado_aprobacion == 1) {{'btn-success'}} @else {{'btn-outline-secondary'}} @endif" for="success-outlined{{ $contacto->id }}"
+                                                    wire:target="aprob_contacto.{{$contacto->id}}" wire:loading.class.remove="btn-success btn-outline-success" wire:loading.class="btn-outline-secondary cursor-na" data-toggle="tooltip" data-placement="top" title="Aprobar">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </label>
+                                                <input type="radio" class="btn-check d-none"
+                                                    name="options-outlined{{ $contacto->id }}"
+                                                    id="danger-outlined{{ $contacto->id }}" value="2" wire:model="aprob_contacto.{{$contacto->id}}" wire:target="aprob_contacto.{{$contacto->id}}" wire:loading.attr="disabled">
+                                                <label class="label-radio-aprob btn @if($contacto->estado_aprobacion == 2) {{'btn-danger'}} @else {{'btn-outline-secondary'}} @endif" for="danger-outlined{{ $contacto->id }}" 
+                                                    wire:target="aprob_contacto.{{$contacto->id}}" wire:loading.class.remove="btn-danger btn-outline-danger" wire:loading.class="btn-outline-secondary cursor-na" data-toggle="tooltip" data-placement="top" title="Desaprobar">
+                                                    <i class="fas fa-times-circle"></i>
+                                                </label>
+                                            </div>
                                         @endcan
-                                    @endif
+                                    {{-- @endif --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -252,7 +269,7 @@
                             {{ $contactos->links() }}
                         </div>
                         <div class="col-md-6 d-flex align-items-center">
-                            {!! 'Viendo  <b>'.$contactos->count().'</b> de un total de <b>'.$contactos->total().'</b>'!!}
+                            {!! 'Viendo  <b>' . $contactos->count() . '</b> de un total de <b>' . $contactos->total() . '</b>' !!}
                         </div>
                     @endif
                 </div>
@@ -264,7 +281,8 @@
         @endif
     </div>
     <script>
-        document.addEventListener('livewire:load', function(){
+        document.addEventListener('livewire:load', function() {
+            $('.label-radio-aprob').tooltip()
             $('#estaca_ids').select2({
                 placeholder: "Todas las estacas",
                 allowClear: true
@@ -274,19 +292,19 @@
                 allowClear: true
             });
 
-            $('#estaca_ids').on('change', function(){
+            $('#estaca_ids').on('change', function() {
                 var ess = (JSON.stringify($('#estaca_ids').val()));
                 // ess = JSON.stringify(ess);
-                console.log( $('#estaca_ids').val())
-                console.log( ess)
+                console.log($('#estaca_ids').val())
+                console.log(ess)
                 @this.set('estaca_id', ess);
             });
 
-            $('#states').on('change', function(){
+            $('#states').on('change', function() {
                 var ess = (JSON.stringify($('#states').val()));
                 // ess = JSON.stringify(ess);
-                console.log( $('#states').val())
-                console.log( ess)
+                console.log($('#states').val())
+                console.log(ess)
                 @this.set('estados_selecteds', ess);
             });
         });

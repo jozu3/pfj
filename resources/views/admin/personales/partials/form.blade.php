@@ -23,17 +23,17 @@
     <small class="text-danger">{{ $message }}</small>
 @enderror --}}
 @php
-$permiso = 2;
-$permiso = isset($contacto->personale->permiso_obispo)? $contacto->personale->permiso_obispo: 2;
+// $permiso = 2;
+// $permiso = isset($contacto->personale->permiso_obispo)? $contacto->personale->permiso_obispo: 2;
 
 @endphp
 <div class="form-group">
     {!! Form::label('permiso_obispo', 'Aprobación de su Obispo/Presidente de rama') !!}
     {!! Form::select('permiso_obispo', [
-            '0' => 'Cancelado',
-            '1' => 'Aprobación pendiente',
-            '2' => 'Aprobado',
-        ], $permiso, ['class' => 'form-control', 'placeholder' => '-- Escoge --', 'style' => 'appearance: none; ']); !!}
+            '0' => 'Aprobación pendiente',
+            '2' => 'Desaprobado',
+            '1' => 'Aprobado',
+        ], null, ['class' => 'form-control', 'placeholder' => '-- Escoge --', 'style' => 'appearance: none; ']); !!}
 </div>
 @error('permiso_obispo')
     <small class="text-danger">{{ $message }}</small>

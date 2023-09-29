@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Comentario;
 use App\Models\InscripcioneTarea;
 use App\Models\Materiale;
 use App\Models\Programa;
@@ -127,12 +128,13 @@ class TareaLista extends Component
         if ($confirmed) {
             $deleted = InscripcioneTarea::where('tarea_id', $idTarea)->delete();
             $deleted = TareaMateriale::where('tarea_id', $idTarea)->delete();
+            $deleted = Comentario::where('tarea_id', $idTarea)->delete();
             $deleted = Tarea::where('id', $idTarea)->delete();        
             if($deleted){                
                 $this->render();
             }
         } else {
-            $this->dispatchBrowserEvent('questionremove', ['idTarea' => $idTarea, 'msj' => 'Se eliminarán todas las dependencias.']);
+            $this->dispatchBrowserEvent('questionremove', ['idTarea' => $idTarea, 'msj' => 'Se eliminarán todas las dependencias, incluso todos los comentarios realizados por el personal. No se podrá recuperar esta información.']);
         }
     }
 

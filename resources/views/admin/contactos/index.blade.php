@@ -71,6 +71,9 @@
             height: auto;
             /* padding: 0.375rem 0.75rem; */
         }
+        .cursor-na{
+            cursor: not-allowed!important;
+        }
         
     </style>
 @stop
@@ -138,4 +141,9 @@
             }
         });
     </script>
+    <script>
+        window.addEventListener('name-updated', event => {
+            alert('Name updated to: ' + event.detail.newName);
+        })
+        </script>
 @stop

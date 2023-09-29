@@ -55,15 +55,15 @@
                                 {!! Form::submit('Actualizar datos', ['class' => 'btn btn-red40-pfj']) !!}
                             </div>
                         </div>
-                        @if ($contacto->estado == 1)
+                        @can('admin.contactos.aprobacionpfj')
                             <div class="col-md-2 mt-4">
                                 <div class="form-group">
-                                    @can('admin.contactos.aprobacionpfj')
-                                        @livewire('admin.contacto-aprobacion-pfj', ['contacto_id' => $contacto->id], key(auth()->user()->id))
-                                    @endcan
+                                    @livewire('admin.contacto-aprobacion-pfj', ['contacto_id' => $contacto->id], key(auth()->user()->id))
                                 </div>
                             </div>
-                        @endif
+                        @endcan
+                        {{-- @if ($contacto->estado == 1)
+                        @endif --}}
                     </div>
                     {!! Form::close() !!}
 

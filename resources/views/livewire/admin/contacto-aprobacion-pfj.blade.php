@@ -1,5 +1,5 @@
 <div>
-    <button wire.ignore id="btn_aprobarconsejero" type="button" wire:loading.remove wire:loading.attr="disabled" class="btn btn-success">Aprobación PFJ y enviar al obispo</button>
+    <button wire.ignore id="btn_aprobarconsejero" type="button" wire:loading.remove wire:loading.attr="disabled" class="btn btn-success">Enviar al obispo</button>
     <span wire:loading class="spinner-border text-danger" role="status">
         <span class="sr-only">  Loading...</span>
       </span>

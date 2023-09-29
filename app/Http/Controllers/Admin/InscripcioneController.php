@@ -43,6 +43,7 @@ class InscripcioneController extends Controller
     {
 
         $contacto = Contacto::find($_GET['idcontacto']);
+        $contacto['permiso_obispo'] = $contacto->estado_aprobacion == null ? 0 : $contacto->estado_aprobacion;
         $personale_existe = null;
         if (isset($contacto->personale)) {
             $personale_existe = 'Ya es personal, se sugiere tipo de matrícula para personale antiguo.';
