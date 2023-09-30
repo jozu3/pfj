@@ -73,6 +73,18 @@ class InscripcioneController extends Controller
         $contacto = Contacto::find($request->contacto_id);
         //$this->authorize('updating', $contacto);// no se que hacia esto aquí
         $request['estado'] = 5;
+        $old_contacto = Contacto::where('email', $request->email)->where('id', '<>', $request->contacto_id)
+                                ->whereHas('personale', function($q) use ($request){
+                                    $q->whereHas('user', function($qu) use ($request){
+                                        $qu->where('email', $request->email);
+                                    });
+                                })->get();
+
+        if ($old_contacto->count() == 1) {
+            Personale::where('contacto_id', $old_contacto->first()->id)->first()->update([
+                'contacto_id' => $request->contacto_id
+            ]);
+        }
 
         /*if (isset($request['vendedor_id'])) {
             //para actualizar el vendedor del contacto si fuera necesario
@@ -80,6 +92,7 @@ class InscripcioneController extends Controller
         }*/
 
         $personale_existe = Personale::where('contacto_id', '=', $request->contacto_id)->get();
+
 
 
         if (!count($personale_existe)){//entra si el personale no existe
@@ -127,10 +140,8 @@ class InscripcioneController extends Controller
         //estado de la inscripcione
         $request['estado'] = '1';
 
-        //registrar la matrícula
+        //registrar la inscripcion
         $inscripcione = Inscripcione::create($request->all());
-
-        //generar las obligaciones por pagar -> InscripcioneObserver
 
         //enviar notification de inscripcione al personale
         $user = $personale->user;

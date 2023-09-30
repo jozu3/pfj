@@ -44,8 +44,8 @@
                                         <div class="text-center">
                                             @if ($inscripcione->programa->imageMatrimonioDirector)
                                                 <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioDirector->url) }}"
-                                                    alt="" class="object-top rounded-full m-auto"
-                                                    width="300px">
+                                                    alt="" class="object-center object-cover rounded-full m-auto"
+                                                    width="300px" height="300px">
                                             @endif
                                         </div>
                                         <div class="md:text-left text-center">
@@ -72,8 +72,8 @@
                                         <div class="text-center">
                                             @if ($inscripcione->programa->imageMatrimonioLogistica)
                                                 <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioLogistica->url) }}"
-                                                    alt="" class="object-top rounded-full m-auto"
-                                                    width="300px">
+                                                    alt="" class="object-center object-cover rounded-full m-auto"
+                                                    width="300px" height="300px">
                                             @endif
                                         </div>
                                         <div class="md:text-left text-center">
