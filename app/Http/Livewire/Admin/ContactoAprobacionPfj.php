@@ -24,22 +24,13 @@ class ContactoAprobacionPfj extends Component
                         $q->where('slug', 'obispo');
                     })->first();
                     
-        if ($contacto->estado == 1) {
-            if($obispo){
-                $update = $contacto->update([
-                    'estado' => 2
-                ]);
-                
-                if ($update) {
-                    $obispo->notify(new NewConsejeroObispoNotification($contacto));
-                    
-                    return redirect()->route('admin.contactos.show', $this->contacto_id)->with('info', 'Se aprobó y envió al obispo.');
-                }
-            } else {
-                $this->emit('no_hay_obispo');
-            }
-
+        if($obispo){
+            $obispo->notify(new NewConsejeroObispoNotification($contacto));
+            return redirect()->route('admin.contactos.show', $this->contacto_id)->with('info', 'Se envió al obispo.');
+        } else {
+            $this->emit('no_hay_obispo');
         }
+
     }
 
     public function render()

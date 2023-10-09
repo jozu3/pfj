@@ -55,6 +55,13 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="col-md-3 mt-2" wire:ignore>
+                    <select name="" id="estado_aprobaciones" class="form-control" name="estado_aprobaciones[]" multiple="multiple">
+                        @foreach ($estado_aprobaciones as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 {{-- <div class="col-md-3 mt-2">
                     <a href="{{ route('admin.excel.exportExcelPersonal', [$programa_id, $familia, $estaca, $estado, $rol]) }}"
                         class="btn btn-success float-right mr-3">
@@ -98,7 +105,9 @@
                             <th wire:click="" style="">Observaciones
                             </th>
                             @if (Auth::user()->can('admin.contactos.edit') || Auth::user()->can('admin.contactos.destroy'))
-                                <th class="text-center">Creado en:</th>
+                                <th  wire:click="sortBy('created_at')" style="cursor:pointer" class="text-center">Creado en:
+                                    @include('partials._sort-icon', ['field' => 'created_at'])
+                                </th>
                                 <th class="text-center">Acciones</th>
                             @endif
                             @can('admin.contactos.aprobacionobispo')
@@ -198,7 +207,9 @@
                                     {{ count($contacto->seguimientos) }}
                                 </td>
                                 @if (Auth::user()->can('admin.contactos.edit') || Auth::user()->can('admin.contactos.destroy'))
-                                    <td>{{ date('d/m/Y H:i:s', strtotime($contacto->created_at)) }}</td>
+                                    <td>
+                                        {{ date('d/m/Y H:i:s', strtotime($contacto->created_at)) }}
+                                    </td>
                                     <td width="">
                                         <div class="d-flex" style="align-items: center; ">
                                             @can('admin.contactos.edit')
@@ -291,6 +302,10 @@
                 placeholder: "Todas los estados",
                 allowClear: true
             });
+            $('#estado_aprobaciones').select2({
+                placeholder: "Todas los estados",
+                allowClear: true
+            });
 
             $('#estaca_ids').on('change', function() {
                 var ess = (JSON.stringify($('#estaca_ids').val()));
@@ -306,6 +321,14 @@
                 console.log($('#states').val())
                 console.log(ess)
                 @this.set('estados_selecteds', ess);
+            });
+
+            $('#estado_aprobaciones').on('change', function() {
+                var ess = (JSON.stringify($('#estado_aprobaciones').val()));
+                // ess = JSON.stringify(ess);
+                console.log($('#states').val())
+                console.log(ess)
+                @this.set('estado_aprobaciones_selecteds', ess);
             });
         });
     </script>

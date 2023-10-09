@@ -21,12 +21,14 @@ class ContactosIndex extends Component
     public $barrio_id = 0;
     public $barrios;
     public $states;
+    public $estado_aprobaciones_selecteds;
+    public $estado_aprobaciones;
     public $created_at;
     public $estados_selecteds;
     public $solo_obispos;
     public $aprob_contacto = [];
 
-	public $sortBy = 'newassign';
+	public $sortBy = 'created_at';
     public $sortDirection = 'desc';
     public $page = 1;
     public $cant_pages = 15;
@@ -91,6 +93,12 @@ class ContactosIndex extends Component
         ];
 
         $this->created_at = '2023-09-10';
+
+        $this->estado_aprobaciones = [
+            '1' => 'Aprobado',
+            'NULL' => 'Aprobación pendiente',
+            '2' => 'Desaprobado',
+        ];
     }
 
     public function updatedAprobContacto($value, $key){
@@ -120,12 +128,17 @@ class ContactosIndex extends Component
         $_estados_selected = [];
         $_estados_selected = json_decode($this->estados_selecteds);
 
+        $_estado_aprobaciones_selecteds = [];
+        if ($this->estado_aprobaciones_selecteds != '') {
+            $_estado_aprobaciones_selecteds = json_decode($this->estado_aprobaciones_selecteds);
+        }
+
         if (auth()->user()->can(['admin.contactos.allcontactos'])) {
 
             $this->states =  [
                 '1' => 'Preinscrito',
-                '2' => 'Enviado al obispo',
-                '3' => 'Aprobado por el obispo',
+                // '2' => 'Enviado al obispo',
+                // '3' => 'Aprobado por el obispo',
                 // '4' => 'Confirmado',
                 '5' => 'Inscrito',
             ];
@@ -142,6 +155,18 @@ class ContactosIndex extends Component
                                 }
                             });
                         }
+                    })
+                    ->where(function($q) use ($_estado_aprobaciones_selecteds){
+                        $q->where(function($query) use ($_estado_aprobaciones_selecteds) {
+                            if(count($_estado_aprobaciones_selecteds)){
+                                $query->whereIn('estado_aprobacion', $_estado_aprobaciones_selecteds);
+                            }
+                        })
+                        ->orWhere(function($query) use ($_estado_aprobaciones_selecteds) {
+                            if (in_array('NULL', $_estado_aprobaciones_selecteds, true)) {
+                                $query->where('estado_aprobacion', null);
+                            }
+                        });
                     })
                     ->where(function($query) use ($that) {
                         $query->orWhere('nombres', 'like','%'.$that->search.'%')
@@ -190,9 +215,9 @@ class ContactosIndex extends Component
 
         } else if (auth()->user()->can(['admin.contactos.contactos_barrio'])) {//obispo
             $this->states =  [
-                // '1' => 'Preinscrito',
-                '2' => 'Enviado al obispo',
-                '3' => 'Aprobado por el obispo',
+                '1' => 'Preinscrito',
+                // '2' => 'Enviado al obispo',
+                // '3' => 'Aprobado por el obispo',
                 // '4' => 'Confirmado',
                 '5' => 'Inscrito',
             ];
@@ -203,6 +228,18 @@ class ContactosIndex extends Component
                                         ->orWhere('apellidos', 'like','%'.$that->search.'%')
                                         ->orWhere('telefono', 'like','%'.$that->search.'%');
                                         // ->orWhere('email', 'like','%'.$that->search.'%');
+                            })
+                            ->where(function($q) use ($_estado_aprobaciones_selecteds){
+                                $q->where(function($query) use ($_estado_aprobaciones_selecteds) {
+                                    if(count($_estado_aprobaciones_selecteds)){
+                                        $query->whereIn('estado_aprobacion', $_estado_aprobaciones_selecteds);
+                                    }
+                                })
+                                ->orWhere(function($query) use ($_estado_aprobaciones_selecteds) {
+                                    if (in_array('NULL', $_estado_aprobaciones_selecteds, true)) {
+                                        $query->where('estado_aprobacion', null);
+                                    }
+                                });
                             })
                             ->whereDoesntHave('personale', function($q){
                                 $q->whereHas('user', function($q){
