@@ -233,7 +233,7 @@ class ContactosIndex extends Component
                 // '4' => 'Confirmado',
                 '5' => 'Inscrito',
             ];
-            $contactos = Contacto::whereIn('estado', [2,3,5])->whereIn('estado',  is_array($_estados_selected) && count($_estados_selected)? $_estados_selected : array_keys($this->states))
+            $contactos = Contacto::whereIn('estado', [1,2,3,5])->whereIn('estado',  is_array($_estados_selected) && count($_estados_selected)? $_estados_selected : array_keys($this->states))
                             ->where('barrio_id', auth()->user()->personale->contacto->barrio_id ) 
                             ->where(function($query) use ($that) {
                                 $query->orWhere('nombres', 'like','%'.$that->search.'%')
