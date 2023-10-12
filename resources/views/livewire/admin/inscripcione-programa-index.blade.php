@@ -68,6 +68,7 @@
                         <th>Apellidos</th>
                         <th>Sexo</th>
                         <th>Estaca</th>
+                        <th>Barrio</th>
                         <th>Habitación</th>
                         <th>Asignación</th>
                         <th>Familia</th>
@@ -98,6 +99,9 @@
                             <td>{{ $inscripcione->personale->contacto->genero }}</td>
                             <td>
                                 {{ $inscripcione->personale->barrio->estaca->nombre }}
+                            </td>
+                            <td>
+                                {{ $inscripcione->personale->barrio->nombre }}
                             </td>
                             <td>
                                 @if (isset($inscripcione->alojamientoPersonale))
