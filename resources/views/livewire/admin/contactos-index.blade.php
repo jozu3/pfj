@@ -31,6 +31,13 @@
                                 aria-describedby="inputGroup-sizing-default">
                         </div>
                     </div>
+                    <div class="col-md-3 mt-2" wire:ignore>
+                        <select name="" id="roles" class="form-control" name="roles[]" multiple="multiple">
+                            @foreach ($roles_select as $role)
+                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-md-3 mt-2">
                         <select name="" id="" class="form-control" wire:model="cant_pages">
                             {{-- <option value="0">Todos(demora en cargar)</option> --}}
@@ -330,6 +337,19 @@
                 console.log($('#states').val())
                 console.log(ess)
                 @this.set('estado_aprobaciones_selecteds', ess);
+            });
+
+            $('#roles').select2({
+                placeholder: "-- No mostrar roles --",
+                allowClear: true
+            });
+
+            $('#roles').on('change', function() {
+                var ess = (JSON.stringify($('#roles').val()));
+                // ess = JSON.stringify(ess);
+                console.log($('#roles').val())
+                console.log(ess)
+                @this.set('roles', ess);
             });
         });
     </script>

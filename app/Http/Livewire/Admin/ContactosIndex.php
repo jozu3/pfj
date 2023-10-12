@@ -9,6 +9,7 @@ use App\Models\Estaca;
 use App\Models\Personale;
 use Illuminate\Support\Facades\DB;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Role;
 
 class ContactosIndex extends Component
 {
@@ -19,6 +20,7 @@ class ContactosIndex extends Component
     public $search;
     public $estaca_id;
     public $barrio_id = 0;
+    public $roles;
     public $barrios;
     public $states;
     public $estado_aprobaciones_selecteds;
@@ -113,6 +115,9 @@ class ContactosIndex extends Component
 
         $_estacas = [];
         $_estacas = json_decode($this->estaca_id);
+
+        $_roles = [];
+        if($this->roles != '') $_roles = json_decode($this->roles);
         
         $this->barrios = [];
         if( is_array($_estacas) && count($_estacas)){
@@ -168,10 +173,10 @@ class ContactosIndex extends Component
                             }
                         });
                     })
-                    ->whereDoesntHave('personale', function($q){
-                        $q->whereHas('user', function($q){
-                            $q->whereHas('roles', function($q){
-                                $q->where('slug', 'obispo');
+                    ->whereDoesntHave('personale', function($q) use ($_roles){
+                        $q->whereHas('user', function($q) use ($_roles){
+                            $q->whereHas('roles', function($q) use ($_roles){
+                                $q->whereIn('id', $_roles);
                             });    
                         });
                     })
@@ -263,6 +268,8 @@ class ContactosIndex extends Component
         }
 
         $this->resetPage();
-        return view('livewire.admin.contactos-index',compact('contactos', 'personales', 'estacas'));
+        $roles_select = Role::whereNotIn('name', ['Admin'])->get();
+
+        return view('livewire.admin.contactos-index',compact('contactos', 'roles_select', 'personales', 'estacas'));
     }
 }
