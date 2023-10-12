@@ -95,7 +95,8 @@
                             <th wire:click="sortBy('barrio.nombre')" style="cursor:pointer">Barrio
                                 @include('partials._sort-icon', ['field' => 'barrio_id'])
                             </th>
-                            <th wire:click="" style="">Edad
+                            <th wire:click="sortBy('fecnac')" style="cursor:pointer">Edad
+                                @include('partials._sort-icon', ['field' => 'fecnac'])
                             </th>
                             <th wire:click="" style="">Recomendación para el templo
                             </th>
