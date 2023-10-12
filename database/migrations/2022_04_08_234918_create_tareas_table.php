@@ -18,6 +18,7 @@ class CreateTareasTable extends Migration
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_final')->nullable();            
             $table->foreignId('programa_id')->constrained();
+            $table->longText('descripcion')->nullable();
             $table->timestamps();
         });
     }

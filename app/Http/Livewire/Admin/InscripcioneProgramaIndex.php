@@ -24,6 +24,7 @@ class InscripcioneProgramaIndex extends Component
     public $familia = 0;
     public $readyToLoad = false;
     public $functions_selecteds = [];
+    public $roles = 0;
 
     protected $listeners = ['changeEstado' => 'changeEstado'];
 
@@ -58,6 +59,9 @@ class InscripcioneProgramaIndex extends Component
 
     public function render()
     {
+        $_roles = [];
+        if ($this->roles != 0 && $this->roles != '') $_roles = json_decode($this->roles);
+
         $inscripciones = [];
         $familias = null;
         if ($this->readyToLoad) {
@@ -82,8 +86,8 @@ class InscripcioneProgramaIndex extends Component
                 $inscripciones = Inscripcione::where('programa_id', $this->programa_id);
 
                 //filtro por rol
-                if($rol != '0'){
-                    $inscripciones = $inscripciones->where('role_id', $rol);
+                if(is_array($_roles) && count($_roles)){
+                    $inscripciones = $inscripciones->whereIn('role_id', $_roles);
                 }
 
                 //filtro por estado
@@ -141,11 +145,11 @@ class InscripcioneProgramaIndex extends Component
             $this->page = 1;
         }
         $familias = Grupo::where('programa_id',$this->programa_id)->get();
-        $roles = Role::whereNotIn('name', ['Admin'])->get();
+        $roles_select = Role::whereNotIn('name', ['Admin'])->get();
         $estacas = Estaca::orderBy('nombre')->get();
 
         $funciones = Funcione::where('programa_id', $this->programa_id)->get();
 
-        return view('livewire.admin.inscripcione-programa-index', compact('inscripciones', 'roles', 'funciones', 'estacas', 'familias'));
+        return view('livewire.admin.inscripcione-programa-index', compact('inscripciones', 'roles_select', 'funciones', 'estacas', 'familias'));
     }
 }

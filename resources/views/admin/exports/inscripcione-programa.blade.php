@@ -3,6 +3,7 @@
         <tr>
             <th>Nombres</th>
             <th>Apellidos</th>
+            <th>Sexo</th>
             <th>Estaca</th>
             <th>Habitación</th>
             <th>Asignación</th>
@@ -26,11 +27,12 @@
     <tbody>
         @forelse ($inscripciones as $inscripcione)
             <tr>
-                <td style="width:20px" class="bg-primary">
+                <td style="width:200px" class="bg-primary">
                     {{ $inscripcione->personale->contacto->nombres }}
                 </td>
-                <td style="width:20px">{{ $inscripcione->personale->contacto->apellidos }}</td>
-                <td style="width:12px">
+                <td style="width:200px">{{ $inscripcione->personale->contacto->apellidos }}</td>
+                <td style="width:20px">{{ $inscripcione->personale->contacto->genero }}</td>
+                <td style="width:120px">
                     {{ $inscripcione->personale->barrio->estaca->nombre }}
                 </td>
                 <td>
@@ -40,7 +42,7 @@
                         {{ $inscripcione->alojamientoPersonale->habitacione->numero }}
                     @endif
                 </td>
-                <td style="width:20px">
+                <td style="width:120px">
                     {{ $inscripcione->role->name }}
                     @forelse ($inscripcione->funciones as $funcione)
                         {{ ' - ' . $funcione->descripcion }}
@@ -51,28 +53,28 @@
                 @if ($inscripcione->role->name == 'Matrimonio Director' ||
                     $inscripcione->role->name == 'Matrimonio de Logística' ||
                     $inscripcione->role->name == 'Coordinador')
-                    <td style="width:20px">{{ $inscripcione->role->name }}</td>
+                    <td style="width:120px">{{ $inscripcione->role->name }}</td>
                 @else
                     @if ($inscripcione->inscripcioneCompanerismo != null)
-                        <td style="width:20px">
+                        <td style="width:120px">
                             {{ $inscripcione->inscripcioneCompanerismo->companerismo->grupo->numero }}
                         </td>
                     @else
-                        <td style="width:16px">
+                        <td style="width:160px">
                             No tiene compañero(a)
                         </td>
                     @endif
                 @endif
-                <td style="width:12px">
+                <td style="width:120px">
                     {{ $inscripcione->personale->contacto->telefono }}
                 </td>
-                <td style="width:20px">
+                <td style="width:120px">
                     @if ($inscripcione->personale->user)
                         {{ $inscripcione->personale->user->email }}
                     @else
                     @endif
                 </td>
-                <td style="width:10px">
+                <td style="width:80px">
                     @switch($inscripcione->personale->preinscripcion)
                         @case(1)
                             {{ 'Sí' }}
@@ -85,7 +87,7 @@
                         @default
                     @endswitch
                 </td>
-                <td style="width:10px">
+                <td style="width:80px">
                     @switch($inscripcione->estado)
                         @case(1)
                             {{ 'Sí' }}
@@ -98,7 +100,7 @@
                         @default
                     @endswitch
                 </td>
-                <td style="width:20px" class="text-center text-info font-weight-bold align-middle">
+                <td style="width:50px" class="text-center text-info font-weight-bold align-middle">
 
                     @if ($capacitaciones->count())
                         @php
@@ -125,31 +127,31 @@
                     @endif
 
                 </td>
-                <td style="width:20px">
+                <td style="width:50px">
                     @if ($capacitaciones->count())
                         <span class="bg-{{ $color_c }} rounded-lg p-1 ">
                             {{ $inscripcione->asistencias->where('asistencia', '0')->count() }}
                         </span>
                     @endif
                 </td>
-                <td style="width:20px">
+                <td style="width:50px">
                     @if ($capacitaciones->count())
                     <span class="bg-{{ $color_c }} rounded-lg p-1 ">
                         {{ $inscripcione->asistencias->where('asistencia', '1')->count() }}
                     </span>
                     @endif
                 </td>
-                <td style="width:20px">
+                <td style="width:50px">
                     @if ($capacitaciones->count())
                     <span class="bg-{{ $color_c }} rounded-lg p-1 ">
                         {{ $inscripcione->asistencias->where('asistencia', '2')->count() }}
                     </span>
                     @endif
                 </td>
-                <td style="width:20px">
+                <td style="width:50px">
                     {{ $capacitaciones->count() }}
                 </td>
-                <td style="width:20px" class="text-center text-info font-weight-bold align-middle">
+                <td style="width:50px" class="text-center text-info font-weight-bold align-middle">
 
                     @if ($tareas->count())
                         @php
@@ -175,23 +177,23 @@
                     @endif
 
                 </td>
-                <td style="width:20px">
+                <td style="width:50px">
                     @if ($tareas->count())
                     <span class="bg-{{ $color_c }} rounded-lg p-1 ">
                         {{ $inscripcione->inscripcioneTareas->where('realizado', '1')->count() }}
                     </span>
                     @endif
                 </td>
-                <td style="width:20px">
+                <td style="width:50px">
                     {{ $inscripcione->inscripcioneTareas->where('realizado', '0')->count() }}
                 </td>
-                <td style="width:20px">
+                <td style="width:50px">
                     {{ $tareas->count() }}
                 </td>
             </tr>
             @empty
                 <tr>
-                    <td style="width:20px" colspan="100%">
+                    <td style="width:50px" colspan="100%">
                         <div class=" text-warning">
                             {{ 'No hay personal' }}
                         </div>

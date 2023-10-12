@@ -74,7 +74,9 @@
         .cursor-na{
             cursor: not-allowed!important;
         }
-        
+        .select2-container{
+            width:100%!important;
+        }
     </style>
 @stop
 

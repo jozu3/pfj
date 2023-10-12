@@ -22,7 +22,7 @@ class TareaLista extends Component
     public $programa;
     public $addTarea = false;
 
-    public $fecha_inicio, $fecha_final;
+    public $fecha_inicio, $fecha_final, $descripcion;
     public $tareaMateriales;
     public $deleteTareaMaterial = [], $rrr;    
 
@@ -30,6 +30,7 @@ class TareaLista extends Component
     protected $rules = [
         'fecha_inicio' => 'required',
         'fecha_final' => 'required',        
+        // 'descripcion' => 'required',        
         'tareaMateriales.*.materiale_id' => 'required',
         'tareaMateriales.*.tema' => 'required',
     ];
@@ -41,7 +42,7 @@ class TareaLista extends Component
 
     public function quitarTareaMaterial($index = null)
     {
-        if (!is_null($index)) {
+        if (!is_null($index) && $this->tareaMateriales != null && $this->tareaMateriales[$index] != null) {
             array_push($this->deleteTareaMaterial, $this->tareaMateriales[$index]['id']);
             array_splice($this->tareaMateriales, $index, 1);
         }
@@ -55,6 +56,7 @@ class TareaLista extends Component
             $tarea = Tarea::where('id', $this->idTarea)->first();
             $tarea->fecha_inicio = $this->fecha_inicio;
             $tarea->fecha_final = $this->fecha_final;
+            $tarea->descripcion = $this->descripcion;
             $tarea->save();
 
             foreach ($this->tareaMateriales as $tareaMaterial) {
@@ -84,6 +86,7 @@ class TareaLista extends Component
             $tarea = Tarea::create([
                 'fecha_inicio' => $this->fecha_inicio,
                 'fecha_final' => $this->fecha_final,
+                'descripcion' => $this->descripcion,
                 'programa_id' => $this->programa->id,
             ]);
 
@@ -102,12 +105,20 @@ class TareaLista extends Component
 
     }
 
+    public function updatedAddTarea($value){
+        $this->descripcion = '';
+        $this->emit('addtareadescripcion');
+    }
+    
     public function editTarea(Tarea $tarea)
     {
-        // $tarea = Tarea::find($id);
+        if ($this->addTarea == false) {
+            $this->emit('addtareadescripcion');
+        }
         $this->idTarea = $tarea->id;
         $this->fecha_inicio = $tarea->fecha_inicio;
         $this->fecha_final = $tarea->fecha_final;
+        $this->descripcion = $tarea->descripcion;
         $this->addTarea = true;
         $this->noMaterial = $tarea->tareaMateriales->count();
         $i = 0;
@@ -120,6 +131,7 @@ class TareaLista extends Component
             ];
             $i++;
         }
+        $this->emit('edtTarea');
         // $this->tareaMateriales = $tarea->tareaMateriales;
     }
 

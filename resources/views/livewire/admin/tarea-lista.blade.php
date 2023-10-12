@@ -4,9 +4,8 @@
             <h3 class="card-title">
                 <i class="fas fa-book-reader"></i>&nbsp;
                 <b>Lecturas asignadas a la sesión</b>
-
+                {{-- {{$descripcion}} --}}
             </h3>
-
             <div class="card-tools pagination pagination-sm">
                 {{ $tareas->links() }}
             </div>
@@ -62,17 +61,34 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
-                                <span class="text text-center" style="width: 300px">Material</span>
-                                <span class="text text-center" style="width: 300px">Temas</span>
-                                <span class="text text-center" style="width: 300px">Enlace</span>
+                                <div class="col-md-12" wire:ignore>
+                                    {!! Form::label('descripcion', 'Descripción') !!}
+                                    {!! Form::textarea('descripcion', null, [
+                                        // 'id' => 'descripcion',
+                                        'wire:model' => 'descripcion',
+                                        'class' => 'form-control',
+                                        'placeholder' => 'Añade una descripción para la tarea ...',
+                                    ]) !!}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 text-center">
+                                    <span class="text " style="">Material</span>
+                                </div>
+                                <div class="col-sm-3 text-center">
+                                    <span class="text " style="">Temas</span>
+                                </div>
+                                <div class="col-sm-3 text-center">
+                                    <span class="text " style="">Enlace</span>
+                                </div>
+                                <div class="col-sm-3">
+                                </div>
                             </div>
                             @for ($i = 0; $i < $noMaterial; $i++)
                                 <div class="row" wire:key="post-field-{{ $i }}">
-                                    <input type="hidden" wire:model='tareaMateriales.{{ $i }}.id'
-                                        wire:target='saveTarea'>
-                                    <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
-                                    <span class="text text-center" style="width: 300px">
+                                    <div class="col-sm-3">
+                                        <input type="hidden" wire:model='tareaMateriales.{{ $i }}.id'
+                                            wire:target='saveTarea'>
                                         <select class="form-control form-control-sm"
                                             wire:model.defer="tareaMateriales.{{ $i }}.materiale_id"
                                             wire:target='saveTarea'>
@@ -84,22 +100,22 @@
                                         </select>
                                         <x-jet-input-error class="text-danger"
                                             for="tareaMateriales.{{ $i }}.materiale_id" />
-                                    </span>
-                                    <span class="text text-center" style="width: 300px">
+                                    </div>
+                                    <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm disabled:opacity-5"
-                                            wire:model.defer="tareaMateriales.{{ $i }}.tema"
-                                            wire:loading.attr='disabled' wire:target='saveTarea'>
+                                        wire:model.defer="tareaMateriales.{{ $i }}.tema"
+                                        wire:loading.attr='disabled' wire:target='saveTarea'>
                                         <x-jet-input-error class="text-danger"
-                                            for="tareaMateriales.{{ $i }}.tema" />
-                                    </span>
-                                    <span class="text text-center" style="width: 300px">
+                                        for="tareaMateriales.{{ $i }}.tema" />
+                                    </div>
+                                    <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm disabled:opacity-5"
-                                            wire:model.defer="tareaMateriales.{{ $i }}.link"
-                                            wire:loading.attr='disabled' wire:target='saveTarea'>
+                                        wire:model.defer="tareaMateriales.{{ $i }}.link"
+                                        wire:loading.attr='disabled' wire:target='saveTarea'>
                                         <x-jet-input-error class="text-danger"
-                                            for="tareaMateriales.{{ $i }}.tema" />
-                                    </span>
-                                    <div class="col-2">
+                                        for="tareaMateriales.{{ $i }}.tema" />
+                                    </div>
+                                    <div class="col-sm-3">
                                         <button class="btn btn-link"
                                             wire:click='quitarTareaMaterial({{ $i }})'>
                                             <i class="fas fa-times-circle"></i> Quitar</button>
@@ -121,13 +137,11 @@
                     <li id="accordion{{ $tarea->id }}">
                         <div class="row">
                             <span class="col-2  text">
-                                <i class="fas fa-bookmark text-warning"></i>&nbsp; 
-                                <span class="t-semana" >Semana</span>
+                                <i class="fas fa-bookmark text-warning"></i>&nbsp;
+                                <span class="t-semana">Semana</span>
                             </span>
                             <div class="col">
                                 <div class="form-row">
-
-
                                     <span class="col-md-4 ">
                                         <div class="bg-info rounded-pill text-center">
                                             {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }}
@@ -141,10 +155,8 @@
                                     </span>
                                 </div>
                             </div>
-
-                            {{-- <span class="text">{{ $tarea->descripcion }}</span> --}}
                             <div class="col">
-                                <div class="row"> {{-- col-4 col-md-3 --}}
+                                <div class="row"> 
                                     <a class="col-md-4 btn btn-link collapsed" data-toggle="collapse"
                                         href="#collapse{{ $tarea->id }}" aria-expanded="false"><i
                                             class="fas fa-eye"></i></a>
@@ -159,8 +171,12 @@
                         <div>
                             <div class="collapse px-3" id="collapse{{ $tarea->id }}"
                                 data-parent="#accordion{{ $tarea->id }}">
-                                <table class="table table-sm table-striped">
-                                    <thead>
+                                <div>
+                                    {!! $tarea->descripcion !!}
+                                </div>
+                                <div>
+                                    <table class="table table-sm table-striped">
+                                        <thead>
                                         <tr class="text-warning">
                                             <th scope="col">Material</th>
                                             <th scope="col">Tema</th>
@@ -169,46 +185,22 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($tarea->tareaMateriales as $item)
-                                            <tr>
+                                        <tr>
                                                 <td>{{ $item->materiale->descripcion }}</td>
                                                 <td>{{ $item->tema }}</td>
                                                 <td>{{ $item->link }}</td>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                {{-- <div class="row text-warning">
-                                    <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
-                                    <span class="text text-center" style="width: 300px">Material</span>
-                                    <span class="text text-center" style="width: 300px">Temas</span>
-                                    <span class="text text-center" style="width: 300px">Enlace</span>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
-                                @foreach ($tarea->tareaMateriales as $item)
-                                    <div class="row">
-                                        <span class="handle ui-sortable-handle" style="width: 10px">&nbsp;</span>
-                                        <span class="text text-center" style="width: 300px">                                            
-                                            <p>{{ $item->materiale->descripcion }}</p>
-                                        </span>
-                                        <span class="text text-center" style="width: 300px">
-                                            <p style="font-weight: normal;">{{ $item->tema }}</p>
-                                        </span>
-                                        <span class="text text-center" style="width: 300px">
-                                            <p style="font-weight: normal;">{{ $item->link }}</p>
-                                        </span>
-                                    </div>
-                                @endforeach --}}
                             </div>
                         </div>
                     </li>
                 @endforeach
             </ul>
         </div>
-        <!-- /.card-body -->
         <div class="card-footer clearfix">
-            {{-- <button type="button" class="btn btn-sm btn-primary float-right" wire:click="$toggle('addTarea')">
-            <i class="fas fa-plus-circle"></i> Añadir tarea
-        </button> --}}
-            {{-- @livewire('admin.create-tarea') --}}
         </div>
     </div>
     <script>
@@ -228,5 +220,39 @@
                 }
             })
         })
+        document.addEventListener('livewire:load', function() {
+            let editor;
+            Livewire.on('addtareadescripcion', () => {
+                var textarea_descripcion = document.querySelector('#descripcion');
+                if (textarea_descripcion){
+                    ClassicEditor.create(textarea_descripcion)
+                        .then(newEditor => {
+                            editor = newEditor;
+                            var desc = @this.descripcion;
+                            // console.log(desc);
+                            if (desc != '') {
+                                editor.setData(desc);
+                            } else {}
+                            editor.model.document.on('change:data', () => {
+                                @this.set('descripcion', newEditor.getData());
+                            });
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                }
+
+            });
+
+            Livewire.on('edtTarea', () => {
+                var desc = @this.descripcion;
+                // console.log(desc);
+                if (editor && desc != '' ) {
+                    editor.setData(desc);
+                } else {}
+            });
+
+
+        });
     </script>
 </div>

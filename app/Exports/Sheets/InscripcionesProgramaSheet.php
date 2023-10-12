@@ -55,9 +55,13 @@ class InscripcionesProgramaSheet implements FromView, WithTitle
         }
 
         //filtros por rol
-        if($this->rol != 0){
-            $rol = $this->rol;
-            $inscripciones = $inscripciones->where('role_id', $rol);
+
+        if ($this->rol != 0 && $this->rol != '') {
+            $_roles = json_decode($this->rol);
+            if(is_array($this->rol) && count($this->rol)){
+                $rol = $this->rol;
+                $inscripciones = $inscripciones->whereIn('role_id', $rol);
+            }
         }
         
         $inscripciones = $inscripciones->get();

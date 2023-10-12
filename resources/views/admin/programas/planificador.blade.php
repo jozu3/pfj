@@ -86,8 +86,8 @@
         }
     </style>
 @stop
-
 @section('js')
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 
 	@if (session('info_comp') || isset($_GET['grupo']))
         <script>

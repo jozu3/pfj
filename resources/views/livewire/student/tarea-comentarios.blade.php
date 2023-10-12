@@ -12,14 +12,22 @@
                                         Semana del {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} al
                                         {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}
                                     </div>
+                                    @if ($tarea->descripcion != '')  
+                                        <div class="border-b-2 my-6 pb-6">
+                                            {!! $tarea->descripcion !!}
+                                        </div>
+                                    @endif
 
                                     <div class="grid md:grid-cols-1 sm:grid-cols-1 gap-4 place-content-center mt-4">
-                                        <div class="text-center">
+                                        <div class="text-left">
+                                            <b>Tareas:</b>
+                                        </div>
+                                        <div class="text-left">
                                             <ul>
                                                 @foreach ($tarea->tareaMateriales as $tareaMateriale)
-                                                    <li class="text-center">
+                                                    <li class="text-left">
                                                         @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
-                                                            <a href="{{ $tareaMateriale->link }}" target="_blank" class="text-blue-800 font-bold">
+                                                            <a href="{{ $tareaMateriale->link }}" target="_blank" class="text-blue-600 font-bold">
                                                                 {{ $tareaMateriale->materiale->descripcion }}:
                                                                 {{ $tareaMateriale->tema }}
                                                             </a>

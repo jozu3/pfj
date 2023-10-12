@@ -3,6 +3,7 @@
 @section('title', 'Sesión')
 
 @section('plugins.Sweetalert2', true)
+@section('plugins.Select2', true)
 
 @section('content_header')
     @can('admin.programas.edit')
@@ -119,6 +120,9 @@
 
 @section('css')
     <style type="text/css">
+        .select2-container{
+            width:100%!important;
+        }
         #success-alert {
             position: fixed;
             top: 150px;
