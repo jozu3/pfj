@@ -168,6 +168,13 @@ class ContactosIndex extends Component
                             }
                         });
                     })
+                    ->whereDoesntHave('personale', function($q){
+                        $q->whereHas('user', function($q){
+                            $q->whereHas('roles', function($q){
+                                $q->where('slug', 'obispo');
+                            });    
+                        });
+                    })
                     ->where(function($query) use ($that) {
                         $query->orWhere('nombres', 'like','%'.$that->search.'%')
                                 ->orWhere('apellidos', 'like','%'.$that->search.'%')
