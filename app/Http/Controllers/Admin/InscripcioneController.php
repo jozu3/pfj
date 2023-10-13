@@ -212,11 +212,12 @@ class InscripcioneController extends Controller
     public function notificacion(Inscripcione $inscripcione){
         $user =  $inscripcione->personale->user; 
 
-        $password = substr(str_shuffle("0123456789PFJ"),0,8);
+        $password = '';
+        // $password = substr(str_shuffle("0123456789PFJ"),0,8);
         
-        $user->update([
-                'password' => Hash::make($password),
-        ]);
+        // $user->update([
+        //         'password' => Hash::make($password),
+        // ]);
 
         $user->notify(new InscripcioneNotification($inscripcione,  $password));
         
