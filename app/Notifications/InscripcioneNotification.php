@@ -14,15 +14,17 @@ class InscripcioneNotification extends Notification
     use Queueable;
 
     public $inscripcione;
+    public $password;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Inscripcione $inscripcione)
+    public function __construct(Inscripcione $inscripcione, $password)
     {
         $this->inscripcione = $inscripcione;
+        $this->password = $password;
     }
 
     /**
@@ -60,8 +62,8 @@ class InscripcioneNotification extends Notification
                 break;
         }
 
-        $line_password = 'Contraseña: password';
-        if($this->inscripcione->personale->user->created_at != $this->inscripcione->personale->user->updated_at){
+        $line_password = 'Contraseña: '.$this->password;
+        if($this->inscripcione->personale->user->created_at != $this->inscripcione->personale->user->updated_at || $this->password == ''){
             $line_password = '';
         }
 

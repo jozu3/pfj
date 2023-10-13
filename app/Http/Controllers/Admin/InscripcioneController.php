@@ -68,7 +68,6 @@ class InscripcioneController extends Controller
      */
     public function store(StoreInscripcioneRequest $request)
     {
-
         //actualizar daotos del contacto
         $contacto = Contacto::find($request->contacto_id);
         //$this->authorize('updating', $contacto);// no se que hacia esto aquí
@@ -106,12 +105,12 @@ class InscripcioneController extends Controller
             $contacto->update($request->all());
             $contacto = Contacto::find($request->contacto_id);
 
-            
+            $password = substr(str_shuffle("0123456789PFJ"),0,8);
             //crear el usuario y asignarlo al request
             $user = User::create([
                 'name' => $contacto->nombres . ' ' . $contacto->apellidos,
                 'email' => $contacto->email,
-                'password' => Hash::make('password'),
+                'password' => Hash::make($password),
                 'estado' => 1,
             ])->assignRole(Role::find($request->role_id)->name);
 
@@ -124,6 +123,7 @@ class InscripcioneController extends Controller
             $personale = Personale::create($request->all());
 
         } else {
+            $password = '';
             $inscripcione_existe = Inscripcione::where('personale_id', $contacto->personale->id)->where('programa_id', $request->programa_id)->get();
             
             if (!count($inscripcione_existe)){ //Entra si no hay inscripcione en el mismo grupo
@@ -145,9 +145,9 @@ class InscripcioneController extends Controller
 
         //enviar notification de inscripcione al personale
         $user = $personale->user;
-        // $user->notify(new InscripcioneNotification($inscripcione));
+        $user->notify(new InscripcioneNotification($inscripcione, $password));
         
-        return redirect()->route('admin.inscripciones.show', $inscripcione)->with('info', 'Inscripción registrada correctamente.');
+        return redirect()->route('admin.inscripciones.show', $inscripcione)->with('info', 'Inscripción registrada correctamente. Se envío la notificación al correo '.  $user->email);
     }
     
     /**
@@ -211,7 +211,7 @@ class InscripcioneController extends Controller
     
     public function notificacion(Inscripcione $inscripcione){
         $user =  $inscripcione->personale->user; 
-        $user->notify(new InscripcioneNotification($inscripcione));
+        $user->notify(new InscripcioneNotification($inscripcione, ''));
         
         return redirect()->route('admin.inscripciones.show', $inscripcione)->with('info', 'Se envío la notificación correctamente al correo '.  $user->email);
     }
