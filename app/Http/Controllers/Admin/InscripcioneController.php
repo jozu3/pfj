@@ -211,7 +211,14 @@ class InscripcioneController extends Controller
     
     public function notificacion(Inscripcione $inscripcione){
         $user =  $inscripcione->personale->user; 
-        $user->notify(new InscripcioneNotification($inscripcione, ''));
+
+        $password = substr(str_shuffle("0123456789PFJ"),0,8);
+        
+        $user->update([
+                'password' => Hash::make($password),
+        ]);
+
+        $user->notify(new InscripcioneNotification($inscripcione,  $password));
         
         return redirect()->route('admin.inscripciones.show', $inscripcione)->with('info', 'Se envío la notificación correctamente al correo '.  $user->email);
     }

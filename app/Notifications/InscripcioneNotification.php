@@ -62,21 +62,17 @@ class InscripcioneNotification extends Notification
                 break;
         }
 
-        $line_password = 'Contraseña: '.$this->password;
-        if($this->inscripcione->personale->user->created_at != $this->inscripcione->personale->user->updated_at || $this->password == ''){
-            $line_password = '';
-        }
 
         return (new MailMessage)
             ->from('no-reply@pfjperu.com', config('app.name'))
-            ->subject('Notificación de Inscripción')
+            ->subject('¡Felicidades! Ya estás inscrito al PFJ 2024')
             ->greeting(Lang::get('Hello!') . ' ' . $this->inscripcione->personale->contacto->nombres)
             ->line('Te damos una cordial bienvenida al '.$this->inscripcione->programa->nombre/*.' que inicia el '.date( 'd/m/Y', strtotime($this->inscripcione->programa->fecha_inicio))*/.'. En este correo encontrarás tu usuario y contraseña de la plataforma MiPFJ')
             ->line('Debes ingresar a '. config('app.url'))
             ->line('Rol: '. $this->inscripcione->role->name)
             ->line('Usuario: '.$this->inscripcione->personale->user->email)
-            ->line($line_password == '' ? 'Si olvidaste tu contraseña ingresa al link y pon olvidé mi contraseña.': $line_password)
-            ->line($line_password!= ''?'Te sugerimos que cambies tu contraseña en las próximas 24 horas, ingresando al menú perfil desde tu portal MiPFJ.': '')
+            ->line($this->password == '' ? 'Si olvidaste tu contraseña ingresa al link y pon olvidé mi contraseña.': 'Contraseña: '.$this->password)
+            ->line($this->password != ''?'Te sugerimos que cambies tu contraseña en las próximas 24 horas, ingresando al menú perfil desde tu portal MiPFJ.': '')
             ->action('Portal MiPFJ ', $url_action)
             ->line('Bienvenido a una nueva experiencia.')
             ->salutation($this->inscripcione->programa->pfj->lema);
