@@ -22,7 +22,7 @@
                         <td>{{ $personal->contacto->telefono }}</td>
     				  	<td>
                             @if ( $personal->user)
-                            {{ $personal->user->email }}
+                            {{ $personal->contacto->email }}
                             @else
                             <a href="{{ route('admin.users.create', ['personale' => $personal]) }}" class="btn btn-primary" >Crear usuario</a>
                             @endif
