@@ -49,6 +49,8 @@ class AprobacionPersonale extends Component
                                 'contactos.id as contactos_id',
                                 'contactos.nombres as contactos_nombres',
                                 'contactos.apellidos as contactos_apellidos',
+                                'contactos.mes_recomendacion as contactos_mes_recomendacion',
+                                'contactos.anio_recomendacion as contactos_anio_recomendacion',
                                 'personales.id as personales_id',
                                 'personales.permiso_obispo as permiso_obispo'
                             )   

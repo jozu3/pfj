@@ -41,10 +41,10 @@
                         aria-controls="nav-home" aria-selected="true">Asistencia</a>
                     <a class="nav-item nav-link" id="nav-tareas-tab" data-toggle="tab" href="#nav-tareas" role="tab"
                         aria-controls="nav-tareas" aria-selected="false">Lecturas/Tareas</a>
-                    <a class="nav-item nav-link" id="nav-vacuna-tab" data-toggle="tab" href="#nav-vacuna" role="tab"
-                        aria-controls="nav-vacuna" aria-selected="false">Vacunas</a>
-                    <a class="nav-item nav-link" id="nav-rtemplo-tab" data-toggle="tab" href="#nav-rtemplo" role="tab"
-                        aria-controls="nav-rtemplo" aria-selected="false">Recomendación para el templo</a>
+                    {{-- <a class="nav-item nav-link" id="nav-vacuna-tab" data-toggle="tab" href="#nav-vacuna" role="tab"
+                        aria-controls="nav-vacuna" aria-selected="false">Vacunas</a> --}}
+                    {{-- <a class="nav-item nav-link" id="nav-rtemplo-tab" data-toggle="tab" href="#nav-rtemplo" role="tab"
+                        aria-controls="nav-rtemplo" aria-selected="false">Recomendación para el templo</a> --}}
                     <a class="nav-item nav-link" id="nav-aprobacion-tab" data-toggle="tab" href="#nav-aprobacion" role="tab"
                         aria-controls="nav-aprobacion" aria-selected="false">Aprobación final</a>
                 </div>
@@ -57,12 +57,12 @@
                 <div class="tab-pane fade" id="nav-tareas" role="tabpanel" aria-labelledby="nav-tareas-tab">
                     @livewire('admin.tareas-personale', ['programa' => $programa])
                 </div>
-                <div class="tab-pane fade" id="nav-vacuna" role="tabpanel" aria-labelledby="nav-vacuna-tab">
+                {{-- <div class="tab-pane fade" id="nav-vacuna" role="tabpanel" aria-labelledby="nav-vacuna-tab">
                     @livewire('admin.create-personale-vacuna', ['programa' => $programa])
-                </div>
-                <div class="tab-pane fade" id="nav-rtemplo" role="tabpanel" aria-labelledby="nav-rtemplo-tab">
+                </div> --}}
+                {{-- <div class="tab-pane fade" id="nav-rtemplo" role="tabpanel" aria-labelledby="nav-rtemplo-tab">
                     @livewire('admin.create-personale-rtemplo', ['programa' => $programa])
-                </div>
+                </div> --}}
                 <div class="tab-pane fade" id="nav-aprobacion" role="tabpanel" aria-labelledby="nav-aprobacion-tab">
                     @livewire('admin.aprobacion-personale', ['programa' => $programa])
                 </div>

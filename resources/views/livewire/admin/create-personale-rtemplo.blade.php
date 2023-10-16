@@ -80,7 +80,9 @@
                         @endif
                     </td>
                     <td width="10px">
-                        <a href="{{ route('admin.contactos.show', $inscripcione->contacto_id) }}" class="btn btn-primary" ><i class="fas fa-user-edit"></i></a>
+                        @can('admin.contactos.edit')
+                            <a href="{{ route('admin.contactos.show', $inscripcione->contacto_id) }}" class="btn btn-primary" ><i class="fas fa-user-edit"></i></a>
+                        @endcan
                     </td>
                 </tr>
         @empty
