@@ -147,7 +147,7 @@ class AppServiceProvider extends ServiceProvider
                         'text' => 'Control',
                         'url' => 'admin/programas/' . session('programa_activo'),
                         'icon' => 'fas fa-calendar-check',
-                        'can' => 'admin.asistencias.index'
+                        'can' => 'admin.programas.control'
                     ];
 
                     $menu_tareas = [
