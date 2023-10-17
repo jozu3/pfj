@@ -75,7 +75,6 @@
                         {{-- <th>Grupo - Compañerismo</th> --}}
                         <th>Telefono</th>
                         <th>Correo electrónico</th>
-                        <th>Pre-Inscripción</th>
                         <th>Activo</th>
                         {{-- <th>Recomendación para el templo</th>
                         <th>Permiso del obispo</th> --}}
@@ -152,19 +151,6 @@
                                     <a href="{{ route('admin.users.create', ['personale' => $inscripcione->personale]) }}"
                                         class="btn btn-primary">Crear usuario</a>
                                 @endif
-                            </td>
-                            <td>
-                                @switch($inscripcione->personale->preinscripcion)
-                                    @case(1)
-                                        {{ 'Sí' }}
-                                    @break
-
-                                    @case(0)
-                                        {{ 'No' }}
-                                    @break
-
-                                    @default
-                                @endswitch
                             </td>
                             <td>
                                 <div class="custom-control custom-switch">
