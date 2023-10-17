@@ -91,8 +91,19 @@ class InscripcioneController extends Controller
         }*/
 
         $personale_existe = Personale::where('contacto_id', '=', $request->contacto_id)->get();
-
-
+        $value_personale = 1;
+        switch ($request['estado_aprobacion']) {
+            case '1':
+                $value_personale = 2;
+                break;
+            case '2':
+                $value_personale = 0;
+                break;
+            
+            default:
+                $value_personale = 1;
+                break;
+        }
 
         if (!count($personale_existe)){//entra si el personale no existe
 
@@ -115,7 +126,7 @@ class InscripcioneController extends Controller
             ])->assignRole(Role::find($request->role_id)->name);
 
             $request['user_id'] = $user->id;
-            // $request['permiso_obispo'] = 0;
+            $request['permiso_obispo'] = $value_personale;
 
             //obtener el ultimo codigo de personale y asignar el nuevo
             //PersonaleObserver / creating
@@ -130,6 +141,8 @@ class InscripcioneController extends Controller
                 $contacto->update($request->all());
 
                 $personale = $contacto->personale;
+                $personale->update(['permiso_obispo' => $value_personale]);
+
             } else {
                  return redirect()->back()->with('error', 'El personal ya está inscrito en la sesión seleccionada.');
             }

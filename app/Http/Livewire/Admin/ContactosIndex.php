@@ -104,7 +104,23 @@ class ContactosIndex extends Component
     }
 
     public function updatedAprobContacto($value, $key){
-        Contacto::find($key)->update(['estado_aprobacion' => $value]);
+        $contacto = Contacto::find($key);
+        $contacto->update(['estado_aprobacion' => $value]);
+        $value_personale = 1;
+        switch ($value) {
+            case '1':
+                $value_personale = 2;
+                break;
+            case '2':
+                $value_personale = 0;
+                break;
+            
+            default:
+                $value_personale = 1;
+                break;
+        }
+
+        $contacto->personale->update(['permiso_obispo' => $value_personale ]);
     }
 
  	public function render()

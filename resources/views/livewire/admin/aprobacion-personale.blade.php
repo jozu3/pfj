@@ -124,7 +124,7 @@
                                         class="form-control btn-{{ $color }} text-white"
                                         onchange="Livewire.emit('changeAprob', {{ $inscripcione->personales_id }}, value)">
                                         <option class="text-danger bg-white" value="0"
-                                            @if ($inscripcione->permiso_obispo == 0) selected @endif>Cancelado</option>
+                                            @if ($inscripcione->permiso_obispo == 0) selected @endif>Desaprobado</option>
                                         <option class="text-warning bg-white" value="1"
                                             @if ($inscripcione->permiso_obispo == 1) selected @endif>Aprobación pendiente</option>
                                         <option class="text-info bg-white" value="2"

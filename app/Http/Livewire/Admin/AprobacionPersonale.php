@@ -27,6 +27,21 @@ class AprobacionPersonale extends Component
             'permiso_obispo' => $value
         ]);
         if($update){
+            $value_contacto = null;
+            switch ($value) {
+                case '2':
+                    $value_contacto = 1;
+                    break;
+                case '0':
+                    $value_contacto = 2;
+                    break;
+                
+                default:
+                    $value_contacto = null;
+                    break;
+            }
+    
+            $personale->contacto->update(['estado_aprobacion' => $value_contacto]);
             $this->emit('alert', true);
         }
 
