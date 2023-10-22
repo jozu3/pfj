@@ -67,6 +67,9 @@
                         <th colspan="2">Nombres</th>
                         <th>Apellidos</th>
                         <th>Sexo</th>
+                        <th>Cumpleaños</th>
+                        <th>Edad</th>
+                        <th>Sexo</th>
                         <th>Estaca</th>
                         <th>Barrio</th>
                         <th>Habitación</th>
@@ -96,11 +99,19 @@
                             </td>
                             <td>{{ $inscripcione->personale->contacto->apellidos }}</td>
                             <td>{{ $inscripcione->personale->contacto->genero }}</td>
+                            <td>{{ date('d-M', strtotime($inscripcione->personale->contacto->fecnac)) }}</td>
                             <td>
-                                {{ $inscripcione->personale->barrio->estaca->nombre }}
+                                @php
+                                    $fecha_nacimiento = new DateTime($inscripcione->personale->contacto->fecnac);
+                                    $hoy = new DateTime();
+                                    echo (string) $hoy->diff($fecha_nacimiento)->format('%y');
+                                @endphp
                             </td>
                             <td>
-                                {{ $inscripcione->personale->barrio->nombre }}
+                                {{ $inscripcione->personale->contacto->barrio->estaca->nombre }}
+                            </td>
+                            <td>
+                                {{ $inscripcione->personale->contacto->barrio->nombre }}
                             </td>
                             <td>
                                 @if (isset($inscripcione->alojamientoPersonale))

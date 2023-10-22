@@ -16,6 +16,26 @@ class TareasPersonale extends Component
     public $aprobacion;
 
     use WithPagination;
+    public $cantpages = 15;
+	public $sortBy = 'contactos.nombres';
+    public $sortDirection = 'asc';
+
+    public function sortBy($field)
+    {
+        $this->sortDirection = $this->sortBy === $field
+            ? $this->reverseSort()
+            : 'asc';
+
+        $this->sortBy = $field;
+    }
+
+    public function reverseSort()
+    {
+        return $this->sortDirection === 'asc'
+            ? 'desc'
+            : 'asc';
+    }
+
 
 	protected $paginationTheme = 'bootstrap';
 
@@ -28,7 +48,9 @@ class TareasPersonale extends Component
         $familias = Grupo::where('programa_id', session('programa_activo'))->get();
 
 
-        $inscripciones = Inscripcione::where('inscripciones.programa_id', $this->programa->id)->whereIn('inscripciones.estado', [1])
+        $inscripciones = Inscripcione::where('inscripciones.programa_id', $this->programa->id)
+                                    ->whereIn('inscripciones.estado', [1])
+                                    ->whereIn('inscripciones.role_id', [4,5,6])
                                     // ->join('inscripcione_companerismos', 'inscripciones.id', '=', 'inscripcione_companerismos.inscripcione_id')
                                     // ->join('companerismos', 'inscripcione_companerismos.id', '=', 'companerismos.id')
                                     // ->join('grupos', 'companerismos.grupo_id', '=', 'grupos.id')
@@ -66,7 +88,7 @@ class TareasPersonale extends Component
                                                         });
                                     }
                                    
-        $inscripciones = $inscripciones->orderBy('contactos.nombres');
+        $inscripciones = $inscripciones->orderBy($this->sortBy, $this->sortDirection);
         
         $inscripciones_all_ids = $inscripciones->pluck('inscripciones.inscripcione_id'); 
         $inscripciones = $inscripciones->paginate();

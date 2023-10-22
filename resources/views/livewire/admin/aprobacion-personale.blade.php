@@ -2,10 +2,10 @@
     <div class="card">
         <div class="card-header">
             <div class="form-row">
-                <div class="col">
+                <div class="col-md-3 mt-2">
                     <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un personal">
                 </div>
-                <div class="col">
+                <div class="col-md-3 mt-2">
                     <select name="" id="" class="form-control" wire:model="familia">
                         <option value="">-- Familias --</option>
                         @foreach ($familias as $familia)
@@ -14,14 +14,21 @@
                     </select>
 
                 </div>
-                <div class="col">
+                <div class="col-md-3 mt-2" wire:ignore>
+                    <select name="" id="estaca_ids" class="form-control" name="estaca_ids[]" multiple="multiple">
+                        {{-- <option value="0">-- Todas las estacas --</option> --}}
+                        @foreach ($estacas as $stk)
+                            <option value="{{ $stk->id }}">{{ $stk->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 mt-2">
                     <select name="" id="" class="form-control" wire:model="aprobacion">
                         <option value="">-- Estado de Aprobación --</option>
                         <option value="0">Cancelado</option>
                         <option value="1">Aprobación pendiente</option>
                         <option value="2">Aprobado</option>
                     </select>
-
                 </div>
             </div>
         </div>
@@ -82,7 +89,7 @@
                                             'class' => 'form-control',
                                             'placeholder' => '----',
                                             'disabled',
-                                            'style' => 'width:150px'
+                                            'style' => 'width:150px',
                                         ],
                                     ) !!}
                                     <input type="text" class="form-control border-0 bg-white text-center px-1"
@@ -90,7 +97,7 @@
                                     {!! Form::number('anio_recomendacion', $inscripcione->contactos_anio_recomendacion, [
                                         'class' => 'form-control',
                                         'readonly',
-                                        'style' => 'width:100px'
+                                        'style' => 'width:100px',
                                     ]) !!}
                                 </div>
                             </td>
@@ -171,3 +178,20 @@
         </div>
 
     </div>
+    <script>     
+        document.addEventListener('livewire:load', function() {
+            $('#estaca_ids').select2({
+                placeholder: "Todas las estacas",
+                allowClear: true
+            });
+
+            $('#estaca_ids').on('change', function() {
+                var ess = (JSON.stringify($('#estaca_ids').val()));
+                // ess = JSON.stringify(ess);
+                console.log($('#estaca_ids').val())
+                console.log(ess)
+                @this.set('estaca_id', ess);
+            });
+        });
+    </script>
+</div>

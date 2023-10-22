@@ -25,8 +25,9 @@
                             <th class="apellido-fijo-lecturas fijo border-0">
                                 Familia
                             </th>
-                            <th class="nombre-fijo-lecturas fijo border-0">
+                            <th class="nombre-fijo-lecturas fijo border-0" wire:click="sortBy('contactos.nombres')" style="cursor:pointer">
                                 Nombres y Apellidos
+                                @include('partials._sort-icon', ['field' => 'contactos.nombres'])
                             </th>
                             <th class="text-center align-middle border-left">
                                 Completado (%/#)

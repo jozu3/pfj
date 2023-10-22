@@ -7,8 +7,7 @@
 
                 </div>
                 <div class="col">
-            @include('admin.programas.partials.card-footer-personal')
-
+                @include('admin.programas.partials.card-footer-personal')
                 </div>
                 <div class="col-md-1 d-flex align-items-center justify-content-end">
                     Ver:

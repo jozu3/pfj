@@ -134,16 +134,12 @@ class InscripcioneProgramaIndex extends Component
                     });
                 }
 
-
-
-
-
-
             }
             $this->emit('readytoload');
             $inscripciones = $inscripciones->orderBy('role_id')->paginate();
             $this->page = 1;
         }
+
         $familias = Grupo::where('programa_id',$this->programa_id)->get();
         $roles_select = Role::whereNotIn('name', ['Admin'])->get();
         $estacas = Estaca::orderBy('nombre')->get();

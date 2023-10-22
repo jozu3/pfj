@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Estaca;
 use App\Models\Grupo;
 use App\Models\Inscripcione;
 use App\Models\Personale;
@@ -15,12 +16,34 @@ class AprobacionPersonale extends Component
     public $search;
     public $familia;
     public $aprobacion;
+    public $estaca_id;
 
     protected $listeners = ['changeAprob'];
 
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
-	protected $paginationTheme = 'bootstrap';
+
+    public $cantpages = 15;
+	public $sortBy = 'contactos.nombres';
+    public $sortDirection = 'asc';
+
+    public function sortBy($field)
+    {
+        $this->sortDirection = $this->sortBy === $field
+            ? $this->reverseSort()
+            : 'asc';
+
+        $this->sortBy = $field;
+    }
+
+    public function reverseSort()
+    {
+        return $this->sortDirection === 'asc'
+            ? 'desc'
+            : 'asc';
+    }
+
 
     public function changeAprob(Personale $personale, $value){
         $update = $personale->update([
@@ -46,6 +69,9 @@ class AprobacionPersonale extends Component
         }
 
     }
+    public function mount(){
+
+    }
 
     public function render()
     {
@@ -54,11 +80,15 @@ class AprobacionPersonale extends Component
         $aprobacion = $this->aprobacion;
         $familias = Grupo::where('programa_id', $this->programa->id)->get();
 
+        $_estacas = [];
+        if($this->estaca_id != '') $_estacas = json_decode($this->estaca_id);
+
         $inscripciones = Inscripcione::where('programa_id',$this->programa->id)
                             ->where('inscripciones.estado', '1')
                             ->whereIn('inscripciones.role_id', [4,5,6])
                             ->join('personales', 'inscripciones.personale_id', '=', 'personales.id')     
                             ->join('contactos', 'contactos.id', '=', 'personales.contacto_id')
+                            ->join('barrios', 'barrios.id', '=', 'contactos.barrio_id')
                             ->select(
                                 'inscripciones.id as inscripciones_id',
                                 'contactos.id as contactos_id',
@@ -67,14 +97,20 @@ class AprobacionPersonale extends Component
                                 'contactos.mes_recomendacion as contactos_mes_recomendacion',
                                 'contactos.anio_recomendacion as contactos_anio_recomendacion',
                                 'personales.id as personales_id',
-                                'personales.permiso_obispo as permiso_obispo'
-                            )   
+                                'personales.permiso_obispo as permiso_obispo',
+                                'barrios.estaca_id'
+                            )
+                            ->where(function($q) use ($_estacas) {
+                                if(count($_estacas)){
+                                    $q->whereIn('barrios.estaca_id', $_estacas);
+                                }
+                            })
                             ->whereHas('personale', function ($q) use($search){
                                 $q->whereHas('contacto', function ($q) use ( $search){
                                     $q->where('nombres','like', '%'.$search.'%')
                                       ->orderBy('nombres', 'asc')  ;
                                 });
-                            });
+                            }); 
                             if(auth()->user()->can('admin.asistencias.migrupo' )){
                                 $auth_inscripcione = auth()->user()->personale->inscripciones->where('programa_id', $this->programa->id)->first();
                                 if($auth_inscripcione && $auth_inscripcione->inscripcioneCompanerismo){
@@ -98,10 +134,13 @@ class AprobacionPersonale extends Component
                             }
 
         // $inscripciones = $inscripciones->orderBy('nombres', 'asc')
+        $id_estacas = $inscripciones->get()->unique('estaca_id')->pluck('estaca_id');
+        $estacas = Estaca::whereIn('id', $id_estacas)->get();
+        
         $inscripciones = $inscripciones->orderBy('nombres')->paginate();
         $this->page = 1;
 
 
-        return view('livewire.admin.aprobacion-personale', compact('inscripciones', 'familias'));
+        return view('livewire.admin.aprobacion-personale', compact('inscripciones', 'familias', 'estacas'));
     }
 }

@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'Control de Consejeros')
+@section('plugins.Select2', true)
 
 @section('content_header')
     <h1><b class="text-pfj">{{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</b></h1>
@@ -208,7 +209,9 @@
             } */
 
         }
-
+        .select2-container{
+            width:100%!important;
+        }
     </style>
     {{-- <link rel="stylesheet" href="{{ config('app.url') }}/css/app.css"> --}}
 
