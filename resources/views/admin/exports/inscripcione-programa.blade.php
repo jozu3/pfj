@@ -4,11 +4,13 @@
             <th>Nombres</th>
             <th>Apellidos</th>
             <th>Sexo</th>
+            <th>Cumpleaños</th>
+            <th>Edad</th>
+            <th>Recomendación para el templo</th>
             <th>Estaca</th>
             <th>Habitación</th>
             <th>Asignación</th>
             <th>Familia</th>
-            {{-- <th>Grupo - Compañerismo</th> --}}
             <th>Telefono</th>
             <th>Correo electrónico</th>
             <th>Pre-Inscripción</th>
@@ -32,6 +34,17 @@
                 </td>
                 <td style="width:200px">{{ $inscripcione->personale->contacto->apellidos }}</td>
                 <td style="width:20px">{{ $inscripcione->personale->contacto->genero }}</td>
+                <td style="width:80px">{{ date('d-M', strtotime($inscripcione->personale->contacto->fecnac)) }}</td>
+                <td>
+                    @php
+                        $fecha_nacimiento = new DateTime($inscripcione->personale->contacto->fecnac);
+                        $hoy = new DateTime();
+                        echo (string) $hoy->diff($fecha_nacimiento)->format('%y');
+                    @endphp
+                </td>
+                <td>
+                    {{ $inscripcione->personale->contacto->mes_recomendacion . ' - ' .$inscripcione->personale->contacto->anio_recomendacion }}
+                </td>
                 <td style="width:120px">
                     {{ $inscripcione->personale->barrio->estaca->nombre }}
                 </td>
