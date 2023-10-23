@@ -389,14 +389,20 @@
                                         </x-jet-dropdown-link>
                                     @endforeach
                                 @else
-                                    @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
-                                        @php
-                                            $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
-                                        @endphp
-                                        <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
-                                            {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
-                                        </x-jet-dropdown-link>
-                                    @endif
+                                    @if ($inscripcione->programa->mostrarGrupos == 1)
+                                        @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
+                                            @php
+                                                $grupo = $inscripcione->inscripcioneCompanerismo->companerismo->grupo;
+                                            @endphp
+                                            <x-jet-dropdown-link href="{{ route('st.grupos.show', $grupo) }}">
+                                                {{ 'Familia ' . $grupo->numero . ' ' . $grupo->nombre }}
+                                            </x-jet-dropdown-link>
+                                        @endif
+                                    @else
+                                    <div class="p-2">
+                                        {{ 'Se están realizando cambios' }}
+                                    </div>
+                                @endif
                                 @endcan
                             @endif
                         @endforeach

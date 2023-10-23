@@ -19,7 +19,7 @@ class ProgramaController extends Controller
     public function __construct()
     {
         $this->middleware('can:admin.programas.index')->only('index');
-        $this->middleware('can:admin.asistencias.create')->only('show');
+        $this->middleware('can:admin.programas.control')->only('show');
         $this->middleware('can:admin.programas.create')->only('create', 'store');
         $this->middleware('can:admin.programas.edit')->only('edit', 'update', 'personal');
         $this->middleware('can:admin.programas.destroy')->only('destroy');
