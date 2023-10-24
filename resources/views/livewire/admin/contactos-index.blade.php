@@ -96,6 +96,9 @@
                             <th wire:click="sortBy('telefono')" style="cursor:pointer">Telefono
                                 @include('partials._sort-icon', ['field' => 'telefono'])
                             </th>
+                            <th wire:click="sortBy('email')" style="cursor:pointer">Email
+                                @include('partials._sort-icon', ['field' => 'email'])
+                            </th>
                             <th wire:click="sortBy('barrio.estaca.nombre')" style="cursor:pointer">Estaca
                                 @include('partials._sort-icon', ['field' => 'estaca_id'])
                             </th>
@@ -155,25 +158,12 @@
                                     </span>
                                 </td>
                                 <td>
-                                    {{-- @if ($contacto->personale != null)
-                                        {{ $contacto->personale->barrio->estaca->nombre }}
-                                    @else
-                                        @if ($contacto->barrio_id == 1)
-                                            {{ $contacto->otra_estaca }}
-                                        @else
-                                        @endif
-                                        @endif --}}
+                                    {{ $contacto->email }}
+                                </td>
+                                <td>
                                     {{ $contacto->barrio->estaca->nombre }}
                                 </td>
                                 <td>
-                                    {{-- @if ($contacto->personale != null)
-                                        {{ $contacto->personale->barrio->nombre }}
-                                    @else
-                                        @if ($contacto->barrio_id == 1)
-                                            {{ $contacto->otro_barrio }}
-                                        @else
-                                        @endif
-                                    @endif --}}
                                     {{ $contacto->barrio->nombre }}
                                 </td>
                                 <td>
@@ -192,6 +182,9 @@
                                 </td>
                                 <td>
                                     {{ $estados[$contacto->estado] }}
+                                    @if ($contacto->estado == 5 && isset($contacto->personale))
+                                        {{ ' - ' .$contacto->personale->inscripciones->last()->programa->nombre }}
+                                    @endif
                                 </td>
                                 {{-- <td>
                                     @php
@@ -223,7 +216,7 @@
                                             @can('admin.contactos.edit')
                                                 <span class="mx-2">
                                                     <a href="{{ route('admin.contactos.show', $contacto) }}"
-                                                        class="btn btn-sm btn-success">
+                                                        class="btn btn-sm btn-success p-0 px-1">
                                                         <i class="fas fa-file-signature"></i> Ver / Editar</a>
                                                 </span>
                                             @endcan

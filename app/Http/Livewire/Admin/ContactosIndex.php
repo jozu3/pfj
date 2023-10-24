@@ -199,8 +199,8 @@ class ContactosIndex extends Component
                     ->where(function($query) use ($that) {
                         $query->orWhere('nombres', 'like','%'.$that->search.'%')
                                 ->orWhere('apellidos', 'like','%'.$that->search.'%')
-                                ->orWhere('telefono', 'like','%'.$that->search.'%');
-                                // ->orWhere('email', 'like','%'.$that->search.'%');
+                                ->orWhere('telefono', 'like','%'.$that->search.'%')
+                                ->orWhere('email', 'like','%'.$that->search.'%');
                     })
                     ->where('contactos.created_at', '>=', $this->created_at);
                     if (!str_contains($this->sortBy,'.')) {
@@ -254,8 +254,8 @@ class ContactosIndex extends Component
                             ->where(function($query) use ($that) {
                                 $query->orWhere('nombres', 'like','%'.$that->search.'%')
                                         ->orWhere('apellidos', 'like','%'.$that->search.'%')
-                                        ->orWhere('telefono', 'like','%'.$that->search.'%');
-                                        // ->orWhere('email', 'like','%'.$that->search.'%');
+                                        ->orWhere('telefono', 'like','%'.$that->search.'%')
+                                        ->orWhere('email', 'like','%'.$that->search.'%');
                             })
                             ->where(function($q) use ($_estado_aprobaciones_selecteds){
                                 $q->where(function($query) use ($_estado_aprobaciones_selecteds) {
