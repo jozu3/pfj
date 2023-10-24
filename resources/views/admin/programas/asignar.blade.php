@@ -3,13 +3,13 @@
 @section('title', 'Sesiones')
 
 @section('content_header')
-    <button id="guardar" class="btn btn-success btn-sm">Guardar cambios</button>
-    <h2 class="txt-red40-pfj font-weight-bold">{{ $programa->nombre }}</h2>
-    <h1>Organizar Personal y Grupos</h1>
-    <div>
-        <a href="{{ route('admin.programa.directorio', $programa->id) }}" class="btn btn-info">Dirección</a>
-        <button class="btn btn-warning">Coordinadores</button>
+    <div class="float-right">
+        <a href="{{ route('admin.programas.directorio', $programa->id) }}" class="btn btn-info">Comité de logística</a>
+        <a href="{{ route('admin.programas.asignar', $programa->id) }}" class="btn btn-warning">Comité de Sesión</a>
     </div>
+    <h1>Comité de Sesión</h1>
+    <p>Organizar Personal y Grupos</p>
+    <button id="guardar" class="btn btn-success btn-sm">Guardar cambios</button>
     <div class="result"></div>
     <div id="cont-progress" class="progress" style="height: 20px;">
         <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"

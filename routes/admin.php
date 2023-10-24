@@ -61,7 +61,7 @@ Route::get('/programas/misprogramas', [ProgramaController::class, 'misprogramas'
 Route::get('/programas/grupos', [ProgramaController::class, 'grupos'])->name('admin.programas.grupos');
 Route::get('/programas/{programa}/planificador', [ProgramaController::class, 'planificador'])->name('admin.programas.planificador');
 Route::get('/programas/{programa}/asignar', [ProgramaController::class, 'asignar'])->name('admin.programas.asignar');
-Route::get('/programas/{programa}/directorio', [ProgramaController::class, 'directorio'])->name('admin.programa.directorio');
+Route::get('/programas/{programa}/directorio', [ProgramaController::class, 'directorio'])->name('admin.programas.directorio');
 Route::get('/programas/{programa}/personal', [ProgramaController::class, 'personal'])->name('admin.programas.personal');
 Route::get('/programas/{programa}/dashboard', [ProgramaController::class, 'dashboard'])->name('admin.programas.dashboard');
 Route::get('/programas/{programa}/tareas', [ProgramaController::class, 'tareas'])->name('admin.programas.tareas');

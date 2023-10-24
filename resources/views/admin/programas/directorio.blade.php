@@ -3,8 +3,11 @@
 @section('title', 'Sesiones')
 
 @section('content_header')
-    <h2><b class="text-pfj">{{ $programa->nombre }}</b></h2>
-    <h3>Organización del directorio</h3>
+    <div class="float-right">
+        <a href="{{ route('admin.programas.directorio', $programa->id) }}" class="btn btn-info">Comité de logística</a>
+        <a href="{{ route('admin.programas.asignar', $programa->id) }}" class="btn btn-warning">Comité de Sesión</a>
+    </div>
+    <h3>Comité de Logística</h3>
 @stop
 
 @section('content')
@@ -13,36 +16,8 @@
             <div class="row">
                 <div class="col-md-4 offset-md-4">
                     <div class="card card-row card-primary">
-                        <div class="card-header bg-success text-center">
-                            <h3 class="card-title">Director de sesión</h3>
-                        </div>
-                        <div class="card-body row">
-                            {{-- <div class="card card-primary card-outline">
-                                <div class="card-header row"> --}}
-                            @foreach ($programa->matrimonioDirectores() as $inscripcione)
-                                <div class="col-6">
-                                    <div class="card text-center w-100">
-                                        <div class="card-header">
-                                            <img class="img-fluid rounded-circle img-personal"
-                                                src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
-                                        </div>
-                                        <div class="card-body p-0">
-                                            {{ $inscripcione->personale->user->name }}
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            {{-- </div>
-                            </div> --}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 offset-md-4">
-                    <div class="card card-row card-primary">
                         <div class="card-header bg-warning text-center">
-                            <h3 class="card-title">Director de Logística</h3>
+                            <h3 class="card-title">Matrimonio de Logística</h3>
                         </div>
                         <div class="card-body row">
                             {{-- <div class="card card-primary card-outline">
@@ -55,7 +30,12 @@
                                                 src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
                                         </div>
                                         <div class="card-body p-0">
-                                            {{ $inscripcione->personale->user->name }}
+                                            @if ($inscripcione->personale->user)
+                                                <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}" class="txt-red40-pfj">
+                                                    {{ $inscripcione->personale->user->name }}
+                                                </a>
+                                            @else
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -108,7 +88,13 @@
                                                 src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
                                         </div>
                                         <div class="card-body p-0">
-                                            {{ $inscripcione->personale->user->name }}
+                                            @if ($inscripcione->personale->user)
+                                                <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}"
+                                                    class="txt-red40-pfj">
+                                                    {{ $inscripcione->personale->user->name }}
+                                                </a>
+                                            @else
+                                            @endif
                                         </div>
                                     </div>
 

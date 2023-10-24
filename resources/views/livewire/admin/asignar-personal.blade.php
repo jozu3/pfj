@@ -19,12 +19,42 @@
     </div>
     <div class="container-fluid h-100">
         <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <div class="card card-row card-primary">
+                    <div class="card-header bg-success text-center">
+                        <h3 class="card-title text-center w-100">Matrimonio Director</h3>
+                    </div>
+                    <div class="card-body row">
+                        @foreach ($programa->matrimonioDirectores() as $inscripcione)
+                            <div class="col-6">
+                                <div class="card text-center w-100">
+                                    <div class="card-header">
+                                        <img class="img-fluid rounded-circle img-personal"
+                                            src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
+                                    </div>
+                                    <div class="card-body p-0">
+                                        @if ($inscripcione->personale->user)
+                                            <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}"
+                                                class="txt-red40-pfj">
+                                                {{ $inscripcione->personale->user->name }}
+                                            </a>
+                                        @else
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
 
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="card card-row card-primary">
                     <div class="card-header bg-red40-pfj text-center">
-                        <h3 class="card-title">
+                        <h3 class="card-title text-center w-100">
                             Coordinadores
                         </h3>
                     </div>
