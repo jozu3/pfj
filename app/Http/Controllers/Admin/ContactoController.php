@@ -198,7 +198,11 @@ class ContactoController extends Controller
             if (isset($contacto->personale)) {
                 $errors['error_delete_contacto'] = 'No se puede eliminar porque. El contacto tiene un personal creado.';
             } else {
+                // dd($contacto->image()->pluck('url')->toArray());
+                Storage::delete($contacto->image()->pluck('url')->toArray());
+                $contacto->image()->delete();
                 $contacto->delete();
+
             }
         } catch (QueryException $qex) {
             return redirect()->back()->withErrors(['error_delete_contacto' =>  $qex->getMessage()]);

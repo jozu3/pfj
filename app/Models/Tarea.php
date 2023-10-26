@@ -22,4 +22,9 @@ class Tarea extends Model
     public function inscripcioneTareas(){
     	return $this->hasMany(InscripcioneTarea::class);
     }    
+
+    public function images(){
+        return $this->morphMany(Image::class, 'imageable');
+    }
+    
 }

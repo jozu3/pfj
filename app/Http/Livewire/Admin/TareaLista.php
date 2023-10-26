@@ -8,6 +8,7 @@ use App\Models\Materiale;
 use App\Models\Programa;
 use App\Models\Tarea;
 use App\Models\TareaMateriale;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -24,12 +25,12 @@ class TareaLista extends Component
 
     public $fecha_inicio, $fecha_final, $descripcion;
     public $tareaMateriales;
-    public $deleteTareaMaterial = [], $rrr;    
+    public $deleteTareaMaterial = [], $rrr;
 
     protected $listeners = ['refresh' => 'render'];
     protected $rules = [
         'fecha_inicio' => 'required',
-        'fecha_final' => 'required',        
+        'fecha_final' => 'required',
         // 'descripcion' => 'required',        
         'tareaMateriales.*.materiale_id' => 'required',
         'tareaMateriales.*.tema' => 'required',
@@ -66,7 +67,7 @@ class TareaLista extends Component
 
                     $tareaMateriale->materiale_id = $tareaMaterial['materiale_id'];
                     $tareaMateriale->tema = $tareaMaterial['tema'];
-                    $tareaMateriale->link = isset($tareaMaterial['link'])  ? $tareaMaterial['link']: '';
+                    $tareaMateriale->link = isset($tareaMaterial['link'])  ? $tareaMaterial['link'] : '';
                     $tareaMateriale->save();
                     // unset($array[array_search($tareaMaterial['id'], $tareaMateriale)]);
                 } else {
@@ -74,13 +75,36 @@ class TareaLista extends Component
                         'tarea_id' => $this->idTarea,
                         'materiale_id' => $tareaMaterial['materiale_id'],
                         'tema' => $tareaMaterial['tema'],
-                        'link' => isset($tareaMaterial['link'])  ? $tareaMaterial['link']: '',
+                        'link' => isset($tareaMaterial['link'])  ? $tareaMaterial['link'] : '',
                     ]);
                 }
             }
 
             foreach ($this->deleteTareaMaterial as $delete) {
                 TareaMateriale::where('id', $delete)->delete();
+            }
+
+            $extractImages = '/src=["\']([^ ^"^\']*)["\']/ims';
+            preg_match_all($extractImages, $this->descripcion, $matches);
+            $img_nuevas = $matches[1];
+            $img_antiguas = $tarea->images()->pluck('url')->toArray();
+
+            foreach ($img_nuevas as $img) {
+                $url_image = 'images-tareas/' . pathinfo($img, PATHINFO_BASENAME);
+
+                $clave = array_search($url_image, $img_antiguas);
+                if ($clave === false) {
+                    $tarea->images()->create([
+                        'url' => $url_image
+                    ]);
+                } else {
+                    unset($img_antiguas[$clave]);
+                }
+            }
+
+            foreach ($img_antiguas as $img) {
+                Storage::delete($img);
+                $tarea->images()->where('url', $img)->delete();
             }
         } else {
             $tarea = Tarea::create([
@@ -95,7 +119,18 @@ class TareaLista extends Component
                     'tarea_id' => $tarea->id,
                     'materiale_id' => $tareaMaterial['materiale_id'],
                     'tema' => $tareaMaterial['tema'],
-                    'link' => isset($tareaMaterial['link'])  ? $tareaMaterial['link']: '',
+                    'link' => isset($tareaMaterial['link'])  ? $tareaMaterial['link'] : '',
+                ]);
+            }
+
+            $extractImages = '/src=["\']([^ ^"^\']*)["\']/ims';
+            preg_match_all($extractImages, $this->descripcion, $matches);
+            $images = $matches[1];
+
+            foreach ($images as $img) {
+                $url_image = 'images-tareas/' . pathinfo($img, PATHINFO_BASENAME);
+                $tarea->images()->create([
+                    'url' => $url_image
                 ]);
             }
         }
@@ -105,11 +140,12 @@ class TareaLista extends Component
 
     }
 
-    public function updatedAddTarea($value){
+    public function updatedAddTarea($value)
+    {
         $this->descripcion = '';
         $this->emit('addtareadescripcion');
     }
-    
+
     public function editTarea(Tarea $tarea)
     {
         if ($this->addTarea == false) {
@@ -141,8 +177,14 @@ class TareaLista extends Component
             $deleted = InscripcioneTarea::where('tarea_id', $idTarea)->delete();
             $deleted = TareaMateriale::where('tarea_id', $idTarea)->delete();
             $deleted = Comentario::where('tarea_id', $idTarea)->delete();
-            $deleted = Tarea::where('id', $idTarea)->delete();        
-            if($deleted){                
+            $tarea = Tarea::find($idTarea);
+            $img_antiguas = $tarea->images()->pluck('url')->toArray();
+            foreach ($img_antiguas as $img) {
+                Storage::delete($img);
+                $tarea->images()->where('url', $img)->delete();
+            }
+            $deleted = $tarea->delete();
+            if ($deleted) {
                 $this->render();
             }
         } else {

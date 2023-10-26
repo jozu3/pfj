@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Models\Image;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Storage;
 
 class Kernel extends ConsoleKernel
 {
@@ -25,6 +27,21 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->call(function(){
+            $img_tareas = Storage::files('images-tareas');
+            $contactos = Storage::files('contactos');
+            $programas = Storage::files('programas');
+            $anuncios = Storage::files('anuncios');
+            $images = Image::pluck('url')->toArray();
+            
+            $images  = array_diff($img_tareas, $images);
+            $images  = array_diff($contactos, $images);
+            $images  = array_diff($programas, $images);
+            $images  = array_diff($anuncios, $images);
+
+            Storage::delete($images);
+
+        })->daily();
     }
 
     /**

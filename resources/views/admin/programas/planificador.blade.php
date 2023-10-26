@@ -3,6 +3,7 @@
 @section('title', 'Editar programa')
 
 @section('plugins.Sweetalert2', true)
+@section('plugins.Ckeditor5', true)
 
 @section('content_header')
      {{-- <a href="{{ route('admin.programas.show', $programa) }}" class="btn btn-success btn-sm float-right"><i class="fas fa-user-graduate"></i> Ver personales</a>
@@ -87,7 +88,6 @@
     </style>
 @stop
 @section('js')
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
 
 	@if (session('info_comp') || isset($_GET['grupo']))
         <script>

@@ -217,6 +217,15 @@ class ProgramaController extends Controller
         return view('admin.programas.planificador', compact('programa'));
     }
 
+    public function uploadImageTarea(Request $request){
+        $path = Storage::put('images-tareas', $request->file('upload'));
+
+        return [
+            'url' => Storage::url($path)
+        ];
+
+    }
+
     public function asignar(Programa $programa)
     {
         return view('admin.programas.asignar', compact('programa'));

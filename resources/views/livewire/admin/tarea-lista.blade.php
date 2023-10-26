@@ -103,17 +103,17 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm disabled:opacity-5"
-                                        wire:model.defer="tareaMateriales.{{ $i }}.tema"
-                                        wire:loading.attr='disabled' wire:target='saveTarea'>
+                                            wire:model.defer="tareaMateriales.{{ $i }}.tema"
+                                            wire:loading.attr='disabled' wire:target='saveTarea'>
                                         <x-jet-input-error class="text-danger"
-                                        for="tareaMateriales.{{ $i }}.tema" />
+                                            for="tareaMateriales.{{ $i }}.tema" />
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="text" class="form-control form-control-sm disabled:opacity-5"
-                                        wire:model.defer="tareaMateriales.{{ $i }}.link"
-                                        wire:loading.attr='disabled' wire:target='saveTarea'>
+                                            wire:model.defer="tareaMateriales.{{ $i }}.link"
+                                            wire:loading.attr='disabled' wire:target='saveTarea'>
                                         <x-jet-input-error class="text-danger"
-                                        for="tareaMateriales.{{ $i }}.tema" />
+                                            for="tareaMateriales.{{ $i }}.tema" />
                                     </div>
                                     <div class="col-sm-3">
                                         <button class="btn btn-link"
@@ -156,7 +156,7 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="row"> 
+                                <div class="row">
                                     <a class="col-md-4 btn btn-link collapsed" data-toggle="collapse"
                                         href="#collapse{{ $tarea->id }}" aria-expanded="false"><i
                                             class="fas fa-eye"></i></a>
@@ -177,19 +177,19 @@
                                 <div>
                                     <table class="table table-sm table-striped">
                                         <thead>
-                                        <tr class="text-warning">
-                                            <th scope="col">Material</th>
-                                            <th scope="col">Tema</th>
-                                            <th scope="col">Enlace</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($tarea->tareaMateriales as $item)
-                                        <tr>
-                                                <td>{{ $item->materiale->descripcion }}</td>
-                                                <td>{{ $item->tema }}</td>
-                                                <td>{{ $item->link }}</td>
+                                            <tr class="text-warning">
+                                                <th scope="col">Material</th>
+                                                <th scope="col">Tema</th>
+                                                <th scope="col">Enlace</th>
                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($tarea->tareaMateriales as $item)
+                                                <tr>
+                                                    <td>{{ $item->materiale->descripcion }}</td>
+                                                    <td>{{ $item->tema }}</td>
+                                                    <td>{{ $item->link }}</td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -224,8 +224,22 @@
             let editor;
             Livewire.on('addtareadescripcion', () => {
                 var textarea_descripcion = document.querySelector('#descripcion');
-                if (textarea_descripcion){
-                    ClassicEditor.create(textarea_descripcion)
+                if (textarea_descripcion) {
+                    ClassicEditor.create(textarea_descripcion, {
+                            simpleUpload: {
+                                // The URL that the images are uploaded to.
+                                uploadUrl: '{{ route("admin.programas.planificador.upload-image-tarea") }}',
+
+                                // Enable the XMLHttpRequest.withCredentials property.
+                                withCredentials: true,
+
+                                // Headers sent along with the XMLHttpRequest to the upload server.
+                                headers: {
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                                    'Accept' : 'application/json'
+                                }
+                            }
+                        })
                         .then(newEditor => {
                             editor = newEditor;
                             var desc = @this.descripcion;
@@ -247,7 +261,7 @@
             Livewire.on('edtTarea', () => {
                 var desc = @this.descripcion;
                 // console.log(desc);
-                if (editor && desc != '' ) {
+                if (editor && desc != '') {
                     editor.setData(desc);
                 } else {}
             });

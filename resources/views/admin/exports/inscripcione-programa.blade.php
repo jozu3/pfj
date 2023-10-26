@@ -8,6 +8,7 @@
             <th>Edad</th>
             <th>Recomendación para el templo</th>
             <th>Estaca</th>
+            <th>Barrio</th>
             <th>Habitación</th>
             <th>Asignación</th>
             <th>Familia</th>
@@ -46,7 +47,10 @@
                     {{ $inscripcione->personale->contacto->mes_recomendacion . ' - ' .$inscripcione->personale->contacto->anio_recomendacion }}
                 </td>
                 <td style="width:120px">
-                    {{ $inscripcione->personale->barrio->estaca->nombre }}
+                    {{ $inscripcione->personale->contacto->barrio->estaca->nombre }}
+                </td>
+                <td style="width:120px">
+                    {{ $inscripcione->personale->contacto->barrio->nombre }}
                 </td>
                 <td>
                     @if (isset($inscripcione->alojamientoPersonale))

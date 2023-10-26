@@ -60,6 +60,7 @@ Route::get('/programas/changesession/{programa}', [ProgramaController::class, 'c
 Route::get('/programas/misprogramas', [ProgramaController::class, 'misprogramas'])->name('admin.programas.misprogramas');
 Route::get('/programas/grupos', [ProgramaController::class, 'grupos'])->name('admin.programas.grupos');
 Route::get('/programas/{programa}/planificador', [ProgramaController::class, 'planificador'])->name('admin.programas.planificador');
+Route::post('/planificador/upload-image-tarea', [ProgramaController::class, 'uploadImageTarea'])->name('admin.programas.planificador.upload-image-tarea'); 
 Route::get('/programas/{programa}/asignar', [ProgramaController::class, 'asignar'])->name('admin.programas.asignar');
 Route::get('/programas/{programa}/directorio', [ProgramaController::class, 'directorio'])->name('admin.programas.directorio');
 Route::get('/programas/{programa}/personal', [ProgramaController::class, 'personal'])->name('admin.programas.personal');

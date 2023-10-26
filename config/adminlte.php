@@ -574,6 +574,16 @@ return [
                 ],
             ],
         ],
+        'Ckeditor5' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '/vendor/ckeditor5/build/ckeditor.js',
+                ],
+            ],
+        ],
     ],
 
     /*
