@@ -69,7 +69,6 @@
                         <th>Sexo</th>
                         <th>Cumpleaños</th>
                         <th>Edad</th>
-                        <th>Sexo</th>
                         <th>Estaca</th>
                         <th>Barrio</th>
                         <th>Habitación</th>
