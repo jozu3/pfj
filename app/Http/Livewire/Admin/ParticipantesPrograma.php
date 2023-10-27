@@ -54,7 +54,8 @@ class ParticipantesPrograma extends Component
 
         } else if($user->can('admin.programas.participantes_barrio')){
             $barrio_obispo = $user->personale->contacto->barrio_id;
-            $participantes = $participantes->where('barrio_id', $barrio_obispo);
+            // dd($barrio_obispo);
+            $this->barrio = $barrio_obispo;
         }
 
         //filtro por barrio
