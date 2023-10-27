@@ -21,7 +21,7 @@
                         @endphp
                         <input class="form-check-input appearance-none w-4 border border-gray-300 rounded-sm bg-white checked:bg-yellow-600 checked:border-yellow-600 focus:outline-none transition duration-200 my-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                             {{ $checkedTarea }} type="checkbox" id="flexCheckChecked{{ $tarea->id }}"
-                            style="color: #ed9934;" wire:click="realizado({{ $tarea->id }})">{{ $tarea->id }}
+                            style="color: #ed9934;" wire:click="realizado({{ $tarea->id }})">
                         <label for="flexCheckChecked{{ $tarea->id }}" class="ml-2 text-sm  md:text-md">
                             Semana del {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} al
                             {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}

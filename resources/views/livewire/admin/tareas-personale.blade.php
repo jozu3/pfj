@@ -43,7 +43,6 @@
                                     <div>
                                         {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} <br>al <br> {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}
                                     </div>
-                                    {{ $tarea->id }}
                                 </th>
                             @empty
                                 <th>No hay lecturas</th>
