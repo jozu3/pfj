@@ -50,7 +50,7 @@ class TareasPersonale extends Component
 
         $inscripciones = Inscripcione::where('inscripciones.programa_id', $this->programa->id)
                                     ->whereIn('inscripciones.estado', [1])
-                                    ->whereIn('inscripciones.role_id', [4,5,6])
+                                    ->whereIn('inscripciones.role_id', [2,3,4,5,6])
                                     // ->join('inscripcione_companerismos', 'inscripciones.id', '=', 'inscripcione_companerismos.inscripcione_id')
                                     // ->join('companerismos', 'inscripcione_companerismos.id', '=', 'companerismos.id')
                                     // ->join('grupos', 'companerismos.grupo_id', '=', 'grupos.id')

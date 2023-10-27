@@ -93,12 +93,14 @@ class AppServiceProvider extends ServiceProvider
                                     // 'route' => ['admin.users.changesesion', 'programa' => $inscripcione->programa],
                                     // 'icon'  => 'fas  fa-users',
                                 ]);
+                                session(['programa_activo' => $inscripcione->programa->id]);
+
                             }
                         }
-
-                        if (count($inscripciones) == 1) {
-                            session(['programa_activo' => $inscripciones->first()->programa->id]);
-                        }
+                        
+                        // if (count($inscripciones) == 1) {
+                        //     session(['programa_activo' => $inscripciones->first()->programa->id]);
+                        // }
                     } else {
                         abort(403);
                     }

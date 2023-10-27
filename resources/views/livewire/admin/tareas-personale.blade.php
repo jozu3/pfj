@@ -43,6 +43,7 @@
                                     <div>
                                         {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} <br>al <br> {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}
                                     </div>
+                                    {{ $tarea->id }}
                                 </th>
                             @empty
                                 <th>No hay lecturas</th>
@@ -100,7 +101,7 @@
 
                                 </td>
 
-                                @forelse ($tareas as $tarea)
+                                @forelse ($tareas->sortBy('fecha_inicio') as $tarea)
                                     <td class="text-center">
                                         @livewire('admin.create-inscripcione-tarea', ['tarea_id' => $tarea->id, 'inscripcione_id' => $inscripcione_->id], key($inscripcione_->id . '-' . $tarea->id))
                                     </td>
