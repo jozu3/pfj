@@ -79,8 +79,9 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.programas.grupos', 'description' => 'Ver los grupos de su sesión'])->syncRoles([$role1, $role2, $role3, $role4, ]);
         Permission::create(['name' => 'admin.programas.planning', 'description' => 'Ver el menu planificador'])->syncRoles([$role1, $role2, $role3, $role4, ]);
         Permission::create(['name' => 'admin.programas.participantes', 'description' => 'Ver el menu participante del programa'])->syncRoles([$role1, $role2, $role3, $role4, ]);
+        Permission::create(['name' => 'admin.programas.participantes_barrio', 'description' => 'Ver los participantes de su barrio'])->syncRoles([$role1, $role2, $role3, $role4, ]);
         Permission::create(['name' => 'admin.programas.companias', 'description' => 'Ver las compañias del programa'])->syncRoles([$role1, $role2, $role3, $role4]);
-        Permission::create(['name' => 'admin.programas.lideres-locales', 'description' => 'Ver los líderes locales de la sesión'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.programas.unidades-locales', 'description' => 'Ver las unidades locales de la sesión'])->syncRoles([$role1, $role2, $role3, $role4]);
         
         //Permisos grupo
         Permission::create(['name' => 'admin.grupos.index', 'description' => 'Ver listado de grupos'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
@@ -176,5 +177,25 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.comentarios.edit', 'description' => 'Editar comentarios'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'admin.comentarios.destroy', 'description' => 'Eliminar comentarios'])->syncRoles([$role1, $role2, $role3, $role4]);
         
+        // permisos consejo_coordinaciones
+        Permission::create(['name' => 'admin.consejo_coordinaciones.index', 'description' => 'Ver listado de consejo de coordinación'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.consejo_coordinaciones.create', 'description' => 'Crear consejo de coordinación'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.consejo_coordinaciones.edit', 'description' => 'Editar consejo de coordinación'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.consejo_coordinaciones.destroy', 'description' => 'Eliminar consejo de coordinación'])->syncRoles([$role1]);
+
+        // permisos estacas
+        Permission::create(['name' => 'admin.estacas.index', 'description' => 'Ver listado de estacas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.estacas.create', 'description' => 'Crear estacas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.estacas.edit', 'description' => 'Editar estacas'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.estacas.destroy', 'description' => 'Eliminar estacas'])->syncRoles([$role1]);
+
+        // permisos barrios
+        Permission::create(['name' => 'admin.barrios.index', 'description' => 'Ver listado de barrios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.barrios.create', 'description' => 'Crear barrios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.barrios.edit', 'description' => 'Editar barrios'])->syncRoles([$role1]);
+        Permission::create(['name' => 'admin.barrios.destroy', 'description' => 'Eliminar barrios'])->syncRoles([$role1]);
+
+
+
     }
 }

@@ -115,8 +115,8 @@ class AppServiceProvider extends ServiceProvider
                     ];
 
                     $menu_unidades_locales = [
-                        'text' => 'Líderes locales',
-                        'url' => '/admin/programas/' . session('programa_activo') . '/lideres-locales',
+                        'text' => 'Unidades locales',
+                        'url' => '/admin/programas/' . session('programa_activo') . '/unidades-locales',
                         'icon' => 'fas fa-cogs',
                         'can'  =>   'admin.programas.unidades-locales'
                     ];
@@ -192,6 +192,13 @@ class AppServiceProvider extends ServiceProvider
                         'can' => 'admin.programas.participantes'
                     ];
 
+                    $menu_participantes_barrio = [
+                        'text' => 'Participantes de mi barrio',
+                        'url' => 'admin/programas/' . session('programa_activo') . '/participantes',
+                        'icon' => 'fas fa-child',
+                        'can' => 'admin.programas.participantes_barrio'
+                    ];
+
                     $menu_companias = [
                         'text' => 'Compañias',
                         'url' => 'admin/programas/' . session('programa_activo') . '/companias',
@@ -218,6 +225,7 @@ class AppServiceProvider extends ServiceProvider
                     // $event->menu->addAfter('programa', $menu_tareas);
                     $event->menu->addAfter('participantes', $menu_unidades_locales);
                     $event->menu->addAfter('participantes', $menu_companias);
+                    $event->menu->addAfter('participantes', $menu_participantes_barrio);
                     $event->menu->addAfter('participantes', $menu_participantes);
                     $event->menu->addAfter('programa', $menu_habitaciones);
                     $event->menu->addAfter('programa', $menu_asistencias);

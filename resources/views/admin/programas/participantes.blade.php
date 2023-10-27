@@ -5,22 +5,21 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-    <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal"
-        data-target="#importExcelParticipantes">
+@can('admin.programas.participantes')
+    <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#importExcelParticipantes">
         <i class="far fa-file-excel"></i> Importar participantes
     </button>
     <a href="{{ route('st.participantes.create', 'programa_id='.$programa->id) }}" class="btn btn-success btn-sm float-right mr-3">
         <i class="fas fa-user-plus"></i> Nuevo participantes
     </a>
-    <a href="{{ route('admin.participantes.deleteall', $programa) }}"
-        class="btn btn-danger btn-sm float-right mr-3 eliminar-participantes" data-prevent="">
+    <a href="{{ route('admin.participantes.deleteall', $programa) }}" class="btn btn-danger btn-sm float-right mr-3 eliminar-participantes" data-prevent="">
         <i class="fas fa-trash"></i> Eliminar todos participantes
     </a>
-    <a href="{{ route('admin.excel.exportParticipantes', $programa) }}"
-        class="btn btn-success btn-sm float-right mr-3">
+    <a href="{{ route('admin.excel.exportParticipantes', $programa) }}" class="btn btn-success btn-sm float-right mr-3">
         <i class="far fa-file-excel"></i> Exportar participantes
     </a>
 
+@endcan
     
     <h1>
         <b class="text-pfj">{{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</b>
@@ -35,7 +34,7 @@
     @endif
     @if (count($errors->getMessages()) > 0)
         <div class="alert alert-danger alert-dismissible" role="alert">
-            <strong>Validation Errors:</strong>
+            <strong>Validation Errors:</strong>                     
             <ul>
                 @foreach ($errors->getMessages() as $errorMessages)
                     @foreach ($errorMessages as $errorMessage)
@@ -189,7 +188,6 @@
             color: #624a00
         }
     </style>
-    {{-- <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet"> --}}
     <style>
         /*\
                 |*| ========================================================================
