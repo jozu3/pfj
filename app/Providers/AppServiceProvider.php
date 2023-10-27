@@ -114,11 +114,11 @@ class AppServiceProvider extends ServiceProvider
                         'can'  =>   'admin.programas.edit'
                     ];
 
-                    $menu_lideres_locales = [
+                    $menu_unidades_locales = [
                         'text' => 'Líderes locales',
                         'url' => '/admin/programas/' . session('programa_activo') . '/lideres-locales',
                         'icon' => 'fas fa-cogs',
-                        'can'  =>   'admin.programas.lideres-locales'
+                        'can'  =>   'admin.programas.unidades-locales'
                     ];
 
                     $menu_organigrama = [
@@ -216,6 +216,7 @@ class AppServiceProvider extends ServiceProvider
 
                     // $event->menu->addAfter('programa', $menu_funciones);
                     // $event->menu->addAfter('programa', $menu_tareas);
+                    $event->menu->addAfter('participantes', $menu_unidades_locales);
                     $event->menu->addAfter('participantes', $menu_companias);
                     $event->menu->addAfter('participantes', $menu_participantes);
                     $event->menu->addAfter('programa', $menu_habitaciones);

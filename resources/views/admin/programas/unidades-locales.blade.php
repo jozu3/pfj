@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Líderes locales')
+@section('title', 'Unidades locales')
 
 @section('content_header')
-    <h1>Lista de Sesiones</h1>
+    <h1>Estacas Participantes</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
             {{ session('info') }}
         </div>
     @endif
-    @livewire('admin.programa.lideres-locales', ['programa' => $programa])
+    @livewire('admin.programa.unidades-locales', ['programa' => $programa])
 @stop
 
 @section('css')

@@ -357,9 +357,9 @@ class ProgramaController extends Controller
                                                                 'totalPersonalMujeresAlojados'));
     }
     
-    public function lideresLocales(Programa $programa){
+    public function unidadesLocales(Programa $programa){
 
 
-        return view('admin.programas.lideres-locales', compact('programa', 'estacas', 'alojados', 'total')); 
+        return view('admin.programas.unidades-locales', compact('programa', 'estacas', 'alojados', 'total')); 
     }
 }

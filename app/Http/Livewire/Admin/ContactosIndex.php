@@ -119,8 +119,10 @@ class ContactosIndex extends Component
                 $value_personale = 1;
                 break;
         }
+        if(isset($contacto->personale)){
+            $contacto->personale->update(['permiso_obispo' => $value_personale ]);
+        }
 
-        $contacto->personale->update(['permiso_obispo' => $value_personale ]);
     }
 
  	public function render()

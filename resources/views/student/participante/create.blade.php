@@ -18,7 +18,7 @@
                     @endif
                     <x-jet-validation-errors class="mb-4" />
 
-                    <h1 class="my-2 text-2xl">Editar datos del participante</h1>
+                    <h1 class="my-2 text-2xl">Crear nuevo participante</h1>
                     <div>
                         {!! Form::open(['route' => 'st.participantes.store']) !!}
                         {!! Form::hidden('programa_id', $_GET['programa_id']) !!}
