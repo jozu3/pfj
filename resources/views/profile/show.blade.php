@@ -23,6 +23,47 @@
                 @livewire('student.update-contacto')
             </div>
             <x-jet-section-border />
+
+            <div class="mt-10 sm:mt-0">
+                <x-jet-form-section submit="updateContacto">
+                    <x-slot name="title">
+                        {{ __('Estado de aprobación por mi Obispo / Pte de Rama') }}
+                    </x-slot>
+                
+                    <x-slot name="description">
+                        {{ __('Si aún no estás aprobado, conversa con tu Obispo o Presidente de Rama') }}
+                    </x-slot>
+                @php
+                    $color = 'yellow';
+                    $text_estado = 'Aprobación pendiente';
+
+                @endphp
+                    <x-slot name="form" >
+                        @switch(auth()->user()->personale->contacto->estado_aprobacion)
+                            @case(2)
+                                @php
+                                    $color = 'red';
+                                    $text_estado = 'Desaprobado';
+                                @endphp
+                            @break
+                            @case(1)
+                                @php
+                                    $color = 'green';
+                                    $text_estado = 'Aprobado';
+                                @endphp
+                            @break
+
+                        @endswitch
+                        <div class="bg-{{ $color }}-600 text-white p-1 rounded-md">
+                                                    {{ $text_estado }}
+                        </div>
+                    </x-slot>
+                
+                    <x-slot name="actions">
+                    </x-slot>
+                </x-jet-form-section>
+            </div>
+            <x-jet-section-border />
             
             @if (Laravel\Fortify\Features::canUpdateProfileInformation())
                 <div class="mt-10 sm:mt-0">

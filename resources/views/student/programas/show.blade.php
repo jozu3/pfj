@@ -28,7 +28,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6">
-                    <!-- This example requires Tailwind CSS v2.0+ -->
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 align-middle min-w-full sm:px-6 lg:px-8">
@@ -44,7 +43,9 @@
                                         <div class="text-center">
                                             @if ($inscripcione->programa->imageMatrimonioDirector)
                                                 <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioDirector->url) }}"
-                                                    alt="" class="object-center object-cover rounded-full m-auto" style="height: 300px!important; width: 300px!important"/>
+                                                    alt=""
+                                                    class="object-center object-cover rounded-full m-auto"
+                                                    style="height: 300px!important; width: 300px!important" />
                                             @endif
                                         </div>
                                         <div class="md:text-left text-center">
@@ -71,7 +72,8 @@
                                         <div class="text-center">
                                             @if ($inscripcione->programa->imageMatrimonioLogistica)
                                                 <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioLogistica->url) }}"
-                                                    alt="" class="object-center object-cover rounded-full m-auto"
+                                                    alt=""
+                                                    class="object-center object-cover rounded-full m-auto"
                                                     width="300px" height="300px">
                                             @endif
                                         </div>
@@ -89,6 +91,15 @@
                                         </div>
                                     </div>
 
+                                </div>
+                                <div class="container py-6" style="">
+                                    <center>
+                                        <iframe width="560" height="315"
+                                            src="https://www.youtube.com/embed/K2iLCh0abcY?si=qXq9DpJX-FLjoYRD"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                    </center>
                                 </div>
 
                                 <div class="container py-6" style="height: 600px; max-height: 600px">
@@ -231,52 +242,51 @@
                                             </button>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div
-                                        class="container py-6 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-6">
-                                        <table class="min-w-full divide-y divide-gray-200 mx-4">
-                                            <tbody class="bg-white divide-y divide-gray-200">
-                                                <tr>
-                                                    <td>
-                                                        <p
-                                                            class="col-span-2 text-left text-md sm:text-2xl font-bold sm:ml-6">
-                                                            Tareas cumplidas:</p>
-                                                        <p>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="p-2 inline-flex text-xl leading-5 text-sm sm:text-xl font-semibold rounded-full bg-green-100 text-green-800">
-                                                            {{ $inscripcione->inscripcioneTareas->where('realizado', true)->count() . '/' . $inscripcione->programa->tareas->count() }}
-                                                        </span>
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('st.tareas.mislecturas', $inscripcione->programa) }}"
-                                                            class="bg-red40-pfj sm:p-2 sm:text-md rounded-lg text-white p-1 text-sm">
-                                                            <i class="fas fa-check-square"></i> Marcar
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="container py-6 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-6">
+                                    <table class="min-w-full divide-y divide-gray-200 mx-4">
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr>
+                                                <td>
+                                                    <p class="col-span-2 text-left text-md sm:text-2xl font-bold sm:ml-6">
+                                                        Tareas cumplidas:</p>
+                                                    <p>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="p-2 inline-flex text-xl leading-5 text-sm sm:text-xl font-semibold rounded-full bg-green-100 text-green-800">
+                                                        {{ $inscripcione->inscripcioneTareas->where('realizado', true)->count() . '/' . $inscripcione->programa->tareas->count() }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('st.tareas.mislecturas', $inscripcione->programa) }}"
+                                                        class="bg-red40-pfj sm:p-2 sm:text-md rounded-lg text-white p-1 text-sm">
+                                                        <i class="fas fa-check-square"></i> Marcar
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
-                                    </div>
+                                </div>
+                                <div class="container py-6 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-6">
                                     @foreach ($tarea_actuales as $tarea)
                                         <div
-                                            class="grid grid-cols-1 gap-4 place-content-center text-3xl text-center text-gray-900 border-b-2 mb-6 mt-10 font-bold">
-                                            <p class="">Tareas de la semana
-                                                {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} al
-                                                {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}</p>
+                                        class="grid grid-cols-1 gap-4 place-content-center text-3xl text-center text-gray-900 border-b-2 mb-6 mt-10 font-bold">
+                                        <p class="">Tareas de la semana
+                                            {{ date('d/m/Y', strtotime($tarea->fecha_inicio)) }} al
+                                            {{ date('d/m/Y', strtotime($tarea->fecha_final)) }}</p>
                                             <!-- border-b-4 -->
-
+                                            
                                         </div>
-
+                                        
                                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-2">
-
+                                            
                                             <table class="min-w-full divide-y divide-gray-200">
                                                 <thead class="bg-gray-50">
                                                     <tr>
-                                                        <th scope="col"
-                                                            class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider">
                                                             Materiales
                                                         </th>
                                                         <th>
@@ -299,18 +309,18 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                                                 <span
-                                                                    class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                                                    @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
-                                                                        <a href="{{ $tareaMateriale->link }}"
-                                                                            target="_blank">
-                                                                            {{ $tareaMateriale->tema }}
-                                                                        </a>
-                                                                    @else
-                                                                        {{ $tareaMateriale->tema }}
-                                                                    @endif
-                                                                </span>
-                                                            </td>
-                                                            {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                                                class="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                                @if ($tareaMateriale->link != '' && $tareaMateriale->link != null)
+                                                                <a href="{{ $tareaMateriale->link }}"
+                                                                    target="_blank">
+                                                                    {{ $tareaMateriale->tema }}
+                                                                </a>
+                                                                @else
+                                                                {{ $tareaMateriale->tema }}
+                                                                @endif
+                                                            </span>
+                                                        </td>
+                                                        {{-- <td class="px-6 py-4 whitespace-nowrap">
                                                             <div class="text-sm">
                                                                 <div class="flex items-center justify-center">
                                                                     <div class="rounded-md bg-yellow-400 text-white font-semibold py-2 px-4">
@@ -318,7 +328,7 @@
                                                                 </div>
                                                             </div>
                                                         </td> --}}
-                                                        </tr>
+                                                    </tr>
                                                     @empty
                                                         <tr>
                                                             <td class="px-6 py-4 text-gray-300" colspan="100%">
@@ -329,30 +339,29 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    @endforeach
+                                    @endforeach 
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
-        <style>
-            .carousel-control-prev-icon,
-            .carousel-control-next-icon {
-                background-color: #fe9321;
-                border-radius: 50%;
-            }
+    </div>
+    <style>
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: #fe9321;
+            border-radius: 50%;
+        }
 
-            .carousel-control-prev-icon {
-                background-position-x: -2px !important
-            }
+        .carousel-control-prev-icon {
+            background-position-x: -2px !important
+        }
 
-            .carousel-control-next-icon {
-                background-position-x: 2px !important
-            }
-        </style>
-        <script src="{{ config('app.url') }}/tw-elements/dist/js/index.min.js"></script>
+        .carousel-control-next-icon {
+            background-position-x: 2px !important
+        }
+    </style>
+    <script src="{{ config('app.url') }}/tw-elements/dist/js/index.min.js"></script>
     </x-app-layout>
