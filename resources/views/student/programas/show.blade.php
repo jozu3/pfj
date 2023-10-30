@@ -161,13 +161,13 @@
                                                     class="carousel-item text-center @if ($i == 0) {{ 'active' }} @endif w-full overflow-hidden">
 
                                                     <img src=" @if ($anuncio->image) {{ Storage::url($anuncio->image->url) }} @endif"
-                                                        class="block m-auto" width="500" alt="" />
+                                                        class="block m-auto" alt="" />
                                                     @if (!$anuncio->image)
                                                         <div class="carousel-caption block absolute inset-0 text-center"
                                                             style="
-                                                display: flex;
-                                                align-items: center;
-                                                justify-content: center;">
+                                                            display: flex;
+                                                            align-items: center;
+                                                            justify-content: center;">
                                                             <div class="flex justify-center">
                                                                 <div
                                                                     class="block rounded-lg shadow-lg bg-white max-w-sm text-center">
