@@ -24,6 +24,14 @@
             {{ $bienvenido }} al {{ $inscripcione->programa->nombre }}
         </h2>
     </x-slot>
+    <style>
+        .img-anuncio{
+            height: 100%;
+        }
+        .carousel-item{
+            height: 100%;
+        }
+    </style>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -107,7 +115,7 @@
                                         <p class="">Anuncios</p> <!-- border-b-4 -->
                                     </div>
                                     <div id="carouselExampleIndicators" class="carousel slide relative"
-                                        style="height: 500px" data-bs-ride="carousel">
+                                        style="height: 600px" data-bs-ride="carousel">
                                         <div
                                             class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
 
@@ -127,7 +135,7 @@
                                             @endforeach
                                         </div>
                                         <div class="carousel-inner relative w-full overflow-hidden"
-                                            style="height: 500px; max-height: 500px">
+                                            style="height: 500px; max-height: 100vh">
                                             @php
                                                 $i = 0;
                                             @endphp
@@ -157,11 +165,9 @@
                                                     @default
                                                 @endswitch
 
-                                                <div
-                                                    class="carousel-item text-center @if ($i == 0) {{ 'active' }} @endif w-full overflow-hidden">
-
+                                                <div class="carousel-item text-center @if ($i == 0) {{ 'active' }} @endif w-full overflow-hidden">
                                                     <img src=" @if ($anuncio->image) {{ Storage::url($anuncio->image->url) }} @endif"
-                                                        class="block m-auto" alt="" />
+                                                        class="block m-auto img-anuncio" alt="" />
                                                     @if (!$anuncio->image)
                                                         <div class="carousel-caption block absolute inset-0 text-center"
                                                             style="
