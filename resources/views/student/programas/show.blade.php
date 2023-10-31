@@ -110,12 +110,12 @@
                                     </center>
                                 </div>
 
-                                <div class="container py-6" style="height: 600px; max-height: 600px">
+                                <div class="container py-6" style="height: 500px; max-height: 500px">
                                     <div class="text-3xl text-center text-gray-900 border-b-2 mb-4 font-bold">
                                         <p class="">Anuncios</p> <!-- border-b-4 -->
                                     </div>
                                     <div id="carouselExampleIndicators" class="carousel slide relative"
-                                        style="height: 600px" data-bs-ride="carousel">
+                                        style="height: 500px" data-bs-ride="carousel">
                                         <div
                                             class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
 
