@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="container py-6" style="">
                                     <center>
-                                        <iframe width="560" height="315"
+                                        <iframe width="100%" height="500"
                                             src="https://www.youtube.com/embed/K2iLCh0abcY?si=qXq9DpJX-FLjoYRD"
                                             title="YouTube video player" frameborder="0"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -110,7 +110,7 @@
                                     </center>
                                 </div>
 
-                                <div class="container py-6" style="height: 500px; max-height: 500px">
+                                <div class="container py-6" style="height: 100vh;">
                                     <div class="text-3xl text-center text-gray-900 border-b-2 mb-4 font-bold">
                                         <p class="">Anuncios</p> <!-- border-b-4 -->
                                     </div>
@@ -135,7 +135,7 @@
                                             @endforeach
                                         </div>
                                         <div class="carousel-inner relative w-full overflow-hidden"
-                                            style="height: 500px; max-height: 100vh">
+                                            style="height: 500px;">
                                             @php
                                                 $i = 0;
                                             @endphp
@@ -250,7 +250,7 @@
                                     </div>
                                 </div>
 
-                                <div class="container py-6 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-6">
+                                <div class="container py-6 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mt-6 mb-6">
                                     <table class="min-w-full divide-y divide-gray-200 mx-4">
                                         <tbody class="bg-white divide-y divide-gray-200">
                                             <tr>
