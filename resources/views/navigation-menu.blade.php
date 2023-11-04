@@ -132,9 +132,17 @@
                         @endif
 
                         @can('admin.home')
-                            <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
-                                {{ __('Panel administrativo') }}
-                            </x-jet-nav-link>
+                            @if (auth()->user()->hasRole('Coordinador auxiliar'))
+                                @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->first()->programa->mostrarGruposToCoordAuxiliares == 1 )
+                                    <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
+                                        {{ __('Panel administrativo') }}
+                                    </x-jet-nav-link>    
+                                @endif 
+                            @else
+                                <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
+                                    {{ __('Panel administrativo') }}
+                                </x-jet-nav-link>
+                            @endif
                         @endcan
                         @php
                             $hasCompania = false;
@@ -468,9 +476,17 @@
                     </x-jet-dropdown>
                 @endif
                 @can('admin.home')
-                    <x-jet-responsive-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
-                        {{ __('Panel Administrativo') }}
-                    </x-jet-responsive-nav-link>
+                @if (auth()->user()->hasRole('Coordinador auxiliar'))
+                    @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->first()->programa->mostrarGruposToCoordAuxiliares == 1 )
+                        <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
+                            {{ __('Panel administrativo') }}
+                        </x-jet-nav-link>    
+                    @endif 
+                @else
+                    <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
+                        {{ __('Panel administrativo') }}
+                    </x-jet-nav-link>
+                @endif
                 @endcan
             @endif
         </div>

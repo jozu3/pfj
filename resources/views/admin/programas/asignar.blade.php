@@ -92,7 +92,9 @@
             overflow-x: hidden;
             overflow-y: auto;
         }
-
+        .chk-aprobado{
+            
+        }
 
         @media (max-width: 1470px) {
             .img-personal {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Estaca;
 use App\Models\Grupo;
 use App\Models\Inscripcione;
 use App\Models\Tarea;
@@ -19,6 +20,7 @@ class TareasPersonale extends Component
     public $cantpages = 15;
 	public $sortBy = 'contactos.nombres';
     public $sortDirection = 'asc';
+    public $estaca_id;
 
     public function sortBy($field)
     {
@@ -46,6 +48,8 @@ class TareasPersonale extends Component
         $fam = $this->familia;
         $search = $this->search;
         $familias = Grupo::where('programa_id', session('programa_activo'))->get();
+        $_estacas = [];
+        if($this->estaca_id != '') $_estacas = json_decode($this->estaca_id);
 
 
         $inscripciones = Inscripcione::where('inscripciones.programa_id', $this->programa->id)
@@ -55,7 +59,8 @@ class TareasPersonale extends Component
                                     // ->join('companerismos', 'inscripcione_companerismos.id', '=', 'companerismos.id')
                                     // ->join('grupos', 'companerismos.grupo_id', '=', 'grupos.id')
                                     ->join('personales', 'inscripciones.personale_id', '=', 'personales.id')
-                                    ->join('contactos', 'personales.contacto_id', '=', 'contactos.id')
+                                    ->join('contactos', 'personales.contacto_id', '=', 'contactos.id') 
+                                    ->join('barrios', 'barrios.id', '=', 'contactos.barrio_id')
                                     ->select(
                                             'inscripciones.id as inscripcione_id', 
                                             'contactos.id as contacto_id', 
@@ -63,12 +68,18 @@ class TareasPersonale extends Component
                                             'contactos.apellidos as contacto_apellidos',
                                             'personales.estado_rtemplo as personale_estado_rtemplo',
                                             'personales.obs_rtemplo as personale_obs_rtemplo',
+                                            'barrios.estaca_id'
                                             )
                                     ->whereHas('personale', function ($q) use($search){
                                         $q->whereHas('contacto', function ($q) use ( $search){
                                             $q->where('nombres','like', '%'.$search.'%');
                                             $q->orWhere('apellidos','like', '%'.$search.'%');
                                         });
+                                    })
+                                    ->where(function($q) use ($_estacas) {
+                                        if(count($_estacas)){
+                                            $q->whereIn('barrios.estaca_id', $_estacas);
+                                        }
                                     });
 
                                     if(auth()->user()->can('admin.asistencias.migrupo' )){
@@ -87,7 +98,9 @@ class TareasPersonale extends Component
                                                             });
                                                         });
                                     }
-                                   
+                               
+        $id_estacas = $inscripciones->get()->unique('estaca_id')->pluck('estaca_id');
+        $estacas = Estaca::whereIn('id', $id_estacas)->get();
         $inscripciones = $inscripciones->orderBy($this->sortBy, $this->sortDirection);
         
         $inscripciones_all_ids = $inscripciones->pluck('inscripciones.inscripcione_id'); 
@@ -95,6 +108,6 @@ class TareasPersonale extends Component
         $this->page = 1;
         $tareas = $this->programa->tareas;
 
-        return view('livewire.admin.tareas-personale', compact('inscripciones', 'tareas', 'familias', 'inscripciones_all_ids'));
+        return view('livewire.admin.tareas-personale', compact('inscripciones', 'estacas', 'tareas', 'familias', 'inscripciones_all_ids'));
     }
 }

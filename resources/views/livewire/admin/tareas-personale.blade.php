@@ -2,11 +2,19 @@
     <div class="card">
         <div class="card-header">
             <h3>Listado de Personal</h3>
-            <div class="form-row">
-                <div class="col">
+            <div class="row">
+                <div class="col-md-3 mt-2">
                     <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un personal">
                 </div>
-                <div class="col">
+                <div class="col-md-3 mt-2" wire:ignore>
+                    <select name="" id="estaca_ids_tareas" class="form-control" name="estaca_ids[]" multiple="multiple">
+                        {{-- <option value="0">-- Todas las estacas --</option> --}}
+                        @foreach ($estacas as $stk)
+                            <option value="{{ $stk->id }}">{{ $stk->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 mt-2">
                     <select name="" id="" class="form-control" wire:model="familia">
                         <option value="">-- Familias --</option>
                         @foreach ($familias as $familia)
@@ -139,4 +147,20 @@
             @include('admin.programas.partials.card-footer-personal')
         </div>
     </div>
+    <script>     
+        document.addEventListener('livewire:load', function() {
+            $('#estaca_ids_tareas').select2({
+                placeholder: "Todas las estacas",
+                allowClear: true
+            });
+
+            $('#estaca_ids_tareas').on('change', function() {
+                var ess = (JSON.stringify($('#estaca_ids_tareas').val()));
+                // ess = JSON.stringify(ess);
+                console.log($('#estaca_ids_tareas').val())
+                console.log(ess)
+                @this.set('estaca_id', ess);
+            });
+        });
+    </script>
 </div>

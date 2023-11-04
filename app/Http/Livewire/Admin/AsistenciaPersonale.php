@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Estaca;
 use App\Models\Grupo;
 use App\Models\Inscripcione;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,8 @@ class AsistenciaPersonale extends Component
     public $cantpages = 15;
 	public $sortBy = 'contactos.nombres';
     public $sortDirection = 'asc';
+
+        public $estaca_id;
 
     use WithPagination;
 
@@ -46,15 +49,19 @@ class AsistenciaPersonale extends Component
         $search = $this->search;
         $familias = Grupo::where('programa_id', session('programa_activo'))->get();
 
+        
+        $_estacas = [];
+        if($this->estaca_id != '') $_estacas = json_decode($this->estaca_id);
 
         $inscripciones = Inscripcione::where('inscripciones.programa_id', $this->programa->id)
-                                    ->whereIn('inscripciones.role_id', [4,5,6])
+                                    ->whereIn('inscripciones.role_id', [2,3,4,5,6])
                                     ->whereIn('inscripciones.estado', [1])
                                     // ->join('inscripcione_companerismos', 'inscripciones.id', '=', 'inscripcione_companerismos.inscripcione_id')
                                     // ->join('companerismos', 'inscripcione_companerismos.id', '=', 'companerismos.id')
                                     // ->join('grupos', 'companerismos.grupo_id', '=', 'grupos.id')
                                     ->join('personales', 'inscripciones.personale_id', '=', 'personales.id')
                                     ->join('contactos', 'personales.contacto_id', '=', 'contactos.id')
+                                    ->join('barrios', 'barrios.id', '=', 'contactos.barrio_id')
                                     // ->join('asistencias', 'inscripciones.id', '=', 'asistencias.inscripcione_id')
                                     ->select(
                                             'inscripciones.id as inscripcione_id', 
@@ -62,8 +69,14 @@ class AsistenciaPersonale extends Component
                                             'contactos.nombres as contacto_nombres', 
                                             'contactos.apellidos as contacto_apellidos',
                                             'personales.estado_rtemplo as personale_estado_rtemplo',
-                                            'personales.obs_rtemplo as personale_obs_rtemplo'
+                                            'personales.obs_rtemplo as personale_obs_rtemplo',
+                                            'barrios.estaca_id'
                                             )
+                                    ->where(function($q) use ($_estacas) {
+                                        if(count($_estacas)){
+                                            $q->whereIn('barrios.estaca_id', $_estacas);
+                                        }
+                                    })
                                     ->whereHas('personale', function ($q) use($search){
                                         $q->whereHas('contacto', function ($q) use ( $search){
                                             $q->where('nombres','like', '%'.$search.'%');
@@ -87,6 +100,9 @@ class AsistenciaPersonale extends Component
                                                             });
                                                         });
                                     }
+
+        $id_estacas = $inscripciones->get()->unique('estaca_id')->pluck('estaca_id');
+        $estacas = Estaca::whereIn('id', $id_estacas)->get();
                                    
         $inscripciones = $inscripciones->orderBy($this->sortBy, $this->sortDirection);
         
@@ -96,6 +112,6 @@ class AsistenciaPersonale extends Component
 
         $capacitaciones = $this->programa->capacitaciones->where('tipo', '1');
 
-        return view('livewire.admin.asistencia-personale', compact('inscripciones', 'familias', 'capacitaciones', 'inscripciones_all_ids'));
+        return view('livewire.admin.asistencia-personale', compact('inscripciones', 'estacas', 'familias', 'capacitaciones', 'inscripciones_all_ids'));
     }
 }

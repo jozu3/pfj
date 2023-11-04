@@ -49,7 +49,19 @@
             </div>
         </div>
         <div class="row">
-
+            @php
+                $color_aprob = [
+                    0 => 'danger',
+                    1 => 'warning',
+                    2 => 'success',
+                ];
+                $icon_aprob = [
+                    0 => 'times-circle',
+                    1 => 'clock',
+                    2 => 'check-circle',
+                ];
+                
+            @endphp
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <div class="card card-row card-primary">
@@ -65,10 +77,13 @@
                                     <div class="col-6" data-id="{{ 'ins-' . $inscripcione->id }}">
                                         <div class="card text-center">
                                             <div class="card-header">
-                                                <img class="img-fluid rounded-circle img-personal"
-                                                    @if ($inscripcione->personale->user) {{ 'src=' . $inscripcione->personale->user->adminlte_image() . ' alt=""' }}
-                                                    @else
-                                                        {{ 'src=' . config('app.url') . '/img/' }} @endif>
+                                                <div class="position-relative" style="width: fit-content; margin: auto;">
+                                                    <img class="img-fluid rounded-circle img-personal"
+                                                        @if ($inscripcione->personale->user) {{ 'src=' . $inscripcione->personale->user->adminlte_image() . ' alt=""' }}
+                                                        @else
+                                                            {{ 'src=' . config('app.url') . '/img/pfjlimanorte.png' }} @endif>
+                                                    <i class="fas fa-{{$icon_aprob[$inscripcione->personale->permiso_obispo]}} chk-aprobado position-absolute text-lg text-{{$color_aprob[$inscripcione->personale->permiso_obispo]}}" style="bottom:7px; right: 7px; background: white; border-radius: 50%;"></i>
+                                                </div>
                                                 <div class="card-text"><small
                                                         class="text-muted">{{ $inscripcione->role->name }}</small>
                                                 </div>
@@ -135,6 +150,7 @@
                                             {{ 'Coordinadores Auxiliares' }}
                                         @endif
                                     </div>
+                                   
                                     <div class="card-header companerismo row"
                                         data-id="{{ 'com-' . $companerismo->id . '-' . str_replace(' ', '', $companerismo->role->name) }}">
                                         @forelse ($companerismo->inscripcioneCompanerismos as $inscripcioneCompanerismo)
@@ -142,10 +158,13 @@
                                                 data-id="{{ 'ins-' . $inscripcioneCompanerismo->inscripcione->id }}">
                                                 <div class="card text-center">
                                                     <div class="card-header inscripcione">
-                                                        <img class="img-fluid rounded-circle img-personal"
+                                                        <div class="position-relative" style="width: fit-content; margin: auto;">
+                                                            <img class="img-fluid rounded-circle img-personal"
                                                             @if ($inscripcioneCompanerismo->inscripcione->personale->user) {{ 'src=' . $inscripcioneCompanerismo->inscripcione->personale->user->adminlte_image() . ' alt=""' }}
-                                                                @else
-                                                                {{ 'src=' . config('app.url') . '/img/pfj-lima-norte.png' }} @endif>
+                                                            @else
+                                                            {{ 'src=' . config('app.url') . '/img/pfj-lima-norte.png' }} @endif>
+                                                            <i class="fas fa-{{$icon_aprob[$inscripcioneCompanerismo->inscripcione->personale->permiso_obispo]}} chk-aprobado position-absolute text-lg text-{{$color_aprob[$inscripcioneCompanerismo->inscripcione->personale->permiso_obispo]}}" style="bottom:7px; right: 7px; background: white; border-radius: 50%;"></i>
+                                                        </div>
                                                         <div class="card-text"><small
                                                                 class="text-muted">{{ $inscripcioneCompanerismo->inscripcione->role->name }}</small>
                                                         </div>
@@ -232,10 +251,13 @@
                             <div class="col-md-1" data-id="{{ 'ins-' . $inscripcione->id }}">
                                 <div class="card text-center">
                                     <div class="card-header inscripcione">
+                                        <div class="position-relative" style="width: fit-content; margin: auto;">
                                         <img class="img-fluid rounded-circle img-personal"
                                             @if ($inscripcione->personale->user) {{ 'src=' . $inscripcione->personale->user->adminlte_image() . ' alt=""' }}
                                                     @else
                                                     {{ 'src=' . config('app.url') . '/img/pfj-lima-norte.png' }} @endif>
+                                                    <i class="fas fa-{{$icon_aprob[$inscripcione->personale->permiso_obispo]}} chk-aprobado position-absolute text-lg text-{{$color_aprob[$inscripcione->personale->permiso_obispo]}}" style="bottom:7px; right: 7px; background: white; border-radius: 50%;"></i>
+                                        </div>
                                         <div class="card-text"><small
                                                 class="text-muted">{{ $inscripcione->role->name }}</small>
                                         </div>

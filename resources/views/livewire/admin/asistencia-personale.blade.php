@@ -1,12 +1,12 @@
 <div>
     <div class="card cont-pestaña">
         <div class="card-header">
-            <div class="form-row">
-                <div class="col">
+            <div class="row">
+                <div class="col-md-2">
                     <h3>Listado de Personal</h3>
 
                 </div>
-                <div class="col">
+                <div class="col-md-8">
                 @include('admin.programas.partials.card-footer-personal')
                 </div>
                 <div class="col-md-1 d-flex align-items-center justify-content-end">
@@ -21,15 +21,23 @@
                         </select>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col">
+            <div class="row">
+                <div class="col-md-3 mt-2">
                     <input wire:model="search" class="form-control" placeholder="Ingrese nombre de un personal">
                 </div>
-                <div class="col">
+                <div class="col-md-3 mt-2">
                     <select name="" id="" class="form-control" wire:model="familia">
                         <option value="">-- Familias --</option>
                         @foreach ($familias as $familia)
                             <option value="{{ $familia->id }}">{{ $familia->nombre.' '.$familia->numero }}</option>  
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 mt-2" wire:ignore>
+                    <select name="" id="estaca_ids_asistencia" class="form-control" name="estaca_ids[]" multiple="multiple">
+                        {{-- <option value="0">-- Todas las estacas --</option> --}}
+                        @foreach ($estacas as $stk)
+                            <option value="{{ $stk->id }}">{{ $stk->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -167,4 +175,20 @@
             @include('admin.programas.partials.card-footer-personal')
         </div>
     </div>
+    <script>     
+        document.addEventListener('livewire:load', function() {
+            $('#estaca_ids_asistencia').select2({
+                placeholder: "Todas las estacas",
+                allowClear: true
+            });
+
+            $('#estaca_ids_asistencia').on('change', function() {
+                var ess = (JSON.stringify($('#estaca_ids_asistencia').val()));
+                // ess = JSON.stringify(ess);
+                console.log($('#estaca_ids_asistencia').val())
+                console.log(ess)
+                @this.set('estaca_id', ess);
+            });
+        });
+    </script>
 </div>

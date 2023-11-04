@@ -85,7 +85,7 @@ class AprobacionPersonale extends Component
 
         $inscripciones = Inscripcione::where('programa_id',$this->programa->id)
                             ->where('inscripciones.estado', '1')
-                            ->whereIn('inscripciones.role_id', [4,5,6])
+                            ->whereIn('inscripciones.role_id', [2,3,4,5,6])
                             ->join('personales', 'inscripciones.personale_id', '=', 'personales.id')     
                             ->join('contactos', 'contactos.id', '=', 'personales.contacto_id')
                             ->join('barrios', 'barrios.id', '=', 'contactos.barrio_id')

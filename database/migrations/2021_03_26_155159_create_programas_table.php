@@ -21,6 +21,7 @@ class CreateProgramasTable extends Migration
             $table->date('fecha_fin');
             $table->tinyInteger('estado');
             $table->boolean('mostrarGrupos')->nullable();
+            $table->boolean('mostrarGruposToCoordAuxiliares')->nullable()->default(1);
             $table->longText('resena_matrimonio')->nullable();
             $table->longText('resena_matrimonio_logistica')->nullable();
             $table->timestamps();
