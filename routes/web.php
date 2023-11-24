@@ -26,12 +26,16 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/notification', function () {
-    $user = User::find(2);
-    $inscripcione = Inscripcione::find(1);
-    $user->notify(new InscripcioneNotification($inscripcione));
-    return 'asdsad';
-});
+// Route::get('/notification', function () {
+//     $user = User::find(2);
+//     $inscripcione = Inscripcione::find(1);
+//     $user->notify(new InscripcioneNotification($inscripcione));
+//     return 'asdsad';
+// });
 
 Route::get('consejeros/preinscripcion', [HomeController::class, 'preinscripcione'])->name('public.pre-inscripcione');
 Route::post('consejeros/preinscripcionstore', [HomeController::class, 'contactoStore'])->name('public.pre-inscripcione.contacto-store');
+
+Route::get('/inscripciones/limanorte1', function(){
+    return redirect('https://www.churchofjesuschrist.org/youth/childrenandyouth/fsy/sessions?country=pe&lang=spa');
+});

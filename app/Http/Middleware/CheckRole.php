@@ -17,9 +17,9 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next)
     {   
-        if (auth()->user()->hasAnyRole(['Obispo', 'Matrimonio de apoyo'])) {
-           return redirect()->route('admin.index');
-        }
+        // if (auth()->user()->hasAnyRole(['Obispo', 'Matrimonio de apoyo'])) {
+        //    return redirect()->route('admin.index');
+        // }
         return $next($request);
     }
 }

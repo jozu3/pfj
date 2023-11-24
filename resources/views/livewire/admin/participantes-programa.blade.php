@@ -5,22 +5,29 @@
                 <div class="col">
                     <input wire:model="search" class="form-control" placeholder="Ingrese nombre para buscar">
                 </div>
-                <div class="col">
-                    <select name="" id="" class="form-control" wire:model="estaca">
-                        <option value="0">-- Todas las estacas --</option>
-                        @foreach ($estacas as $stk)
-                            <option value="{{ $stk->id }}">{{ $stk->nombre }}</option>
-                        @endforeach
-                    </select>
-                    @if (count($barriosEstaca))
-                        <select name="" id="" class="form-control mt-2" wire:model="barrio">
-                            <option value="0">-- Barrios --</option>
-                            @foreach ($barriosEstaca as $barrio)
-                                <option value="{{ $barrio->id }}">{{ $barrio->nombre }}</option>
+                @can('admin.programas.participantes')
+                    <div class="col">
+                        <select name="" id="" class="form-control" wire:model="estaca">
+                            <option value="0">-- Todas las estacas --</option>
+                            @foreach ($estacas as $stk)
+                                <option value="{{ $stk->id }}">{{ $stk->nombre }}</option>
                             @endforeach
                         </select>
-                    @endif
-                </div>
+                        @if (count($barriosEstaca))
+                            <select name="" id="" class="form-control mt-2" wire:model="barrio">
+                                <option value="0">-- Barrios --</option>
+                                @foreach ($barriosEstaca as $barrio)
+                                    <option value="{{ $barrio->id }}">{{ $barrio->nombre }}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                    </div>
+                @elsecan('admin.programas.participantes_barrio')
+                    <div class="col">
+                        <input type="text" class="form-control" readonly
+                            value="{{ auth()->user()->personale->contacto->barrio->estaca->nombre . ' - ' . auth()->user()->personale->contacto->barrio->nombre }}">
+                    </div>
+                @endcan
                 <div class="col">
                     <select name="" id="" class="form-control" wire:model="compania">
                         <option value="0">-- Todas las compañias --</option>
@@ -33,11 +40,11 @@
                     <select name="" id="" class="form-control" wire:model="estado">
                         <option value="-1">-- Todos --</option>
                         <option value="0">Inscrito</option>
-                        <option value="1">Ingresado</option>
+                        <option value="1">Ingresó al PFJ</option>
                         <option value="2">Permutado</option>
-                        <option value="3">Terminado</option>
+                        <option value="3">Terminó el PFJ</option>
                         <option value="4">Retirado</option>
-                        <option value="5">En espera</option>
+                        <option value="5">En espera del PFJ</option>
                         <option value="6">Canceló inscripción</option>
                     </select>
                 </div>
@@ -113,7 +120,8 @@
                             </td>
                             <td>
                                 @if (isset($participante->alojamiento))
-                                    {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} - Piso: {{ $participante->alojamiento->habitacione->piso->num }} -
+                                    {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} - Piso:
+                                    {{ $participante->alojamiento->habitacione->piso->num }} -
                                     {{ $participante->alojamiento->habitacione->numero }}
                                 @endif
                             </td>
@@ -169,8 +177,25 @@
                             {{-- <td>
                                 {{ $participante->sangre }}
                             </td> --}}
-                            <td width="10px">
-                                @switch($participante->estado)
+                            <td >
+                                @php
+                                    $estados = [
+                                        "0" => "Inscrito",
+                                        // "5" => "En espera del PFJ",
+                                        // "1" => "Ingresó al PFJ",
+                                        // "3" => "Terminó el PFJ",
+                                        "2" => "Permutado",
+                                        // "4" => "Retirado",
+                                        // "6" => "Canceló inscripción ",
+                                    ];
+                                @endphp
+                                <select name="" class="form-control changeEstadoParticipante"
+                                    data-idparticipante="{{ $participante->id }}">
+                                    @foreach ($estados as $key => $value)
+                                        <option value="{{$key}}" @if ($key == $participante->estado) {{ 'selected' }} @endif >{{$value}}</option>
+                                    @endforeach
+                                </select> 
+                                {{-- @switch($participante->estado)
                                     @case(0)
                                         {{ 'Inscrito' }}
                                     @break
@@ -194,7 +219,8 @@
                                     @case(5)
                                         <div class="d-flex items-center">
                                             <div style="width:20px; height: 100%; align-items: center" class="">
-                                                <div class="spinner-grow text-success" style="width:20px; height: 20px;" role="status">
+                                                <div class="spinner-grow text-success" style="width:20px; height: 20px;"
+                                                    role="status">
                                                     <span class="sr-only">Loading...</span>
                                                 </div>
                                             </div>
@@ -209,7 +235,7 @@
                                     @break
 
                                     @default
-                                @endswitch
+                                @endswitch --}}
                             </td>
                             <td width="10px">
                                 <a href="{{ route('st.participantes.edit', $participante) }}"
@@ -228,23 +254,40 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <div class="form-row">
+                @if ($participantes != [])
+                    <div class="col">
+                        {{ $participantes->links() }}
+                    </div>
+                    <div class="col">
+                        Viendo <b> {{ count($participantes) }}</b> de un total de <b>
+                            {{ $participantes->total() }}</b>
+                    </div>
+                @endif
             </div>
-            <div class="card-footer">
-                <div class="form-row">
-                    @if ($participantes != [])
-                        <div class="col">
-                            {{ $participantes->links() }}
-                        </div>
-                        <div class="col">
-                            Viendo <b> {{ count($participantes) }}</b> de un total de <b>
-                                {{ $participantes->total() }}</b>
-                        </div>
-                    @endif
-                </div>
 
-            </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('livewire:load', function() {
+            let editor;
+            
+            Livewire.on('readyto', function(){
+
+                $(".changeEstadoParticipante").on( "change", function() {
+                    var idparticipante = $(this).data('idparticipante');
+                    var value = $(this).val();
+                    console.log(idparticipante+ "-" +value)
+                    Livewire.emit('changeEstadoParticipante', idparticipante, value)
+                } );
+            })           
+
+
+        });
+    </script>
+</div>

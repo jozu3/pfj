@@ -13,9 +13,11 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @can('student.home')
-                        <x-jet-nav-link href="{{ route('st.index') }}" :active="request()->routeIs('st.index')">
-                            {{ __('Inicio') }}
-                        </x-jet-nav-link>
+                        @can('student.programas.index')
+                            <x-jet-nav-link href="{{ route('st.index') }}" :active="request()->routeIs('st.index')">
+                                {{ __('Inicio') }}
+                            </x-jet-nav-link>
+                        @endcan
                     @endcan
                     @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count() ||
                             auth()->user()->can('admin.programas.viewList'))
@@ -340,9 +342,11 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @can('student.home')
-                <x-jet-responsive-nav-link href="{{ route('st.index') }}" :active="request()->routeIs('st.index')">
-                    {{ __('Inicio') }}
-                </x-jet-responsive-nav-link>
+                @can('student.programas.index')
+                    <x-jet-responsive-nav-link href="{{ route('st.index') }}" :active="request()->routeIs('st.index')">
+                        {{ __('Inicio') }}
+                    </x-jet-responsive-nav-link>
+                @endcan
             @endcan
             @php
                 $hasCompania = false;

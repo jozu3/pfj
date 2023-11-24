@@ -121,6 +121,9 @@
                         <div class="card-header bg-red40-pfj">
                             <h3 class="card-title">
                                 {{ 'Familia ' . $grupo->numero }}
+                                @if ($grupo->nombre != '')
+                                   {{ ': ' . $grupo->nombre }} 
+                                @endif
                             </h3>
                             <div class="float-right">
                                 <i class="fas fa-edit"

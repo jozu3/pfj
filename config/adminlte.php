@@ -333,7 +333,7 @@ return [
         [
             'header' => 'Participantes',
             'can'  =>   'admin.programas.participantes',
-            'can'  =>   'admin.programas.participantes_barrio',
+            // 'can'  =>   'admin.programas.participantes_barrio',
             'key' => 'participantes',
         ],
         // [

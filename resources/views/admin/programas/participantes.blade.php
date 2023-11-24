@@ -5,22 +5,24 @@
 @section('plugins.Sweetalert2', true)
 
 @section('content_header')
-@can('admin.programas.participantes')
-    <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal" data-target="#importExcelParticipantes">
-        <i class="far fa-file-excel"></i> Importar participantes
-    </button>
-    <a href="{{ route('st.participantes.create', 'programa_id='.$programa->id) }}" class="btn btn-success btn-sm float-right mr-3">
-        <i class="fas fa-user-plus"></i> Nuevo participantes
-    </a>
-    <a href="{{ route('admin.participantes.deleteall', $programa) }}" class="btn btn-danger btn-sm float-right mr-3 eliminar-participantes" data-prevent="">
-        <i class="fas fa-trash"></i> Eliminar todos participantes
-    </a>
-    <a href="{{ route('admin.excel.exportParticipantes', $programa) }}" class="btn btn-success btn-sm float-right mr-3">
-        <i class="far fa-file-excel"></i> Exportar participantes
-    </a>
+    @can('admin.programas.participantes')
+        <button type="button" class="btn btn-success btn-sm float-right mr-3" data-toggle="modal"
+            data-target="#importExcelParticipantes">
+            <i class="far fa-file-excel"></i> Importar participantes
+        </button>
+        <a href="{{ route('st.participantes.create', 'programa_id=' . $programa->id) }}"
+            class="btn btn-success btn-sm float-right mr-3">
+            <i class="fas fa-user-plus"></i> Nuevo participantes
+        </a>
+        <a href="{{ route('admin.participantes.deleteall', $programa) }}"
+            class="btn btn-danger btn-sm float-right mr-3 eliminar-participantes" data-prevent="">
+            <i class="fas fa-trash"></i> Eliminar todos participantes
+        </a>
+        <a href="{{ route('admin.excel.exportParticipantes', $programa) }}" class="btn btn-success btn-sm float-right mr-3">
+            <i class="far fa-file-excel"></i> Exportar participantes
+        </a>
+    @endcan
 
-@endcan
-    
     <h1>
         <b class="text-pfj">{{ $programa->nombre . ' ' . date('d/m/Y', strtotime($programa->fecha_inicio)) }}</b>
     </h1>
@@ -34,7 +36,7 @@
     @endif
     @if (count($errors->getMessages()) > 0)
         <div class="alert alert-danger alert-dismissible" role="alert">
-            <strong>Validation Errors:</strong>                     
+            <strong>Validation Errors:</strong>
             <ul>
                 @foreach ($errors->getMessages() as $errorMessages)
                     @foreach ($errorMessages as $errorMessage)
@@ -190,14 +192,14 @@
     </style>
     <style>
         /*\
-                |*| ========================================================================
-                |*| Bootstrap Toggle: bootstrap4-toggle.css v3.6.1
-                |*| https://gitbrent.github.io/bootstrap4-toggle/
-                |*| ========================================================================
-                |*| Copyright 2018-2019 Brent Ely
-                |*| Licensed under MIT
-                |*| ========================================================================
-                \*/
+                    |*| ========================================================================
+                    |*| Bootstrap Toggle: bootstrap4-toggle.css v3.6.1
+                    |*| https://gitbrent.github.io/bootstrap4-toggle/
+                    |*| ========================================================================
+                    |*| Copyright 2018-2019 Brent Ely
+                    |*| Licensed under MIT
+                    |*| ========================================================================
+                    \*/
         .btn-group-xs>.btn,
         .btn-xs {
             padding: .35rem .4rem .25rem .4rem;
@@ -449,6 +451,20 @@
                         window.location = this.getAttribute('href');
                     }
                 })
+            });
+
+            Livewire.on('alert', function(result) {
+                if (result) {
+                    $("#success-alert").show();
+                    $("#success-alert").fadeTo(1000, 500).slideUp(500, function() {
+                        $("#success-alert").slideUp(500);
+                    });
+                } else {
+                    $("#danger-alert").show();
+                    $("#danger-alert").fadeTo(1000, 500).slideUp(500, function() {
+                        $("#danger-alert").slideUp(500);
+                    });
+                }
             });
 
         });

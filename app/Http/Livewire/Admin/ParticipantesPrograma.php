@@ -26,8 +26,19 @@ class ParticipantesPrograma extends Component
         
     }
 
+    protected $listeners = ['changeEstadoParticipante'];
+
+    public function changeEstadoParticipante($idparticipante, $value){
+        Participante::find($idparticipante)->update([
+            'estado' => $value
+        ]);
+        $this->emit('alert', true);
+    }
+
+
     public function render()
     {
+        $this->emit('readyto');
         $that = $this;
         $estacas = Estaca::all();
 
