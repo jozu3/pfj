@@ -36,6 +36,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::get('consejeros/preinscripcion', [HomeController::class, 'preinscripcione'])->name('public.pre-inscripcione');
 Route::post('consejeros/preinscripcionstore', [HomeController::class, 'contactoStore'])->name('public.pre-inscripcione.contacto-store');
 
-Route::get('/inscripciones/limanorte1', function(){
+Route::get('/limanorte', function(){
     return redirect('https://www.churchofjesuschrist.org/youth/childrenandyouth/fsy/sessions?country=pe&lang=spa');
 });
