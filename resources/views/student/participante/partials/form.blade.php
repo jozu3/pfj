@@ -263,7 +263,10 @@
         {!! Form::label('estado_aprobacion', 'Estado de aprobación', [
             'class' => 'block font-medium text-sm text-gray-700',
         ]) !!}
-        {!! Form::select('estado_aprobacion', ['1' => 'Aprobado', '0' => 'No aprobado'], null, [
+        {!! FSorm::select('estado_aprobacion', [
+                '1' => 'Aprobado', 
+                '0' => 'No aprobado'
+            ], null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Seleccione',
