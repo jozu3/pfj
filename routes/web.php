@@ -39,7 +39,7 @@ Route::post('consejeros/preinscripcionstore', [HomeController::class, 'contactoS
 Route::get('/limanorte', function(){
 
     if (date("Y-m-d H:i:s") >= "2023-12-03 17:00:00" ) {
-        return redirect('https://www.churchofjesuschrist.org/youth/childrenandyouth/fsy/sessions?country=pe&lang=spa');
+        return redirect('https://www.churchofjesuschrist.org/youth/childrenandyouth/fsy/session?id=a9bdd131-938b-468e-954b-7dd819e01f0e&lang=spa');
     }
     return view('public.inscripciones');
     
