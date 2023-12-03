@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <section id="secbody" style="width: 100%; height: 100vh; background-image: url({{config('app.url')}}/img/imgcontador.jpg)">
+    <section id="secbody" style="width: 100%; height: 100vh; background-image: url({{config('app.url')}}/img/bandera-pfj-3-compr.gif)">
         {{-- <section id="secbody" style="width: 100%; height: 100vh; background-image: url({{config('app.url')}}/img/bandera-pfj---.gif)"> --}}
 
     {{-- <x-jet-authentication-card>
@@ -56,8 +56,7 @@
         #inicio{
             position: absolute;
             width:100%;
-            bottom: 20px;
-
+            bottom: 75px;
         }
         #inicio div{
             margin:auto;
@@ -92,8 +91,8 @@
 
                 simplyCountdown('#contadorr', {
                     year: 2023, // required
-                    month: 11, // required
-                    day: 27, // required
+                    month: 12, // required
+                    day: 03, // required
                     hours: 17, // Default is 0 [0-23] integer
                     minutes: 0, // Default is 0 [0-59] integer
                     seconds: 0, // Default is 0 [0-59] integer
