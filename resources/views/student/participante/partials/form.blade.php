@@ -228,7 +228,7 @@
 </div>
 <div class="grid grid-cols-12 gap-4">
     <div class="col-span-12 mt-3 sm:col-span-4">
-        {!! Form::label('contacto1', 'Número de contacto 1', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::label('contacto1', 'Nombre de contacto 1', ['class' => 'block font-medium text-sm text-gray-700']) !!}
         {!! Form::text('contacto1', null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
@@ -239,8 +239,46 @@
         @enderror
     </div>
     <div class="col-span-12 mt-3 sm:col-span-4">
-        {!! Form::label('contacto2', 'Número de contacto 2', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::label('contacto1_phone', 'Número de contacto 1', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::text('contacto1_phone', null, [
+            'class' =>
+                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
+            'placeholder' => 'Ingrese el teléfono del contacto 1',
+        ]) !!}
+        @error('contacto1_phone')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
+    </div>
+    <div class="col-span-12 mt-3 sm:col-span-4">
+        {!! Form::label('contacto1_email', 'Email de contacto 1', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::text('contacto1_email', null, [
+            'class' =>
+                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
+            'placeholder' => 'Ingrese el email del contacto 1',
+        ]) !!}
+        @error('contacto1_email')
+            <small class="text-red-600">{{ $message }}</small>
+        @enderror
+    </div>
+    <div class="col-span-12 mt-3 sm:col-span-4">
+        {!! Form::label('contacto2', 'Nombre de contacto 2', ['class' => 'block font-medium text-sm text-gray-700']) !!}
         {!! Form::text('contacto2', null, [
+            'class' =>
+                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
+            'placeholder' => 'Ingrese el contacto',
+        ]) !!}
+    </div>
+    <div class="col-span-12 mt-3 sm:col-span-4">
+        {!! Form::label('contacto2_phone', 'Número de contacto 2', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::text('contacto2_phone', null, [
+            'class' =>
+                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
+            'placeholder' => 'Ingrese el contacto',
+        ]) !!}
+    </div>
+    <div class="col-span-12 mt-3 sm:col-span-4">
+        {!! Form::label('contacto2_email', 'Email de contacto 2', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::text('contacto2_email', null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
             'placeholder' => 'Ingrese el contacto',
@@ -249,7 +287,7 @@
 </div>
 <div class="grid grid-cols-12 gap-4">
     <div class="col-span-12 mt-3 sm:col-span-4">
-        {!! Form::label('barrio_id', 'Barrio', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::label('barrio_id', 'Barrio / Rama', ['class' => 'block font-medium text-sm text-gray-700']) !!}
         {!! Form::select('barrio_id', $estacasselect, null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
@@ -259,13 +297,15 @@
             <small class="text-red-600">{{ $message }}</small>
         @enderror
     </div>
-    <div class="col-span-12 sm:col-span-4">
+    <div class="col-span-12 mt-3 sm:col-span-4">
         {!! Form::label('estado_aprobacion', 'Estado de aprobación', [
             'class' => 'block font-medium text-sm text-gray-700',
         ]) !!}
-        {!! FSorm::select('estado_aprobacion', [
-                '1' => 'Aprobado', 
-                '0' => 'No aprobado'
+        {!! Form::select('estado_aprobacion', [
+                'Aprobados' => 'Aprobados',
+                'Aprobación pendiente' => 'Aprobación pendiente',
+                'En lista de espera' => 'En lista de espera',
+                'Cancelado' => 'Cancelado',
             ], null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
@@ -275,7 +315,7 @@
             <small class="text-red-600">{{ $message }}</small>
         @enderror
     </div>
-    <div class="col-span-12 sm:col-span-4">
+    <div class="col-span-12 mt-3 sm:col-span-4">
         {!! Form::label('obispo', 'Nombre del obispo o presidente de rama', [
             'class' => 'block font-medium text-sm text-gray-700',
         ]) !!}
@@ -287,6 +327,16 @@
         @error('obispo')
             <small class="text-red-600">{{ $message }}</small>
         @enderror
+    </div>
+    <div class="col-span-12 sm:col-span-4">
+        {!! Form::label('obispo_email', 'Email del obispo o presidente de rama', [
+            'class' => 'block font-medium text-sm text-gray-700',
+        ]) !!}
+        {!! Form::text('obispo_email', null, [
+            'class' =>
+                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
+            'placeholder' => 'Ingrese el nombre del obispo o presidente de rama',
+        ]) !!}
     </div>
     <div class="col-span-12 sm:col-span-4">
         {!! Form::label('estado', 'Estado del participante', [

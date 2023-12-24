@@ -1,6 +1,80 @@
 <div wire:init="loadParticipantes">
     <div class="card">
         <div class="card-header">
+
+            @if ($miscupos > $inscritos)
+                @can('admin.programas.participantes')
+                @elsecan('admin.programas.participantes_barrio')
+                    <a href="{{ route('st.participantes.create', 'programa_id=' . $programa_id) }}"
+                        class="btn btn-success btn-sm float-right mr-3">
+                        <i class="fas fa-user-plus"></i> Nuevo participantes
+                    </a>
+                @endcan
+            @endif
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <table class="table table-sm">
+                        <thead class="text-bold">
+                            <tr>
+                                <th>Aprobación</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($estado_aprobaciones as $estado_aprobacion)
+                                <tr>
+                                    <td>{{ $estado_aprobacion->descripcion }}</td>
+                                    <td>{{ $allParticipantes->where('estado_aprobacion', $estado_aprobacion->id)->count() }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Participante</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mi cupos aprobados</td>
+                                <td>{{ $miscupos }}</td>
+                            </tr>
+                            <tr>
+                                <td>Inscritos</td>
+                                <td>{{ $inscritos }}</td>
+                            </tr>
+                            <tr>
+                                <td>Permutados</td>
+                                <td>{{ $permutados }}</td>
+                            </tr>
+                            <tr>
+                                <td>No inscritos</td>
+                                <td>{{ $noinscritos }}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            @if ($miscupos <= $inscritos ) 
+                            <tr>
+                                <td colspan="100%">
+                                    <span class="text-success"><i class="fas fa-info-circle"></i> Ha completado sus cupos aprobados. No puede inscribir más</span>
+                                </td>
+                            </tr>
+                            @endif
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
             <div class="form-row">
                 <div class="col">
                     <input wire:model="search" class="form-control" placeholder="Ingrese nombre para buscar">
@@ -37,6 +111,14 @@
                     </select>
                 </div>
                 <div class="col">
+                    <select name="" id="" class="form-control" wire:model="estado_aprobacion">
+                        <option value="Todos">Aprobación: Todos</option>
+                        @foreach ($estado_aprobaciones as $est)
+                            <option value="{{ $est->id }}">{{ $est->descripcion }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col">
                     <select name="" id="" class="form-control" wire:model="estado">
                         <option value="-1">-- Todos --</option>
                         <option value="0">Inscrito</option>
@@ -57,7 +139,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-striped">
+            <table class="table table-sm table-striped">
                 <thead>
                     <tr>
                         <th colspan="1">Nombres</th>
@@ -75,6 +157,7 @@
                         <th>Edad</th>
                         {{-- <th>Edad 2022</th> --}}
                         {{-- <th>Tipo de sangre</th> --}}
+                        <th>Aprobación</th>
                         <th>Estado</th>
                     </tr>
                 </thead>
@@ -171,30 +254,39 @@
                             <td>
                                 {{ $participante->age }}
                             </td>
+                            <td>
+                                {{ $participante->estadoAprobacione->descripcion }}
+                            </td>
                             {{-- <td>
                                 {{ $participante->age_2022 }}
                             </td> --}}
                             {{-- <td>
                                 {{ $participante->sangre }}
                             </td> --}}
-                            <td >
+                            <td>
                                 @php
                                     $estados = [
-                                        "0" => "Inscrito",
+                                        '0' => 'Inscrito',
+                                        '-1' => 'No Inscrito',
                                         // "5" => "En espera del PFJ",
                                         // "1" => "Ingresó al PFJ",
                                         // "3" => "Terminó el PFJ",
-                                        "2" => "Permutado",
+                                        '2' => 'Permutado',
                                         // "4" => "Retirado",
                                         // "6" => "Canceló inscripción ",
                                     ];
                                 @endphp
                                 <select name="" class="form-control changeEstadoParticipante"
-                                    data-idparticipante="{{ $participante->id }}">
+                                    wire:loading.attr="disabled" style="width: 150px"
+                                    data-idparticipante="{{ $participante->id }}"
+                                    @if ($miscupos <= $inscritos && $participante->estado != 0) {{'disabled'}} @endif
+                                    >
                                     @foreach ($estados as $key => $value)
-                                        <option value="{{$key}}" @if ($key == $participante->estado) {{ 'selected' }} @endif >{{$value}}</option>
+                                        <option value="{{ $key }}"
+                                            @if ($key == $participante->estado) {{ 'selected' }} @endif>
+                                            {{ $value }}</option>
                                     @endforeach
-                                </select> 
+                                </select>
                                 {{-- @switch($participante->estado)
                                     @case(0)
                                         {{ 'Inscrito' }}
@@ -238,7 +330,7 @@
                                 @endswitch --}}
                             </td>
                             <td width="10px">
-                                <a href="{{ route('st.participantes.edit', $participante) }}"
+                                <a href="{{ route('st.participantes.edit', $participante) }}" target="_blank"
                                     class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
                             <td>
@@ -254,40 +346,27 @@
                                     </div>
                                 </td>
                             </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-        <div class="card-footer">
-            <div class="form-row">
-                @if ($participantes != [])
-                    <div class="col">
-                        {{ $participantes->links() }}
-                    </div>
-                    <div class="col">
-                        Viendo <b> {{ count($participantes) }}</b> de un total de <b>
-                            {{ $participantes->total() }}</b>
-                    </div>
-                @endif
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
+            <div class="card-footer">
+                <div class="form-row">
+                    @if ($participantes != [])
+                        <div class="col">
+                            {{ $participantes->links() }}
+                        </div>
+                        <div class="col">
+                            Viendo <b> {{ count($participantes) }}</b> de un total de <b>
+                                {{ $participantes->total() }}</b>
+                        </div>
+                    @endif
+                </div>
 
+            </div>
         </div>
+        <script>
+            document.addEventListener('livewire:load', function() {
+            });
+        </script>
     </div>
-    <script>
-        document.addEventListener('livewire:load', function() {
-            let editor;
-            
-            Livewire.on('readyto', function(){
-
-                $(".changeEstadoParticipante").on( "change", function() {
-                    var idparticipante = $(this).data('idparticipante');
-                    var value = $(this).val();
-                    console.log(idparticipante+ "-" +value)
-                    Livewire.emit('changeEstadoParticipante', idparticipante, value)
-                } );
-            })           
-
-
-        });
-    </script>
-</div>

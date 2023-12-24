@@ -312,7 +312,7 @@ return [
             'can'  => 'admin.inscripciones.index'
         ],
         [
-            'text' => 'Lista de contactos',
+            'text' => 'Lista de contactos(JAS)',
             'key' => 'list_contacts',
             'label_color' => 'success',
             'route'  => 'admin.contactos.index',
@@ -333,7 +333,11 @@ return [
         [
             'header' => 'Participantes',
             'can'  =>   'admin.programas.participantes',
-            // 'can'  =>   'admin.programas.participantes_barrio',
+            'key' => 'participantes',
+        ],
+        [
+            'header' => 'Participantes',
+            'can'  =>   'admin.programas.participantes_barrio',
             'key' => 'participantes',
         ],
         // [

@@ -195,7 +195,7 @@ class AppServiceProvider extends ServiceProvider
                     ];
 
                     $menu_participantes_barrio = [
-                        'text' => 'Participantes de mi barrio',
+                        'text' => 'Participantes de mi unidad',
                         'url' => 'admin/programas/' . session('programa_activo') . '/participantes',
                         'icon' => 'fas fa-child',
                         'can' => 'admin.programas.participantes_barrio'
@@ -213,7 +213,7 @@ class AppServiceProvider extends ServiceProvider
                         // 'url' => 'admin/habitaciones',
                         'route' => 'admin.habitaciones.index',
                         'icon' => 'fas fa-hotel',
-                        'can' => 'admin.programas.participantes'
+                        'can' => 'admin.programas.habitaciones'
                     ];
 
                     $header = [

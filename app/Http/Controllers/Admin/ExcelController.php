@@ -8,7 +8,11 @@ use App\Http\Controllers\Controller;
 use App\Imports\ParticipantesImport;
 use Illuminate\Http\Request;
 use App\Imports\PersonalesImport;
+use App\Models\BarrioInfo;
+use App\Models\Inscripcione;
+use App\Models\Participante;
 use App\Models\Programa;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Validation\ValidationException;
 
@@ -56,6 +60,24 @@ class ExcelController extends Controller
 
         try {
             Excel::import(new ParticipantesImport($programa), $file);
+
+            $inf = Participante::select('barrio_id', DB::raw('count(id) as cantidad'))
+                            ->where('estado', '0') //inscritos
+                            ->where('programa_id', $programa->id)
+                            ->groupBy('barrio_id')->get();
+            
+                            
+            foreach ($inf as $key => $value) {
+                $barrio_id = $value->barrio_id;
+
+                BarrioInfo::create([
+                    'barrio_id' => $barrio_id,
+                    'cupos' => $value->cantidad,
+                    'programa_id' => $programa->id
+                ]);
+            }
+            
+
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
             $failures = $e->failures();
             

@@ -360,6 +360,6 @@ class ProgramaController extends Controller
     public function unidadesLocales(Programa $programa){
 
 
-        return view('admin.programas.unidades-locales', compact('programa', 'estacas', 'alojados', 'total')); 
+        return view('admin.programas.unidades-locales', compact('programa')); 
     }
 }

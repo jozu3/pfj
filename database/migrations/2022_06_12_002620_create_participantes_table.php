@@ -34,7 +34,7 @@ class CreateParticipantesTable extends Migration
             $table->integer('age');
             $table->integer('age_2022');
             $table->foreignId('barrio_id')->constrained();
-            $table->tinyInteger('estado_aprobacion');
+            $table->unsignedBigInteger('estado_aprobacion');
             $table->string('obispo');
             $table->string('obispo_email');
             $table->string('sangre');

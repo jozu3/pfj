@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreContactoRequest;
 use App\Models\Barrio;
 use App\Models\Estaca;
+use App\Models\Image;
+use Intervention\Image\Facades\Image as ImageIntervention;
 use DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
@@ -80,9 +82,22 @@ class ContactoController extends Controller
         if ($request->file('imgperfil')) {
             $url = Storage::put('contactos', $request->file('imgperfil'));
             $contacto->image()->create([
-                'url' => $url
+                'url' => $url,
+                'tipo' => 'original'
             ]);
-        }
+            
+            //image 200x200
+            $extension = $request->file('imgperfil')->getClientOriginalExtension();
+            $image_200x200 = ImageIntervention::make($request->file('imgperfil'))->resize(200, null, function ($constraint) {
+                                                                                    $constraint->aspectRatio();
+                                                                                })->encode($extension);
+            $name_img_200x200 = $contacto->id."_".$contacto->nombres."_".$contacto->apellidos.".".$extension;
+            $url_200x200 = Storage::put('contactos/200x200/'.$name_img_200x200, $image_200x200);
+            $contacto->image200x200()->create([
+                'url' => $url_200x200,
+                'tipo' => '200x200'
+            ]);
+     }
 
         return redirect()->route('admin.contactos.show', compact('contacto'))->with('info', 'Contacto creado con éxito');
     }
@@ -164,7 +179,14 @@ class ContactoController extends Controller
         
         if ($request->file('imgperfil')) {
             $url = Storage::put('contactos', $request->file('imgperfil'));
-            //$contacto->image()->delete();
+            //image 200x200
+            $extension = $request->file('imgperfil')->getClientOriginalExtension();
+            $image_200x200 = ImageIntervention::make($request->file('imgperfil'))->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode($extension);
+            $name_img_200x200 = $contacto->id."_".$contacto->nombres."_".$contacto->apellidos.".".$extension;
+            $url_200x200 = Storage::put('contactos/200x200/'.$name_img_200x200, $image_200x200);
+            
             if($contacto->image != null){
                 Storage::delete($contacto->image->url);
                 $contacto->image->update([
@@ -173,6 +195,20 @@ class ContactoController extends Controller
             } else {
                 $contacto->image()->create([
                     'url' => $url
+                ]);
+            }
+            
+            if($contacto->image200x200 != null){
+                // Storage::delete($contacto->image200x200->url);
+                // dd($url);
+                $contacto->image200x200()->update([
+                    'url' => $url_200x200,
+                    'tipo' => '200x200'                
+                ]);
+            } else {
+                $contacto->image200x200()->create([
+                    'url' => $url_200x200,
+                    'tipo' => '200x200'
                 ]);
             }
         }
@@ -200,7 +236,9 @@ class ContactoController extends Controller
             } else {
                 // dd($contacto->image()->pluck('url')->toArray());
                 Storage::delete($contacto->image()->pluck('url')->toArray());
+                Storage::delete($contacto->image200x200()->pluck('url')->toArray());
                 $contacto->image()->delete();
+                $contacto->image200x200()->delete();
                 $contacto->delete();
 
             }

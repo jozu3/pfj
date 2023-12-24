@@ -17,18 +17,18 @@
 	<div class="form-row">
 			@forelse ($inscripcione->programa->funciones as $funcione)
 			<div class="col-1">
-				{!! Form::checkbox('funciones[]', $funcione->id, null, ['class' => 'mr-1']) !!}
-				{!! Form::label('funcion', $funcione->descripcion) !!}
+				{!! Form::checkbox('funciones[]', $funcione->id, null, ['class' => 'mr-1', 'id' => 'funcion'.$funcione->id]) !!}
+				{!! Form::label('funcion'.$funcione->id, $funcione->descripcion) !!}
 			</div>
 			@empty
 			<div class="col">
-					No ha creado funciones
-				</div>
+				No ha creado funciones
+			</div>
 			@endforelse
 				
 			@error('funciones')
-			<small class="text-danger">{{ $message }}</small>
+				<small class="text-danger">{{ $message }}</small>
 			@enderror
-		</div> 	
-	</div> 
+	</div> 	
+</div> 
 @endif

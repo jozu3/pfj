@@ -22,7 +22,7 @@ class ProgramaSeeder extends Seeder
             
             $estado = 0;
 
-            $fecha_inicio = $faker->dateTimeThisYear($max = '2022-07-31', $timezone = null)->format('Y-m-d');
+            $fecha_inicio = $faker->dateTimeThisYear($max = '2024-07-31', $timezone = null)->format('Y-m-d');
     
             //sumas 5 días - fecha de fin
             $fecha_fin =  date("Y-m-d",strtotime($fecha_inicio."+ 5 days")); 

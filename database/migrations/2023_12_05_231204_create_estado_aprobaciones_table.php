@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBarrioInfosTable extends Migration
+class CreateEstadoAprobacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateBarrioInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('barrio_infos', function (Blueprint $table) {
+        Schema::create('estado_aprobaciones', function (Blueprint $table) {
             $table->id();
-            $table->integer('cupos')->default(0);
-            $table->foreignId('barrio_id')->constrained();
-            $table->foreignId('programa_id')->constrained();
+            $table->string('descripcion');
+            $table->boolean('estado');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateBarrioInfosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('barrio_infos');
+        Schema::dropIfExists('estado_aprobaciones');
     }
 }

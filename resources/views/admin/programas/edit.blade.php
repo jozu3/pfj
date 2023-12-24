@@ -32,6 +32,21 @@
 		</div>
 	</div>
     @endif
+	@if (auth()->user()->can('admin.programas.unidades-locales'))
+	<div class="card">
+		<div class="card-header">
+			<a href="{{ route('admin.programas.unidades-locales', $programa) }}" class="btn btn-sm btn-success float-right">Editar</a>
+			Estacas
+		</div>
+		<div class="card-body">
+			<ul>
+				@foreach ($programa->estacaInscripciones as $estacaInscripcione)
+					<li>{{ $estacaInscripcione->estaca->nombre }}</li>
+				@endforeach
+			</ul>
+		</div>
+	</div>
+    @endif
 
 @stop
 

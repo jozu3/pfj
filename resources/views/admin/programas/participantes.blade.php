@@ -192,14 +192,14 @@
     </style>
     <style>
         /*\
-                    |*| ========================================================================
-                    |*| Bootstrap Toggle: bootstrap4-toggle.css v3.6.1
-                    |*| https://gitbrent.github.io/bootstrap4-toggle/
-                    |*| ========================================================================
-                    |*| Copyright 2018-2019 Brent Ely
-                    |*| Licensed under MIT
-                    |*| ========================================================================
-                    \*/
+                        |*| ========================================================================
+                        |*| Bootstrap Toggle: bootstrap4-toggle.css v3.6.1
+                        |*| https://gitbrent.github.io/bootstrap4-toggle/
+                        |*| ========================================================================
+                        |*| Copyright 2018-2019 Brent Ely
+                        |*| Licensed under MIT
+                        |*| ========================================================================
+                        \*/
         .btn-group-xs>.btn,
         .btn-xs {
             padding: .35rem .4rem .25rem .4rem;
@@ -466,6 +466,32 @@
                     });
                 }
             });
+
+                var previous;
+                var select;
+                Livewire.on('readyto', function() {
+
+                    $(".changeEstadoParticipante").on('focus', function() {
+                        // Store the current value on focus and on change
+                        previous = this.value;
+                    }).on("change", function() {
+                        console.log(previous)
+                        var idparticipante = $(this).data('idparticipante');
+                        var value = $(this).val();
+                        select = $(this)
+                        console.log(idparticipante + "-" + value)
+                        
+                        Livewire.emit('changeEstadoParticipante', idparticipante, value)
+                        setTimeout(() => {
+                            location.reload();
+                        }, 500);
+                    });
+                })
+
+                Livewire.on('backState', function() {
+                    select.val(previous)
+                })
+           
 
         });
     </script>

@@ -26,5 +26,8 @@ class Barrio extends Model
         return $this->hasMany(Participante::class);
     }
 
+    public function barrioInfo(){
+        return $this->hasOne(BarrioInfo::class);
+    }
 
 }

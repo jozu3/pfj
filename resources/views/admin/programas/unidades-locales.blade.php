@@ -3,7 +3,7 @@
 @section('title', 'Unidades locales')
 
 @section('content_header')
-    <h1>Estacas Participantes</h1>
+    <h1>Estacas Participantes - {{ $programa->pfj->nombre . ' ' . $programa->nombre }}</h1>
 @stop
 
 @section('content')

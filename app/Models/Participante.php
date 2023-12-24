@@ -19,6 +19,11 @@ class Participante extends Model
         return $this->belongsTo(Programa::class);
     }
 
+    public function estadoAprobacione()
+    {
+        return $this->belongsTo(EstadoAprobacione::class, 'estado_aprobacion', 'id');
+    }
+
     public function participanteCompania(){
         return $this->hasOne(ParticipanteCompania::class);
     }

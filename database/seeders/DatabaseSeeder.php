@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BarrioSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(VacunaSeeder::class);
+        $this->call(EstadoAprobacioneSeeder::class);        
         
         $this->call(ContactoSeeder::class);
         $this->call(PfjSeeder::class);

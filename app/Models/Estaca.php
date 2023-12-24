@@ -26,4 +26,8 @@ class Estaca extends Model
         })->get();
         return $participantes;
     }
+
+    public function estacaInscripciones(){
+        return $this->hasMany(EstacaInscripcione::class);
+    }
 }

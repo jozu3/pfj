@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class EstacaInscripcione extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function programa(){
+        return $this->belongsTo(Programa::class);
+    }
+
+    public function estaca(){
+        return $this->belongsTo(Estaca::class);
+    }
+
 }

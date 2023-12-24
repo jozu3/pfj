@@ -103,6 +103,10 @@ class Programa extends Model
         return $companias;
     }
 
+    public function estacaInscripciones(){
+        return $this->hasMany(EstacaInscripcione::class);
+    }
+
 }
 /*
 Estados

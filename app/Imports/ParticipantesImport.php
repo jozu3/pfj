@@ -3,7 +3,9 @@
 namespace App\Imports;
 
 use App\Models\Barrio;
+use App\Models\EstadoAprobacione;
 use App\Models\Participante;
+use App\Models\Programa;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Rules\Exists;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -13,6 +15,11 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidation
 {
+    public $programa;
+    public function  __construct(Programa $programa)
+    {
+        $this->programa = $programa->id;
+    }
     /**
     * @param Collection $collection
     */
@@ -20,6 +27,7 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
     {
         foreach ($collection as $row) 
         {
+            if($row['tipo'] != 'Participante') continue;
             //genero
             // switch ($row['sexo']) {
             //     case 'Mujer' || 'mujer' || 'MUJER':
@@ -48,11 +56,11 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
             }
 
             //estado
-            if ($row['estado'] == 'Aprobados' || $row['estado'] == 'aprobados' || $row['estado'] == 'aprobado' || $row['estado'] == 'APROBADO' || $row['estado'] == 'Aprobados - L') {
-                $row['estado'] = 1;
-            } else {
-                $row['estado'] = 0;
-            }
+            // if ($row['estado'] == 'Aprobados' || $row['estado'] == 'aprobados' || $row['estado'] == 'aprobado' || $row['estado'] == 'APROBADO' || $row['estado'] == 'Aprobados - L') {
+            //     $row['estado'] = 1;
+            // } else {
+            //     $row['estado'] = 0;
+            // }
 
             //vacunas
             if (is_int($row['cuentas_con_todas_las_dosis_requeridas_de_vacunacion_contra_covid'])) {
@@ -67,7 +75,11 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
 
             if (!isset($row['correo_electronico'])) {
                 $row['correo_electronico'] = '';
-            }   
+            }
+            
+            if(isset($row['estado'])){
+                $row['estado'] = EstadoAprobacione::where('descripcion', $row['estado'])->first()->id;
+            }
 
             Participante::create([
                 'nombres' => $row['nombre'],
@@ -87,7 +99,7 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
                 'contacto2_phone' => $row['contact_2_phone'] == null ? '': $row['contact_2_phone'] ,
                 'contacto2_email' => $row['contact_2_email'] == null ? '': $row['contact_2_email'] ,
                 'age' => $row['age'],
-                'age_2022' => empty($row['cuantos_anos_cumples_en_el_2022']) ? '0' : $row['cuantos_anos_cumples_en_el_2022'],
+                'age_2022' => empty($row['cuantos_anos_cumples_en_el_2024']) ? '0' : $row['cuantos_anos_cumples_en_el_2024'],
                 'barrio_id' => $row['nombre_del_barrio_o_rama'],
                 'estado_aprobacion' => $row['estado'],
                 'obispo' => $row['nombre_del_obispo'] == null ? '' : $row['nombre_del_obispo'],
@@ -98,8 +110,8 @@ class ParticipantesImport implements ToCollection, WithHeadingRow, WithValidatio
                 'diabetico_asmatico' => $row['eres_diabetico_o_asmatico'] == null ? '' : $row['eres_diabetico_o_asmatico'],
                 'seguro_medico' => $row['con_que_seguro_medico_cuentas'] == null ? '' : $row['con_que_seguro_medico_cuentas'],
                 'vacunas' => $row['cuentas_con_todas_las_dosis_requeridas_de_vacunacion_contra_covid'] == null ? '0' : $row['cuentas_con_todas_las_dosis_requeridas_de_vacunacion_contra_covid'],
-                'programa_id' => session('programa_activo'),
-                'estado' => 0,//inscrito
+                'programa_id' => $this->programa,
+                'estado' => $row['estado'] == 1 ? 0 : -1,//inscrito
                 'tipo_ingreso' => null,
                 'horallegada' => null,
             ]);

@@ -47,7 +47,7 @@ Route::post('/permissions/create', [RoleController::class, 'storePermission'])->
 Route::resource('roles', RoleController::class)->names('admin.roles');
 Route::resource('estacas', EstacaController::class)->names('admin.estacas');
 Route::resource('barrios', BarrioController::class)->names('admin.barrios');
-Route::get('/estacas/{estaca}/barrios', [BarrioController::class, 'show'])->name('admin.barrios.show');
+// Route::get('/estacas/{estaca}/barrios', [BarrioController::class, 'show'])->name('admin.barrios.show');
 Route::resource('contactos', ContactoController::class)->names('admin.contactos');
 Route::resource('seguimientos', SeguimientoController::class)->names('admin.seguimientos');
 Route::resource('pfjs', PfjController::class)->names('admin.pfjs');

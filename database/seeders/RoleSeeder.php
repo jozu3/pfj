@@ -79,9 +79,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admin.programas.grupos', 'description' => 'Ver los grupos de su sesión'])->syncRoles([$role1, $role2, $role3, $role4, ]);
         Permission::create(['name' => 'admin.programas.planning', 'description' => 'Ver el menu planificador'])->syncRoles([$role1, $role2, $role3, $role4, ]);
         Permission::create(['name' => 'admin.programas.participantes', 'description' => 'Ver el menu participante del programa'])->syncRoles([$role1, $role2, $role3, $role4, ]);
-        Permission::create(['name' => 'admin.programas.participantes_barrio', 'description' => 'Ver los participantes de su barrio'])->syncRoles([$role1, $role2, $role3, $role4, ]);
+        Permission::create(['name' => 'admin.programas.participantes_barrio', 'description' => 'Ver los participantes de su barrio'])->syncRoles([$role1, $role2, $role3, $role4, $role7]);
         Permission::create(['name' => 'admin.programas.companias', 'description' => 'Ver las compañias del programa'])->syncRoles([$role1, $role2, $role3, $role4]);
         Permission::create(['name' => 'admin.programas.unidades-locales', 'description' => 'Ver las unidades locales de la sesión'])->syncRoles([$role1, $role2, $role3, $role4]);
+        Permission::create(['name' => 'admin.programas.habitaciones', 'description' => 'Ver las habitaciones de la sesión'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
         
         //Permisos grupo
         Permission::create(['name' => 'admin.grupos.index', 'description' => 'Ver listado de grupos'])->syncRoles([$role1, $role2, $role3, $role4, $role5]);
