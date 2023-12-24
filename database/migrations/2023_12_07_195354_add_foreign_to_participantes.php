@@ -16,8 +16,7 @@ class AddForeignToParticipantes extends Migration
         Schema::table('participantes', function (Blueprint $table) {
             $table->foreign('estado_aprobacion')
                 ->references('id')
-                ->on('estado_aprobaciones')
-                ->onDelete('cascade');
+                ->on('estado_aprobaciones');
         });
     }
 
