@@ -178,29 +178,39 @@ class ContactoController extends Controller
         }
         
         if ($request->file('imgperfil')) {
-            $url = Storage::put('contactos', $request->file('imgperfil'));
-            //image 200x200
             $extension = $request->file('imgperfil')->getClientOriginalExtension();
+            $name_img = $contacto->id."_". str_replace(" ", "_", $contacto->nombres)."_". str_replace(" ", "_", $contacto->apellidos).".".$extension;
+            // $url = "contactos/".$name_img;
+
+            $url = Storage::put("contactos", $request->file('imgperfil'));
+
+            //image 200x200
+
+            if($contacto->image200x200 != null){
+                Storage::delete($contacto->image200x200->url);
+            }
+
             $image_200x200 = ImageIntervention::make($request->file('imgperfil'))->resize(200, null, function ($constraint) {
                 $constraint->aspectRatio();
             })->encode($extension);
-            $name_img_200x200 = $contacto->id."_".$contacto->nombres."_".$contacto->apellidos.".".$extension;
-            $url_200x200 = Storage::put('contactos/200x200/'.$name_img_200x200, $image_200x200);
+            $url_200x200 = 'contactos/200x200/'.$name_img ;
+            Storage::put($url_200x200, $image_200x200->__toString());
+            // dd($url_200x200);
             
             if($contacto->image != null){
                 Storage::delete($contacto->image->url);
                 $contacto->image->update([
-                    'url' => $url
+                    'url' => $url,
+                    'tipo' => 'original'
                 ]);
             } else {
                 $contacto->image()->create([
-                    'url' => $url
+                    'url' => $url,
+                    'tipo' => 'original'
                 ]);
             }
             
             if($contacto->image200x200 != null){
-                // Storage::delete($contacto->image200x200->url);
-                // dd($url);
                 $contacto->image200x200()->update([
                     'url' => $url_200x200,
                     'tipo' => '200x200'                

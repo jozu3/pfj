@@ -30,7 +30,19 @@
                                 <div class="card text-center w-100">
                                     <div class="card-header">
                                         <img class="img-fluid rounded-circle img-personal"
-                                            src="{{ $inscripcione->personale->user->adminlte_image() }}" alt="">
+                                            @if ($inscripcione->personale->user)
+                                                @if (isset($inscripcione->personale->contacto->image200x200)) 
+                                                {{ 'src=' . Storage::url($inscripcione->personale->contacto->image200x200->url) . ' alt=""' }}
+                                                @else
+                                                    @if (isset($inscripcione->personale->contacto->image)) 
+                                                    {{ 'src=' . Storage::url($inscripcione->personale->contacto->image->url) . ' alt=""' }}
+                                                    @else
+                                                    {{ 'src=' . config('app.url') . '/img/user-pfj.png' }} 
+                                                    @endif
+                                                @endif
+                                            @else
+                                            {{ 'src=' . config('app.url') . '/img/user-pfj.png' }} 
+                                            @endif>
                                     </div>
                                     <div class="card-body p-0">
                                         @if ($inscripcione->personale->user)
@@ -79,9 +91,19 @@
                                             <div class="card-header">
                                                 <div class="position-relative" style="width: fit-content; margin: auto;">
                                                     <img class="img-fluid rounded-circle img-personal"
-                                                        @if ($inscripcione->personale->user) {{ 'src=' . $inscripcione->personale->user->adminlte_image() . ' alt=""' }}
+                                                        @if ($inscripcione->personale->user)
+                                                            @if (isset($inscripcione->personale->contacto->image200x200)) 
+                                                            {{ 'src=' . Storage::url($inscripcione->personale->contacto->image200x200->url) . ' alt=""' }}
+                                                            @else
+                                                                @if (isset($inscripcione->personale->contacto->image)) 
+                                                                {{ 'src=' . Storage::url($inscripcione->personale->contacto->image->url) . ' alt=""' }}
+                                                                @else
+                                                                {{ 'src=' . config('app.url') . '/img/user-pfj.png' }} 
+                                                                @endif
+                                                            @endif
                                                         @else
-                                                            {{ 'src=' . config('app.url') . '/img/pfjlimanorte.png' }} @endif>
+                                                        {{ 'src=' . config('app.url') . '/img/user-pfj.png' }} 
+                                                        @endif>
                                                     <i class="fas fa-{{$icon_aprob[$inscripcione->personale->permiso_obispo]}} chk-aprobado position-absolute text-lg text-{{$color_aprob[$inscripcione->personale->permiso_obispo]}}" style="bottom:7px; right: 7px; background: white; border-radius: 50%;"></i>
                                                 </div>
                                                 <div class="card-text"><small
@@ -163,9 +185,19 @@
                                                     <div class="card-header inscripcione">
                                                         <div class="position-relative" style="width: fit-content; margin: auto;">
                                                             <img class="img-fluid rounded-circle img-personal"
-                                                            @if ($inscripcioneCompanerismo->inscripcione->personale->user) {{ 'src=' . $inscripcioneCompanerismo->inscripcione->personale->user->adminlte_image() . ' alt=""' }}
-                                                            @else
-                                                            {{ 'src=' . config('app.url') . '/img/pfj-lima-norte.png' }} @endif>
+                                                                @if ($inscripcioneCompanerismo->inscripcione->personale->user)
+                                                                    @if (isset($inscripcioneCompanerismo->inscripcione->personale->contacto->image200x200)) 
+                                                                    {{ 'src=' . Storage::url($inscripcioneCompanerismo->inscripcione->personale->contacto->image200x200->url) . ' alt=""' }}
+                                                                    @else
+                                                                        @if (isset($inscripcioneCompanerismo->inscripcione->personale->contacto->image)) 
+                                                                        {{ 'src=' . Storage::url($inscripcioneCompanerismo->inscripcione->personale->contacto->image->url) . ' alt=""' }}
+                                                                        @else
+                                                                        {{ 'src=' . config('app.url') . '/img/user-pfj.png' }} 
+                                                                        @endif
+                                                                    @endif
+                                                                @else
+                                                                {{ 'src=' . config('app.url') . '/img/user-pfj.png' }} 
+                                                                @endif>
                                                             <i class="fas fa-{{$icon_aprob[$inscripcioneCompanerismo->inscripcione->personale->permiso_obispo]}} chk-aprobado position-absolute text-lg text-{{$color_aprob[$inscripcioneCompanerismo->inscripcione->personale->permiso_obispo]}}" style="bottom:7px; right: 7px; background: white; border-radius: 50%;"></i>
                                                         </div>
                                                         <div class="card-text"><small
@@ -255,11 +287,21 @@
                                 <div class="card text-center">
                                     <div class="card-header inscripcione">
                                         <div class="position-relative" style="width: fit-content; margin: auto;">
-                                        <img class="img-fluid rounded-circle img-personal"
-                                            @if ($inscripcione->personale->user) {{ 'src=' . $inscripcione->personale->user->adminlte_image() . ' alt=""' }}
+                                            <img class="img-fluid rounded-circle img-personal"
+                                                @if ($inscripcione->personale->user)
+                                                    @if (isset($inscripcione->personale->contacto->image200x200)) 
+                                                    {{ 'src=' . Storage::url($inscripcione->personale->contacto->image200x200->url) . ' alt=""' }}
                                                     @else
-                                                    {{ 'src=' . config('app.url') . '/img/pfj-lima-norte.png' }} @endif>
-                                                    <i class="fas fa-{{$icon_aprob[$inscripcione->personale->permiso_obispo]}} chk-aprobado position-absolute text-lg text-{{$color_aprob[$inscripcione->personale->permiso_obispo]}}" style="bottom:7px; right: 7px; background: white; border-radius: 50%;"></i>
+                                                        @if (isset($inscripcione->personale->contacto->image)) 
+                                                        {{ 'src=' . Storage::url($inscripcione->personale->contacto->image->url) . ' alt=""' }}
+                                                        @else
+                                                        {{ 'src=' . config('app.url') . '/img/user-pfj.png' }} 
+                                                        @endif
+                                                    @endif
+                                                @else
+                                                {{ 'src=' . config('app.url') . '/img/user-pfj.png' }} 
+                                                @endif>
+                                            <i class="fas fa-{{$icon_aprob[$inscripcione->personale->permiso_obispo]}} chk-aprobado position-absolute text-lg text-{{$color_aprob[$inscripcione->personale->permiso_obispo]}}" style="bottom:7px; right: 7px; background: white; border-radius: 50%;"></i>
                                         </div>
                                         <div class="card-text"><small
                                                 class="text-muted">{{ $inscripcione->role->name }}</small>

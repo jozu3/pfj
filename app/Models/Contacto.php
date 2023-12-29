@@ -26,11 +26,11 @@ class Contacto extends Model
     }
 
     public function image(){
-        return $this->morphOne(Image::class, 'imageable')->where('tipo', 'original');;
+        return $this->morphOne(Image::class, 'imageable')->where('tipo', 'original');
     }
 
     public function image200x200(){
-        return $this->morphOne(Image::class, 'imageable')->where('tipo', '200x200');;
+        return $this->morphOne(Image::class, 'imageable')->where('tipo', '200x200');
     }
     
     public function barrio(){

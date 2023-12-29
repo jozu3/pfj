@@ -17,6 +17,7 @@ use App\Models\Cord_auxiliare;
 
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\ResetPasswordNotification;
+use Intervention\Image\Facades\Image as ImageIntervention;
 
 class User extends Authenticatable
 {
@@ -95,18 +96,54 @@ class User extends Authenticatable
     public function updateProfilePhoto($input){
         if($input  != '' && $input != null){
 
-            $url = Storage::put('contactos', $input);
-            //$contacto->image()->delete();
+            $extension = $input->getClientOriginalExtension();
+            $name_img = $this->personale->contacto->id."_". str_replace(" ", "_", $this->personale->contacto->nombres)."_". str_replace(" ", "_", $this->personale->contacto->apellidos).".".$extension;
+            // $url = "contactos/".$name_img;
+
+            $url = Storage::put("contactos", $input);
+            //image 200x200
+            if($this->personale->contacto->image200x200 != null){
+                Storage::delete($this->personale->contacto->image200x200->url);
+            }
+
+            $image_200x200 = ImageIntervention::make($input)->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->encode($extension);
+            $url_200x200 = 'contactos/200x200/'.$name_img ;
+            Storage::put($url_200x200, $image_200x200->__toString());
+            // dd($url_200x200);
+            
             if($this->personale->contacto->image != null){
                 Storage::delete($this->personale->contacto->image->url);
                 $this->personale->contacto->image->update([
-                    'url' => $url
+                    'url' => $url,
+                    'tipo' => 'original'
                 ]);
             } else {
                 $this->personale->contacto->image()->create([
-                    'url' => $url
+                    'url' => $url,
+                    'tipo' => 'original'
                 ]);
             }
+            
+            if($this->personale->contacto->image200x200 != null){
+                $this->personale->contacto->image200x200()->update([
+                    'url' => $url_200x200,
+                    'tipo' => '200x200'                
+                ]);
+            } else {
+                $this->personale->contacto->image200x200()->create([
+                    'url' => $url_200x200,
+                    'tipo' => '200x200'
+                ]);
+            }
+
+
+
+
+
+
+
             
         }
     }
