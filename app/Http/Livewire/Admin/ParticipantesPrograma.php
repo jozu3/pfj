@@ -21,7 +21,7 @@ class ParticipantesPrograma extends Component
     public $compania = 0;
     public $estaca = 0;
     public $barrio = 0;
-    public $estado = -1;
+    public $estado = -2;
     public $barriosEstaca = [];
     public $estado_aprobaciones;
     public $estado_aprobacion = 'Todos';
@@ -53,6 +53,7 @@ class ParticipantesPrograma extends Component
                 Participante::find($idparticipante)->update([
                     'estado' => $value
                 ]);
+                
                 $this->emit('alert', true);
             } else {
 
@@ -65,6 +66,9 @@ class ParticipantesPrograma extends Component
             Participante::find($idparticipante)->update([
                 'estado' => $value
             ]);
+            // if($value == 2){
+            //     return redirect()->route('st.participantes.create',  'programa_id=' . $this->programa_id);
+            // }
             $this->emit('alert', true);
         }
     }
@@ -138,7 +142,7 @@ class ParticipantesPrograma extends Component
         }
 
         //filtro por estado
-        if ($this->estado != '-1') {
+        if ($this->estado != '-2') {
             $participantes = $participantes->where('estado', $this->estado);
         }
 

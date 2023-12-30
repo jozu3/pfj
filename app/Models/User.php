@@ -137,13 +137,6 @@ class User extends Authenticatable
                     'tipo' => '200x200'
                 ]);
             }
-
-
-
-
-
-
-
             
         }
     }

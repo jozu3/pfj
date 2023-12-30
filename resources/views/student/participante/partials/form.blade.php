@@ -302,10 +302,10 @@
             'class' => 'block font-medium text-sm text-gray-700',
         ]) !!}
         {!! Form::select('estado_aprobacion', [
-                'Aprobados' => 'Aprobados',
-                'Aprobación pendiente' => 'Aprobación pendiente',
-                'En lista de espera' => 'En lista de espera',
-                'Cancelado' => 'Cancelado',
+                '1' => 'Aprobados',
+                '2' => 'Aprobación pendiente',
+                '3' => 'En lista de espera',
+                '4' => 'Cancelado',
             ], null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',

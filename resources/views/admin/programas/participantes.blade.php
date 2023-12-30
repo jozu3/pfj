@@ -483,7 +483,15 @@
                         
                         Livewire.emit('changeEstadoParticipante', idparticipante, value)
                         setTimeout(() => {
-                            location.reload();
+                            if(value != 2){
+                                location.reload();
+                            } else if (value == 2){
+                                Swal.fire(
+                                    "Permutado correctamente",
+                                    'Puede inscribir un joven de su lista o crear uno nuevo con el botón verde de arriba.',
+                                    'success'
+                                )
+                            }
                         }, 500);
                     });
                 })

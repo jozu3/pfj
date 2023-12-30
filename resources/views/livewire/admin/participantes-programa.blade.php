@@ -6,8 +6,8 @@
                 @can('admin.programas.participantes')
                 @elsecan('admin.programas.participantes_barrio')
                     <a href="{{ route('st.participantes.create', 'programa_id=' . $programa_id) }}"
-                        class="btn btn-success btn-sm float-right mr-3">
-                        <i class="fas fa-user-plus"></i> Nuevo participantes
+                        class="btn btn-success btn-md float-right mr-3">
+                        <i class="fas fa-user-plus"></i> Nuevo participante
                     </a>
                 @endcan
             @endif
@@ -120,7 +120,8 @@
                 </div>
                 <div class="col">
                     <select name="" id="" class="form-control" wire:model="estado">
-                        <option value="-1">-- Todos --</option>
+                        <option value="-2">-- Todos --</option>
+                        <option value="-1">No inscrito</option>
                         <option value="0">Inscrito</option>
                         <option value="1">Ingresó al PFJ</option>
                         <option value="2">Permutado</option>
@@ -265,24 +266,41 @@
                             </td> --}}
                             <td>
                                 @php
-                                    $estados = [
-                                        '0' => 'Inscrito',
-                                        '-1' => 'No Inscrito',
-                                        // "5" => "En espera del PFJ",
-                                        // "1" => "Ingresó al PFJ",
-                                        // "3" => "Terminó el PFJ",
-                                        '2' => 'Permutado',
-                                        // "4" => "Retirado",
-                                        // "6" => "Canceló inscripción ",
-                                    ];
+                                    if ($participante->estado_aprobacion == 1) {
+                                        $estados = [
+                                            '0' => 'Inscrito',
+                                            // '-1' => 'No Inscrito',
+                                            // "5" => "En espera del PFJ",
+                                            // "1" => "Ingresó al PFJ",
+                                            // "3" => "Terminó el PFJ",
+                                            '2' => 'Permutar',
+                                            // "4" => "Retirado",
+                                            // "6" => "Canceló inscripción ",
+                                        ];
+                                    } else if ($participante->estado_aprobacion > 1) {
+                                        $estados = [
+                                            '0' => 'Inscrito',
+                                            '-1' => 'No Inscrito',
+                                            // "5" => "En espera del PFJ",
+                                            // "1" => "Ingresó al PFJ",
+                                            // "3" => "Terminó el PFJ",
+                                            // '2' => 'Permutado',
+                                            // "4" => "Retirado",
+                                            // "6" => "Canceló inscripción ",
+                                        ];
+                                    }
+                                    $selectcolor = '';
+                                    if ($participante->estado == 0) {
+                                        $selectcolor = 'btn-success';
+                                    }
                                 @endphp
-                                <select name="" class="form-control changeEstadoParticipante"
+                                <select name="" class="form-control changeEstadoParticipante {{ $selectcolor }}"
                                     wire:loading.attr="disabled" style="width: 150px"
                                     data-idparticipante="{{ $participante->id }}"
                                     @if ($miscupos <= $inscritos && $participante->estado != 0) {{'disabled'}} @endif
                                     >
                                     @foreach ($estados as $key => $value)
-                                        <option value="{{ $key }}"
+                                        <option value="{{ $key }}" class="bg-white"
                                             @if ($key == $participante->estado) {{ 'selected' }} @endif>
                                             {{ $value }}</option>
                                     @endforeach
@@ -333,9 +351,11 @@
                                 <a href="{{ route('st.participantes.edit', $participante) }}" target="_blank"
                                     class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
-                            <td>
+                            <td> 
+                                @can('admin.pdf.ingreso_participante')
                                 <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" target="_blank"
                                     class="btn btn-sm btn-danger"><i class="fas fa-file-pdf"></i></a>
+                                @endcan
                             </td>
                         </tr>
                         @empty
