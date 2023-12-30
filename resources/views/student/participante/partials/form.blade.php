@@ -239,7 +239,9 @@
         @enderror
     </div>
     <div class="col-span-12 mt-3 sm:col-span-4">
-        {!! Form::label('contacto1_phone', 'Número de contacto 1', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::label('contacto1_phone', 'Número de contacto 1', [
+            'class' => 'block font-medium text-sm text-gray-700',
+        ]) !!}
         {!! Form::text('contacto1_phone', null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
@@ -250,7 +252,9 @@
         @enderror
     </div>
     <div class="col-span-12 mt-3 sm:col-span-4">
-        {!! Form::label('contacto1_email', 'Email de contacto 1', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::label('contacto1_email', 'Email de contacto 1', [
+            'class' => 'block font-medium text-sm text-gray-700',
+        ]) !!}
         {!! Form::text('contacto1_email', null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
@@ -269,7 +273,9 @@
         ]) !!}
     </div>
     <div class="col-span-12 mt-3 sm:col-span-4">
-        {!! Form::label('contacto2_phone', 'Número de contacto 2', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::label('contacto2_phone', 'Número de contacto 2', [
+            'class' => 'block font-medium text-sm text-gray-700',
+        ]) !!}
         {!! Form::text('contacto2_phone', null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
@@ -277,7 +283,9 @@
         ]) !!}
     </div>
     <div class="col-span-12 mt-3 sm:col-span-4">
-        {!! Form::label('contacto2_email', 'Email de contacto 2', ['class' => 'block font-medium text-sm text-gray-700']) !!}
+        {!! Form::label('contacto2_email', 'Email de contacto 2', [
+            'class' => 'block font-medium text-sm text-gray-700',
+        ]) !!}
         {!! Form::text('contacto2_email', null, [
             'class' =>
                 'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
@@ -301,16 +309,21 @@
         {!! Form::label('estado_aprobacion', 'Estado de aprobación', [
             'class' => 'block font-medium text-sm text-gray-700',
         ]) !!}
-        {!! Form::select('estado_aprobacion', [
+        {!! Form::select(
+            'estado_aprobacion',
+            [
                 '1' => 'Aprobados',
                 '2' => 'Aprobación pendiente',
                 '3' => 'En lista de espera',
                 '4' => 'Cancelado',
-            ], null, [
-            'class' =>
-                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
-            'placeholder' => 'Seleccione',
-        ]) !!}
+            ],
+            null,
+            [
+                'class' =>
+                    'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
+                'placeholder' => 'Seleccione',
+            ],
+        ) !!}
         @error('estado_aprobacion')
             <small class="text-red-600">{{ $message }}</small>
         @enderror
@@ -339,19 +352,33 @@
         ]) !!}
     </div>
     <div class="col-span-12 sm:col-span-4">
+        @php
+            $estados = [
+                '0' => 'Inscrito', 
+                '1' => 'Ingresado', 
+                '2' => 'Permutado', 
+                '3' => 'Terminado', 
+                '4' => 'Retirado', 
+                '5' => 'En espera', 
+                '6' => 'Canceló inscripción'];
+            
+        @endphp
+        @can('admin.programas.participantes_barrio')
+            @php
+                $estados = [
+                    '0' => 'Inscrito', 
+                ];
+            @endphp
+        @endcan
+
         {!! Form::label('estado', 'Estado del participante', [
             'class' => 'block font-medium text-sm text-gray-700',
         ]) !!}
-        {!! Form::select(
-            'estado',
-            ['0' => 'Inscrito', '1' => 'Ingresado', '2' => 'Permutado', '3' => 'Terminado', '4' => 'Retirado', '5' => 'En espera', '6' => 'Canceló inscripción'],
-            null,
-            [
-                'class' =>
-                    'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
-                'placeholder' => 'Seleccione',
-            ],
-        ) !!}
+        {!! Form::select('estado', $estados, null, [
+            'class' =>
+                'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
+            'placeholder' => 'Seleccione',
+        ]) !!}
         @error('estado')
             <small class="text-red-600">{{ $message }}</small>
         @enderror

@@ -488,7 +488,7 @@
                             } else if (value == 2){
                                 Swal.fire(
                                     "Permutado correctamente",
-                                    'Puede inscribir un joven de su lista o crear uno nuevo con el botón verde de arriba.',
+                                    'Puede inscribir un joven que diga "en lista de espera" o crear uno nuevo con el botón verde de arriba o no inscribir a nadie más',
                                     'success'
                                 )
                             }

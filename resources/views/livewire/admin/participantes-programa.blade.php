@@ -1,7 +1,6 @@
 <div wire:init="loadParticipantes">
     <div class="card">
         <div class="card-header">
-
             @if ($miscupos > $inscritos)
                 @can('admin.programas.participantes')
                 @elsecan('admin.programas.participantes_barrio')
@@ -11,6 +10,7 @@
                     </a>
                 @endcan
             @endif
+            <h2>Resumen de participantes</h2>
         </div>
         <div class="card-body">
             <div class="row">
@@ -31,6 +31,15 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <span class="text-warning"><i class="fas fa-info-circle"></i>
+                                        Información de la página de la iglesia. Esta información no cambia.
+                                    </span>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <div class="col-md-4">
@@ -60,12 +69,13 @@
                             </tr>
                         </tbody>
                         <tfoot>
-                            @if ($miscupos <= $inscritos ) 
-                            <tr>
-                                <td colspan="100%">
-                                    <span class="text-success"><i class="fas fa-info-circle"></i> Ha completado sus cupos aprobados. No puede inscribir más</span>
-                                </td>
-                            </tr>
+                            @if ($miscupos <= $inscritos)
+                                <tr>
+                                    <td colspan="100%">
+                                        <span class="text-success"><i class="fas fa-info-circle"></i> Ha completado sus
+                                            cupos aprobados. No puede inscribir más</span>
+                                    </td>
+                                </tr>
                             @endif
                         </tfoot>
                     </table>
@@ -277,7 +287,7 @@
                                             // "4" => "Retirado",
                                             // "6" => "Canceló inscripción ",
                                         ];
-                                    } else if ($participante->estado_aprobacion > 1) {
+                                    } elseif ($participante->estado_aprobacion > 1) {
                                         $estados = [
                                             '0' => 'Inscrito',
                                             '-1' => 'No Inscrito',
@@ -294,11 +304,11 @@
                                         $selectcolor = 'btn-success';
                                     }
                                 @endphp
-                                <select name="" class="form-control changeEstadoParticipante {{ $selectcolor }}"
+                                <select name=""
+                                    class="form-control changeEstadoParticipante {{ $selectcolor }}"
                                     wire:loading.attr="disabled" style="width: 150px"
                                     data-idparticipante="{{ $participante->id }}"
-                                    @if ($miscupos <= $inscritos && $participante->estado != 0) {{'disabled'}} @endif
-                                    >
+                                    @if ($miscupos <= $inscritos && $participante->estado != 0) {{ 'disabled' }} @endif>
                                     @foreach ($estados as $key => $value)
                                         <option value="{{ $key }}" class="bg-white"
                                             @if ($key == $participante->estado) {{ 'selected' }} @endif>
@@ -351,10 +361,10 @@
                                 <a href="{{ route('st.participantes.edit', $participante) }}" target="_blank"
                                     class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
-                            <td> 
+                            <td>
                                 @can('admin.pdf.ingreso_participante')
-                                <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" target="_blank"
-                                    class="btn btn-sm btn-danger"><i class="fas fa-file-pdf"></i></a>
+                                    <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}"
+                                        target="_blank" class="btn btn-sm btn-danger"><i class="fas fa-file-pdf"></i></a>
                                 @endcan
                             </td>
                         </tr>
@@ -386,7 +396,6 @@
             </div>
         </div>
         <script>
-            document.addEventListener('livewire:load', function() {
-            });
+            document.addEventListener('livewire:load', function() {});
         </script>
     </div>

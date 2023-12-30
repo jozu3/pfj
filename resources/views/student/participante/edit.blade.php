@@ -52,10 +52,12 @@
                         {!! Form::submit('Actualizar Participante', [
                             'class' => 'p-2 bg-blue-400 mt-6 rounded-md text-white cursor-pointer',
                         ]) !!}
-                        <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" target="_blank"
-                            class="p-2 bg-red-400 mt-6 rounded-sm text-white"><i class="fas fa-file-pdf"></i> Ficha de
-                            ingreso</a>
-                        {!! Form::close() !!}
+                        @can('admin.pdf.ingreso_participante')
+                            <a href="{{ route('admin.pdf.ingreso_participante', $participante) }}" target="_blank"
+                                class="p-2 bg-red-400 mt-6 rounded-sm text-white"><i class="fas fa-file-pdf"></i> Ficha de
+                                ingreso</a>
+                            {!! Form::close() !!}
+                        @endcan
 
                     </div>
                 </div>
