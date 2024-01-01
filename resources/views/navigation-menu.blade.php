@@ -89,12 +89,12 @@
                                     </button>
                                 </x-slot>
                                 <x-slot name="content">
-                                    <x-jet-dropdown-link href="{{ config('app.url') . '/img/PFJManualStaff2022.pdf' }}"
+                                    <x-jet-dropdown-link href="{{ config('app.url') . '/img/Manual_para_el_STAFF_2024.pdf' }}"
                                         target="_blank">
                                         {{ __('Manual para el personal') }}
                                     </x-jet-dropdown-link>
                                     <x-jet-dropdown-link
-                                        href="{{ config('app.url') . '/img/PFJManualParticipante2022.pdf' }}"
+                                        href="{{ config('app.url') . '/img/Manual_para_el_participante_2024.pdf' }}"
                                         target="_blank">
                                         {{ __('Manual para el participante') }}
                                     </x-jet-dropdown-link>
@@ -439,11 +439,11 @@
                         </button>
                     </x-slot>
                     <x-slot name="content">
-                        <x-jet-dropdown-link href="{{ config('app.url') . '/img/PFJManualStaff2022.pdf' }}"
+                        <x-jet-dropdown-link href="{{ config('app.url') . '/img/Manual_para_el_STAFF_2024.pdf' }}"
                             target="_blank">
                             {{ __('Manual para el personal') }}
                         </x-jet-dropdown-link>
-                        <x-jet-dropdown-link href="{{ config('app.url') . '/img/PFJManualParticipante2022.pdf' }}"
+                        <x-jet-dropdown-link href="{{ config('app.url') . '/img/Manual_para_el_participante_2024.pdf' }}"
                             target="_blank">
                             {{ __('Manual para el participante') }}
                         </x-jet-dropdown-link>

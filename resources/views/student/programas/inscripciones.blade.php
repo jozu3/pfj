@@ -19,7 +19,7 @@
         </div>
     </div> --}}
     <div class="bg-search-participante w-full h-screen bg-cover"
-        style="background-image: url('{{ config('app.url', 'http://localhost/pfj/public') . '/img/portadalow.jpg' }}')">
+        style="background-image: url('{{ config('app.url', 'http://localhost/pfj/public') . '/img/banner2024.png' }}'); background-position:center">
         <div class="flex justify-center sm:justify-end items-center h-full">
             <div class="w-full md:w-2/4">
                 @livewire('student.bienvenida', ['programa' => $programa], key($programa->id))
