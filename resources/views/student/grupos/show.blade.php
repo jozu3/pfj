@@ -34,8 +34,13 @@
                                     {{ $companerismo->role_id }}
                                 </div> --}}
 
-                            <div
-                                class="col-span-4 {{ $colspan }}  bg-gray-100 border-2 rounded-lg p-4 flex  shadow-md">
+                            <div class="col-span-4 {{ $colspan }}  bg-gray-100 borsder-2 rounded-lg p-4  shadow-md">
+                                @if ($companerismo->role_id != 5)
+                                <div class="text-center font-bold">{{ 'Compañia: ' . $companerismo->numero }}</div>
+                                @endif
+
+                                <div class="flex">
+
                                 @foreach ($companerismo->inscripcioneCompanerismos as $inscripcioneCompanerismo)
                                     <div class="flex flex-col w-1/2 rounded-lg space-y-4">
                                         <p class="text-gray-500 text-sm">{{ $companerismo->role->name }}</p>
@@ -55,7 +60,7 @@
                                             @php
                                                 $contacto = $inscripcioneCompanerismo->inscripcione->personale->contacto;
                                             @endphp
-                                            {{ $contacto->nombres. ' '. $contacto->apellidos }}
+                                            {{ $contacto->nombres . ' ' . $contacto->apellidos }}
                                         </h1>
                                         <h2 class="text-gray-500 text-xs"><i class="fas fa-birthday-cake"></i>
                                             {{ date('d/m/Y', strtotime($inscripcioneCompanerismo->inscripcione->personale->contacto->fecnac)) }}
@@ -74,6 +79,8 @@
                                         {{-- <button class="px-8 py-1 border-2 border-indigo-600 bg-indigo-600 rounded-full text-gray-50 font-semibold">Follow</button> --}}
                                     </div>
                                 @endforeach
+                            </div>
+
                             </div>
                         @endforeach
                     </div>
