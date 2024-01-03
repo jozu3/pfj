@@ -60,7 +60,7 @@
                         <th colspan="1">Nombres</th>
                         <th>Apellidos</th>
                         <th>Género</th>
-                        <th>Estaca</th>
+                        <th>Estaca - Barrio</th>
                         <th>Compañia</th>
                         <th>Habitación</th>
                         <th>Telefono</th>
@@ -129,7 +129,7 @@
                                 @endswitch
                             </td>
                             <td>
-                                {{ $participante->barrio->estaca->nombre }}
+                                {{ $participante->barrio->estaca->nombre . ' - ' . $participante->barrio->nombre }}
                             </td>
                             <td>
                                 @if ($participante->participanteCompania)

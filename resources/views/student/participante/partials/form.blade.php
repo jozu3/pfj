@@ -352,23 +352,27 @@
         ]) !!}
     </div>
     <div class="col-span-12 sm:col-span-4">
-        @php
-            $estados = [
-                '0' => 'Inscrito', 
-                '1' => 'Ingresado', 
-                '2' => 'Permutado', 
-                '3' => 'Terminado', 
-                '4' => 'Retirado', 
-                '5' => 'En espera', 
-                '6' => 'Canceló inscripción'];
-            
-        @endphp
-        @can('admin.programas.participantes_barrio')
+        @can('admin.programas.participantes')
             @php
                 $estados = [
+                    '-1' => ' No Inscrito', 
                     '0' => 'Inscrito', 
-                ];
+                    '1' => 'Ingresado', 
+                    '2' => 'Permutado', 
+                    '3' => 'Terminado', 
+                    '4' => 'Retirado', 
+                    '5' => 'En espera', 
+                    '6' => 'Canceló inscripción'];
+                
             @endphp
+        @else
+            @can('admin.programas.participantes_barrio')
+                @php
+                    $estados = [
+                        '0' => 'Inscrito', 
+                    ];
+                @endphp
+            @endcan
         @endcan
 
         {!! Form::label('estado', 'Estado del participante', [

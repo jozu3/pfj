@@ -54,6 +54,13 @@
 		<small class="text-danger">{{ $message }}</small>
 	@enderror
 </div> 
+<div class="col-md-3">
+	{!! Form::label('locale_id', 'Local') !!}
+	{!! Form::select('locale_id', $locales, null, ['class' => 'form-control', 'placeholder' => '--Seleccione--']); !!}
+	@error('locale_id')
+		<small class="text-danger">{{ $message }}</small>
+	@enderror
+</div> 
 <div class="col-md-12 mt-3">
 	{!! Form::label('img', 'Foto del Matrimonio Director') !!}
 

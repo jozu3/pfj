@@ -113,7 +113,7 @@ class ParticipantesPrograma extends Component
         $noinscritos = 0;
         if ($user->can('admin.programas.participantes')) {
             $allParticipantes = Participante::where('programa_id', $this->programa_id)->get();
-            $miscupos = Participante::where('programa_id', $this->programa_id)->where('estado_aprobacion', 1)->get()->count();
+            $miscupos = Participante::where('programa_id', $this->programa_id)->whereIn('estado_aprobacion', [1,2])->get()->count();
         } else if ($user->can('admin.programas.participantes_barrio')) {
             $barrio_obispo = $user->personale->contacto->barrio_id;
             // dd($barrio_obispo);

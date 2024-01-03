@@ -14,4 +14,9 @@ class Locale extends Model
     public function edificios(){
         return $this->hasMany(Edificio::class);
     }
+
+    public function programas(){
+        return $this->hasMany(Programa::class);
+    }
+    
 }

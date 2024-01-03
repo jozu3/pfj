@@ -26,6 +26,10 @@ class Programa extends Model
         return $this->belongsTo(Pfj::class);
     }
 
+    public function locale(){
+        return $this->belongsTo(Locale::class);
+    }
+
     public function inscripciones(){
     	return $this->hasMany(Inscripcione::class);
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Alojamiento;
 use App\Models\Estaca;
 use App\Models\Inscripcione;
+use App\Models\Locale;
 use App\Models\Participante;
 use Illuminate\Http\Request;
 use App\Models\Pfj;
@@ -47,8 +48,9 @@ class ProgramaController extends Controller
     {
 
         $pfj = Pfj::find($_GET['idpfj']);
+        $locales = Locale::all()->pluck('nombre', 'id');
 
-        return view('admin.programas.create', compact('pfj'));
+        return view('admin.programas.create', compact('pfj', 'locales'));
     }
 
     /**
@@ -111,7 +113,9 @@ class ProgramaController extends Controller
      */
     public function edit(Programa $programa)
     {
-        return view('admin.programas.edit', compact('programa'));
+        $locales = Locale::all()->pluck('nombre', 'id');
+
+        return view('admin.programas.edit', compact('programa', 'locales'));
     }
 
     /**

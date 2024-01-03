@@ -16,6 +16,7 @@ class CreateProgramasTable extends Migration
         Schema::create('programas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pfj_id')->constrained();
+            $table->foreignId('locale_id')->constrained();
             $table->string('nombre');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');

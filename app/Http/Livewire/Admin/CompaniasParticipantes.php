@@ -34,7 +34,23 @@ class CompaniasParticipantes extends Component
         //filtros
         $estaca = $this->estaca;
 
-        $participantes = Participante::where('nombres','like', '%'. $this->search .'%')
+        $participantes = Participante::where(function($q){
+                                        $q->orWhere('nombres','like', '%'. $this->search .'%')
+                                        ->orWhere('apellidos','like', '%'. $this->search .'%')
+                                        ->orWhere('documento','like', '%'. $this->search .'%')
+                                        ->orWhere('email','like', '%'. $this->search .'%')
+                                        ->orWhere('telefono','like', '%'. $this->search .'%')
+                                        ->orWhere('informacion_medica','like', '%'. $this->search .'%')
+                                        ->orWhere('informacion_alimentaria','like', '%'. $this->search .'%')
+                                        ->orWhere('contacto1','like', '%'. $this->search .'%')
+                                        ->orWhere('contacto2','like', '%'. $this->search .'%')
+                                        ->orWhere('sangre','like', '%'. $this->search .'%')
+                                        ->orWhere('alergia','like', '%'. $this->search .'%')
+                                        ->orWhere('tratamiento_medico','like', '%'. $this->search .'%')
+                                        ->orWhere('diabetico_asmatico','like', '%'. $this->search .'%')
+                                        ->orWhere('seguro_medico','like', '%'. $this->search .'%')
+                                        ;
+                                    })  
                                     ->whereHas('barrio', function($qu) use ($estaca){
                                         //filtro estaca
                                         if($estaca != '' && $estaca != '0'){

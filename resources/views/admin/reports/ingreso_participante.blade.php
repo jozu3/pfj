@@ -3,7 +3,7 @@
 @section('content')
     <div class="border">
         <center>
-            <img src="{{ config('app.url') }}/img/pfj-lima-norte.png" width="300px" alt="">
+            <img src="{{ config('app.url') }}/img/logo2024.png" width="300px" alt="">
         </center>
         <center>
             <h3>Hola!</h3>
