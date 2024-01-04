@@ -24,10 +24,21 @@ class HabitacionesIndex extends Component
         $that = $this;
 
         $habitaciones = Habitacione::whereHas('piso', function ($q) use ($that){
-            $q->whereHas('edificio', function ($qe) use ($that){
-                $qe->where('locale_id', $that->locale);
-            });
-        })->paginate($this->cant);
+                                        $q->whereHas('edificio', function ($qe) use ($that){
+                                            $qe->where('locale_id', $that->locale);
+                                        });
+                                    })
+                                    ->with('alojamientos', function($q){
+                                        $q->whereHas('participante', function($q){
+                                            $q->where('programa_id', session('programa_activo')); 
+                                        }); 
+                                    })
+                                    ->with('alojamientosPersonales', function($q){
+                                        $q->whereHas('inscripcione', function($q){
+                                            $q->where('programa_id', session('programa_activo')); 
+                                        }); 
+                                    })
+                                    ->paginate($this->cant);
 
         $locales = Locale::all();
 
