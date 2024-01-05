@@ -221,13 +221,13 @@ class ProgramaController extends Controller
         return view('admin.programas.planificador', compact('programa'));
     }
 
-    public function uploadImageTarea(Request $request){
+    public function uploadImageTarea(Request $request)
+    {
         $path = Storage::put('images-tareas', $request->file('upload'));
 
         return [
             'url' => Storage::url($path)
         ];
-
     }
 
     public function asignar(Programa $programa)
@@ -326,46 +326,55 @@ class ProgramaController extends Controller
         $estacas = Estaca::get();
 
         $alojados = Participante::where('programa_id', $programa->id)
-                                ->whereHas('alojamiento', function () {})
-                                ->whereIn('estado', ['0', '1', '5', '3'])
-                                ->get();
+            ->whereHas('alojamiento', function () {
+            })
+            ->whereIn('estado', ['0', '1', '5', '3'])
+            ->get();
         $total = Participante::where('programa_id', $programa->id)->whereIn('estado', ['0', '1', '5', '3'])->get();
 
         $totalPersonalHombres__ = Inscripcione::where('programa_id', $programa->id)
-                                ->where('estado', '1')
-                                ->whereHas('personale', function ($q) {
-                                    $q->whereHas('contacto', function ($qu) {
-                                        $qu->where('genero', 'Hombre');
-                                    });
-                                });
-                                
+            ->whereIn('role_id', [2, 3, 4, 5, 6, 8])
+            ->where('estado', '1')
+            ->whereHas('personale', function ($q) {
+                $q->whereHas('contacto', function ($qu) {
+                    $qu->where('genero', 'Hombre');
+                });
+            });
+
         $totalPersonalHombres = $totalPersonalHombres__->count();
-        $totalPersonalHombresAlojados = $totalPersonalHombres__->whereHas('alojamientoPersonale', function(){})->count();
+        $totalPersonalHombresAlojados = $totalPersonalHombres__->whereHas('alojamientoPersonale', function () {
+        })->count();
 
         $totalPersonalMujeres__ = Inscripcione::where('programa_id', $programa->id)
-                                ->where('estado', '1')
-                                ->whereHas('personale', function ($q) {
-                                    $q->whereHas('contacto', function ($qu) {
-                                        $qu->where('genero', 'Mujer');
-                                    });
-                                });
+            ->whereIn('role_id', [2, 3, 4, 5, 6, 8])
+            ->where('estado', '1')
+            ->whereHas('personale', function ($q) {
+                $q->whereHas('contacto', function ($qu) {
+                    $qu->where('genero', 'Mujer');
+                });
+            });
 
         $totalPersonalMujeres = $totalPersonalMujeres__->count();
         // dd($totalPersonalMujeres);
-        $totalPersonalMujeresAlojados = $totalPersonalMujeres__->whereHas('alojamientoPersonale', function(){})->count();
+        $totalPersonalMujeresAlojados = $totalPersonalMujeres__->whereHas('alojamientoPersonale', function () {
+        })->count();
 
-      
 
-        return view('admin.programas.dashboard-bienvenida', compact('programa', 'estacas', 'alojados', 'total', 
-                                                                'totalPersonalHombres', 
-                                                                'totalPersonalHombresAlojados', 
-                                                                'totalPersonalMujeres', 
-                                                                'totalPersonalMujeresAlojados'));
+
+        return view('admin.programas.dashboard-bienvenida', compact(
+            'programa',
+            'estacas',
+            'alojados',
+            'total',
+            'totalPersonalHombres',
+            'totalPersonalHombresAlojados',
+            'totalPersonalMujeres',
+            'totalPersonalMujeresAlojados'
+        ));
     }
-    
-    public function unidadesLocales(Programa $programa){
 
-
-        return view('admin.programas.unidades-locales', compact('programa')); 
+    public function unidadesLocales(Programa $programa)
+    {
+        return view('admin.programas.unidades-locales', compact('programa'));
     }
 }
