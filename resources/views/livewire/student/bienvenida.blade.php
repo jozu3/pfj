@@ -115,7 +115,7 @@
                                 {{ $participanteSelected->alojamiento->habitacione->piso->edificio->nombre }} - Piso: {{ $participanteSelected->alojamiento->habitacione->piso->num }} -
                                 {{ $participanteSelected->alojamiento->habitacione->numero }}
                             @else 
-                                {{'Habitación'}}
+                                {{'Habitación falta'}}
                             @endif
                         </div>
                     </div>

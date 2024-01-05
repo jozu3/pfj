@@ -323,11 +323,13 @@ class ProgramaController extends Controller
 
     public function dashboardBienvenida(Programa $programa)
     {
-        $estacas = Estaca::all();
+        $estacas = Estaca::get();
 
-        $alojados = Participante::where('programa_id', $programa->id)->whereHas('alojamiento', function () {
-        })->whereIn('estado', ['0', '1', '5', '2'])->get();
-        $total = Participante::where('programa_id', $programa->id)->whereIn('estado', ['0', '1', '5', '2'])->get();
+        $alojados = Participante::where('programa_id', $programa->id)
+                                ->whereHas('alojamiento', function () {})
+                                ->whereIn('estado', ['0', '1', '5', '3'])
+                                ->get();
+        $total = Participante::where('programa_id', $programa->id)->whereIn('estado', ['0', '1', '5', '3'])->get();
 
         $totalPersonalHombres__ = Inscripcione::where('programa_id', $programa->id)
                                 ->where('estado', '1')

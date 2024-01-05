@@ -21,7 +21,7 @@
                     <h3>Bienvenida de Participantes</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-sm table-striped">
                         <thead>
                             <tr>
                                 <th>Estado de los participantes</th>
@@ -29,6 +29,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr>
+                                <td>
+                                    <i class="fas fa-check-circle"></i> Inscritos
+                                </td>
+                                <td>
+                                    {{ $programa->participantes->where('estado', 0)->count() }}
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     <div class="d-flex items-center">
@@ -68,7 +76,7 @@
                     <h3>Compañias</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-sm table-striped">
                         <thead>
                             <tr>
                                 <th>Compañias</th>
@@ -114,7 +122,7 @@
                     <h3>Estacas</h3>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-sm table-striped">
                         <thead>
                             <tr>
                                 <th>Estaca</th>
@@ -122,35 +130,82 @@
                                 <th>Inscritos</th>
                                 <th>En espera</th>
                                 <th>Ingresó</th>
+                                <th>Terminado</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $estacas_count = 0;
+                                $participantes = 0;
+                                $participantes_h = 0;
+                                $participantes_m = 0;
+                                $participantes_0 = 0;
+                                $participantes_5 = 0;
+                                $participantes_1 = 0;
+                                $participantes_3 = 0;
+                            @endphp
                             @foreach ($estacas as $estaca)
-                                @if ($estaca->participantes()->count())
+                                @if ($estaca->participantesPrograma($programa)->count())
                                     <tr>
+                                        @php
+                                            $estacas_count++;
+                                            $participantes = $participantes + $estaca->participantesPrograma($programa)->whereIn('estado', [0,5,1,3])->count() ;
+                                            $participantes_h = $participantes_h + $estaca->participantesPrograma($programa)->where('genero', 1)->count();
+                                            $participantes_m = $participantes_m + $estaca->participantesPrograma($programa)->where('genero', 0)->count();
+                                            $participantes_0 = $participantes_0 + $estaca->participantesPrograma($programa)->where('estado', '0')->count();
+                                            $participantes_5 = $participantes_5 + $estaca->participantesPrograma($programa)->where('estado', '5')->count();
+                                            $participantes_1 = $participantes_1 + $estaca->participantesPrograma($programa)->where('estado', '1')->count();
+                                            $participantes_3 = $participantes_3 + $estaca->participantesPrograma($programa)->where('estado', '3')->count();
+                                        @endphp
                                         <td>
                                             {{ $estaca->nombre }}
                                         </td>
                                         <td>
-                                            {{ $estaca->participantes()->count() }}
+                                            {{ $estaca->participantesPrograma($programa)->whereIn('estado', [0,5,1,3])->count() }}
                                             <br>
-                                            {{ 'H:' .$estaca->participantes()->where('genero', 1)->count() }}
-                                            {{ 'M:' .$estaca->participantes()->where('genero', 0)->count() }}
+                                            {{ 'H:' .$estaca->participantesPrograma($programa)->where('genero', 1)->count() }}
+                                            {{ 'M:' .$estaca->participantesPrograma($programa)->where('genero', 0)->count() }}
                                         </td>
                                         <td>
-                                            {{ $estaca->participantes()->where('estado', '0')->count() }}
+                                            {{ $estaca->participantesPrograma($programa)->where('estado', '0')->count() }}
                                         </td>
                                         <td>
-                                            {{ $estaca->participantes()->where('estado', '5')->count() }}
+                                            {{ $estaca->participantesPrograma($programa)->where('estado', '5')->count() }}
                                         </td>
                                         <td>
-                                            {{ $estaca->participantes()->where('estado', '1')->count() }}
+                                            {{ $estaca->participantesPrograma($programa)->where('estado', '1')->count() }}
+                                        </td>
+                                        <td>
+                                            {{ $estaca->participantesPrograma($programa)->where('estado', '3')->count() }}
                                         </td>
                                     </tr>
                                 @endif
                             @endforeach
 
                         </tbody>
+                        <tfoot>
+                            <tr class="font-weight-bold">
+                                <td>Total: {{ $estacas_count }} </td>
+                                <td>
+                                    {{ $participantes }}
+                                    <br>
+                                    {{ 'H:' .$participantes_h }}
+                                    {{ 'M:' .$participantes_m }}
+                                </td>
+                                <td>
+                                    {{ $participantes_0 }}
+                                </td>
+                                <td>
+                                    {{ $participantes_5 }}
+                                </td>
+                                <td>
+                                    {{ $participantes_1 }}
+                                </td>
+                                <td>
+                                    {{ $participantes_3 }}
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -177,7 +232,7 @@
                                     {{ $alojados->where('genero', '1')->count() }}
                                 </td>
                                 <td>
-                                    {{ $total->count() - $alojados->count() }}
+                                    {{ $total->where('genero', 1)->count() - $alojados->where('genero', 1)->count() }}
                                 </td>
                             </tr>
                             <tr>
