@@ -99,10 +99,17 @@ class AlojamientoPersonaleController extends Controller
 
     public function asignarInscripcionesHabitacion(Programa $programa){
 
+        $locale_id = $programa->locale_id;
+
         $habitaciones = Habitacione::select('habitaciones.id as habitacion', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num, " - ", habitaciones.numero, " (", habitaciones.cupos," personas)") as nivel'))
         ->join('pisos', 'habitaciones.piso_id', '=', 'pisos.id')
         ->join('edificios', 'pisos.edificio_id', '=', 'edificios.id')
         ->join('locales', 'edificios.locale_id', '=', 'locales.id')
+        ->whereHas('piso', function ($q) use ($locale_id) {
+            $q->whereHas('edificio', function ($q) use ($locale_id) {
+                $q->where('locale_id', $locale_id);
+            });
+        })
         ->pluck('nivel', 'habitacion');
 
         $companias = $programa->companias();
