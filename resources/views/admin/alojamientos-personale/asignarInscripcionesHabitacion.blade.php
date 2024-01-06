@@ -38,7 +38,7 @@
                                     {!! Form::label('compania', 'Personal: ('.$programa->inscripciones->where('estado', '1')->count().' personas)') !!}
                                 </h3>
                             </div>
-                            @foreach ($programa->inscripciones->where('estado', '1') as $inscripcione)
+                            @foreach ($programa->inscripciones->whereIn('role_id', [2,3,4,5,6,8])->where('estado', '1') as $inscripcione)
                                 @php
                                     switch ($inscripcione->personale->contacto->genero) {
                                         case 'Mujer':
