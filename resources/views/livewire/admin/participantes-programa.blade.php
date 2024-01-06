@@ -372,7 +372,7 @@
                             <tr>
                                 <td colspan="100%">
                                     <div class=" text-warning">
-                                        {{ 'No hay personal' }}
+                                        {{ 'No hay participantes' }}
                                     </div>
                                 </td>
                             </tr>

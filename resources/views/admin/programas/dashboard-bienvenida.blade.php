@@ -150,8 +150,8 @@
                                         @php
                                             $estacas_count++;
                                             $participantes = $participantes + $estaca->participantesPrograma($programa)->whereIn('estado', [0,5,1,3])->count() ;
-                                            $participantes_h = $participantes_h + $estaca->participantesPrograma($programa)->where('genero', 1)->count();
-                                            $participantes_m = $participantes_m + $estaca->participantesPrograma($programa)->where('genero', 0)->count();
+                                            $participantes_h = $participantes_h + $estaca->participantesPrograma($programa)->whereIn('estado', [0,5,1,3])->where('genero', 1)->count();
+                                            $participantes_m = $participantes_m + $estaca->participantesPrograma($programa)->whereIn('estado', [0,5,1,3])->where('genero', 0)->count();
                                             $participantes_0 = $participantes_0 + $estaca->participantesPrograma($programa)->where('estado', '0')->count();
                                             $participantes_5 = $participantes_5 + $estaca->participantesPrograma($programa)->where('estado', '5')->count();
                                             $participantes_1 = $participantes_1 + $estaca->participantesPrograma($programa)->where('estado', '1')->count();
@@ -163,8 +163,8 @@
                                         <td>
                                             {{ $estaca->participantesPrograma($programa)->whereIn('estado', [0,5,1,3])->count() }}
                                             <br>
-                                            {{ 'H:' .$estaca->participantesPrograma($programa)->where('genero', 1)->count() }}
-                                            {{ 'M:' .$estaca->participantesPrograma($programa)->where('genero', 0)->count() }}
+                                            {{ 'H:' .$estaca->participantesPrograma($programa)->whereIn('estado', [0,5,1,3])->where('genero', 1)->count() }}
+                                            {{ 'M:' .$estaca->participantesPrograma($programa)->whereIn('estado', [0,5,1,3])->where('genero', 0)->count() }}
                                         </td>
                                         <td>
                                             {{ $estaca->participantesPrograma($programa)->where('estado', '0')->count() }}
