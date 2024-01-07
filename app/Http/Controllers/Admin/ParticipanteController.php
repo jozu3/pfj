@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Participante;
 use App\Http\Controllers\Controller;
+use App\Models\Alojamiento;
 use App\Models\ParticipanteCompania;
 use App\Models\Programa;
 use Illuminate\Http\Request;
@@ -91,8 +92,11 @@ class ParticipanteController extends Controller
         ParticipanteCompania::whereHas('participante', function($q) use ($programa){
             $q->where('programa_id', $programa->id);
         })->delete();
+        Alojamiento::whereHas('participante', function($q) use ($programa){
+            $q->where('programa_id', $programa->id);
+        })->delete();
         Participante::where('programa_id', $programa->id)->delete();
 
-        return redirect()->route('admin.programas.participantes', $programa)->with('info', 'Se eliminó a todos los participantes de la sesión');
+        return redirect()->route('admin.programas.participantes', $programa)->with('info', 'Se eliminó a todos los participantes(compañias y alojamientos) de la sesión');
     }
 }
