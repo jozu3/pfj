@@ -279,24 +279,24 @@
                                     if ($participante->estado_aprobacion == 1) {
                                         $estados = [
                                             '0' => 'Inscrito',
-                                            // '-1' => 'No Inscrito',
-                                            // "5" => "En espera del PFJ",
-                                            // "1" => "Ingresó al PFJ",
-                                            // "3" => "Terminó el PFJ",
+                                            '-1' => 'No Inscrito',
+                                            "5" => "En espera del PFJ",
+                                            "1" => "Ingresó al PFJ",
+                                            "3" => "Terminó el PFJ",
                                             '2' => 'Permutar',
-                                            // "4" => "Retirado",
-                                            // "6" => "Canceló inscripción ",
+                                            "4" => "Retirado",
+                                            "6" => "Canceló inscripción ",
                                         ];
                                     } elseif ($participante->estado_aprobacion > 1) {
                                         $estados = [
                                             '0' => 'Inscrito',
                                             '-1' => 'No Inscrito',
-                                            // "5" => "En espera del PFJ",
-                                            // "1" => "Ingresó al PFJ",
-                                            // "3" => "Terminó el PFJ",
-                                            // '2' => 'Permutado',
-                                            // "4" => "Retirado",
-                                            // "6" => "Canceló inscripción ",
+                                            "5" => "En espera del PFJ",
+                                            "1" => "Ingresó al PFJ",
+                                            "3" => "Terminó el PFJ",
+                                            '2' => 'Permutado',
+                                            "4" => "Retirado",
+                                            "6" => "Canceló inscripción ",
                                         ];
                                     }
                                     $selectcolor = '';

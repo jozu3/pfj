@@ -111,7 +111,9 @@
                         @default
                     @endswitch
                 </td>
-                <td>{{ date('d/m/Y H:i:s', strtotime($participante->horallegada)) }}</td>
+                <td>
+                    {{ date('d/m/Y H:i:s', strtotime($participante->horallegada)) }}
+                </td>
                 <td>{{ $participante->age }}</td>
                 <td>{{ date('d/m/Y', strtotime($participante->fecnac)) }}</td>
                 <td>{{ $participante->age_22 }}</td>
