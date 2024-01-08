@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Alojamiento;
 use App\Http\Controllers\Controller;
 use App\Models\Habitacione;
+use App\Models\Locale;
 use App\Models\Participante;
 use App\Models\Programa;
 use Illuminate\Http\Request;
@@ -118,8 +119,9 @@ class AlojamientoController extends Controller
     {
         $programa_ = session('programa_activo');
         $locale_id = Programa::find($programa_)->locale_id;
+        $locale = Locale::find($locale_id);
 
-        $habitaciones = Habitacione::select('habitaciones.id as habitacion', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num, " - ", habitaciones.numero, " (", habitaciones.cupos," personas)") as nivel'))
+        $habitaciones = Habitacione::select('habitaciones.id as habitacion', 'habitaciones.numero', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num, " - ", habitaciones.numero, " (", habitaciones.cupos," personas)") as nivel'))
             ->join('pisos', 'habitaciones.piso_id', '=', 'pisos.id')
             ->join('edificios', 'pisos.edificio_id', '=', 'edificios.id')
             ->join('locales', 'edificios.locale_id', '=', 'locales.id')
@@ -127,12 +129,14 @@ class AlojamientoController extends Controller
                 $q->whereHas('edificio', function ($q) use ($locale_id) {
                     $q->where('locale_id', $locale_id);
                 });
-            })
-            ->pluck('nivel', 'habitacion');
+            });
+
+        $habitaciones_select = $habitaciones->pluck('nivel', 'habitacion');
+        $habitaciones = $habitaciones->get();
 
         $companias = $programa->companias();
 
-        return view('admin.alojamientos.asignarParticipantesHabitacion', compact('companias', 'habitaciones'));
+        return view('admin.alojamientos.asignarParticipantesHabitacion', compact('companias', 'habitaciones', 'locale', 'habitaciones_select'));
     }
 
     public function storeParticipantesHabitacion(Request $request)
@@ -140,27 +144,46 @@ class AlojamientoController extends Controller
 
         $request->validate([
             'participantes' => 'required',
-            'habitacione_id' => 'required',
+            // 'habitacione_id' => 'required',
         ]);
 
         $programa = Programa::find(session('programa_activo'));
 
-        // dd($request->participantes);
         $nota = '';
+        $participantes = $request->participantes;
+        $p = 0;
+        // dd(count($request->participantes));
+        foreach ($request->habitaciones as $key => $value) {
+            $habitacione = Habitacione::find($value);
+            for ($i=0; $i < $habitacione->cupos - $habitacione->alojamientos->count() ; $i++) { 
+                if(isset($participantes[$p])){
 
-        foreach ($request->participantes as $participante_id) {
-            $habitacione = Habitacione::where('id', $request->habitacione_id)->first();
+                    Alojamiento::where('participante_id', $participantes[$p])->delete();
+                    Alojamiento::create([
+                        'participante_id' => $participantes[$p],
+                        'habitacione_id' => $habitacione->id,
+                    ]);
+                    $p++;
+                }
+            }
+            if($p == count($request->participantes) - 1 ){
 
-            if ($habitacione->alojamientos->count() < $habitacione->cupos) {
-                Alojamiento::where('participante_id', $participante_id)->delete();
-                Alojamiento::create([
-                    'participante_id' => $participante_id,
-                    'habitacione_id' => $request->habitacione_id,
-                ]);
-            } else {
-                $nota = 'Nota: Algunos participantes no se alojaron porque la habitación está llena.';
             }
         }
+
+        // foreach ($request->participantes as $participante_id) {
+        //     $habitacione = Habitacione::where('id', $request->habitacione_id)->first();
+
+        //     if ($habitacione->alojamientos->count() < $habitacione->cupos) {
+        //         Alojamiento::where('participante_id', $participante_id)->delete();
+        //         Alojamiento::create([
+        //             'participante_id' => $participante_id,
+        //             'habitacione_id' => $request->habitacione_id,
+        //         ]);
+        //     } else {
+        //         $nota = 'Nota: Algunos participantes no se alojaron porque la habitación está llena.';
+        //     }
+        // }
 
         return redirect()->route('admin.alojamientos.asignarParticipantesHabitacion', $programa)->with('info', 'Se alojó correctamente. ' . $nota);
     }
