@@ -328,9 +328,9 @@ class ProgramaController extends Controller
         $alojados = Participante::where('programa_id', $programa->id)
             ->whereHas('alojamiento', function () {
             })
-            ->whereIn('estado', ['0', '1', '5', '3'])
+            ->whereIn('estado', ['1'])
             ->get();
-        $total = Participante::where('programa_id', $programa->id)->whereIn('estado', ['0', '1', '5', '3'])->get();
+        $total = Participante::where('programa_id', $programa->id)->whereIn('estado', ['1'])->get();
 
         $totalPersonalHombres__ = Inscripcione::where('programa_id', $programa->id)
             ->whereIn('role_id', [2, 3, 4, 5, 6, 8])
