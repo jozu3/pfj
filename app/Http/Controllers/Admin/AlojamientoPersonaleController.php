@@ -94,7 +94,10 @@ class AlojamientoPersonaleController extends Controller
      */
     public function destroy(AlojamientoPersonale $alojamientoPersonale)
     {
-        //
+        dd($alojamientoPersonale->id);
+        $programa = $alojamientoPersonale->inscripcione->programa;
+        $alojamientoPersonale->delete();
+        return redirect()->route('admin.programas.personal', $programa)->with('info', 'Se borró el alojamiento correctamente');
     }
 
     public function asignarInscripcionesHabitacion(Programa $programa){

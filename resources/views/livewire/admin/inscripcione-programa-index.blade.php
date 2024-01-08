@@ -176,6 +176,20 @@
                                 <a href="{{ route('admin.contactos.show', $inscripcione->personale->contacto) }}"
                                     class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
+                            <td>
+                                @can('admin.programa.delete_alojamiento_inscripcione')
+                                    @if (isset($inscripcione->alojamientoPersonale))  
+                                        {{-- {{$inscripcione->alojamientoPersonale->id}}
+                                        <form method="POST" class="eliminar-contactos"
+                                            action="{{ route('admin.alojamientosPersonale.destroy', $inscripcione->alojamientoPersonale->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                            class="btn btn-sm btn-danger ">Borrar cuarto</button>
+                                        </form> --}}
+                                    @endif
+                                @endcan
+                            </td>
                         </tr>
                         @empty
                             <tr>

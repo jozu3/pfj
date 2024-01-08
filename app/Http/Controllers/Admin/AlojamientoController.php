@@ -112,7 +112,9 @@ class AlojamientoController extends Controller
      */
     public function destroy(Alojamiento $alojamiento)
     {
-        //
+        $programa = $alojamiento->participante->programa;
+        $alojamiento->delete();
+        return redirect()->route('admin.programas.participantes', $programa)->with('info', 'Se borró el alojamiento correctamente');
     }
 
     public function asignarParticipantesHabitacion(Programa $programa)

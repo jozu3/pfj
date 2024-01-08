@@ -367,6 +367,19 @@
                                         target="_blank" class="btn btn-sm btn-danger"><i class="fas fa-file-pdf"></i></a>
                                 @endcan
                             </td>
+                            <td>
+                                @can('admin.programa.delete_alojamiento_participante')
+                                    @if ($participante->alojamiento)  
+                                        <form method="POST" class="eliminar-contactos"
+                                            action="{{ route('admin.alojamientos.destroy', $participante->alojamiento) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                            class="btn btn-sm btn-danger ">Borrar cuarto</button>
+                                        </form>
+                                    @endif
+                                @endcan
+                            </td>
                         </tr>
                         @empty
                             <tr>
