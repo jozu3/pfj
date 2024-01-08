@@ -253,7 +253,7 @@
                                 @endswitch
                             </td>
                             <td width="10px">
-                                <a href="{{ route('admin.participantes.edit', $participante) }}" target="_blank"
+                                <a href="{{ route('st.participantes.edit', $participante) }}" target="_blank"
                                     class="btn btn-primary"><i class="fas fa-user-edit"></i></a>
                             </td>
                         </tr>
