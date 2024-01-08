@@ -11,6 +11,7 @@ use App\Models\Participante;
 class ParticipanteSheet implements FromView, WithTitle
 {
     private $grupo;
+    private $programa;
 
     public function __construct($programa){
         $this->programa = $programa;

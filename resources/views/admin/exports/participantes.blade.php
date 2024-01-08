@@ -4,9 +4,11 @@
             <th>Nombres</th>
             <th>Apellidos</th>
             <th>Sexo</th>
+            <th>Documento</th>
             <th>Compañia</th>
             <th>Habitación</th>
             <th>Estado</th>
+            <th>Hora de llegada</th>
             <th>Edad</th>
             <th>Fecha de nacimiento</th>
             <th>Edad que cumple el 2022</th>
@@ -59,6 +61,9 @@
                     @endswitch
                 </td>
                 <td>
+                    {{ $participante->documento }}
+                </td>
+                <td>
                     @if ($participante->participanteCompania)
                         {{ $participante->participanteCompania->companerismo->numero }}
                     @endif
@@ -106,6 +111,7 @@
                         @default
                     @endswitch
                 </td>
+                <td>{{ date('d/m/Y H:i:s', strtotime($participante->horallegada)) }}</td>
                 <td>{{ $participante->age }}</td>
                 <td>{{ date('d/m/Y', strtotime($participante->fecnac)) }}</td>
                 <td>{{ $participante->age_22 }}</td>
