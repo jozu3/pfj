@@ -12,6 +12,7 @@
             <th>Habitación</th>
             <th>Asignación</th>
             <th>Familia</th>
+            <th>Compañia</th>
             <th>Telefono</th>
             <th>Correo electrónico</th>
             <th>Pre-Inscripción</th>
@@ -82,6 +83,11 @@
                         </td>
                     @endif
                 @endif
+                <td> 
+                    @if (isset($inscripcione->inscripcioneCompanerismo->companerismo))
+                        {{$inscripcione->inscripcioneCompanerismo->companerismo->numero}}
+                    @endif
+                </td>
                 <td style="width:120px">
                     {{ $inscripcione->personale->contacto->telefono }}
                 </td>
