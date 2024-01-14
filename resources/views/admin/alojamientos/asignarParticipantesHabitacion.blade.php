@@ -17,6 +17,13 @@
             {!! Form::open(['route' => 'admin.alojamientos.storeParticipantesHabitacion']) !!}
 
             <div class="form-group">
+                <div>
+                    {!! Form::submit('Guardar', ['class' => 'btn btn-primary float-right']) !!}
+
+                    <h3>
+                        <label for="">{{ $locale->nombre }}</label>
+                    </h3>
+                </div>
                 {!! Form::label('habitacione_id', 'Seleccione una o varias habitaciones') !!}
                 {{-- {!! Form::select('habitacione_id', $habitaciones_select, null, [
                     'class' => 'form-control',
@@ -112,6 +119,23 @@
                             <div class="col-12">
                                 <h3>
                                     {!! Form::label('compania', 'Compañia: ' . $compania->numero) !!}
+                                    
+                                    {!! Form::radio('compania'.$compania->id, null, null, [
+                                        'class' => 'compania_id', 
+                                        'data-compania_id' => $compania->id,
+                                        'data-genero' => '1',
+                                        'id' => 'compania_h'.$compania->id
+                                        ]) !!}
+
+                                    {!! Form::label('compania_h'.$compania->id, 'H') !!}
+
+                                    {!! Form::radio('compania'.$compania->id, null, null, [
+                                        'class' => 'compania_id', 
+                                        'data-compania_id' => $compania->id,
+                                        'data-genero' => '0',
+                                        'id' => 'compania_m'.$compania->id
+                                        ]) !!}
+                                    {!! Form::label('compania_m'.$compania->id, 'M') !!}
                                 </h3>
                             </div>
                             @foreach ($compania->participantes()->sortBy('age') as $participante)
@@ -120,20 +144,24 @@
                                         case '0':
                                             $s = 'M';
                                             $color_sexo = 'warning';
+                                            $bg_sexo = 'bg-m';
                                             break;
-                                            case '1':
+                                        case '1':
                                             $s = 'H';
                                             $color_sexo = 'primary';
+                                            $bg_sexo = 'bg-h';
                                             break;
                                         default:
                                             # code...
                                             break;
                                     }
                                 @endphp
-                                <div class="col-2 border d-flex align-items-start">
+                                <div class="col-2 border d-flex align-items-start {{$bg_sexo}}">
                                     {!! Form::checkbox('participantes[]', $participante->id, null, [
                                         'class' => 'mr-1 mt-2',
                                         'id' => 'part' . $participante->id,
+                                        'data-compania_id' => $compania->id,
+                                        'data-genero' => $participante->genero,
                                     ]) !!}
                                     <label for="{{ 'part' . $participante->id }}" class="w-100">
                                         {{ $participante->nombres . ' ' . $participante->apellidos }}
@@ -176,11 +204,29 @@
         .bg-warning-personal{
             background-color: #5b99cc
         }
+        .bg-h{
+            background-color: #006184;
+            color: white;
+        }
+        .bg-m{
+            background-color: pink
+        }
     </style>
 @stop
 
 @section('js')
     <script>
-        console.log('Hi!');
+        $().ready(function() {
+            
+            $('.compania_id').click(function(){
+                console.log($(this).data('genero'));
+
+                var c_id = $(this).data('compania_id');
+                var genero = $(this).data('genero');
+                var _genero = genero == 1 ? 0:1;
+                $('input[type=checkbox][data-compania_id='+c_id+'][data-genero='+genero+']').prop('checked', true)
+                $('input[type=checkbox][data-compania_id='+c_id+'][data-genero='+_genero+']').prop('checked', false)
+            });
+        });
     </script>
 @stop
