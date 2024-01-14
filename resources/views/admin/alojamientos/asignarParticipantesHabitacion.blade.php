@@ -21,10 +21,10 @@
                 {{-- {!! Form::select('habitacione_id', $habitaciones_select, null, [
                     'class' => 'form-control',
                     'placeholder' => 'Escoja la habitación a asignar',
-                ]) !!}
-                @error('habitacione_id')
+                ]) !!}--}}
+                @error('habitaciones')
                     <small>{{ $message }}</small>
-                @enderror --}}
+                @enderror 
             </div>
             <div class="" style="height: 80vh; overflow-y: auto;">
                 <div class="form-group">

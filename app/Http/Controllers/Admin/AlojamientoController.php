@@ -121,7 +121,22 @@ class AlojamientoController extends Controller
     {
         $programa_ = session('programa_activo');
         $locale_id = Programa::find($programa_)->locale_id;
-        $locale = Locale::find($locale_id);
+        $locale = Locale::find($locale_id)->with('edificios', function($q) use ($programa_){
+            $q->with('pisos', function($q) use ($programa_){
+                $q->with('habitaciones', function($q) use ($programa_){
+                    $q->with('alojamientos', function($q) use ($programa_){
+                        $q->with('participante', function($q) use ($programa_){
+                            $q->where('programa_id', $programa_);
+                        });
+                    })
+                    ->with('alojamientosPersonales', function($q) use ($programa_){
+                        $q->with('inscripcione', function($q) use ($programa_){
+                            $q->where('programa_id', $programa_);
+                        });
+                    });
+                });
+            });
+        });
 
         $habitaciones = Habitacione::select('habitaciones.id as habitacion', 'habitaciones.numero', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num, " - ", habitaciones.numero, " (", habitaciones.cupos," personas)") as nivel'))
             ->join('pisos', 'habitaciones.piso_id', '=', 'pisos.id')
