@@ -133,12 +133,12 @@ class AlojamientoController extends Controller
                 });
             })
             ->with('alojamientos', function($q) use ($programa_){
-                $q->whereHas('participante', function($q) use ($programa_){
+                $q->with('participante', function($q) use ($programa_){
                     $q->where('programa_id', $programa_);
                 });
             })
             ->with('alojamientosPersonales', function($q) use ($programa_){
-                $q->whereHas('inscripcione', function($q) use ($programa_){
+                $q->with('inscripcione', function($q) use ($programa_){
                     $q->where('programa_id', $programa_);
                 });
             })
