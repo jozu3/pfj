@@ -17,14 +17,14 @@
             {!! Form::open(['route' => 'admin.alojamientos.storeParticipantesHabitacion']) !!}
 
             <div class="form-group">
-                {!! Form::label('habitacione_id', 'Habitación') !!}
-                {!! Form::select('habitacione_id', $habitaciones_select, null, [
+                {!! Form::label('habitacione_id', 'Seleccione una o varias habitaciones') !!}
+                {{-- {!! Form::select('habitacione_id', $habitaciones_select, null, [
                     'class' => 'form-control',
                     'placeholder' => 'Escoja la habitación a asignar',
                 ]) !!}
                 @error('habitacione_id')
                     <small>{{ $message }}</small>
-                @enderror
+                @enderror --}}
             </div>
             <div class="" style="height: 80vh; overflow-y: auto;">
                 <div class="form-group">

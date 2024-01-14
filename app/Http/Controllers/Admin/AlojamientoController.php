@@ -131,7 +131,18 @@ class AlojamientoController extends Controller
                 $q->whereHas('edificio', function ($q) use ($locale_id) {
                     $q->where('locale_id', $locale_id);
                 });
-            });
+            })
+            ->with('alojamientos', function($q) use ($programa_){
+                $q->whereHas('participante', function($q) use ($programa_){
+                    $q->where('programa_id', $programa_);
+                });
+            })
+            ->with('alojamientosPersonales', function($q) use ($programa_){
+                $q->whereHas('inscripcione', function($q) use ($programa_){
+                    $q->where('programa_id', $programa_);
+                });
+            })
+            ;
 
         $habitaciones_select = $habitaciones->pluck('nivel', 'habitacion');
         $habitaciones = $habitaciones->get();
@@ -146,6 +157,7 @@ class AlojamientoController extends Controller
 
         $request->validate([
             'participantes' => 'required',
+            'habitaciones' => 'required',
             // 'habitacione_id' => 'required',
         ]);
 

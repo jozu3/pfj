@@ -11,6 +11,7 @@
     <a href="{{route('admin.participanteCompanias.create')}}" class="btn btn-success btn-sm float-right mr-3">
         <i class="far fa-plus"></i> Asignar Participante-Compañia
     </a>
+    <a href="{{ route('admin.alojamientos.asignarParticipantesHabitacion', session('programa_activo') ) }}" class="btn btn-success btn-sm float-right">Asignar varios participantes/habitaciones</a>
     <a href="{{route('admin.alojamientos.create')}}" class="btn btn-success btn-sm float-right mr-3">
         <i class="far fa-plus"></i> Asignar Habitación-Participante
     </a>
