@@ -136,7 +136,7 @@ class AlojamientoController extends Controller
                     });
                 });
             });
-        });
+        })->get();
 
         $habitaciones = Habitacione::select('habitaciones.id as habitacion', 'habitaciones.numero', DB::raw('concat(locales.nombre , " - " , edificios.nombre, " - Piso: " , num, " - ", habitaciones.numero, " (", habitaciones.cupos," personas)") as nivel'))
             ->join('pisos', 'habitaciones.piso_id', '=', 'pisos.id')
