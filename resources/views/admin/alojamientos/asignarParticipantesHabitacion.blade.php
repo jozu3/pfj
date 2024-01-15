@@ -167,6 +167,26 @@
                                         {{ $participante->nombres . ' ' . $participante->apellidos }}
                                         <span class="text-{{ $color_sexo }}">{{ '('. $s. ')' }}</span>
                                         <span class="text-info">{{ '(' . $participante->age . ')' }}</span>
+                                        @php
+                                                $estados = [
+                                                '0' => 'Inscrito',
+                                                '-1' => 'No Inscrito',
+                                                "5" => "En espera del PFJ",
+                                                "1" => "Ingresó al PFJ",
+                                                "3" => "Terminó el PFJ",
+                                                '2' => 'Permutado',
+                                                "4" => "Retirado",
+                                                "6" => "Canceló inscripción ",
+                                            ];
+                                            $text_success = '';
+                                            if ($participante->estado == 0 || $participante->estado == 5) {
+                                                $text_success = 'text-success';
+                                            }
+                                        @endphp
+                                        <span class="{{$text_success}}" >(
+                                            {{ $estados[$participante->estado]}}
+                                        )
+                                        </span>
                                         @if (isset($participante->alojamiento))
                                             <div class="text-danger">
                                                 {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} -
