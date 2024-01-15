@@ -182,7 +182,7 @@ class InscripcioneController extends Controller
      */
     public function edit(Inscripcione $inscripcione)
     {
-        $roles = Role::whereIn('id', [2,3,4,5,6])->pluck('name', 'id');
+        $roles = Role::whereIn('id', [2,3,4,5,6,7,8])->pluck('name', 'id');
         return view('admin.inscripciones.edit', compact('inscripcione', 'roles'));
     }
     
