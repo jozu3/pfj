@@ -138,7 +138,7 @@
                                     {!! Form::label('compania_m'.$compania->id, 'M') !!}
                                 </h3>
                             </div>
-                            @foreach ($compania->participantes()->sortBy('age') as $participante)
+                            @foreach ($compania->participantes()->sortBy(['genero', 'age']) as $participante)
                                 @php
                                     switch ($participante->genero) {
                                         case '0':
