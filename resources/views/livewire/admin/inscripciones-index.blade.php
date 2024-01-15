@@ -52,11 +52,11 @@
                                 <td>
                                     @switch($inscripcione->estado)
                                         @case(0)
-                                            {{ 'Habilitado' }}
+                                            {{ 'No Habilitado' }}
                                         @break
 
                                         @case(1)
-                                            {{ 'Retirado' }}
+                                            {{ 'Habilitado' }}
                                         @break
 
                                         @case(2)
