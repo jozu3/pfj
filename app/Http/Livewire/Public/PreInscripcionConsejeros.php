@@ -16,6 +16,7 @@ class PreInscripcionConsejeros extends Component
     public $requisitos = false;
     public $nombres;
     public $apellidos;
+    public $doc;
     public $email;
     public $telefono;
     public $fecnac;
@@ -47,6 +48,7 @@ class PreInscripcionConsejeros extends Component
     protected $rules = [
 		'nombres' => 'required',
 		'apellidos' => 'required',
+		'doc' => 'required',
 		'email' => 'required|email',
 		// 'email' => 'required|email|unique:App\Models\Contacto,email',
 		'telefono' => 'required|numeric|digits:9|min:0',
@@ -70,7 +72,7 @@ class PreInscripcionConsejeros extends Component
 		'recomendacion_vigente' => 'required',
 		'mes_recomendacion' => 'required_if:recomendacion_vigente,1',
 		'anio_recomendacion' => 'required_if:recomendacion_vigente,1',
-		'imgrec' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
+		'imgrec' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
 		'imgperfil' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
 	];
 
@@ -80,7 +82,7 @@ class PreInscripcionConsejeros extends Component
     }
 
     public function updatedImgrec(){
-        // $this->validateOnly('imgrec');
+        $this->validateOnly('imgrec');
         $this->emit('rec_imagen_cargada');
     }
 
@@ -90,6 +92,7 @@ class PreInscripcionConsejeros extends Component
         $contacto = Contacto::create([
             'nombres' => $this->nombres,
             'apellidos' => $this->apellidos,
+            'doc' => $this->doc,
             'email' => $this->email,
             'telefono' => $this->telefono,
             'fecnac' => $this->fecnac,

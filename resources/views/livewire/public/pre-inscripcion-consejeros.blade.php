@@ -111,6 +111,15 @@
                         </div>
                     </div>
                     <div class="mt-4">
+                        <x-jet-label for="doc" value="{{ __('DNI o documento de Identidad') }}"
+                            class="font-black" />
+                        <x-jet-input id="doc" class="block mt-1 w-full" type="text" wire:model="doc"
+                            name="doc" required />
+                        @error('doc')
+                            <small class="text-red-600">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="mt-4">
                         <x-jet-label for="email" value="{{ __('Email') }}" class="font-black" />
                         <x-jet-input id="email" class="block mt-1 w-full" type="email" wire:model="email"
                             name="email" required />
@@ -365,14 +374,21 @@
                             </div>
                         </div>
                     @endif
+                    <x-jet-section-border />
+
                     <div class="mt-4" wire:ignore>
-                        {!! Form::label('imgrec', 'Foto de tu recomendación para el Templo vigente(desdoblada, que se vea ambas caras)', ['class' => 'font-black']) !!}
+                        {!! Form::label(
+                            'imgrec',
+                            'Foto de tu recomendación para el Templo vigente(desdoblada, que se vea ambas caras)',
+                            ['class' => 'font-black'],
+                        ) !!}
                         <div class="grid grid-cols-12 gap-4">
                             <div class="col-span-12 mt-3 sm:col-span-12" style="position: relative">
                                 <label class="custom-file-label" for="imgrec" wire:loading.class="opacity-50"
                                     wire:target="imgrec">
                                     <img id="rec-img-show" class="object-cover m-auto"
-                                        src="{{ config('app.url') }}/img/rec_templo2.jpg" alt="" style="width:200px!important;height: 151px!important;opacity:0.4">
+                                        src="{{ config('app.url') }}/img/rec_templo2.jpg" alt=""
+                                        style="width:200px!important;height: 151px!important;opacity:0.4">
                                 </label>
                                 <div role="status"
                                     class="absolute -translate-x-1/2 -translate-y-1/2 top-0 left-0 items-center justify-center w-full h-full"
@@ -406,7 +422,6 @@
                         <small class="text-red-600">{{ 'Tu foto es requerida.' }}</small>
                         <small class="text-red-600">{{ $message }}</small>
                     @enderror
-                    {{-- {{$imgperfil}} --}}
                     <div class="text-green-600" wire:loading wire:target="imgrec">
                         Estamos cargando tu foto...
                     </div>
@@ -454,7 +469,7 @@
                     </div>
                     <x-jet-section-border />
                     <div class="mt-4" wire:ignore>
-                        {!! Form::label('imgperfil', 'Tómate un selfie ;)', ['class' => 'font-black']) !!}
+                        {!! Form::label('imgperfil', 'Tómate un selfie (foto formal, que se vea tu rostro) ;)', ['class' => 'font-black']) !!}
                         <div class="grid grid-cols-12 gap-4">
                             <div class="col-span-12 mt-3 sm:col-span-12" style="position: relative">
                                 <label class="custom-file-label" for="imgperfil" wire:loading.class="opacity-50"
