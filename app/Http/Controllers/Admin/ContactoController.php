@@ -262,8 +262,10 @@ class ContactoController extends Controller
                 // dd($contacto->image()->pluck('url')->toArray());
                 Storage::delete($contacto->image()->pluck('url')->toArray());
                 Storage::delete($contacto->image200x200()->pluck('url')->toArray());
+                Storage::delete($contacto->imageRecTemple()->pluck('url')->toArray());
                 $contacto->image()->delete();
                 $contacto->image200x200()->delete();
+                $contacto->imageRecTemple()->delete();
                 $contacto->delete();
 
             }

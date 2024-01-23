@@ -366,14 +366,13 @@
                         </div>
                     @endif
                     <div class="mt-4" wire:ignore>
-                        {!! Form::label('imgrec', 'Foto de tu recomendación vigente', ['class' => 'font-black']) !!}
+                        {!! Form::label('imgrec', 'Foto de tu recomendación vigente(desdoblada, que se bea ambas caras)', ['class' => 'font-black']) !!}
                         <div class="grid grid-cols-12 gap-4">
                             <div class="col-span-12 mt-3 sm:col-span-12" style="position: relative">
                                 <label class="custom-file-label" for="imgrec" wire:loading.class="opacity-50"
                                     wire:target="imgrec">
-                                    <img id="rec-img-show" class="rounded-full object-cover m-auto"
-                                        src="{{ config('app.url') }}/img/user-pfj.png" alt="" width="160"
-                                        height="160" style="width:148px!important;height: 148px!important;">
+                                    <img id="rec-img-show" class="object-cover m-auto"
+                                        src="{{ config('app.url') }}/img/rec_templo2.jpg" alt="" style="width:200px!important;height: 151px!important;opacity:0.4">
                                 </label>
                                 <div role="status"
                                     class="absolute -translate-x-1/2 -translate-y-1/2 top-0 left-0 items-center justify-center w-full h-full"
