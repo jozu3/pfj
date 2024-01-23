@@ -3,6 +3,7 @@
         <tr>
             <th>Nombres</th>
             <th>Apellidos</th>
+            <th>Documento</th>
             <th>Sexo</th>
             <th>Cumpleaños</th>
             <th>Edad</th>
@@ -35,6 +36,7 @@
                     {{ $inscripcione->personale->contacto->nombres }}
                 </td>
                 <td style="width:200px">{{ $inscripcione->personale->contacto->apellidos }}</td>
+                <td style="width:200px">{{ $inscripcione->personale->contacto->doc }}</td>
                 <td style="width:20px">{{ $inscripcione->personale->contacto->genero }}</td>
                 <td style="width:80px">{{ date('d-M', strtotime($inscripcione->personale->contacto->fecnac)) }}</td>
                 <td>
