@@ -201,7 +201,7 @@
         @enderror
     </div>
     <div class="col-md-12">
-        {!! Form::label('imgrec', 'Imagen de Recomendación para el templo') !!}
+        {!! Form::label('imgrec', 'Foto de tu recomendación para el Templo vigente(desdoblada, que se vea ambas caras)') !!}
         <div class="row p-2">
             <div class="col text-center">
                 <img id="rec-img-show" class="img-fluid" style="max-width: 25rem"

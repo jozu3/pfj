@@ -366,7 +366,7 @@
                         </div>
                     @endif
                     <div class="mt-4" wire:ignore>
-                        {!! Form::label('imgrec', 'Foto de tu recomendación vigente(desdoblada, que se bea ambas caras)', ['class' => 'font-black']) !!}
+                        {!! Form::label('imgrec', 'Foto de tu recomendación para el Templo vigente(desdoblada, que se vea ambas caras)', ['class' => 'font-black']) !!}
                         <div class="grid grid-cols-12 gap-4">
                             <div class="col-span-12 mt-3 sm:col-span-12" style="position: relative">
                                 <label class="custom-file-label" for="imgrec" wire:loading.class="opacity-50"
