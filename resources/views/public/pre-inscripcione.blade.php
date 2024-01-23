@@ -60,8 +60,9 @@
 
                 function cambiarImagenRecTemplo(event) {
                     console.log('changee');
+                    document.getElementById("rec-img-show").style.opacity = "0.5"
                     document.getElementById("rec-img-show").setAttribute('src',
-                        '{{ config('app.url') }}/img/user-pfj.png');
+                        '{{ config('app.url') }}/img/rec_templo2.jpg');
                     var file = event.target.files[0];
 
                     var reader = new FileReader();
@@ -72,6 +73,7 @@
 
                     Livewire.on('rec_imagen_cargada', () => {
                         document.getElementById("rec-img-show").setAttribute('src', temp_image_rec);
+                        document.getElementById("rec-img-show").style.opacity = "1"
                     })
                 }
 
