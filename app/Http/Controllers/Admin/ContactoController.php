@@ -176,6 +176,21 @@ class ContactoController extends Controller
                 'email' => $request->email
             ]);
         }
+        if ($request->file('imgrec')) {
+            $url = Storage::put("contactos", $request->file('imgrec'));
+            if($contacto->imageRecTemple != null){
+                Storage::delete($contacto->imageRecTemple->url);
+                $contacto->imageRecTemple->update([
+                    'url' => $url,
+                    'tipo' => 'rec_templo'
+                ]);
+            } else {
+                $contacto->imageRecTemple()->create([
+                    'url' => $url,
+                    'tipo' => 'rec_templo'
+                ]);
+            }
+        }
         
         if ($request->file('imgperfil')) {
             $extension = $request->file('imgperfil')->getClientOriginalExtension();

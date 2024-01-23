@@ -200,6 +200,26 @@
             <small class="text-danger">{{ $message }}</small>
         @enderror
     </div>
+    <div class="col-md-12">
+        {!! Form::label('imgrec', 'Imagen de Recomendación para el templo') !!}
+        <div class="row p-2">
+            <div class="col text-center">
+                <img id="rec-img-show" class="img-fluid" style="max-width: 25rem"
+                    src="@if (isset($contacto)) @if (isset($contacto->imageRecTemple)) {{ Storage::url($contacto->imageRecTemple->url) }} @endif @endif"
+                    alt="">
+            </div>
+            <div class="col">
+                <div class="custom-file">
+                    {!! Form::file('imgrec', ['class' => 'custom-file-input', 'accept' => 'image/*']) !!}
+                    <label class="custom-file-label" for="imgrec">Escoge una foto</label>
+                </div>
+                <p>Solo se permite los formatos de imagen(jpg, png)</p>
+                @error('imgrec')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+        </div>
+    </div>
 
     <div class="col-md-12">
         <div class="border-top my-4"></div>

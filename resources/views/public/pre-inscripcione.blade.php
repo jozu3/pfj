@@ -28,6 +28,7 @@
     </style>
     <script>
         var temp_image = ''
+        var temp_image_rec = ''
         let stateCheck = setInterval(() => {
             if (document.readyState === 'complete') {
                 clearInterval(stateCheck);
@@ -38,6 +39,7 @@
 
 
                 document.getElementById('imgperfil').addEventListener('change', cambiarImagen);
+                document.getElementById('imgrec').addEventListener('change', cambiarImagenRecTemplo);
 
                 function cambiarImagen(event) {
                     console.log('changee');
@@ -53,6 +55,23 @@
 
                     Livewire.on('imagen_cargada', () => {
                         document.getElementById("img-show").setAttribute('src', temp_image);
+                    })
+                }
+
+                function cambiarImagenRecTemplo(event) {
+                    console.log('changee');
+                    document.getElementById("rec-img-show").setAttribute('src',
+                        '{{ config('app.url') }}/img/user-pfj.png');
+                    var file = event.target.files[0];
+
+                    var reader = new FileReader();
+                    reader.onload = (event) => {
+                        temp_image_rec = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+
+                    Livewire.on('rec_imagen_cargada', () => {
+                        document.getElementById("rec-img-show").setAttribute('src', temp_image_rec);
                     })
                 }
 

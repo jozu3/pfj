@@ -36,6 +36,7 @@ class PreInscripcionConsejeros extends Component
     public $mes_recomendacion;
     public $anio_recomendacion;
     public $imgperfil;
+    public $imgrec;
     public $disabled_enviar = '';
 
     public $asiste_instituto;
@@ -69,12 +70,18 @@ class PreInscripcionConsejeros extends Component
 		'recomendacion_vigente' => 'required',
 		'mes_recomendacion' => 'required_if:recomendacion_vigente,1',
 		'anio_recomendacion' => 'required_if:recomendacion_vigente,1',
+		'imgrec' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
 		'imgperfil' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
 	];
 
     public function updatedImgperfil(){
         $this->validateOnly('imgperfil');
         $this->emit('imagen_cargada');
+    }
+
+    public function updatedImgrec(){
+        // $this->validateOnly('imgrec');
+        $this->emit('rec_imagen_cargada');
     }
 
     public function guardar(){
@@ -110,9 +117,19 @@ class PreInscripcionConsejeros extends Component
             if ($this->imgperfil) {
                 $url = Storage::put('contactos', $this->imgperfil);
                 $contacto->image()->create([
-                    'url' => $url
+                    'url' => $url,
+                    'tipo' => 'original'
                 ]);
             }
+
+            if ($this->imgrec) {
+                $url = Storage::put('contactos', $this->imgrec);
+                $contacto->imageRecTemple()->create([
+                    'url' => $url,
+                    'tipo' => 'rec_templo'
+                ]);
+            }
+
             $this->result = true;
         }
 

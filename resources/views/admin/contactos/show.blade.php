@@ -5,8 +5,8 @@
 
 @section('content_header')
     @can('admin.inscripciones.create')
-    <a href="{{ route('admin.inscripciones.create', 'idcontacto=' . $contacto->id) }}"
-        class="btn btn-success btn-sm float-right">Inscribir</a>
+        <a href="{{ route('admin.inscripciones.create', 'idcontacto=' . $contacto->id) }}"
+            class="btn btn-success btn-sm float-right">Inscribir</a>
     @endcan
     <h1>Contacto JAS: {{ $contacto->nombres . ' ' . $contacto->apellidos }}</h1>
 @stop
@@ -92,44 +92,48 @@
                 </div>
             </div>
             @forelse ($contacto->personale->inscripciones as $inscripcione)
-                @if($inscripcione->programa->estado < 2 )
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                        	<a href="{{ route('admin.inscripciones.notificacion', $inscripcione) }}" class="btn btn-success btn-sm float-right mr-2"><i class="fas fa-envelope"></i> Enviar Notificación</a>
-                            <h3>Información de la inscripción a: {{' '. $inscripcione->programa->pfj->nombre. ' - '. $inscripcione->programa->nombre }}</h3>
-                        </div>
-                        <div class="card-body">
-                            {!! Form::model($inscripcione, ['route' => ['admin.inscripciones.update', $inscripcione], 'method' => 'put']) !!}
-                            {{-- @livewire('admin.grupo-info', ['pfj_id' => $inscripcione->grupo->pfj->id, 'grupo_id' => $inscripcione->grupo->id]) --}}
-                            <div class="form-group">
-                                {!! Form::label('estado', 'Estado') !!}
-                                {!! Form::select(
-                                    'estado',
-                                    [
-                                        '0' => 'Desahabilitado',
-                                        '1' => 'Habilitado',
-                                        //'2' => 'Suspendido',
-                                    ],
-                                    null,
-                                    ['class' => 'form-control'],
-                                ) !!}
+                @if ($inscripcione->programa->estado < 2)
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="{{ route('admin.inscripciones.notificacion', $inscripcione) }}"
+                                    class="btn btn-success btn-sm float-right mr-2"><i class="fas fa-envelope"></i> Enviar
+                                    Notificación</a>
+                                <h3>Información de la inscripción a:
+                                    {{ ' ' . $inscripcione->programa->pfj->nombre . ' - ' . $inscripcione->programa->nombre }}
+                                </h3>
                             </div>
-                            @include('admin.inscripciones.partials.formedit')
-                            {!! Form::submit('Guardar', ['class' => 'btn btn-red40-pfj']) !!}
-                            {!! Form::close() !!}
+                            <div class="card-body">
+                                {!! Form::model($inscripcione, ['route' => ['admin.inscripciones.update', $inscripcione], 'method' => 'put']) !!}
+                                {{-- @livewire('admin.grupo-info', ['pfj_id' => $inscripcione->grupo->pfj->id, 'grupo_id' => $inscripcione->grupo->id]) --}}
+                                <div class="form-group">
+                                    {!! Form::label('estado', 'Estado') !!}
+                                    {!! Form::select(
+                                        'estado',
+                                        [
+                                            '0' => 'Desahabilitado',
+                                            '1' => 'Habilitado',
+                                            //'2' => 'Suspendido',
+                                        ],
+                                        null,
+                                        ['class' => 'form-control'],
+                                    ) !!}
+                                </div>
+                                @include('admin.inscripciones.partials.formedit')
+                                {!! Form::submit('Guardar', ['class' => 'btn btn-red40-pfj']) !!}
+                                {!! Form::close() !!}
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endif
             @empty
             @endforelse
         @endif
-    @can('admin.seguimientos.create')
-    <div class="col-md-12">
-        @livewire('admin.contacto-seguimientos', ['contacto' => $contacto])
-    </div>
-    @endcan
+        @can('admin.seguimientos.create')
+            <div class="col-md-12">
+                @livewire('admin.contacto-seguimientos', ['contacto' => $contacto])
+            </div>
+        @endcan
     </div>
 @stop
 
@@ -143,17 +147,33 @@
 
 @section('js')
     <script>
-        document.getElementById('imgperfil').addEventListener('change', cambiarImagen);
+        $(document).ready(function() {
+            // Handler for .ready() called.
+            document.getElementById('imgperfil').addEventListener('change', cambiarImagen);
 
-        function cambiarImagen(event) {
-            var file = event.target.files[0];
+            function cambiarImagen(event) {
+                var file = event.target.files[0];
 
-            var reader = new FileReader();
-            reader.onload = (event) => {
-                document.getElementById("img-show").setAttribute('src', event.target.result);
-            };
+                var reader = new FileReader();
+                reader.onload = (event) => {
+                    document.getElementById("img-show").setAttribute('src', event.target.result);
+                };
 
-            reader.readAsDataURL(file);
-        }
+                reader.readAsDataURL(file);
+            }
+
+            document.getElementById('imgrec').addEventListener('change', cambiarImagenRecTemplo);
+
+            function cambiarImagenRecTemplo(event) {
+                var file = event.target.files[0];
+
+                var reader = new FileReader();
+                reader.onload = (event) => {
+                    document.getElementById("rec-img-show").setAttribute('src', event.target.result);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
 @stop

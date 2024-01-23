@@ -32,6 +32,10 @@ class Contacto extends Model
     public function image200x200(){
         return $this->morphOne(Image::class, 'imageable')->where('tipo', '200x200');
     }
+
+    public function imageRecTemple(){
+        return $this->morphOne(Image::class, 'imageable')->where('tipo', 'rec_templo');
+    }
     
     public function barrio(){
     	return $this->belongsTo(Barrio::class)->select('nombre', 'estaca_id');
