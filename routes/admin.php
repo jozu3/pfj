@@ -55,7 +55,6 @@ Route::get('grupos/migrupo', [GrupoController::class, 'migrupo'])->name('admin.g
 Route::resource('grupos', GrupoController::class)->names('admin.grupos');
 Route::resource('companerismos', CompanerismoController::class)->names('admin.companerismos');
 Route::resource('anuncios', AnuncioController::class)->names('admin.anuncios');
-Route::resource('notas', NotaController::class)->names('admin.notas');
 Route::get('/programas/changesession/{programa}', [ProgramaController::class, 'changeSession'])->name('admin.programas.changesesion');
 Route::get('/programas/misprogramas', [ProgramaController::class, 'misprogramas'])->name('admin.programas.misprogramas');
 Route::get('/programas/grupos', [ProgramaController::class, 'grupos'])->name('admin.programas.grupos');

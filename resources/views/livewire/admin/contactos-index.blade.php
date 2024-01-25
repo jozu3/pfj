@@ -174,6 +174,12 @@
                                     @endphp
                                 </td>
                                 <td>
+                                    @if (isset($contacto->imageRecTemple))
+                                    <a href="{{Storage::url($contacto->imageRecTemple->url)}}" target="_blank">
+                                        <img src="{{Storage::url($contacto->imageRecTemple->url)}}" width="35px" alt="">
+                                    </a>
+                                    @endif
+                                    
                                     @if (!empty($contacto->mes_recomendacion) || !empty($contacto->anio_recomendacion))
                                         {{ $meses[$contacto->mes_recomendacion] . ' - ' . $contacto->anio_recomendacion }}
                                     @else
