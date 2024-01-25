@@ -94,7 +94,7 @@ class ContactosIndex extends Component
             '12' => 'Diciembre',
         ];
 
-        $this->created_at = '2023-09-10';
+        $this->created_at = '2024-01-22';
 
         $this->estado_aprobaciones = [
             '1' => 'Aprobado',
