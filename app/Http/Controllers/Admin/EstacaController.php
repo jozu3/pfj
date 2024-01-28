@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barrio;
 use App\Models\ConsejoCoordinacione;
 use App\Models\Estaca;
 use Illuminate\Http\Request;
@@ -58,9 +59,10 @@ class EstacaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Estaca $estaca)
     {
-        //
+          $barrios = Barrio::where('estaca_id', $estaca->id)->get();
+          return view('admin.estacas.show', compact('barrios', 'estaca'));
     }
 
     /**
@@ -103,7 +105,7 @@ class EstacaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Estaca $estaca)
     {
         //
     }

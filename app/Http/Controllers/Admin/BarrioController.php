@@ -52,7 +52,7 @@ class BarrioController extends Controller
         $barrio = Barrio::create($request->all());
 
         if ($barrio->id)
-            return redirect()->route('admin.barrios.show', $barrio->estaca)->with('info', 'El barrio se creó correctamente');
+            return redirect()->route('admin.estacas.show', $barrio->estaca)->with('info', 'El barrio se creó correctamente');
     }
 
     /**
@@ -61,11 +61,9 @@ class BarrioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Estaca $estaca)
+    public function show(Barrio $barrio)
     {
         //
-        $barrios = Barrio::where('estaca_id', $estaca->id)->get();
-        return view('admin.barrios.index', compact('barrios', 'estaca'));
     }
 
     /**
