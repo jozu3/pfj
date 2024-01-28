@@ -110,6 +110,9 @@
                             </th>
                             <th wire:click="" style="">Recomendación para el templo
                             </th>
+                            <th wire:click="sortBy('mision')" style="cursor:pointer">Misión
+                                @include('partials._sort-icon', ['field' => 'mision'])
+                            </th>
                             <th wire:click="sortBy('estado')" style="cursor:pointer">Estado
                                 @include('partials._sort-icon', ['field' => 'estado'])
                             </th>
@@ -185,6 +188,9 @@
                                     @else
                                         --
                                     @endif
+                                </td>
+                                <td>
+                                    {{ $contacto->mision }}
                                 </td>
                                 <td>
                                     {{ $estados[$contacto->estado] }}
