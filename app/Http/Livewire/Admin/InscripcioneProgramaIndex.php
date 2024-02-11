@@ -116,11 +116,13 @@ class InscripcioneProgramaIndex extends Component
                         $qu->where('nombres', 'like', '%' . $search . '%')
                             ->orWhere('apellidos', 'like', '%' . $search . '%')
                             ->orWhere('telefono', 'like', '%' . $search . '%');
-                    })->whereHas('barrio', function($qu) use ($estaca){
-                        //filtro estaca
-                        if($estaca != '' && $estaca != '0'){
-                            $qu->where('estaca_id', $estaca);
-                        }
+                    })->whereHas('contacto', function ($qu) use ($estaca) {
+                        $qu->whereHas('barrio', function($qu) use ($estaca){
+                            //filtro estaca
+                            if($estaca != '' && $estaca != '0'){
+                                $qu->where('estaca_id', $estaca);
+                            }
+                        });
                     });
                     
                 });
