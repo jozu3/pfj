@@ -4,7 +4,8 @@
 
 @section('content_header')
     <a href="{{ route('admin.alojamientos.asignarParticipantesHabitacion', $programa) }}"
-        class="btn btn-success btn-sm float-right">Asignar varios participantes/habitaciones</a>
+        class="btn btn-success btn-sm float-right">
+        Asignar varios participantes/habitaciones</a>
     <h1>Alojar personal en grupo</h1>
 @stop
 
@@ -76,11 +77,17 @@
                                 ]) !!}
                                 <label for="{{ 'insc' . $inscripcione->id }}" class="w-100">
                                     {{ $inscripcione->personale->contacto->nombres . ' ' . $inscripcione->personale->contacto->apellidos }}
-                                    <span class="text-secondary">{{ ', ' . $inscripcione->role->name }}</span>
+                                    <span class="text-warning">{{ ', ' . $inscripcione->role->name }}</span>
+                                    @if ($inscripcione->role_id == 6 && isset($inscripcione->inscripcioneCompanerismo))
+                                        <span>
+                                            {{ ' - Compañia: ' . $inscripcione->inscripcioneCompanerismo->companerismo->numero }}
+                                        </span>
+                                    @endif
                                     <span class="text-{{ $color_sexo }}">{{ '(' . $s . ')' }}</span>
                                     @if (isset($inscripcione->alojamientoPersonale))
                                         <div class="text-danger">
-                                            {{ $inscripcione->alojamientoPersonale->habitacione->piso->edificio->nombre }} -
+                                            {{ $inscripcione->alojamientoPersonale->habitacione->piso->edificio->nombre }}
+                                            -
                                             Piso: {{ $inscripcione->alojamientoPersonale->habitacione->piso->num }} -
                                             {{ $inscripcione->alojamientoPersonale->habitacione->numero }}
                                         </div>
@@ -123,7 +130,7 @@
         }
 
         .bg-m {
-            background-color: pink
+            background-color: rgb(253, 220, 225)
         }
     </style>
 @stop
