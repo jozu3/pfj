@@ -3,6 +3,10 @@
 @section('title', 'PFJ')
 
 @section('content_header')
+    <a href="{{ route('admin.alojamientosPersonale.asignarInscripcionesHabitacione', $programa) }}"
+        class="btn btn-success btn-sm float-right mr-3">
+        <i class="fas fa-address-card"></i> Asignar Personal/habitaciones
+    </a>
     <h1>Alojar participantes en grupo</h1>
 @stop
 
@@ -19,7 +23,6 @@
             <div class="form-group">
                 <div>
                     {!! Form::submit('Guardar', ['class' => 'btn btn-primary float-right']) !!}
-
                     <h3>
                         <label for="">{{ $locale->nombre }}</label>
                     </h3>
@@ -28,86 +31,15 @@
                 {{-- {!! Form::select('habitacione_id', $habitaciones_select, null, [
                     'class' => 'form-control',
                     'placeholder' => 'Escoja la habitación a asignar',
-                ]) !!}--}}
+                ]) !!} --}}
                 @error('habitaciones')
                     <small>{{ $message }}</small>
-                @enderror 
+                @enderror
             </div>
-            <div class="" style="height: 80vh; overflow-y: auto;">
+            <div class="" style="height: auto; overflow-y: auto;">
                 <div class="form-group">
-                    <div class="form-row">
-                        @forelse ($locale->edificios as $edificio)
-                            <div class="col-2 border d-flex align-items-start">
-                                <div class="form-row">
-                                    <div class="col-12 text-center">
-                                        {{$edificio->nombre}}
-                                    </div>
-                                    @forelse ($edificio->pisos as $piso)
-                                        <div class="col-12 border d-flex align-items-start">
-                                            <div class="form-row">
-                                                <div class="col-12">
-                                                    {{ 'Piso:  '}} <b> {{$piso->num}} </b>
-                                                </div>
-                                                @forelse ($piso->habitaciones as $habitacione)
-                                                    @php
-                                                        $background = '';
-                                                        $tipo = '';
-                                                        if ($habitacione->alojamientos->count() == $habitacione->cupos) {
-                                                            $background = 'bg-info';
-                                                            $tipo = 'P';
-                                                        } else if($habitacione->alojamientos->count() < $habitacione->cupos && $habitacione->alojamientos->count() > 0){
-                                                            $background = 'bg-warning';
-                                                            $tipo = 'P';
-                                                        } else if($habitacione->alojamientos->count() == 0){
-                                                            $background = 'bg-success';
-                                                            $tipo = '';
-                                                        } 
-                                                        
-                                                        if ($habitacione->alojamientosPersonales->count() == $habitacione->cupos) {
-                                                            $background = 'bg-personal';
-                                                            $tipo = 'C';
-                                                        } else if($habitacione->alojamientosPersonales->count() < $habitacione->cupos && $habitacione->alojamientosPersonales->count() > 0){
-                                                            $background = 'bg-warning-personal';
-                                                            $tipo = 'C';
-                                                        }
-                                                    @endphp
-                                                    <div class="col-6 border d-flex align-items-start {{$background}}">
-                                                        {!! Form::checkbox('habitaciones[]', $habitacione->id, null, [
-                                                            'class' => 'mr-1 mt-2',
-                                                            'id' => 'hab' . $habitacione->id,
-                                                            ]) !!}
-                                                        <label for="{{ 'hab' . $habitacione->id }}" class="w-100">
-                                                            {{ $habitacione->numero }} -
-                                                            @switch($tipo)
-                                                                @case('P')
-                                                                    {{$habitacione->alojamientos->count()}}                                                 
-                                                                    @break
-                                                                @case('C')
-                                                                    {{$habitacione->alojamientosPersonales->count()}} 
-                                                                @break
-                                                                @endswitch
-                                                            /
-                                                            {{$habitacione->cupos}}
-                                                            @if ($tipo == 'C')
-                                                                {{'Staff'}}
-                                                            @endif
-                                                        </label>
-                                                    </div>
-                                                @empty
-                                                    
-                                                @endforelse
-                                            </div>
-                                        </div>        
-                                    @empty
-                                    @endforelse
-                                </div>
-                            </div>
-                        @empty
-                            
-                        @endforelse
-                    </div>
+                    @include('admin.alojamientos.partials.edificios-show')
                 </div>
-            </div>
             </div>
 
 
@@ -119,23 +51,23 @@
                             <div class="col-12">
                                 <h3>
                                     {!! Form::label('compania', 'Compañia: ' . $compania->numero) !!}
-                                    
-                                    {!! Form::radio('compania'.$compania->id, null, null, [
-                                        'class' => 'compania_id', 
+
+                                    {!! Form::radio('compania' . $compania->id, null, null, [
+                                        'class' => 'compania_id',
                                         'data-compania_id' => $compania->id,
                                         'data-genero' => '1',
-                                        'id' => 'compania_h'.$compania->id
-                                        ]) !!}
+                                        'id' => 'compania_h' . $compania->id,
+                                    ]) !!}
 
-                                    {!! Form::label('compania_h'.$compania->id, 'H') !!}
+                                    {!! Form::label('compania_h' . $compania->id, 'H') !!}
 
-                                    {!! Form::radio('compania'.$compania->id, null, null, [
-                                        'class' => 'compania_id', 
+                                    {!! Form::radio('compania' . $compania->id, null, null, [
+                                        'class' => 'compania_id',
                                         'data-compania_id' => $compania->id,
                                         'data-genero' => '0',
-                                        'id' => 'compania_m'.$compania->id
-                                        ]) !!}
-                                    {!! Form::label('compania_m'.$compania->id, 'M') !!}
+                                        'id' => 'compania_m' . $compania->id,
+                                    ]) !!}
+                                    {!! Form::label('compania_m' . $compania->id, 'M') !!}
                                 </h3>
                             </div>
                             @foreach ($compania->participantes()->sortBy(['genero', 'age']) as $participante)
@@ -156,7 +88,7 @@
                                             break;
                                     }
                                 @endphp
-                                <div class="col-2 border d-flex align-items-start {{$bg_sexo}}">
+                                <div class="col-2 border d-flex align-items-start {{ $bg_sexo }}">
                                     {!! Form::checkbox('participantes[]', $participante->id, null, [
                                         'class' => 'mr-1 mt-2',
                                         'id' => 'part' . $participante->id,
@@ -165,27 +97,27 @@
                                     ]) !!}
                                     <label for="{{ 'part' . $participante->id }}" class="w-100">
                                         {{ $participante->nombres . ' ' . $participante->apellidos }}
-                                        <span class="text-{{ $color_sexo }}">{{ '('. $s. ')' }}</span>
+                                        <span class="text-{{ $color_sexo }}">{{ '(' . $s . ')' }}</span>
                                         <span class="text-info">{{ '(' . $participante->age . ')' }}</span>
                                         @php
-                                                $estados = [
+                                            $estados = [
                                                 '0' => 'Inscrito',
                                                 '-1' => 'No Inscrito',
-                                                "5" => "En espera del PFJ",
-                                                "1" => "Ingresó al PFJ",
-                                                "3" => "Terminó el PFJ",
+                                                '5' => 'En espera del PFJ',
+                                                '1' => 'Ingresó al PFJ',
+                                                '3' => 'Terminó el PFJ',
                                                 '2' => 'Permutado',
-                                                "4" => "Retirado",
-                                                "6" => "Canceló inscripción ",
+                                                '4' => 'Retirado',
+                                                '6' => 'Canceló inscripción ',
                                             ];
                                             $text_success = '';
                                             if ($participante->estado == 0 || $participante->estado == 5) {
                                                 $text_success = 'text-success';
                                             }
                                         @endphp
-                                        <span class="{{$text_success}}" >(
-                                            {{ $estados[$participante->estado]}}
-                                        )
+                                        <span class="{{ $text_success }}">(
+                                            {{ $estados[$participante->estado] }}
+                                            )
                                         </span>
                                         @if (isset($participante->alojamiento))
                                             <div class="text-danger">
@@ -204,7 +136,7 @@
                 @endforelse
             </div>
             @error('participantes')
-                <small>{{ $message }}</small>
+                <small class="text-danger">{{ $message }}</small>
             @enderror
 
 
@@ -217,18 +149,21 @@
 @section('css')
     <link rel="stylesheet" href="">
     <style>
-        .bg-personal{
+        .bg-personal {
             background-color: #003057;
             color: white;
         }
-        .bg-warning-personal{
+
+        .bg-warning-personal {
             background-color: #5b99cc
         }
-        .bg-h{
+
+        .bg-h {
             background-color: #006184;
             color: white;
         }
-        .bg-m{
+
+        .bg-m {
             background-color: pink
         }
     </style>
@@ -236,17 +171,26 @@
 
 @section('js')
     <script>
-        $().ready(function() {
-            
-            $('.compania_id').click(function(){
+        $(document).ready(function() {
+
+            $('.compania_id').click(function() {
                 console.log($(this).data('genero'));
 
                 var c_id = $(this).data('compania_id');
                 var genero = $(this).data('genero');
-                var _genero = genero == 1 ? 0:1;
-                $('input[type=checkbox][data-compania_id='+c_id+'][data-genero='+genero+']').prop('checked', true)
-                $('input[type=checkbox][data-compania_id='+c_id+'][data-genero='+_genero+']').prop('checked', false)
+                var _genero = genero == 1 ? 0 : 1;
+                $('input[type=checkbox][data-compania_id=' + c_id + '][data-genero=' + genero + ']').prop(
+                    'checked', true)
+                $('input[type=checkbox][data-compania_id=' + c_id + '][data-genero=' + _genero + ']').prop(
+                    'checked', false)
             });
+            $(document).ready(function() {
+            // Handler for .ready() called.
+            $('.showAlojamientos').click(function(e) {
+                var habitacione_id = e.currentTarget.dataset.habitacione;
+                Livewire.emit('showAlojamientos', habitacione_id);
+            })
+        });
         });
     </script>
 @stop

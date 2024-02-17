@@ -119,7 +119,7 @@ class AlojamientoController extends Controller
 
     public function asignarParticipantesHabitacion(Programa $programa)
     {
-        $programa_ = session('programa_activo');
+        $programa_ = $programa->id;
         $locale_id = Programa::find($programa_)->locale_id;
         $locale = Locale::where('id', $locale_id)->with('edificios', function($q) use ($programa_){
             $q->with('pisos', function($q) use ($programa_){
@@ -164,7 +164,7 @@ class AlojamientoController extends Controller
 
         $companias = $programa->companias();
 
-        return view('admin.alojamientos.asignarParticipantesHabitacion', compact('companias', 'habitaciones', 'locale', 'habitaciones_select'));
+        return view('admin.alojamientos.asignarParticipantesHabitacion', compact('programa', 'companias', 'habitaciones', 'locale', 'habitaciones_select'));
     }
 
     public function storeParticipantesHabitacion(Request $request)
@@ -183,7 +183,12 @@ class AlojamientoController extends Controller
         $p = 0;
         // dd(count($request->participantes));
         foreach ($request->habitaciones as $key => $value) {
-            $habitacione = Habitacione::find($value);
+            $habitacione = Habitacione::where('id', $value)->with('alojamientos', function($q) use ($programa){
+                                                    $q->whereHas('participante', function($q) use ($programa){
+                                                            $q->where('programa_id', $programa->id);
+                                                    });
+                                                })->first();
+
             for ($i=0; $i < $habitacione->cupos - $habitacione->alojamientos->count() ; $i++) { 
                 if(isset($participantes[$p])){
 
