@@ -43,6 +43,9 @@
                                         {{ $habitacione->numero }} -
                                         @switch($tipo)
                                             @case('P')
+                                                {{ $habitacione->alojamientos->count() }}
+                                                /
+                                                {{ $habitacione->cupos }}
                                                 @php
                                                     $f = [];
                                                 @endphp
@@ -58,15 +61,12 @@
                                                     {{ 'C: ' . implode(',',$f)}}
                                                 </span>
                                                 <br>
-                                                {{ $habitacione->alojamientos->count() }}
                                             @break
 
                                             @case('C')
                                                 {{ $habitacione->alojamientosPersonales->count() }}
                                             @break
                                         @endswitch
-                                        /
-                                        {{ $habitacione->cupos }}
                                         @if ($tipo == 'C')
                                             {{ 'Staff' }}
                                         @endif
