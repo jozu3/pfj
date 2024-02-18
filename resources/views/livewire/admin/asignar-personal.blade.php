@@ -7,13 +7,16 @@
                     Mostrar personal sin asignar
                 </label>
             </div>
-            <div class="custom-control custom-checkbox mr-sm-2 d-inline">
-                <input class="form-check-input" wire:model="renderSortable" type="checkbox" value=""
-                    id="renderSortable">
-                <label class="form-check-label" for="renderSortable">
-                    Mover personal
-                </label>
-            </div>
+            @if(auth()->user()->can(['admin.inscripcioneCompanerismos.edit']))
+                <div class="custom-control custom-checkbox mr-sm-2 d-inline">
+                    <input class="form-check-input" wire:model="renderSortable" type="checkbox" value=""
+                        id="renderSortable">
+                    <label class="form-check-label" for="renderSortable">
+                        Mover personal
+                    </label>
+                </div>
+            @else
+            @endif
 
         </div>
     </div>

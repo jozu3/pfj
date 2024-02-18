@@ -43,6 +43,21 @@
                                         {{ $habitacione->numero }} -
                                         @switch($tipo)
                                             @case('P')
+                                                @php
+                                                    $f = [];
+                                                @endphp
+                                                @foreach ($habitacione->alojamientos as $alojamiento)
+                                                    @if (!in_array($alojamiento->compania()->numero, $f) )
+                                                        @php
+                                                            array_push($f, $alojamiento->compania()->numero )
+                                                        @endphp
+                                                    @endif
+                                                @endforeach
+                                                <br>
+                                                <span class="bg-danger px-1 rounded">    
+                                                    {{ 'C: ' . implode(',',$f)}}
+                                                </span>
+                                                <br>
                                                 {{ $habitacione->alojamientos->count() }}
                                             @break
 
@@ -57,7 +72,7 @@
                                         @endif
                                     </label>
                                     <button type="button"
-                                        class="btn btn-success btn-sm float-right mr-3 showAlojamientos"
+                                        class="btn btn-success btn-sm float-right showAlojamientos"
                                         data-toggle="modal" data-target="#showAlojamientos"
                                         data-habitacione="{{ $habitacione->id }}">
                                         <i class="far fa-eye"></i>
