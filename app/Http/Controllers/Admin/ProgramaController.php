@@ -24,7 +24,7 @@ class ProgramaController extends Controller
         $this->middleware('can:admin.programas.create')->only('create', 'store');
         $this->middleware('can:admin.programas.edit')->only('edit', 'update', 'personal');
         $this->middleware('can:admin.programas.destroy')->only('destroy');
-        $this->middleware('can:admin.inscripcioneCompanerismos.edit')->only('asignar');
+        $this->middleware('can:admin.inscripcioneCompanerismos.index')->only('asignar');
         $this->middleware('can:admin.programas.misprogramas')->only('misprogramas');
     }
     /**
