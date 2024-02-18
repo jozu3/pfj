@@ -41,11 +41,11 @@
                                     ]) !!}
                                     <label for="{{ 'hab' . $habitacione->id }}" class="w-100">
                                         {{ $habitacione->numero }} -
+                                        {{ $habitacione->alojamientos->count() }}
+                                        /
+                                        {{ $habitacione->cupos }}
                                         @switch($tipo)
                                             @case('P')
-                                                {{ $habitacione->alojamientos->count() }}
-                                                /
-                                                {{ $habitacione->cupos }}
                                                 @php
                                                     $f = [];
                                                 @endphp
