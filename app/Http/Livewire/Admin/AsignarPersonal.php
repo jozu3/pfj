@@ -124,6 +124,10 @@ class AsignarPersonal extends Component
     {
         $grupos = Grupo::where('programa_id', $this->programa->id)->get();
         $this->famNumero = ($grupos->isNotEmpty()) ? ($grupos->sortByDesc('numero')->first()->numero) + 1 : 1;
+        if(auth()->user()->can(['admin.inscripcioneCompanerismos.edit'])){
+        } else {
+            $this->renderSortable = false;
+        }
         return view('livewire.admin.asignar-personal', compact('grupos'));
     }
 }

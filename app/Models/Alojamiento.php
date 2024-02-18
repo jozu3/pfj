@@ -21,4 +21,8 @@ class Alojamiento extends Model
         return $this->belongsTo(Habitacione::class);
     }
 
+    public function compania(){
+        return $this->participante->participanteCompania->companerismo;
+    }
+
 }

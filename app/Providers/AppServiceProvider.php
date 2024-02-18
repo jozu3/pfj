@@ -127,7 +127,7 @@ class AppServiceProvider extends ServiceProvider
                         'text' => 'Organigrama',
                         'url' => '/admin/programas/' . session('programa_activo') . '/asignar',
                         'icon' => 'fas fa-sitemap',
-                        'can'  =>   'admin.inscripcioneCompanerismos.edit'
+                        'can'  =>   'admin.inscripcioneCompanerismos.index'
                     ];
 
                     $menu_personales = [
