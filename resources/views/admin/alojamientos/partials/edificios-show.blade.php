@@ -68,6 +68,9 @@
                                                 /
                                                 {{ $habitacione->cupos }}
                                             @break
+                                            @default
+                                                0/{{ $habitacione->cupos }}
+                                            @break
                                         @endswitch
                                         @if ($tipo == 'C')
                                             {{ 'Staff' }}
