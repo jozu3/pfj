@@ -35,6 +35,14 @@
                         <h2 class="text-gray-500 text-xs"><i class="fas fa-birthday-cake"></i>
                             {{ date('d/m/Y', strtotime($inscripcioneCompanerismo->inscripcione->personale->contacto->fecnac)) }}
                         </h2>
+                        @if (isset($inscripcioneCompanerismo->inscripcione->alojamientoPersonale) && $inscripcioneCompanerismo->inscripcione->personale->user->id == auth()->user()->id  )
+                            <h2 class="text-gray-500 text-xs">
+                                <i class="fas fa-bed"></i>
+                                {{ $inscripcioneCompanerismo->inscripcione->alojamientoPersonale->habitacione->piso->edificio->nombre }} -
+                                Piso: {{ $inscripcioneCompanerismo->inscripcione->alojamientoPersonale->habitacione->piso->num }} -
+                                {{ $inscripcioneCompanerismo->inscripcione->alojamientoPersonale->habitacione->numero }}
+                            </h2>
+                        @endif
                         <h2 class="text-gray-500 text-xs rounded">
                             <i class="fas fa-phone-alt"></i>
                             <a
@@ -89,6 +97,7 @@
                             <th>
                                 Teléfono
                             </th>
+                            <th>Habitación</th>
                             <!--th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                           Unidades completadas
                         </th-->
@@ -129,7 +138,14 @@
                                     <span
                                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                         {{-- {{ $inscripcione->programa->count() }} --}}
+                                        @if (isset($participante->alojamiento))
+                                            {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} - Piso:
+                                            {{ $participante->alojamiento->habitacione->piso->num }} -
+                                            {{ $participante->alojamiento->habitacione->numero }}
+                                        @endif
                                     </span>
+                                </td>
+                                <td>
                                 </td>
                                 <td width=" 10px" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     {{-- <a href="{{ route('st.programas.show', $inscripcione->programa) }}"
