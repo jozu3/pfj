@@ -7,6 +7,7 @@
             <th>Documento</th>
             <th>Compañia</th>
             <th>Habitación</th>
+            <th>Cupos habitación</th>
             <th>Estado</th>
             <th>Hora de llegada</th>
             <th>Edad</th>
@@ -73,6 +74,11 @@
                         {{ $participante->alojamiento->habitacione->piso->edificio->nombre }} - Piso:
                         {{ $participante->alojamiento->habitacione->piso->num }} -
                         {{ $participante->alojamiento->habitacione->numero }}
+                    @endif
+                </td>
+                <td>
+                    @if (isset($participante->alojamiento))
+                        {{ $participante->alojamiento->habitacione->cupos }}
                     @endif
                 </td>
                 <td>

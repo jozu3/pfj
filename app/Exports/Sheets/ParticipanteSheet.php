@@ -19,7 +19,7 @@ class ParticipanteSheet implements FromView, WithTitle
     
     public function view():View{
                
-        $participantes = Participante::where('programa_id', $this->programa)->get();
+        $participantes = Participante::where('programa_id', $this->programa)->where('estado', '1')->get();
 
         return view('admin.exports.participantes', compact('participantes'));
     }
