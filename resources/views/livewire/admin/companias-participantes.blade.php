@@ -63,10 +63,20 @@
                         <th>Estaca - Barrio</th>
                         <th>Compañia</th>
                         <th>Habitación</th>
+                        <th>Edad</th>
+                        <th>
+                            Informacion médica
+                        </th>
+                        <th>
+                            Tratamiento médico
+                        </th>
+                        <th>
+                            Informacion alimentaria
+                        </th>
+                         <th>Alergia</th>
                         <th>Telefono</th>
                         <th>Correo electrónico</th>
                         <th>Fecha de nacimiento</th>
-                        <th>Edad</th>
                         <th>Contacto 1</th>
                         <th>Teléfono de Contacto 1</th>
                         <th>Correo electrónico de Contacto 1</th>
@@ -76,13 +86,6 @@
                         <th>Obispo</th>
                         <th>Correo electrónico del obispo</th>
                         <th>Tipo de sangre</th>
-                        <th>
-                            Informacion médica
-                        </th>
-                        <th>
-                            Tratamiento médico
-                        </th>
-                        <th>Alergia</th>
                         <th>
                             Diabetico o asmático
                         </th>
@@ -148,6 +151,21 @@
                                 @endif
                             </td>
                             <td>
+                                {{ $participante->age }}
+                            </td>
+                            <td>
+                                {{ $participante->informacion_medica }}
+                            </td>
+                            <td>
+                                {{ $participante->tratamiento_medico }}
+                            </td>
+                            <td>
+                                {{ $participante->informacion_alimentaria }}
+                            </td>
+                            <td>
+                                {{ $participante->alergia }}
+                            </td>
+                            <td>
                                 <span>
                                     <a href="tel:{{ str_replace(' ', '', $participante->telefono) }}"
                                         alt="Llamar por teléfono" data-toggle="tooltip" data-placement="top"
@@ -168,9 +186,7 @@
                             <td>
                                 {{ date('d/m/Y', strtotime($participante->fecnac)) }}
                             </td>
-                            <td>
-                                {{ $participante->age }}
-                            </td>
+                           
                             <td>
                                 {{ $participante->contacto1 }}
                             </td>
@@ -198,24 +214,14 @@
                             <td>
                                 {{ $participante->sangre }}
                             </td>
-                            <td>
-                                {{ $participante->informacion_medica }}
-                            </td>
-                            <td>
-                                {{ $participante->tratamiento_medico }}
-                            </td>
-                            <td>
-                                {{ $participante->alergia }}
-                            </td>
+                            
                             <td>
                                 {{ $participante->diabetico_asmatico }}
                             </td>
                             <td>
                                 {{ $participante->seguro_medico }}
                             </td>
-                            <td>
-                                {{ $participante->informacion_alimentaria }}
-                            </td>
+                            
                             <td>
                                 {{ $participante->vacunas }}
                             </td>
