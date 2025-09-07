@@ -50,7 +50,7 @@ class NewConsejeroObispoNotification extends Notification
             ->subject('Notificación de Pre-Inscripción de consejero')
             ->greeting('Bienvenido apreciado Obispo  ' . $this->contacto->obispo)
             ->line('Este es el Sistema Mi PFJ para la aprobación de consejeros y participantes. Ha recibido este correo porque un(a) joven de su barrio desea participar como consejero(a) en el '. $pfj->nombre)
-            ->line('Debe ingresar a '. route('admin.contactos.index'))
+            ->line('Para aprobarlo debe ingresar al siguiente botón: ') //. route('admin.contactos.index'))
             // ->line('Usuario: '.$this->inscripcione->personale->user->email)
             // ->line('Contraseña: password')
             // ->line('Te sugerimos que cambies tu contraseña en las próximas 24 horas, ingresando al menú perfil desde tu portal MiPFJ.')

@@ -22,9 +22,9 @@ class CreateParticipantesTable extends Migration
             $table->boolean('genero');
             $table->string('telefono');
             $table->string('email');
-            $table->string('informacion_medica');
+            $table->text('informacion_medica');
             $table->string('talla');
-            $table->string('informacion_alimentaria');
+            $table->text('informacion_alimentaria');
             $table->string('contacto1')->nullable();
             $table->string('contacto1_phone')->nullable();
             $table->string('contacto1_email')->nullable();

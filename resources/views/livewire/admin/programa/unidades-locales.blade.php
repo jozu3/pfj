@@ -26,16 +26,24 @@
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
+            @if ($guardado)
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Se guardó correctamente!</strong> 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
         </div>
 
     </div>
     <div class="card-footer">
-        {{ var_export($estacasselecteds) }}
+        {{-- {{ var_export($estacasselecteds) }}
         <ul>
             @forelse ($estacasselecteds as $estacaInscripcione)
                 <li>{{ $estacaInscripcione }}</li>
                 @empty
             @endforelse
-        </ul>
+        </ul> --}}
     </div>
 </div>

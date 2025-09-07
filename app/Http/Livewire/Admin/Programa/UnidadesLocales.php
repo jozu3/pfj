@@ -15,6 +15,7 @@ class UnidadesLocales extends Component
     public $ccrdnes;
     public $estacasselecteds = [] ;
     public $programa;
+    public $guardado = false;
 
     public function mount(){
         $this->estacas = Estaca::all();
@@ -33,6 +34,11 @@ class UnidadesLocales extends Component
             if($id != 0){
                 EstacaInscripcione::create(['programa_id' => $this->programa->id, 'estaca_id' => $id]);
             }
+        }
+
+        $count = EstacaInscripcione::where('programa_id', $this->programa->id)->count();
+        if(count($this->estacasselecteds) == $count){
+            $this->guardado = true;
         }
     }
 

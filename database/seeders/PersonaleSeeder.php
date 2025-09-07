@@ -125,7 +125,8 @@ class PersonaleSeeder extends Seeder
 
         //Crear compañerismos
         foreach (Grupo::all() as $grupo) {
-            for ($i=0; $i < 5; $i++) { 
+            $cant_companerismos = $faker->numberBetween(4,6);
+            for ($i=0; $i < $cant_companerismos; $i++) { 
                 Companerismo::create([
                     'numero' => ($i+1),
                     'nombre' => $faker->word(1),

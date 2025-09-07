@@ -528,7 +528,7 @@
                 </form>
             @else
                 <div class="bg-green-500 rounded-md text-white p-2">
-                    Gracias por unirte esta nueva aventura llamada <b>PFJ Lima Norte 2024!</b>
+                    Gracias por unirte esta nueva aventura llamada <b>PFJ Lima Norte 2026!</b>
                 </div>
             @endif
         </div>
