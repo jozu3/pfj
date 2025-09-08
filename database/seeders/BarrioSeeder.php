@@ -17,13 +17,17 @@ class BarrioSeeder extends Seeder
     public function run()
     {
         //Barrio desconocido
-        $nn = ConsejoCoordinacione::create(['nombre' => 'NaN']);
-        $eNN = Estaca::create(['nombre' => 'Desconocido', 'consejo_coordinacione_id' => $nn->id]);
-        Barrio::create(['nombre' => 'Desconocido', 'estaca_id' => $eNN->id]);
+        $nn = ConsejoCoordinacione::create(['nombre' => 'Otro']);
+        $eNN = Estaca::create(['nombre' => 'Otro', 'consejo_coordinacione_id' => $nn->id]);
+        Barrio::create(['nombre' => 'Otro', 'estaca_id' => $eNN->id]);
 
         
         $cclimanorte = ConsejoCoordinacione::create([
             'nombre' => 'Lima Norte'
+        ]);
+
+        $cclimanoreste = ConsejoCoordinacione::create([
+            'nombre' => 'Lima Noreste'
         ]);
 
         //Lima Norte
@@ -33,10 +37,10 @@ class BarrioSeeder extends Seeder
         $eSanFelipe = Estaca::create(['nombre' => 'San Felipe', 'consejo_coordinacione_id' => $cclimanorte->id]);
         $eSanta = Estaca::create(['nombre' => 'Santa Isabel', 'consejo_coordinacione_id' => $cclimanorte->id]);
         $eTorre = Estaca::create(['nombre' => 'Torre Blanca', 'consejo_coordinacione_id' => $cclimanorte->id]);
-        $eMagnolias = Estaca::create(['nombre' => 'Magnolias', 'consejo_coordinacione_id' => $cclimanorte->id]);
-        $eWiesse = Estaca::create(['nombre' => 'Wiesse', 'consejo_coordinacione_id' => $cclimanorte->id]);
-        $eCanto = Estaca::create(['nombre' => 'Canto Grande', 'consejo_coordinacione_id' => $cclimanorte->id]);
-        $eBegonias = Estaca::create(['nombre' => 'Begonias', 'consejo_coordinacione_id' => $cclimanorte->id]);
+        $eMagnolias = Estaca::create(['nombre' => 'Magnolias', 'consejo_coordinacione_id' => $cclimanoreste->id]);
+        $eWiesse = Estaca::create(['nombre' => 'Wiesse', 'consejo_coordinacione_id' => $cclimanoreste->id]);
+        $eCanto = Estaca::create(['nombre' => 'Canto Grande', 'consejo_coordinacione_id' => $cclimanoreste->id]);
+        $eBegonias = Estaca::create(['nombre' => 'Begonias', 'consejo_coordinacione_id' => $cclimanoreste->id]);
 
 
         //Lima Begonias Stake
