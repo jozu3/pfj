@@ -23,18 +23,20 @@
     <small class="text-danger">{{ $message }}</small>
 @enderror --}}
 @php
-  $contacto['permiso_obispo'] = 1;
+    $contacto['permiso_obispo'] = 1;
+    if(!empty($contacto->estado_aprobacion)){
         switch ($contacto->estado_aprobacion) {
             case '1':
-                $contacto['permiso_obispo'] = 2;
-                break;
+            $contacto['permiso_obispo'] = 2;
+            break;
             case '2':
-                $contacto['permiso_obispo'] = 0;
-                break;
+            $contacto['permiso_obispo'] = 0;
+            break;
             default:
-                $contacto['permiso_obispo'] = 1;
-                break;
+            $contacto['permiso_obispo'] = 1;
+            break;
         }
+    }
 @endphp
 <div class="form-group">
     {!! Form::label('permiso_obispo', 'Aprobación de su Obispo/Presidente de rama') !!}

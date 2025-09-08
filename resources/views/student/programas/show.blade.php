@@ -262,7 +262,15 @@
                                                 <td>
                                                     <span
                                                         class="p-2 inline-flex text-xl leading-5 text-sm sm:text-xl font-semibold rounded-full bg-green-100 text-green-800">
-                                                        {{ $inscripcione->inscripcioneTareas->where('realizado', true)->count() . '/' . $programa->tareas->count() }}
+                                                        @php
+                                                        $tareas_realizadas_count = 0;
+                                                        @endphp
+                                                        @if (!empty($inscripcione))
+                                                        @php
+                                                            $tareas_realizadas_count = $inscripcione->inscripcioneTareas->where('realizado', true)->count();
+                                                        @endphp
+                                                        @endif
+                                                        {{ $tareas_realizadas_count. '/' . $programa->tareas->count() }}
                                                     </span>
                                                 </td>
                                                 <td>
