@@ -22,7 +22,7 @@ class TestSeeder extends Seeder
         // $this->call(MatrimonioUsersSeeder::class); //Richard y Paola
         $this->call(EstadoAprobacioneSeeder::class);        
 
-
+        //agregar seeder de local
        
     }
 }

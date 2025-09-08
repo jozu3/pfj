@@ -1,4 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+    @php
+        $auth_inscripciones = auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'));
+    @endphp
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -19,7 +22,7 @@
                             </x-jet-nav-link>
                         @endcan
                     @endcan
-                    @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count() ||
+                    @if ($auth_inscripciones->count() ||
                             auth()->user()->can('admin.programas.viewList'))
 
                         <div class="inline-flex items-center px-1 pt-1">
@@ -102,7 +105,7 @@
 
                             </x-jet-dropdown>
                         </div>
-                        @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->first()->programa->estado == 1)
+                        @if ( !empty($auth_inscripciones->first()) && $auth_inscripciones->first()->programa->estado == 1)
                             <div class="inline-flex items-center px-1 pt-1">
                                 <x-jet-dropdown align="right" width="48">
                                     <x-slot name="trigger">
@@ -135,7 +138,7 @@
 
                         @can('admin.home')
                             @if (auth()->user()->hasRole('Coordinador auxiliar'))
-                                @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->first()->programa->mostrarGruposToCoordAuxiliares == 1 )
+                                @if ($auth_inscripciones->first()->programa->mostrarGruposToCoordAuxiliares == 1 )
                                     <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
                                         {{ __('Panel administrativo') }}
                                     </x-jet-nav-link>    
@@ -366,8 +369,7 @@
                     {{ __('Mi compañia') }}
                 </x-jet-nav-link>
             @endif
-            @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->count() ||
-                    auth()->user()->can('admin.programas.viewList'))
+            @if ($auth_inscripciones->count() || auth()->user()->can('admin.programas.viewList'))
                 <!-- Account Management -->
                 <x-jet-dropdown>
                     <x-slot name="trigger">
@@ -449,7 +451,7 @@
                         </x-jet-dropdown-link>
                     </x-slot>
                 </x-jet-dropdown>
-                @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->first()->programa->estado == 1)
+                @if ( !empty($auth_inscripciones->first()) && $auth_inscripciones->first()->programa->estado == 1)
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
 
@@ -481,7 +483,7 @@
                 @endif
                 @can('admin.home')
                 @if (auth()->user()->hasRole('Coordinador auxiliar'))
-                    @if (auth()->user()->personale->inscripciones->where('estado', '1')->whereIn('programa_id', session('programa_activo'))->first()->programa->mostrarGruposToCoordAuxiliares == 1 )
+                    @if ($auth_inscripciones->first()->programa->mostrarGruposToCoordAuxiliares == 1 )
                         <x-jet-nav-link href="{{ route('admin.index') }}" :active="request()->routeIs('admin.index')">
                             {{ __('Panel administrativo') }}
                         </x-jet-nav-link>    
