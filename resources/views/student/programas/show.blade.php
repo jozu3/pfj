@@ -21,7 +21,7 @@
                     $bienvenido = 'Bienvenida';
                 @endphp
             @endif
-            {{ $bienvenido }} al {{ $inscripcione->programa->nombre }}
+            {{ $bienvenido }} al {{ $programa->nombre }}
         </h2>
     </x-slot>
     <style>
@@ -49,23 +49,23 @@
 
                                     <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 place-content-center mt-4">
                                         <div class="text-center">
-                                            @if ($inscripcione->programa->imageMatrimonioDirector)
-                                                <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioDirector->url) }}"
+                                            @if ($programa->imageMatrimonioDirector)
+                                                <img src="{{ Storage::url($programa->imageMatrimonioDirector->url) }}"
                                                     alt=""
                                                     class="object-center object-cover rounded-full m-auto"
                                                     style="height: 300px!important; width: 300px!important" />
                                             @endif
                                         </div>
                                         <div class="md:text-left text-center">
-                                            @forelse ($inscripcione->programa->matrimonioDirectores() as $lider)
+                                            @forelse ($programa->matrimonioDirectores() as $lider)
                                                 <p class="text-xl"><b>{{ $lider->personale->user->name }}</b>
                                                 </p>
                                             @empty
                                                 <p>No asignados</p>
                                             @endforelse
                                             <br>
-                                            @if ($inscripcione->programa->resena_matrimonio)
-                                                <p>{!! $inscripcione->programa->resena_matrimonio !!}</p>
+                                            @if ($programa->resena_matrimonio)
+                                                <p>{!! $programa->resena_matrimonio !!}</p>
                                             @endif
                                         </div>
                                     </div>
@@ -78,23 +78,23 @@
 
                                     <div class="grid md:grid-cols-2 sm:grid-cols-1 gap-4 place-content-center mt-4">
                                         <div class="text-center">
-                                            @if ($inscripcione->programa->imageMatrimonioLogistica)
-                                                <img src="{{ Storage::url($inscripcione->programa->imageMatrimonioLogistica->url) }}"
+                                            @if ($programa->imageMatrimonioLogistica)
+                                                <img src="{{ Storage::url($programa->imageMatrimonioLogistica->url) }}"
                                                     alt=""
                                                     class="object-center object-cover rounded-full m-auto"
                                                     width="300px" height="300px">
                                             @endif
                                         </div>
                                         <div class="md:text-left text-center">
-                                            @forelse ($inscripcione->programa->matrimonioLogisticas() as $lider)
+                                            @forelse ($programa->matrimonioLogisticas() as $lider)
                                                 <p class="text-xl"><b>{{ $lider->personale->user->name }}</b>
                                                 </p>
                                             @empty
                                                 <p>No asignados</p>
                                             @endforelse
                                             <br>
-                                            @if ($inscripcione->programa->resena_matrimonio_logistica)
-                                                <p>{!! $inscripcione->programa->resena_matrimonio_logistica !!}</p>
+                                            @if ($programa->resena_matrimonio_logistica)
+                                                <p>{!! $programa->resena_matrimonio_logistica !!}</p>
                                             @endif
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@
                                             @php
                                                 $i = 0;
                                             @endphp
-                                            @foreach ($inscripcione->programa->anuncios->where('estado', '1') as $anuncio)
+                                            @foreach ($programa->anuncios->where('estado', '1') as $anuncio)
                                                 {{-- @if ($anuncio->image) --}}
                                                 <button type="button" data-bs-target="#carouselExampleIndicators"
                                                     data-bs-slide-to="{{ $i }}"
@@ -139,7 +139,7 @@
                                             @php
                                                 $i = 0;
                                             @endphp
-                                            @forelse ($inscripcione->programa->anuncios->where('estado', '1') as $anuncio)
+                                            @forelse ($programa->anuncios->where('estado', '1') as $anuncio)
                                                 @switch($anuncio->tipo)
                                                     @case(1)
                                                         @php
@@ -262,11 +262,11 @@
                                                 <td>
                                                     <span
                                                         class="p-2 inline-flex text-xl leading-5 text-sm sm:text-xl font-semibold rounded-full bg-green-100 text-green-800">
-                                                        {{ $inscripcione->inscripcioneTareas->where('realizado', true)->count() . '/' . $inscripcione->programa->tareas->count() }}
+                                                        {{ $inscripcione->inscripcioneTareas->where('realizado', true)->count() . '/' . $programa->tareas->count() }}
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('st.tareas.mislecturas', $inscripcione->programa) }}"
+                                                    <a href="{{ route('st.tareas.mislecturas', $programa) }}"
                                                         class="bg-red40-pfj sm:p-2 sm:text-md rounded-lg text-white p-1 text-sm">
                                                         <i class="fas fa-check-square"></i> Marcar
                                                     </a>
