@@ -41,6 +41,11 @@ class BarrioSeeder extends Seeder
         $eWiesse = Estaca::create(['nombre' => 'Wiesse', 'consejo_coordinacione_id' => $cclimanoreste->id]);
         $eCanto = Estaca::create(['nombre' => 'Canto Grande', 'consejo_coordinacione_id' => $cclimanoreste->id]);
         $eBegonias = Estaca::create(['nombre' => 'Begonias', 'consejo_coordinacione_id' => $cclimanoreste->id]);
+        
+        $eCampoy = Estaca::create(['nombre' => 'Campoy', 'consejo_coordinacione_id' => $cclimanoreste->id]);
+        $eLasFlores = Estaca::create(['nombre' => 'Las Flores', 'consejo_coordinacione_id' => $cclimanoreste->id]);
+        $eRimac = Estaca::create(['nombre' => 'Rímac', 'consejo_coordinacione_id' => $cclimanoreste->id]);
+        
 
 
         //Lima Begonias Stake
@@ -130,10 +135,72 @@ class BarrioSeeder extends Seeder
         Barrio::create(['nombre' => 'Mariscal Cáceres Ward', 'estaca_id' => $eWiesse->id]);
         Barrio::create(['nombre' => 'Montenegro Ward', 'estaca_id' => $eWiesse->id]);
         Barrio::create(['nombre' => 'Wiesse Ward', 'estaca_id' => $eWiesse->id]);
+
+        //Lima Rímac Stake
+        Barrio::create(['nombre' => 'Cercado Ward ', 'estaca_id' => $eRimac->id]);
+        Barrio::create(['nombre' => 'Ingeniería Ward', 'estaca_id' => $eRimac->id]);
+        Barrio::create(['nombre' => 'Leoncio Prado Ward', 'estaca_id' => $eRimac->id]);
+        Barrio::create(['nombre' => 'Rimac 1st Ward', 'estaca_id' => $eRimac->id]);
+        Barrio::create(['nombre' => 'Rimac 2nd Ward', 'estaca_id' => $eRimac->id]);
         
 
 
+        $cclimaeste = ConsejoCoordinacione::create([
+            'nombre' => 'Lima Este'
+        ]);
 
+        $cclimacentral = ConsejoCoordinacione::create([
+            'nombre' => 'Lima Central'
+        ]);
+
+
+    
+        //Lima Central
+        $eIndependencia = Estaca::create(['nombre' => 'Independencia', 'consejo_coordinacione_id' => $cclimacentral->id]);
+
+
+
+        //Lima Campoy Stake
+        Barrio::create(['nombre' => 'Campoy Ward', 'estaca_id' => $eCampoy->id]);
+        Barrio::create(['nombre' => 'El Valle Ward', 'estaca_id' => $eCampoy->id]);
+        Barrio::create(['nombre' => 'Huachipa Ward', 'estaca_id' => $eCampoy->id]);
+        Barrio::create(['nombre' => 'Mangomarca Ward', 'estaca_id' => $eCampoy->id]);
+        Barrio::create(['nombre' => 'Portada del Sol Ward', 'estaca_id' => $eCampoy->id]);
+
+        //Lima Independencia Stake
+        Barrio::create(['nombre' => 'Diecisiete de Noviembre Ward', 'estaca_id' => $eIndependencia->id]);
+        Barrio::create(['nombre' => 'Independencia Ward', 'estaca_id' => $eIndependencia->id]);
+        Barrio::create(['nombre' => 'José Gálvez Ward', 'estaca_id' => $eIndependencia->id]);
+        Barrio::create(['nombre' => 'La Magnolias Ward', 'estaca_id' => $eIndependencia->id]);
+        Barrio::create(['nombre' => 'Las Violetas Ward', 'estaca_id' => $eIndependencia->id]);
+        Barrio::create(['nombre' => 'Los Pinos Ward', 'estaca_id' => $eIndependencia->id]);
+
+        
+        //Las Flores Stake
+        Barrio::create(['nombre' => 'Las Flores Ward', 'estaca_id' => $eLasFlores->id]);
+        Barrio::create(['nombre' => 'Caja de Agua Ward', 'estaca_id' => $eLasFlores->id]);
+        Barrio::create(['nombre' => 'Los Jardines Ward', 'estaca_id' => $eLasFlores->id]);
+        Barrio::create(['nombre' => 'Nueva Era Ward', 'estaca_id' => $eLasFlores->id]);
+        Barrio::create(['nombre' => 'San Silvestre Ward', 'estaca_id' => $eLasFlores->id]);
+        Barrio::create(['nombre' => 'Zárate Ward', 'estaca_id' => $eLasFlores->id]);
+
+        //Lima Central
+
+
+        $cclimaoeste = ConsejoCoordinacione::create([
+            'nombre' => 'Lima Oeste'
+        ]);
+
+        //Lima Oeste
+        $eNaranjal = Estaca::create(['nombre' => 'Naranjal', 'consejo_coordinacione_id' => $cclimaoeste->id]);
+
+        //Lima Naranjal Stake
+        Barrio::create(['nombre' => 'Canta Callao Ward', 'estaca_id' => $eNaranjal->id]);
+        Barrio::create(['nombre' => 'Huandoy Ward', 'estaca_id' => $eNaranjal->id]);
+        Barrio::create(['nombre' => 'Los Próceres Ward', 'estaca_id' => $eNaranjal->id]);
+        Barrio::create(['nombre' => 'Márquez Ward', 'estaca_id' => $eNaranjal->id]);
+        Barrio::create(['nombre' => 'Naranjal Ward', 'estaca_id' => $eNaranjal->id]);
+        Barrio::create(['nombre' => 'Oquendo Ward', 'estaca_id' => $eNaranjal->id]);
         
     }
 }
