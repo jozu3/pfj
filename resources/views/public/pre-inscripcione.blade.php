@@ -6,8 +6,8 @@
             <div class="text-center">
                 <x-jet-authentication-card-logo />
             </div>
-            <div class="text-center">
-                <img src="{{ config('ap-url') }}/img/lima_norte_2024.png" class="m-auto" width="50%" alt="">
+            <div class="text-center mt-4">
+                <img src="{{ config('ap-url') }}/img/fsy2026/fsy2026.png" class="m-auto" width="30%" alt="">
             </div>
             {{-- <div class="text-center" style='color:#2d999b;font-family: system-ui;'>
                 <span class="text-5xl">pfj <b>2024</b></span>
@@ -18,6 +18,9 @@
 
         @livewire('public.pre-inscripcion-consejeros', key($user->id))
         <div id="inicio" class="pb-16">
+        </div>
+        <div class="mt-4 text-center text-sm text-gray-600">
+            Sitio web no oficial de La Iglesia.
         </div>
 
     </x-jet-authentication-card>

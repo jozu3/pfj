@@ -53011,24 +53011,3 @@ a.text-muted:hover {
 }
 /*# sourceMappingURL=adminlte.css.map */
 
-.card-body, .card-header, .card-footer {
-	overflow: auto;
-}
-
-
-.bg-red40-pfj{
-	background-color: #faa61a
-}
-.bg-red40-pfj:hover{
-	background-color: #f68d2e
-}
-
-.btn-red40-pfj{
-	background-color: #e10f5a;
-  border-color: #e10f5a;
-  box-shadow: none;
-	color: white!important;
-}
-.btn-red40-pfj:hover{
-	background-color: #6e0d33
-}

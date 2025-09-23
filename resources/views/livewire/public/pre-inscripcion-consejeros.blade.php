@@ -10,54 +10,52 @@
                 <h4>Consejeros</h4>
                 <div class="text-justify">
                     <p class="mt-1 text-gray-600">
-                        Todos los consejeros de FSY deben tener un fuerte testimonio del Salvador y de Su evangelio
-                        restaurado y estar preparados para promover principios que concuerden con la doctrina de la
-                        Iglesia.
-                        Los consejeros jóvenes adultos solteros desempeñan una función fundamental en el éxito de las
-                        conferencias FSY y ejercen una gran influencia en los jóvenes. Por lo tanto, el servir como
-                        consejero de FSY debe considerarse una oportunidad para fortalecer a los jóvenes, en lugar de
-                        principalmente una oportunidad de ser fortalecido.
+                        Todos los consejeros de las conferencias FSY deben tener un firme testimonio del Salvador y de Su Evangelio
+                        restaurado y estar preparados para promover principios que concuerden con la doctrina de la Iglesia. Los consejeros jóvenes
+                        adultos solteros desempeñan una función fundamental en el éxito de las conferencias FSY y ejercen una gran influencia en los
+                        jóvenes. Por lo tanto, el servir como consejero de FSY debe considerarse una oportunidad para fortalecer a los jóvenes, en lugar
+                        de principalmente una oportunidad de ser fortalecido
                         <br>
                         <br>
                         Requisitos:
-                        <br>• Ser miembro de La Iglesia de Jesucristo de los Santos de los Últimos Días que conserva
-                        su plena condición de miembro, como lo demuestra la aprobación de un miembro de su
-                        obispado.
-                        <br>• Ser capaz de servir como mentor entre sus compañeros y líder de los jóvenes participantes
-                        y
-                        de otros miembros del personal.
-                        <br>• Ajustarse a las pautas de edad, según lo establecido por la Presidencia de Área.
-                        <br>• No estar casado actualmente y no tener personas dependientes en el hogar (aunque algunas
-                        Áreas podrían optar por usar a matrimonios jóvenes, según lo apruebe la Presidencia de
-                        Área).
-                        <br>• Pasar la preselección de solicitante, aprobada por el asesor legal de Área.
-                        <br>• Completar la capacitación de la Iglesia para la protección de los jóvenes y cualquier otra
-                        capacitación requerida por la Presidencia de Área.
-                        <br>• Ejemplificar las siguientes características:
+                        <br>• Ser miembro de La Iglesia de Jesucristo de los Santos de los Últimos Días que conserva su plena condición de miembro,
+                        demostrado por medio de la aprobación de un miembro de su obispado, capaz de servir como mentor entre sus
+                        compañeros y como líder de los jóvenes participantes y de otros miembros del personal.
+                        <br>• Demostrar un testimonio del Evangelio restaurado de Jesucristo al ser digno de poseer una recomendación para el templo
+                        y participar en el servicio en la Iglesia.
+                        <br>• Ajustarse a las pautas de edad, según lo establecido por la Presidencia de Área (debe tener diecinueve años como mínimo
+                        y ser espiritualmente maduro)
+                        <br>• Completar la capacitación Cómo proteger a los niños y jóvenes en LaIglesiadeJesucristo.org, así como toda otra
+                        capacitación o evaluación requerida por la Presidencia de Área o el asesor legal de Área
+                        <br>• Poder estar en el sitio durante toda la sesión de la conferencia FSY (los coordinadores de bienestar pueden trabajar por
+                        turnos, si es necesario, asegurándose de que siempre haya un número suficiente disponible).
+                        <br>• Ser un buen ejemplo de las siguientes características:
                     <ul class="list-decimal">
-                        <li class="ml-7">Buenas aptitudes organizativas y de administración del tiempo.</li>
-                        <li class="ml-7">Aptitud para el liderazgo.</li>
-                        <li class="ml-7">Buen juicio.</li>
-                        <li class="ml-7">Habilidades comunicativas y don de gentes.</li>
-                        <li class="ml-7">Automotivación.</li>
-                        <li class="ml-7">Capacidad para resolver problemas.</li>
-                        <li class="ml-7">Enseñable.</li>
-                        <li class="ml-7">Responsable de sus actos.</li>
-                        <li class="ml-7">Con facilidad para adaptarse.</li>
-                        <li class="ml-7">Confiable.</li>
-                        <li class="ml-7">Positivo.</li>
-                        <li class="ml-7">Dispuesto a recibir y actuar de acuerdo con los comentarios y sugerencias y
-                            la orientación de los supervisores</li>
+                        <li class="ml-7">Buen juicio, buena comunicación y habilidades interpersonales, incluso bajo presión</li>
+                        <li class="ml-7">Aptitudes excepcionales de organización, gestión del tiempo, liderazgo y resolución de problemas</li>
+                        <li class="ml-7">Automotivación, voluntad de aprender, adaptabilidad, fiabilidad y positividad</li>
+                        <li class="ml-7">Disposición para recibir y actuar de acuerdo con los comentarios y la dirección de otras personas.</li>
                     </ul>
                     <br>
                     <br>
                     Responsabilidades:
                     <br>
-                    <br>• Garantizar la seguridad física y promover el bienestar espiritual de cada participante que
-                    asista a FSY, en particular, los participantes de su grupo asignado.
-                    <br>• Enseñar y dirigir de manera eficaz análisis formales e informales que concuerden con la
-                    doctrina de La Iglesia de Jesucristo de los Santos de los Últimos Días.
-                    <br>• Actuar como líder ejemplar, modelo a seguir y mentor para los jóvenes participantes y
+                    <br>• Comportarse como líderes ejemplares, modelos a seguir y mentores para los jóvenes participantes y los demás miembros
+                    del personal. Interactuar y motivar a los jóvenes participantes de manera amable y edificante.
+                    <br>• Leer y estudiar el manual para el personal de la conferencia FSY antes de su servicio en dicha conferencia y continuar
+                    estudiándolo a lo largo de su sesión. Ceñirse a las normas y los procedimientos de las conferencias FSY, tal como se
+                    detallan en el manual para el personal de FSY.
+                    <br>• Mantener todas las interacciones con los jóvenes dentro de las pautas descritas en la capacitación Cómo proteger a los
+                    niños y jóvenes.
+                    <br>• Ayudar a los jóvenes a seguir la sección “Conducta en las actividades de la Iglesia” (véase la página 37) y abordar la
+                    conducta inapropiada de manera amable y profesional.
+                    <br>• Obedecer y enseñar los principios que se describen en Para la Fortaleza de la Juventud: Una guía para tomar decisiones.
+                    <br>• Participar enérgica y activamente con los jóvenes; esto incluye poder llevar a cabo todos sus deberes, caminar por largos
+                    períodos durante el día y participar en actividades físicas, que incluyen juegos, subir y bajar escaleras, correr, saltar y
+                    bailar.
+                    <br>• Demostrar la salud mental y la estabilidad emocional necesarias para participar de forma segura con los participantes, ser
+                    responsable de ellos y cumplir con sus deberes eficazmente en situaciones estresantes.
+                    {{-- <br>• Actuar como líder ejemplar, modelo a seguir y mentor para los jóvenes participantes y
                     compañeros consejeros.
                     <br>• Mantener todas las interacciones con los jóvenes dentro de las pautas de la capacitación
                     para la protección de los jóvenes.
@@ -74,7 +72,7 @@
                     <br>• Leer y estudiar el manual para el personal de FSY antes de su primera semana de servicio y
                     continuar estudiándolo a lo largo de su servicio.
                     <br>• Obedecer los principios que se enseñan en Para la Fortaleza de la Juventud: Una guía para
-                    tomar decisiones.
+                    tomar decisiones. --}}
                     <br>
                     <i>
                         Pag. 20-22 (PFJ GUÍA PARA LA PLANIFICACIÓN DE CONFERENCIAS)
@@ -95,7 +93,7 @@
                             <x-jet-label for="nombres" value="{{ __('Name') }}" class="font-black" />
                             <x-jet-input id="nombres" class="block mt-1 w-full" type="text" name="nombres"
                                 wire:model="nombres" required autofocus autocomplete="given-name" />
-                            @error('apellidos')
+                            @error('nombres')
                                 <small class="text-red-600">{{ $message }}</small>
                             @enderror
                         </div>

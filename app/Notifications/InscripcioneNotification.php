@@ -65,7 +65,7 @@ class InscripcioneNotification extends Notification
 
         return (new MailMessage)
             ->from('no-reply@pfjperu.com', config('app.name'))
-            ->subject('¡Felicidades! Ya estás inscrito al PFJ 2024')
+            ->subject('¡Felicidades! Ya estás inscrito al '. config('app.name'))
             ->greeting(Lang::get('Hello!') . ' ' . $this->inscripcione->personale->contacto->nombres)
             ->line('Te damos una cordial bienvenida al '.$this->inscripcione->programa->nombre/*.' que inicia el '.date( 'd/m/Y', strtotime($this->inscripcione->programa->fecha_inicio))*/.'. En este correo encontrarás tu usuario y contraseña de la plataforma MiPFJ')
             ->line('Debes ingresar a '. config('app.url'))

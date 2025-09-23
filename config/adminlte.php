@@ -53,6 +53,14 @@ return [
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'PFJ 2024',
 
+    'preloader' => [
+        'enabled' => true,
+        'img' => [
+            'path' => 'img/logo-circle-2024.png', // Cambia esto a la ruta de tu imagen
+            'alt' => config('app.name'), // Texto alternativo para la imagen
+            'bg_color' => '#ffb731ff', // Cambia este valor al color que desees
+        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | User Menu
@@ -586,6 +594,16 @@ return [
                     'type' => 'js',
                     'asset' => true,
                     'location' => '/vendor/ckeditor5/build/ckeditor.js',
+                ],
+            ],
+        ],
+        'CustomCss' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'css/custom.css',
                 ],
             ],
         ],

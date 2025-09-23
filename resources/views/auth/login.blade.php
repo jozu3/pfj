@@ -44,5 +44,8 @@
                 </x-jet-button>
             </div>
         </form>
+        <div class="mt-4 text-center text-sm text-gray-600">
+            Sitio web no oficial de La Iglesia.
+        </div>
     </x-jet-authentication-card>
 </x-guest-layout>
