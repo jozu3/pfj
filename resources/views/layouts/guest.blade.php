@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="{{ config('app.url', 'https://www.pfjperu.com').'/css/app.css' }}">
         <link rel="stylesheet" href="{{ config('app.url', 'https://www.pfjperu.com').'/vendor/fontawesome-free/css/all.min.css' }}">
         <link rel="stylesheet" href="{{config('app.url')}}/css/simplyCountdown/simplyCountdown.theme.default.css"/>
+        <link rel="stylesheet" href="{{config('app.url')}}/css/custom.css"/>
 
 
         @livewireStyles
