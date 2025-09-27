@@ -3,7 +3,7 @@
 @section('title', 'Panel')
 
 @section('content_header')
-    <h1>PFJ Lima Norte 2024</h1>
+    <h1>{{ config('app.name') }}</h1>
 @stop
 
 @section('content')

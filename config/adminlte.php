@@ -16,7 +16,7 @@ return [
 
     'title' => '',
     'title_prefix' => '',
-    'title_postfix' => ' | PFJ',
+    'title_postfix' => ' | FSY',
 
     /*
     |--------------------------------------------------------------------------
@@ -51,7 +51,7 @@ return [
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'PFJ 2024',
+    'logo_img_alt' => config('app.name'),
 
     'preloader' => [
         'enabled' => true,
