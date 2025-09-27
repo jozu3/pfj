@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<strong>PFJ</strong> 2024',
+    'logo' => '<strong>FSY</strong> 2026',
     //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img' => 'img/logo_pfj2024.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
