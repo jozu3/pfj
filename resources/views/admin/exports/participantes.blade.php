@@ -84,7 +84,7 @@
                 <td>
                     @switch($participante->estado)
                         @case(-1)
-                            {{ 'No Inscrito' }}
+                            {{ 'No participa' }}
                         @break
                         @case(0)
                             {{ 'Inscrito' }}

@@ -355,7 +355,7 @@
         @can('admin.programas.participantes')
             @php
                 $estados = [
-                    '-1' => ' No Inscrito', 
+                    '-1' => ' No participa', 
                     '0' => 'Inscrito', 
                     '1' => 'Ingresado', 
                     '2' => 'Permutado', 

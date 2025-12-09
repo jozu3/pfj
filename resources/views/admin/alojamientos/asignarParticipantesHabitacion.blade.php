@@ -102,7 +102,7 @@
                                         @php
                                             $estados = [
                                                 '0' => 'Inscrito',
-                                                '-1' => 'No Inscrito',
+                                                '-1' => 'No participa',
                                                 '5' => 'En espera del PFJ',
                                                 '1' => 'Ingresó al PFJ',
                                                 '3' => 'Terminó el PFJ',

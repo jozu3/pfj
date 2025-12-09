@@ -52,19 +52,19 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Mi cupos aprobados</td>
+                                <td>Mi inscritos(Total)</td>
                                 <td>{{ $miscupos }}</td>
                             </tr>
                             <tr>
-                                <td>Inscritos</td>
+                                <td>Participan</td>
                                 <td>{{ $inscritos }}</td>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <td>Permutados</td>
                                 <td>{{ $permutados }}</td>
-                            </tr>
+                            </tr> --}}
                             <tr>
-                                <td>No inscritos</td>
+                                <td>No participa</td>
                                 <td>{{ $noinscritos }}</td>
                             </tr>
                         </tbody>
@@ -131,7 +131,7 @@
                 <div class="col">
                     <select name="" id="" class="form-control" wire:model="estado">
                         <option value="-2">-- Todos --</option>
-                        <option value="-1">No inscrito</option>
+                        <option value="-1">No participa</option>
                         <option value="0">Inscrito</option>
                         <option value="1">Ingresó al PFJ</option>
                         <option value="2">Permutado</option>
@@ -278,25 +278,25 @@
                                 @php
                                     if ($participante->estado_aprobacion == 1) {
                                         $estados = [
-                                            '0' => 'Inscrito',
-                                            '-1' => 'No Inscrito',
-                                            "5" => "En espera del PFJ",
+                                            '0' => 'Participa',
+                                            '-1' => 'No participa',
+                                           /* "5" => "En espera del PFJ",
                                             "1" => "Ingresó al PFJ",
                                             "3" => "Terminó el PFJ",
                                             '2' => 'Permutar',
                                             "4" => "Retirado",
-                                            "6" => "Canceló inscripción ",
+                                            "6" => "Canceló inscripción ",*/
                                         ];
                                     } elseif ($participante->estado_aprobacion > 1) {
                                         $estados = [
-                                            '0' => 'Inscrito',
-                                            '-1' => 'No Inscrito',
-                                            "5" => "En espera del PFJ",
+                                            '0' => 'Participa',
+                                            '-1' => 'No participa',
+                                        /*    "5" => "En espera del PFJ",
                                             "1" => "Ingresó al PFJ",
                                             "3" => "Terminó el PFJ",
                                             '2' => 'Permutado',
                                             "4" => "Retirado",
-                                            "6" => "Canceló inscripción ",
+                                            "6" => "Canceló inscripción ",*/
                                         ];
                                     }
                                     $selectcolor = '';
