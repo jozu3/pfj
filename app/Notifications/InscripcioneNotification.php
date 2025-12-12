@@ -73,7 +73,7 @@ class InscripcioneNotification extends Notification
             ->line('Usuario: '.$this->inscripcione->personale->user->email)
             ->line($this->password == '' ? 'Si olvidaste tu contraseña ingresa al link y pon olvidé mi contraseña.': 'Contraseña: '.$this->password)
             ->line($this->password != ''?'Te sugerimos que cambies tu contraseña en las próximas 24 horas, ingresando al menú perfil desde tu portal MiPFJ.': '')
-            ->action('Portal MiPFJ ', $url_action)
+            ->action('Portal MiPFJ ', config('app.url'))
             ->line('Bienvenido a una nueva experiencia.')
             ->salutation($this->inscripcione->programa->pfj->lema);
 
