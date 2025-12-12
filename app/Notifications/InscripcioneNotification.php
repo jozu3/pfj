@@ -52,7 +52,7 @@ class InscripcioneNotification extends Notification
                 $url_action = url('/st');
                 break;
             case 'obispo':
-                $url_action = route('admin.contactos.index');
+                $url_action = route('admin.programas.participantes');
                 break;
             case 'matrimonio_apoyo':
                 $url_action = route('admin.contactos.index');
