@@ -356,7 +356,7 @@
             @php
                 $estados = [
                     '-1' => ' No participa', 
-                    '0' => 'Inscrito', 
+                    '0' => 'Participa', 
                     '1' => 'Ingresado', 
                     '2' => 'Permutado', 
                     '3' => 'Terminado', 
