@@ -21,7 +21,7 @@ class CreateParticipantesTable extends Migration
             $table->date('fecnac');
             $table->boolean('genero');
             $table->string('telefono');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->text('informacion_medica');
             $table->string('talla');
             $table->text('informacion_alimentaria');
