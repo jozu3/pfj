@@ -87,7 +87,7 @@
                             {{ 'No participa' }}
                         @break
                         @case(0)
-                            {{ 'Inscrito' }}
+                            {{ 'Participa' }}
                         @break
 
                         @case(1)
