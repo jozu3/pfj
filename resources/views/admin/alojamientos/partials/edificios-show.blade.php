@@ -50,7 +50,7 @@
                                                     $f = [];
                                                 @endphp
                                                 @foreach ($habitacione->alojamientos as $alojamiento)
-                                                    @if (!in_array($alojamiento->compania()->numero, $f) )
+                                                    @if ($alojamiento->compania() && !in_array($alojamiento->compania()->numero, $f) )
                                                         @php
                                                             array_push($f, $alojamiento->compania()->numero )
                                                         @endphp
