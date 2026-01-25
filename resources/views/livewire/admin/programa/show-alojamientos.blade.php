@@ -33,7 +33,9 @@
                                                 {{ $alojamiento->participante->nombres . ' ' . $alojamiento->participante->apellidos . '(' . $alojamiento->participante->age . ')' }}
                                             </td>
                                             <td>
-                                                {{ $alojamiento->participante->participanteCompania->companerismo->numero }}
+                                                @if (!empty($alojamiento->participante->participanteCompania))
+                                                    {{ $alojamiento->participante->participanteCompania->companerismo->numero }}
+                                                @endif
                                             </td>
                                             <td>
                                                 {{ $alojamiento->participante->barrio->estaca->nombre . '/' . $alojamiento->participante->barrio->nombre }}
