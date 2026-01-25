@@ -22,7 +22,10 @@ class Alojamiento extends Model
     }
 
     public function compania(){
-        return $this->participante->participanteCompania->companerismo;
+        if (!empty($this->participante->participanteCompania)){
+            return $this->participante->participanteCompania->companerismo;
+        }
+        return null;
     }
 
 }
