@@ -73,7 +73,7 @@
                         <th>
                             Informacion alimentaria
                         </th>
-                         <th>Alergia</th>
+                        <th>Alergia</th>
                         <th>Telefono</th>
                         <th>Correo electrónico</th>
                         <th>Fecha de nacimiento</th>
@@ -91,9 +91,6 @@
                         </th>
                         <th>
                             Seguro médico
-                        </th>
-                        <th>
-                            Informacion alimentaria
                         </th>
                         <th>
                             Vacunas
@@ -186,7 +183,6 @@
                             <td>
                                 {{ date('d/m/Y', strtotime($participante->fecnac)) }}
                             </td>
-                           
                             <td>
                                 {{ $participante->contacto1 }}
                             </td>
@@ -221,7 +217,6 @@
                             <td>
                                 {{ $participante->seguro_medico }}
                             </td>
-                            
                             <td>
                                 {{ $participante->vacunas }}
                             </td>

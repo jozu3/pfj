@@ -47,10 +47,10 @@
     <script>
         console.log('Hi!');
         $(document).ready(function() {
-            $('#select-habitaciones').select2({
-                placeholder: "-- Busque una habitación --",
-                allowClear: true
-            });
+            // $('#select-companerismos').select2({
+            //     placeholder: "-- Busque una compañia --",
+            //     allowClear: true
+            // });
             $('#select-participantes').select2({
                 placeholder: "-- Busque un participante --",
                 allowClear: true

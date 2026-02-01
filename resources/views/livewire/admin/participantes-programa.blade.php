@@ -276,86 +276,42 @@
                             </td> --}}
                             <td>
                                 @php
-                                    if ($participante->estado_aprobacion == 1) {
-                                        $estados = [
-                                            '0' => 'Participa',
-                                            '-1' => 'No participa',
-                                           /* "5" => "En espera del PFJ",
-                                            "1" => "Ingresó al PFJ",
-                                            "3" => "Terminó el PFJ",
-                                            '2' => 'Permutar',
-                                            "4" => "Retirado",
-                                            "6" => "Canceló inscripción ",*/
-                                        ];
-                                    } elseif ($participante->estado_aprobacion > 1) {
-                                        $estados = [
-                                            '0' => 'Participa',
-                                            '-1' => 'No participa',
-                                        /*    "5" => "En espera del PFJ",
-                                            "1" => "Ingresó al PFJ",
-                                            "3" => "Terminó el PFJ",
-                                            '2' => 'Permutado',
-                                            "4" => "Retirado",
-                                            "6" => "Canceló inscripción ",*/
-                                        ];
-                                    }
+                                    $allEstados = [
+                                        '0' => 'Participa',
+                                        '-1' => 'No participa',
+                                        "5" => "En espera del PFJ",
+                                        "1" => "Ingresó al PFJ",
+                                        "3" => "Terminó el PFJ",
+                                        '2' => 'Permutado',
+                                        "4" => "Retirado",
+                                        "6" => "Canceló inscripción ",
+                                    ];
+                                    $estados = [
+                                        '0' => 'Participa',
+                                        '-1' => 'No participa',
+                                    ];
+
                                     $selectcolor = '';
                                     if ($participante->estado == 0) {
                                         $selectcolor = 'btn-success';
                                     }
                                 @endphp
-                                <select name=""
-                                    class="form-control changeEstadoParticipante {{ $selectcolor }}"
-                                    wire:loading.attr="disabled" style="width: 150px"
-                                    data-idparticipante="{{ $participante->id }}"
-                                    @if ($miscupos <= $inscritos && $participante->estado != 0) {{ 'disabled' }} @endif>
-                                    @foreach ($estados as $key => $value)
+                                
+                                @if ($participante->estado != 0 && $participante->estado != -1)
+                                    {{ $allEstados[$participante->estado]  }}
+                                @else
+                                    <select name=""
+                                        class="form-control changeEstadoParticipante {{ $selectcolor }}"
+                                        wire:loading.attr="disabled" style="width: 150px"
+                                        data-idparticipante="{{ $participante->id }}"
+                                        @if ($miscupos <= $inscritos && $participante->estado != 0) {{ 'disabled' }} @endif>
+                                        @foreach ($estados as $key => $value)
                                         <option value="{{ $key }}" class="bg-white"
-                                            @if ($key == $participante->estado) {{ 'selected' }} @endif>
-                                            {{ $value }}</option>
-                                    @endforeach
-                                </select>
-                                {{-- @switch($participante->estado)
-                                    @case(0)
-                                        {{ 'Inscrito' }}
-                                    @break
-
-                                    @case(1)
-                                        {{ 'Ingresado' }}
-                                    @break
-
-                                    @case(2)
-                                        {{ 'Permutado' }}
-                                    @break
-
-                                    @case(3)
-                                        {{ 'Terminado' }}
-                                    @break
-
-                                    @case(4)
-                                        {{ 'Retirado' }}
-                                    @break
-
-                                    @case(5)
-                                        <div class="d-flex items-center">
-                                            <div style="width:20px; height: 100%; align-items: center" class="">
-                                                <div class="spinner-grow text-success" style="width:20px; height: 20px;"
-                                                    role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                            </div>
-                                            <div style="width: 80px">
-                                                {{ 'En espera' }}
-                                            </div>
-                                        </div>
-                                    @break
-
-                                    @case(6)
-                                        {{ 'Canceló inscripción' }}
-                                    @break
-
-                                    @default
-                                @endswitch --}}
+                                        @if ($key == $participante->estado) {{ 'selected' }} @endif>
+                                        {{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
                             </td>
                             <td width="10px">
                                 <a href="{{ route('st.participantes.edit', $participante) }}" target="_blank"

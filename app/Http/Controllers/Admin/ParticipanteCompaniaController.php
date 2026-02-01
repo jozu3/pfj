@@ -45,12 +45,13 @@ class ParticipanteCompaniaController extends Controller
     {
         $request->validate([
             'participante_id' => 'required',
-            'companerismo_id' => 'required',
+            // 'companerismo_id' => 'required',
         ]);
 
         ParticipanteCompania::where('participante_id', $request->participante_id)->delete();
-
-        ParticipanteCompania::create($request->all());
+        if(!empty($request->companerismo_id) ){
+            ParticipanteCompania::create($request->all());
+        }
 
         return redirect()->route('admin.programas.companias', session('programa_activo'))->with('info', 'Se asigno correctamente al participante.');
 

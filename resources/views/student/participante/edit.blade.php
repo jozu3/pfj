@@ -33,7 +33,7 @@
 
                         @include('student.participante.partials.form')
 
-                        @if (isset($participante->participanteCompania))
+                        @if (in_array($participante->estado, ["0", "1", "2", "3", "4", "5"]))
                             <div class="col-span-12 sm:col-span-4 mt-3">
                                 {!! Form::label('compania', 'Compañia', [
                                     'class' => 'block font-medium text-sm text-gray-700',
@@ -41,7 +41,7 @@
                                 {!! Form::select('compania', $participante->programa->companias()->pluck('numero', 'id'), null, [
                                     'class' =>
                                         'border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full',
-                                    'placeholder' => 'Seleccione',
+                                    'placeholder' => 'Sin compañia',
                                 ]) !!}
                                 @error('compania')
                                     <small class="text-red-600">{{ $message }}</small>

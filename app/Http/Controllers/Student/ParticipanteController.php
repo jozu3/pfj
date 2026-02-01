@@ -143,7 +143,7 @@ class ParticipanteController extends Controller
             // 'telefono' => 'required',
             'talla' => 'required',
             // 'tipo_ingreso' => 'required',
-            'vacunas' => 'required',
+            // 'vacunas' => 'required',
             'sangre' => 'required',
             // 'diabetico_asmatico' => 'required',
             // 'alergia' => 'required',
@@ -159,10 +159,15 @@ class ParticipanteController extends Controller
 
         $participante->update($request->all());
 
-        if (isset($request->compania)) {
-            $parComp = ParticipanteCompania::where('participante_id', $participante->id)->first()->update(['companerismo_id' => $request->compania]);
-            // dd($parComp);
+        if(empty($request->compania)){
+            ParticipanteCompania::where('participante_id', $participante->id)->delete();
+        } else {
+            ParticipanteCompania::updateOrCreate(
+                ['participante_id' => $participante->id],
+                ['companerismo_id' => $request->compania]
+            );
         }
+
         if($participante->estado == 6){
             ParticipanteCompania::where('participante_id', $participante->id)->delete();
             Alojamiento::where('participante_id', $participante->id)->delete();

@@ -14,8 +14,8 @@ class EstadoAprobacioneSeeder extends Seeder
      */
     public function run()
     {
-        EstadoAprobacione::create(['descripcion' => 'Aprobados', 'estado' => '1']);
-        EstadoAprobacione::create(['descripcion' => 'Aprobación pendiente', 'estado' => '1']);
+        EstadoAprobacione::create(['descripcion' => 'Aprobado', 'estado' => '1']);
+        EstadoAprobacione::create(['descripcion' => 'Pendiente de aprobación', 'estado' => '1']);
         EstadoAprobacione::create(['descripcion' => 'En lista de espera', 'estado' => '1']);
         EstadoAprobacione::create(['descripcion' => 'Cancelado', 'estado' => '1']);
     }
